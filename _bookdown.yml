@@ -1,5 +1,5 @@
 output_dir: "docs"
-book_filename: "datascienceforpoliticalscience"
+book_filename: "datasciforpolisci"
 delete_merged_file: true
 language:
   label:
