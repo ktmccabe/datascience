@@ -1,21 +1,17 @@
 # R Overview {#rover}
 
-This course will primarily use R for analysis, though we will briefly discuss a few areas where Stata may be more efficient.
-
-Learning to program in R is not a primary goal of this course, but in proceeding through the course, you will gain and/or get practice with a lot of R skills.
-
-For those brand new to R, I strongly recommend you complete the following tutorials prior to or at the beginning of the course.
-
 **Goal**
 
-By the end of the first week of the course, you will want to have R and RStudio installed on your computer (both free) and feel comfortable using R as a calculator and loading datasets into R.
+By the end of the first week of the course, you will want to have R and RStudio installed on your computer (both free) and feel comfortable using R as a calculator.
+
 
 **R and RStudio Installation**
 
+This content follows and reinforces QSS 1.3. Additional resources are also linked below.
   - This [video](http://www.youtube.com/embed/ulIv0NiVTs4?rel=0) from Christopher Bail explains the R and RStudio installation process. This involves
     1. Going to [cran](https://cran.r-project.org/), select the link that matches your operating system, and
 then follow the installation instructions, and 
-    2. Visiting [RStudio](http://www.rstudio.com/) and follow the download and installation instructions. R is the statistical software and programming language used for analysis. RStudio provides a convenient user interface for running R code. You do not need RStudio to use R, but it is free and can make your life easier! 
+    2. Visiting [RStudio](http://www.rstudio.com/) and follow the download and installation instructions. R is the statistical software and programming language used for analysis. RStudio provides a convenient user interface for running R code. 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library("vembedr")
@@ -24,28 +20,21 @@ library(knitr)
 embed_url("https://www.youtube.com/watch?v=ulIv0NiVTs4")
 ```
 
-  - After installing R and RStudio, you can also follow along with Christopher Bail's [R Basics](https://www.youtube.com/watch?v=vVcH_OvrLEM) and [Data Wrangling](https://www.youtube.com/watch?v=sXVP9256JSQ) videos to learn the basic functionality of R.
-  
-**Supplemental Resources**
 
 To supplement the above resources, I would recommend the following:
 
   - If you were having difficulties following the above instructions for installation, you can try following the first couple of Rutgers Data Librarian Ryan Womack's videos, which similarly start from the point of installation. They are [here](https://www.youtube.com/watch?v=5rOR31bmoL8&list=PLCj1LhGni3hNxsLsVNHX6V1LICyklHl2a&ab_channel=librarianwomack). He goes at a slow pace and codes along in the videos. He also has a number of videos on more advanced data analysis topics. 
-  - [R for Data Science](https://r4ds.had.co.nz/) is another great resource and focuses on "tidyverse" code in R, which can be particularly helpful in data wrangling and visualization.
   
-Note: Much of the code used in the course will rely on "base R" functions (functions that already exist in R). People have also developed [tidyverse](https://www.tidyverse.org/) packages that can be easily installed in R, which supplements base R tools with alternative functions and a syntax based on a particular design philosophy, grammar, and data structure that they find preferable to base R. Using base R vs. tidyverse is often just a matter of personal taste. Either is fine to use in this course, and you will get exposure to code that relies on both.
-
-This is a lot of information to digest all at once. Don't worry. No one remembers everything. Plan on going back to these resources often throughout the course and beyond. We will have office hours the first week of the course to help troubleshoot issues. 
 
 ## First Time with R and RStudio
 
-This next section provides a few notes on using R and RStudio now that you have installed it. This is mostly repetitive of the other resources. This includes only the bare essential information for opening an R script and digging into using R as a calculator, which we will do in chapter 3. In this section, we cover the following materials:
+This next section provides a few notes on using R and RStudio now that you have installed it. In this section, we cover the following materials:
 
   - Using R as a calculator and assigning objects using `<-`
   - Setting your working directory and the `setwd()` function.
   - Creating and saving an R script
 
-### **Open RStudio**
+### Open RStudio
 
 RStudio is an open-source and free program that greatly facilitates the use of R, especially for users new to programming. Once you have downloaded and installed R and RStudio, to work in R, all you need to do now is open RStudio (it will open R). It should look like this, though your version number may be different: (*Image from Kosuke Imai's Quantitative Social Science Figure 1.1*)
 
@@ -56,7 +45,7 @@ RStudio is an open-source and free program that greatly facilitates the use of R
   - To do this, in RStudio, click on File, New, and then R script. This will open a blank document for text editing in the upper left of the RStudio window. We will return to this window in a moment.
 
 
-### **Using R as a Calculator**
+### Using R as a Calculator
 
 The *bottom left* window in your RStudio is the Console. You can type in this window to use R as a calculator or to try out commands. It will show the raw output of any commands you type. For example, we can try to use R as a calculator. Type the following in the Console (the bottom left window) and hit "enter" or "return" on your keyboard:
 
@@ -76,7 +65,7 @@ The *bottom left* window in your RStudio is the Console. You can type in this wi
 
 In the other RStudio windows, the upper right will show a history of commands that you have sent from the text editor to the R console, along with other items. The lower right will show graphs, help documents and other features. These will be useful later in the course.
 
-### **Working in an R Script**
+### Working in an R Script
 
 Earlier, I asked you to open an R script in the upper left window by doing File, then New File, then R Script. Let's go back to working in that window.
 
@@ -113,7 +102,7 @@ Let's now save our R script to our working directory and give it an informative 
 Give the file an informative name, such as: "McCabeWeek1.R". Note: all of your R scripts will have the .R extension.
 
 
-### **Preparing your R script**
+### Preparing your R script
 
 Now that we have saved our R script, let's work inside of it. Remember, we are in the top-left RStudio window now.
 
@@ -127,7 +116,7 @@ Now that we have saved our R script, let's work inside of it. Remember, we are i
   - Think of the R script as where you write the final draft of your paper. In the Console (the bottom-left window), you can mess around and try different things, like you might when you are taking notes or outlining an essay. Then, write the final programming steps that lead you to your answer in the R script. For example, if I wanted to add 5 + 3, I might try different ways of typing it in the Console, and then when I found out `5 + 3` is the right approach, I would type that into my script.
 
 
-### **Executing Commands in your R script**
+### Executing Commands in your R script
 
 The last thing we will note in this initial handout is how to execute commands in your R script.
 
@@ -156,7 +145,7 @@ Note: The symbol \# also allows for annotation behind commands or on a separate 
 sum53 <- 5 + 3 # example of assigning an addition calculation
 ```
 
-### **Objects**
+### Objects
 
 Sometimes we will want to store our calculations as "objects" in R. We use `<-` to assign objects by placing it [to the left](https://www.youtube.com/watch?v=vLZA67L7gIo&ab_channel=BeyonceSasha1) of what we want to store. For example, let's store the calculation `5 + 3` as an object named `sum53`:
 
@@ -230,14 +219,24 @@ A big part of learning to use R will be learning how to troubleshoot and detect 
 ![](images/punctuation.png){width=80%}
 
 
-### **Practice** 
+## Assignment 1
 
-Below is an exercise that will demonstrate you are able to use R as a calculator and create R scripts.
+Below is an exercise that will demonstrate you are able to use R as a calculator and create R scripts, as well as locate important course platforms.
+
+We will walk through this assignment together during class on Wednesday 9/8, but you are welcome to try to do this ahead of time on your own. You will submit, on Canvas, two documents prior to class on Thursday 9/9.
+
+  - An R script (.R) file with your code. Follow the best practices by titling your script and using \# comments to explain your steps. This code should be clean. I should be able to run your code to verify that the code produces the answers you write down.
+  - A Word document / Google Docs document or pdf with answers to the written questions (Problems 3-6 below). This document should also have a title with your name on it.
+      + You may also alternatively submit a compiled RMarkdown document. We will discuss what RMarkdown is during class.
+
+***Assignment Exercises***
 
   1. Create an R script saved as ``LastnameSetup1.R" (use your last name). Within the R script, follow the example from  this handout and title the script.
   2. Set your working directory, and include the file pathway (within `setwd()`) at the top of your .R script.
-  3. Do the calculation 4 + 3 - 2 in R. Store it as an object with an informative name.
-  4. Do the calculation 5 $\times$ 4 in R. Store it as an object with an informative name.
-  5. Add these two calculations together. In R, try to do this by adding together the objects you created, not the underlying raw calculations. 
+  3. Do the calculation 8 + 3 - 2 in R. Store it as an object with an informative name. Report the answer.
+  4. Do the calculation 5 $\times$ 3 in R. Store it as an object with an informative name. Report the answer.
+  5. Add these two calculations together. Note: do this by adding together the objects you created, not the underlying raw calculations. Report the answer.
+  6.  Write down how you will complete your R assignments this semester. (For example, if you have a personal laptop with R and RStudio on it, you will simply write "I will use my personal laptop." If you don't have a personal computer or laptop, please indicate where on campus or off-campus you will have regular access to a computer with R/RStudio to do your work. It is essential that you have regular access to a computer so that you will not fall behind in this course.
+  7. Navigate to the course Piazza site and post a message. This can be as simple as "hello" or a reply to another person's post. (No need to report this in your submission.)
 
 

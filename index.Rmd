@@ -16,8 +16,8 @@ output:
 
 This document will include important links and course notes for 01:790:391:01: Data Science for Political Science.
 
-  - This site will be updated throughout the semester with new content. 
-  - This is a new and living document. If you spot errors or have questions or suggestions, please email me at k.mccabe@rutgers.edu.
+  - This site will be updated throughout the semester with new content. The Canvas modules will provide links to the relevant sections to review for a given week of the course. 
+  - This is a new and living document. If you spot errors or have questions or suggestions, please email me at k.mccabe@rutgers.edu or post to the course Piazza site.
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
 
