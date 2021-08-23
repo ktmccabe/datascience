@@ -1,0 +1,7 @@
+output_dir: "docs"
+book_filename: "datascienceforpoliticalscience"
+delete_merged_file: true
+language:
+  label:
+    fig: "Image "
+chapter_name: "Section "
