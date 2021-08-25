@@ -12,23 +12,106 @@ output:
     number_sections: true
 ---
 
-# Course Overview
+# Course Notes
 
 This document will include important links and course notes for 01:790:391:01: Data Science for Political Science.
 
   - This site will be updated throughout the semester with new content. 
-  - The Canvas modules will provide links to the relevant sections to review for a given week of the course. 
+  - The Canvas modules will provide links to the relevant sections to review for a given week of the course.
+  - The primary text for the course is [Quantitative Social Science: An Introduction](https://qss.princeton.press/qss-an-introduction/) by Kosuke Imai. We will refer to this as QSS in the notes.
   - This is a new and living document. If you spot errors or have questions or suggestions, please email me at k.mccabe@rutgers.edu or post to the course Piazza site.
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
 
 <!-- Instructions: https://ontheline.trincoll.edu/bookdown.html -->
 
-## Setup in R {#rover}
+
+## What have I signed up for?
+
+
+First: What is Data Science?
+
+  - Data Science involves a combination of math/statistics and programming/coding skills, which, for our purposes, we will combine with social science knowledge.
+    + [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) has a nice venn diagram of how these different skill sets intersect.
+    + Note: This course will not assume prior familiarity with data science in general or coding, specifically. For those brand new to data science, the idea of learning to code may seem intimidating, but anyone can succeed with a bit of patience and an open mind.
+
+![](images/venn.png)
+  
+Next: What is political science?
+  
+  - The science of politics, of course! Politics focuses on studying governance and the distribution of power in society, broadly conceived. 
+      + How else might you define politics and political science? What do we study in political science?
+
+
+### Data Science Can Help Social Scientists
+
+
+***Example: Mapping poverty using mobile phone and satellite data***
+
+Researchers used modern data sources, including mobile phone data, as a way to ***predict*** and ***describe*** poverty in different geographic regions. These methods helped social scientists come up with methods that are much more cost-effective and efficient, but still as accurate as traditional methods for this type of measurement.
+
+  - How might measures of global poverty be useful to political scientists?
+
+
+![](images/blum.jpg){width=90%}
+
+*[Steele et al. 2017](https://royalsocietypublishing.org/doi/full/10.1098/rsif.2016.0690): Poverty is one of the most important determinants of adverse health outcomes globally, a major cause of societal instability and one of the largest causes of lost human potential. Traditional approaches to measuring and targeting poverty rely heavily on census data, which in most low- and middle-income countries (LMICs) are unavailable or out-of-date. Alternate measures are needed to complement and update estimates between censuses. This study demonstrates how public and private data sources that are commonly available for LMICs can be used to provide novel insight into the spatial distribution of poverty.* 
+
+
+***Social Science Goals***
+
+We have several goals in social science. Here are four that data science can help us pursue:
+
+  - **Describe** and measure
+      + Has the U.S. population increased?
+  - **Explain**, evaluate, and recommend (study of causation)
+      + Does expanding Medicaid improve health outcomes?
+  - **Predict**
+      + Who will win the next election?
+  - **Discover**
+      + How do policies diffuse across states?
+
+What are other examples of these goals?
+
+
+
+Note: In this course, we are exploiting the benefits of quantitative data to help achieve goals of social science. However, quantitative data have their shortcomings, too. We will also discuss the limitations of various applications of social science data, and we encourage you to always think critically about how we are using data.
+
+### Course Goals
+
+This course will provide you with a taste of each of these social science goals, and how the use of data can help achieve these goals. By the end of the course, you should be able to
+
+  - Provide examples of how quantitative data may be used to help answer social science research questions.
+  - Compare and contrast the goals of description, causation, prediction, and discovery in social science research.
+  - Use the programming language R to import and explore social science data and conduct basic statistical analyses.
+  - Interpret and describe visual displays of social science data, such as graphs and maps. 
+  - Develop your own analyses and visualizations to understand social science phenomena.
+
+
+If you are someone that loves data, we hope you will find this course engaging. If you are someone who loathes or finds the idea of working with data and statistics alarming, we hope you keep an open mind. We will meet you where you are. This course will not assume knowledge of statistical software, and there will be plenty of opportunities to ask questions and seek help from classmates and the instructor throughout the semester. 
+
+The first section of course will walk people through how to use the statistical program-- R-- that we will employ this semester. 
+
+***Will this course help me in the future?***
+
+Even if you do not plan on becoming a social scientist or a data scientist, an introduction to these skills may prove helpful throughout your academic and professional careers.
+
+  - To become an informed consumer of news articles and research involving quantitative analyses.
+  - To practice analytical thinking to make informed arguments and decisions.
+  - To expand your toolkit for getting a job that may involve consuming or performing some data analysis, even if that is not the traditional role.
+    + Example: Journalism- [How 5 Data Dynamos Do Their Jobs](https://www.nytimes.com/2019/06/12/reader-center/data-reporting-spreadsheets.html) 
+
+
+
+## Setup in R {#rsetup}
 
 **Goal**
 
 By the end of the first week of the course, you will want to have R and RStudio installed on your computer (both free) and feel comfortable using R as a calculator.
+
+R is an application that processes the R programming language in a statistical computing environment. RStudio is also an application, which serves as a user interface that makes working in R easier. We will primarily open and use RStudio to work with R.   
+
+In other classes, you may come across Stata, SPSS, Excel, or SAS, which are programs that also conduct data analysis. R has the advantage of being free and open-source. Even after you leave the university setting, you will be able to use R/RStudio for free. As an open-source program, it is very flexible, and a community of active R/RStudio users is constantly adding to and improving the program.   
 
 
 **R and RStudio Installation**
@@ -48,10 +131,7 @@ embed_url("https://www.youtube.com/watch?v=ulIv0NiVTs4")
 ```
 
 
-To supplement the above resources, I would recommend the following:
-
-  - If you were having difficulties following the above instructions for installation, you can try following the first of Rutgers Data Librarian Ryan Womack's videos, which similarly start from the point of installation. They are [here](https://www.youtube.com/watch?v=5rOR31bmoL8&list=PLCj1LhGni3hNxsLsVNHX6V1LICyklHl2a&ab_channel=librarianwomack). He goes at a slow pace and codes along in the videos.
-  
+ 
 
 ## First Time Working in R and RStudio
 
@@ -65,13 +145,25 @@ This section highlights important concepts from QSS chapter 1.
 
 ### Open RStudio
 
-RStudio is an open-source and free program that greatly facilitates the use of R, especially for users new to programming. Once you have downloaded and installed R and RStudio, to work in R, all you need to do now is open RStudio (it will open R). It should look like this, though your version number may be different: (*Image from Kosuke Imai's Quantitative Social Science Figure 1.1*)
+RStudio is an open-source and free program that greatly facilitates the use of R, especially for users new to programming. Once you have downloaded and installed R and RStudio, to work in R, all you need to do now is ***open RStudio*** (it will open R). It should look like this, though your version numbers will be different:
 
-![](images/imai11.png)
+![](images/rconsole1.png)
 
-**Note:** If you only have three windows (e.g., no upper-left window), you may need to **open an R script.** 
+**Note:** The first time you open RStudio, you likely only have the three windows above. We will want to create a fourth window by **opening an R script** to create the fourth window. 
 
-  - To do this, in RStudio, click on File, New, and then R script. This will open a blank document for text editing in the upper left of the RStudio window. We will return to this window in a moment.
+  - To do this, in RStudio, click on File -> New -> R script in your computer's toolbar. This will open a blank document for text editing in the upper left of the RStudio window. We will return to this window in a moment.
+      + You can alternatively click on the green + sign indicator in the top-left corner of the RStudio window, which should give you the option to create a new R script document.
+
+Now you should have something that looks like this, similar to Figure 1.1. in QSS:
+
+![](images/rconsole2.png)
+
+  
+  - The upper-left window has our script document that will contain code.
+  - The lower-right window is the console. This will show the output of the code we run. We will also be able to type directly in the console.
+  - The upper-right window shows the environment (and other tabs, such as the history of commands). When we load and store data in RStudio, we will see a summary of that in the environment.
+  - The lower-right window will enable us to view plots and search help files, among other things.
+
 
 
 ### Using R as a Calculator
@@ -252,7 +344,7 @@ A big part of learning to use R will be learning how to troubleshoot and detect 
 
 Below is an exercise that will demonstrate you are able to use R as a calculator and create R scripts, as well as locate important course platforms.
 
-We will walk through this assignment together during class on Wednesday 9/8, but you are welcome to try to do this ahead of time on your own. You will submit, on Canvas, two documents prior to class on Thursday 9/9.
+We will walk through this assignment together during class, but you are welcome to try to do this ahead of time on your own. You will submit, on Canvas, two documents prior to the deadline.
 
   - An R script (.R) file with your code. Follow the best practices by titling your script and using \# comments to explain your steps. This code should be clean. I should be able to run your code to verify that the code produces the answers you write down.
   - A Word document / Google Docs document or pdf with answers to the written questions (Problems 3-6 below). This document should also have a title with your name on it.
@@ -265,7 +357,7 @@ We will walk through this assignment together during class on Wednesday 9/8, but
   3. Do the calculation 8 + 3 - 2 in R. Store it as an object with an informative name. Report the answer.
   4. Do the calculation 5 $\times$ 3 in R. Store it as an object with an informative name. Report the answer.
   5. Add these two calculations together. Note: do this by adding together the objects you created, not the underlying raw calculations. Report the answer.
-  6.  Write down how you will complete your R assignments this semester. (For example, if you have a personal laptop with R and RStudio on it, you will simply write "I will use my personal laptop." If you don't have a personal computer or laptop, please indicate where on campus or off-campus you will have regular access to a computer with R/RStudio to do your work. It is essential that you have regular access to a computer so that you will not fall behind in this course.
+  6.  Write down how you will complete your R assignments this semester. For example, if you have a personal laptop with R and RStudio on it, you will simply write "I will use my personal laptop." If you don't have a personal computer or laptop, please indicate where on campus or off-campus you will have regular access to a computer with R/RStudio to do your work. It is essential that you have regular access to a computer so that you will not fall behind in this course.
   7. Navigate to the course Piazza site and post a message. This can be as simple as "hello" or a reply to another person's post. (No need to report this in your submission.)
 
 
