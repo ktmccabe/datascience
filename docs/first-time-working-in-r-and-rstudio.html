@@ -131,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course Notes</a>
+<li class="chapter" data-level="1" data-path="course-notes.html"><a href="course-notes.html"><i class="fa fa-check"></i><b>1</b> Course Notes</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html"><i class="fa fa-check"></i><b>1.1</b> What have I signed up for?</a>
 <ul>
@@ -150,7 +150,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="assignment-1.html"><a href="assignment-1.html"><i class="fa fa-check"></i><b>1.4</b> Assignment 1</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="description.html"><a href="description.html"><i class="fa fa-check"></i><b>2</b> Description</a></li>
 </ul>
 
       </nav>
@@ -192,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/rconsole2.png" /></p>
 <ul>
 <li>The upper-left window has our script document that will contain code.</li>
-<li>The lower-right window is the console. This will show the output of the code we run. We will also be able to type directly in the console.</li>
+<li>The lower-left window is the console. This will show the output of the code we run. We will also be able to type directly in the console.</li>
 <li>The upper-right window shows the environment (and other tabs, such as the history of commands). When we load and store data in RStudio, we will see a summary of that in the environment.</li>
 <li>The lower-right window will enable us to view plots and search help files, among other things.</li>
 </ul>
@@ -221,13 +220,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>(Almost) every time you work in RStudio, the first thing you will do is set your working directory. This is a designated folder in your computer where you will save your R scripts and datasets.</p>
 <p>There are many ways to do this.</p>
 <ul>
-<li>An easy way is to go to Session <span class="math inline">\(\rightarrow\)</span> Set Working Directory <span class="math inline">\(\rightarrow\)</span> Choose Directory. I suggest choosing a folder in your computer that you can easily find and that you will routinely use for this class. Go ahead and create/select it.</li>
+<li>An easy way is to go to Session -&gt; Set Working Directory -&gt; Choose Directory. I suggest choosing a folder in your computer that you can easily find and that you will routinely use for this class. Go ahead and create/select it.</li>
 <li>Note: when you selected your directory, code came out in the bottom left Console window. This is the <code>setwd()</code> command which can also be used directly to set your working directory in the future.</li>
 <li>If you aren’t sure where your directory has been set, you can also type <code>getwd()</code> in your Console. Try it now</li>
 </ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="first-time-working-in-r-and-rstudio.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example of where my directory was</span></span>
 <span id="cb13-2"><a href="first-time-working-in-r-and-rstudio.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
-<p>If I want to change the working directory, I can go to the top toolbar of my computer and use Session <span class="math inline">\(\rightarrow\)</span> Set Working Directory <span class="math inline">\(\rightarrow\)</span> Choose Directory or just type my file pathway using the <code>setwd()</code> below:</p>
+<p>If I want to change the working directory, I can go to the top toolbar of my computer and use Session -&gt; Set Working Directory -&gt; Choose Directory or just type my file pathway using the <code>setwd()</code> below:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="first-time-working-in-r-and-rstudio.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example of setting the working directory using setwd().</span></span>
 <span id="cb14-2"><a href="first-time-working-in-r-and-rstudio.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Your computer will have your own file path.</span></span>
 <span id="cb14-3"><a href="first-time-working-in-r-and-rstudio.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/ktmccabe/Dropbox/Rutgers Teaching/&quot;</span>)</span></code></pre></div>
@@ -286,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="first-time-working-in-r-and-rstudio.html#cb25-1" aria-hidden="true" tabindex="-1"></a>mccabe <span class="ot">&lt;-</span> <span class="st">&quot;professor for this course&quot;</span></span>
 <span id="cb25-2"><a href="first-time-working-in-r-and-rstudio.html#cb25-2" aria-hidden="true" tabindex="-1"></a>mccabe</span></code></pre></div>
 <pre><code>## [1] &quot;professor for this course&quot;</code></pre>
-<p><em>Note:</em> Object names cannot begin with numbers and no spacing is allowed. Avoid using special characters such as % and $, which have specific meanings in R. Finally, use concise and intuitive object names.}</p>
+<p><em>Note:</em> Object names cannot begin with numbers and no spacing is allowed. Avoid using special characters such as % and $, which have specific meanings in R. Finally, use concise and intuitive object names.</p>
 <ul>
 <li>GOOD CODE: <code>practice.calc &lt;- 5 + 3</code></li>
 <li>BAD CODE: <code>meaningless.and.unnecessarily.long.name &lt;- 5 + 3</code></li>
@@ -366,20 +365,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

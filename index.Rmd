@@ -48,7 +48,7 @@ Next: What is political science?
 
 ***Example: Mapping poverty using mobile phone and satellite data***
 
-Researchers used modern data sources, including mobile phone data, as a way to ***predict*** and ***describe*** poverty in different geographic regions. These methods helped social scientists come up with methods that are much more cost-effective and efficient, but still as accurate as traditional methods for this type of measurement.
+Researchers used modern data sources, including mobile phone data, as a way to ***predict*** and ***describe*** poverty in different geographic regions. These tools helped social scientists come up with methods that are much more cost-effective and efficient, but still as accurate as traditional methods for this type of measurement.
 
   - How might measures of global poverty be useful to political scientists?
 
@@ -160,7 +160,7 @@ Now you should have something that looks like this, similar to Figure 1.1. in QS
 
   
   - The upper-left window has our script document that will contain code.
-  - The lower-right window is the console. This will show the output of the code we run. We will also be able to type directly in the console.
+  - The lower-left window is the console. This will show the output of the code we run. We will also be able to type directly in the console.
   - The upper-right window shows the environment (and other tabs, such as the history of commands). When we load and store data in RStudio, we will see a summary of that in the environment.
   - The lower-right window will enable us to view plots and search help files, among other things.
 
@@ -196,7 +196,7 @@ Earlier, I asked you to open an R script in the upper left window by doing File,
 
 There are many ways to do this.
 
-  - An easy way is to go to Session $\rightarrow$ Set Working Directory $\rightarrow$ Choose Directory. I suggest choosing a folder in your computer that you can easily find and that you will routinely use for this class. Go ahead and create/select it. 
+  - An easy way is to go to Session -> Set Working Directory -> Choose Directory. I suggest choosing a folder in your computer that you can easily find and that you will routinely use for this class. Go ahead and create/select it. 
   - Note: when you selected your directory, code came out in the bottom left Console window. This is the `setwd()` command which can also be used directly to set your working directory in the future.
   - If you aren't sure where your directory has been set, you can also type `getwd()` in your Console. Try it now
 
@@ -207,7 +207,7 @@ getwd()
 ```
 
 
-If I want to  change the working directory, I can go to the top toolbar of my computer and use Session $\rightarrow$ Set Working Directory $\rightarrow$ Choose Directory or just type my file pathway using the `setwd()` below:
+If I want to  change the working directory, I can go to the top toolbar of my computer and use Session -> Set Working Directory -> Choose Directory or just type my file pathway using the `setwd()` below:
 
 ```{r, eval=FALSE}
 ## Example of setting the working directory using setwd().
@@ -301,7 +301,7 @@ mccabe
 ```
 
 
-*Note:* Object names cannot begin with numbers and no spacing is allowed. Avoid using special characters such as \% and \$, which have specific meanings in R. Finally, use concise and intuitive object names.}
+*Note:* Object names cannot begin with numbers and no spacing is allowed. Avoid using special characters such as \% and \$, which have specific meanings in R. Finally, use concise and intuitive object names.
 
   - GOOD CODE: `practice.calc <- 5 + 3`
   - BAD CODE: `meaningless.and.unnecessarily.long.name <- 5 + 3`
@@ -355,9 +355,11 @@ We will walk through this assignment together during class, but you are welcome 
   1. Create an R script saved as ``LastnameSetup1.R" (use your last name). Within the R script, follow the example from  this handout and title the script.
   2. Set your working directory, and include the file pathway (within `setwd()`) at the top of your .R script.
   3. Do the calculation 8 + 3 - 2 in R. Store it as an object with an informative name. Report the answer.
-  4. Do the calculation 5 $\times$ 3 in R. Store it as an object with an informative name. Report the answer.
+  4. Do the calculation 5 x 3 in R. Store it as an object with an informative name. Report the answer.
   5. Add these two calculations together. Note: do this by adding together the objects you created, not the underlying raw calculations. Report the answer.
   6.  Write down how you will complete your R assignments this semester. For example, if you have a personal laptop with R and RStudio on it, you will simply write "I will use my personal laptop." If you don't have a personal computer or laptop, please indicate where on campus or off-campus you will have regular access to a computer with R/RStudio to do your work. It is essential that you have regular access to a computer so that you will not fall behind in this course.
   7. Navigate to the course Piazza site and post a message. This can be as simple as "hello" or a reply to another person's post. (No need to report this in your submission.)
 
-
+```{r, include=FALSE}
+knitr::knit_exit()
+```
