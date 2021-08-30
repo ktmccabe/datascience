@@ -340,7 +340,7 @@ A big part of learning to use R will be learning how to troubleshoot and detect 
 ![](images/punctuation.png){width=80%}
 
 
-## Assignment 1
+## Assignment 1 R Installation
 
 Below is an exercise that will demonstrate you are able to use R as a calculator and create R scripts, as well as locate important course platforms.
 
