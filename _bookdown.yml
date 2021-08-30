@@ -1,6 +1,6 @@
 output_dir: "docs"
 book_filename: "datasciforpolisci"
-delete_merged_file: true
+delete_merged_file: false
 language:
   label:
     fig: "Image "

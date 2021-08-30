@@ -360,3 +360,60 @@ We will walk through this assignment together during class, but you are welcome 
   6.  Write down how you will complete your R assignments this semester. For example, if you have a personal laptop with R and RStudio on it, you will simply write "I will use my personal laptop." If you don't have a personal computer or laptop, please indicate where on campus or off-campus you will have regular access to a computer with R/RStudio to do your work. It is essential that you have regular access to a computer so that you will not fall behind in this course.
   7. Navigate to the course Piazza site and post a message. This can be as simple as "hello" or a reply to another person's post. (No need to report this in your submission.)
 
+
+<!--chapter:end:index.Rmd-->
+
+```{r, include=FALSE}
+knitr::knit_exit()
+```
+
+# Description {#description}
+
+This section will discuss the goal of description in social science.
+
+
+## Description in Political Science
+
+What are things we want to describe in political science?
+
+  - Unemployment rate, GDP
+  - Voter turnout, vote share for a party in an election 
+  - Percentage of women in the labor force
+  - Poverty rates over time
+
+What else? What does description help us achieve?
+
+What does description help us achieve?
+
+  - Identify tendencies
+  - Identify patterns or trends
+  - Identify relationships between two or more factors
+  - Help us generalize from anecdotes, what is common vs. what is uncommon?
+  - Diagnose demand, needs, potential problems, likely outcomes 
+  
+Generate ideas for other goals, such as explanation and prediction
+
+## Process of Describing
+
+How do we go about a descriptive quantitative analysis?
+  
+  1. Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)
+  2. Find outcome data relevant to that question (e.g., GDP)
+  3. Find multiple relevant units or "data points"
+      - Multiple years of data (e.g., U.S., from 1900 to 2020) 
+      - Multiple countries from one year (e.g., U.S. to Germany to other
+countries)
+  4. Summarize the data to help answer the question (more on this later)
+  
+### Example Process
+
+  1. How is the economy doing?
+  2. Find outcome data relevant to that question 
+      - Let's ask people.
+  3. Find multiple relevant units or data points
+      - We will ask several people. Each person will be a data point.
+  4. Summarize the data
+
+
+<!--chapter:end:02-Description.Rmd-->
+
