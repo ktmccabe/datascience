@@ -31,20 +31,12 @@ Generate ideas for other goals, such as explanation and prediction
 ## Process of Describing
 
 How do we go about a descriptive quantitative analysis?
-
+  
   1. Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)
   2. Find outcome data relevant to that question (e.g., GDP)
-    - Start from a concept: what we want to describe (i.e., health of the
-economy)
-    - Move toward an "operationalization" (i.e., a way to measure it)
-    - Easy! except... social science is messy. Our concepts are rich, while
-our measures may be very narrow or concrete.
-    - For example, GDP is one way to measure economic health, but is it
-the only measure?
-    - Choose measures based on validity (accuracy), reliability, cost
   3. Find multiple relevant units or "data points"
-    - Multiple years of data (e.g., U.S., from 1900 to 2020)
-    - Multiple countries from one year (e.g., U.S. to Germany to other
+      - Multiple years of data (e.g., U.S., from 1900 to 2020) 
+      - Multiple countries from one year (e.g., U.S. to Germany to other
 countries)
   4. Summarize the data to help answer the question (more on this later)
   
