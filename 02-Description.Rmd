@@ -1,13 +1,5 @@
-```{r, include=FALSE}
-knitr::knit_exit()
-```
 
 # Description {#description}
-
-This section will discuss the goal of description in social science.
-
-
-## Description in Political Science
 
 What are things we want to describe in political science?
 
@@ -17,8 +9,6 @@ What are things we want to describe in political science?
   - Poverty rates over time
 
 What else? What does description help us achieve?
-
-What does description help us achieve?
 
   - Identify tendencies
   - Identify patterns or trends
@@ -34,18 +24,168 @@ How do we go about a descriptive quantitative analysis?
   
   1. Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)
   2. Find outcome data relevant to that question (e.g., GDP)
+      - Start from a concept: what we want to describe (i.e., health of the economy)
+      - Move toward an "operationalization" (i.e., a way to measure it)
+      - Easy! except... social science is messy. Our concepts are rich, while
+our measures may be very narrow or concrete.
+        + For example, GDP is one way to measure economic health, but is it
+the only measure?
+        + Choose measures based on validity, reliability, cost
   3. Find multiple relevant units or "data points"
-      - Multiple years of data (e.g., U.S., from 1900 to 2020) 
-      - Multiple countries from one year (e.g., U.S. to Germany to other
+      - E.g., Multiple years of data (e.g., U.S., from 1900 to 2020) 
+      - E.g., Multiple countries from one year (e.g., U.S. to Germany to other
 countries)
-  4. Summarize the data to help answer the question (more on this later)
+  4. Summarize the data to help answer the question 
   
 ### Example Process
 
   1. How is the economy doing?
   2. Find outcome data relevant to that question 
-      - Let's ask people.
+      - Let's ask people
   3. Find multiple relevant units or data points
       - We will ask several people. Each person will be a data point.
   4. Summarize the data
+      - Let's take the mean
+
+![](images/economysurvey.png){width=50%}
+
+How would you summarize information in explaining it to another person? You would probably want to describe how most people feel about the economy. In other words, you would describe the "central tendency" of people's responses (the central tendency of the data).
+
+## Summarizing univariate data
+
+Data coming from one "variable," which captures the values of a changing characteristic
+
+
+Our set of values is Outcome = \{0,0,0,0,1,1,0,1,0,1\}.
+
+  - We will call this a vector of values, where a vector is just a collection of things.
+  - Because our vector contains only numbers, we will call it a *numeric* vector.
+  - Each value can be indexed by `i`, denoting the position of the value in the
+  - For example, Jesse is in position `i=10` of the vector, and his value is 1
+
+We can create vectors in R by using `c()` and assigning `<-` it to an object we will call `Outcome`.
+
+```{r}
+Outcome <- c(0,0,0,0,1,1,0,1,0,1) # Use commas to separate values
+```
+
+
+We can extract a particular value within our vector using brackets
+
+```{r}
+Outcome[10]
+```
+
+We can label our outcomes using `names()`
+
+```{r}
+names(Outcome) <-c("Joe","Sally", "Trevor", "Emily", "Mark",
+                   "Sarah Jane", "Stacey", "Steve", "Phoebe", "Jesse")
+Outcome[10]
+```
+
+
+We can overwrite whole vectors or values within a vector
+
+```{r}
+Outcome <- c(5,0,2, 6,1,1, 7, 8, 0, 1) # oops we put the wrong numbers
+Outcome
+Outcome <- c(0,0,0,0,1,1,0,1,0,1) # no problem, just overwrite it
+Outcome
+```
+
+Oops we accidentally type a 0 for Jesse.
+
+```{r}
+Outcome <- c(0,0,0,0,1,1,0,1,0,0) # oops typo for Jesse
+Outcome
+Outcome[10] <- 1 # no prob bob. Assign a 1 in position 10
+Outcome
+```
+
+
+Vectors do not have to be numeric. Character vectors contain a collection of words and phrases. In R, we use quotations around character values
+
+Example: let's create a vector of names that we will call `People`.
+
+```{r}
+People <- c("Joe","Sally", "Trevor", "Emily", "Mark", "Sarah Jane", "Stacey", "Steve", "Phoebe", "Jesse")
+People[10]
+```
+
+We can use the R function `class()` to tell us the type of object we have.
+
+```{r}
+class(Outcome)
+class(People)
+```
+
+## Functions to summarize univariate data
+
+For univariate data, often we are interested in describing the range of the values and their central tendency.
+
+  - range: the minimum (`min()`) and maximum (`max()`) values
+  - mean: the average value (`mean()`)
+
+The average is the sum of the values divided by the number of values:
+
+$\bar{X} = \frac{\text{sum of values}}{\text{number of values}} = \frac{x_1 + x_2 + ... + x_N}{N}=\frac{1}{N}\sum_{i=1}^{i=N} x_i$
+
+
+Let's do this in R for our set of 10 values
+
+```{r}
+(0 + 0 + 0 + 0 + 1 + 1 + 0 + 1 + 0 + 1)/10
+```
+
+The average outcome is .4. Note: when a variable contains only 0's and 1's its mean is the proportion of 1's. 40\% of people think the economy is doing well. 
+
+
+### Using functions in R (overview)
+
+A function is an action(s) that you request R to perform on an object or set of objects. For example, we will use the `mean()` function to ask R to take the mean or "average" of a vector.
+
+  - Inside the function you place inputs or "arguments."
+
+
+```{r}
+mean(Outcome)
+```
+
+R also has functions that take the sum `sum()` of a vector of values.
+
+```{r}
+sumofvalues <- sum(Outcome)
+```
+
+And that count the total number of values or "length" `length()` of the vector.
+
+```{r}
+numberofvalues <- length(Outcome)
+```
+
+Note that the below is also equivalent to the mean
+
+```{r}
+sumofvalues / numberofvalues
+```
+
+Returning to our example, we found that 40\% of people surveyed thought the economy was doing well. Surveying people about their opinions on how the country doing is a common way that social scientists use description. We could extend this exercise in many ways going forward, even with the same question.
+
+  - Start with a question: How is the economy doing?
+  - Let's find a measure: Ask people if the economy is doing well.
+  - Find data points: Multiple people (we could stop there with the average!), or add more variables:
+      + Across time: Survey people across multiple years
+      + Across type of people: Survey different partisan groups
+
+These types of survey trends are often used by news organizations and public opinion organizations like, Gallup.
+
+![](images/economyconf.png){width=70%}
+
+
+This was just a first example of description in political science. There are many other ways to describe how the economy is doing and many other topics we might want to describe in politics. 
+
+
+
+
 
