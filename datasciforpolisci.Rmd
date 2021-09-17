@@ -496,8 +496,17 @@ How would you summarize information in explaining it to another person? You woul
 
 ## Summarizing univariate data
 
-Data coming from one "variable," which captures the values of a changing characteristic
+For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=80tbdiWuljc")
+```
+
+
+Univariate data refers to data coming from one "variable," where a variable captures the values of a changing characteristic.
 
 Our set of values is Outcome = \{0,0,0,0,1,1,0,1,0,1\}.
 
@@ -649,6 +658,16 @@ In this dataset, each row is an election year. Each column contains information 
 
 
 ### Working with datasets in R
+
+For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=rm_g0rrglEQ")
+```
+
 
 Often the variables we care about are stored inside of rectangular datasets
 
