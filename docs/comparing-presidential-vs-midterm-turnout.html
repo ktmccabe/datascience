@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Data Science for Political Science</title>
-  <meta name="description" content="Data Science for Political Science" />
+  <title>2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science</title>
+  <meta name="description" content="2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Data Science for Political Science" />
+  <meta property="og:title" content="2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science for Political Science" />
+  <meta name="twitter:title" content="2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="comparing-vep-and-vap-turnout.html"/>
 
-<link rel="next" href="what-have-i-signed-up-for.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -198,29 +198,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science for Political Science</h1>
-<p class="author"><em>Instructor: Katherine McCabe</em></p>
+<div id="comparing-presidential-vs.-midterm-turnout" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Comparing Presidential vs. Midterm turnout</h2>
+<p>How does turnout compare in presidential vs. midterm years? Sometimes using a single summary of turnout may obscure important underlying differences in the data. To detect these differences, we may want to summarize different parts of the data.</p>
+<p>Oh dear. We need to extract specific years from the turnout data frame. Which rows contain the years we want?</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb105-1" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year</span></code></pre></div>
+<pre><code>##  [1] 1980 1982 1984 1986 1988 1990 1992 1994 1996 1998 2000 2002 2004 2008</code></pre>
+<p>Ok: rows 1,3,5,7,9,11,13,14 are the presidential. And rows 2,4,6,8,10,12 are midterms.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="do">## we can extract all of these at once by using c()</span></span>
+<span id="cb107-2"><a href="comparing-presidential-vs-midterm-turnout.html#cb107-2" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)] <span class="co"># presidential</span></span></code></pre></div>
+<pre><code>## [1] 1980 1984 1988 1992 1996 2000 2004 2008</code></pre>
+<p>Let’s take the mean VEP turnout for presidential years.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)])</span></code></pre></div>
+<pre><code>## [1] 55.983</code></pre>
+<p>Let’s take the mean VEP turnout for midterm years.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)])</span></code></pre></div>
+<pre><code>## [1] 39.5712</code></pre>
+<p>Let’s take the difference by storing each mean and then subtracting</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb113-1" aria-hidden="true" tabindex="-1"></a>mean.VEP.pres <span class="ot">&lt;-</span> <span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)])</span>
+<span id="cb113-2"><a href="comparing-presidential-vs-midterm-turnout.html#cb113-2" aria-hidden="true" tabindex="-1"></a>mean.VEP.mid <span class="ot">&lt;-</span> <span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)])</span>
+<span id="cb113-3"><a href="comparing-presidential-vs-midterm-turnout.html#cb113-3" aria-hidden="true" tabindex="-1"></a>mean.VEP.pres <span class="sc">-</span>  mean.VEP.mid</span></code></pre></div>
+<pre><code>## [1] 16.41181</code></pre>
+<p>Presidential turnout, on average, is higher than midterm turnout.</p>
+<div id="r-shortcut-for-writing-vectors" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> R shortcut for writing vectors</h3>
+<p>Sometimes we write numbers that are in a predictable sequence (e.g., 1,2,3,4,5). In R, we have functions that prevent us from having to type each number when this is the case.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>) <span class="co"># is equivalent to:</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># is equivalent to:</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>We can use the last one to our advantage to extract the midterm years, which go by 2</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)]) <span class="co"># is the same as</span></span></code></pre></div>
+<pre><code>## [1] 39.5712</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">2</span>)])</span></code></pre></div>
+<pre><code>## [1] 39.5712</code></pre>
+<p>Not a big deal now, but imagine if you had to write 100 numbers or 1 MILLION NUMBERS!</p>
+<p>In this section, we have described voter turnout using multiple measures and types of elections. There are several other questions that political scientists may be interested in when it comes to voter turnout.</p>
+<p>For example, Texas and more than a dozen other states have passed new laws that change voting procedures in elections. What effect will these have on voter turnout? In the next section, we start to examine how to evaluate causal claims.</p>
+<p><img src="images/texaslaw.png" style="width:60.0%" /></p>
+
 </div>
-<div id="course-notes" class="section level1" number="1">
-<h1><span class="header-section-number">Section 1</span> Course Notes</h1>
-<p>This document will include important links and course notes for 01:790:391:01: Data Science for Political Science.</p>
-<ul>
-<li>This site will be updated throughout the semester with new content.</li>
-<li>The Canvas modules will provide links to the relevant sections to review for a given week of the course.</li>
-<li>The primary text for the course is <a href="https://qss.princeton.press/qss-an-introduction/">Quantitative Social Science: An Introduction</a> by Kosuke Imai. We will refer to this as QSS in the notes.</li>
-<li>This is a new and living document. If you spot errors or have questions or suggestions, please email me at <a href="mailto:k.mccabe@rutgers.edu" class="email">k.mccabe@rutgers.edu</a> or post to the course Piazza site.</li>
-</ul>
-<!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
-<!-- Instructions: https://ontheline.trincoll.edu/bookdown.html -->
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
+<a href="comparing-vep-and-vap-turnout.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="what-have-i-signed-up-for.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

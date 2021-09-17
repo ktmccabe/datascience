@@ -629,6 +629,299 @@ These types of survey trends are often used by news organizations and public opi
 This was just a first example of description in political science. There are many other ways to describe how the economy is doing and many other topics we might want to describe in politics. 
 
 
+## Loading data into R
+
+For this section, our motivating example will be methods to measure voter turnout in the United States.
+
+Describing voter turnout
+
+  - What is a typical level of voter turnout?
+  - How has turnout changed over time?
+  - Is turnout higher in presidential years or in midterm years?
+
+How can we measure turnout? Think about the validity, reliability, and cost of different approaches.
+
+Example: Dataset on Voter Turnout in the U.S. across multiple years
+
+![](images/turnoutframe.png){width=80%}
+
+In this dataset, each row is an election year. Each column contains information about the population, potential voters, or voter turnout. These will help us compute the turnout rate in a given year. To work with this dataset, we need to load it into R.
+
+
+### Working with datasets in R
+
+Often the variables we care about are stored inside of rectangular datasets
+
+  - These have a number of rows `nrow()` and columns `ncol()`
+  - Each row is an "observation," representing the information collected from an individual or entity
+  - Each column is a variable, representing a changing characteristic across multiple observations
+  
+
+When we import a dataset into R, we have a few options.
+
+Option 1: Download dataset to your computer
+
+  - Move the dataset to your working directory
+  - Identify the file type (e.g., csv, dta, RData, txt)
+  - Pick the appropriate R function to match the type (e.g., `read.csv(), read.dta(), load(), read.table()`)
+  - Assign the dataset to an object. This object will now be `class()` of `data.frame`
+
+```{r, eval=F}
+turnout <- read.csv("turnout.csv")
+```
+
+
+Option 2: Read file from a url provided
+  
+  - Need an active internet connection for this to work
+  - URL generally must be public
+  - Include the url inside the function used to read the data
+
+```{r}
+turnout <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/turnout.csv")
+```
+
+```{r}
+class(turnout)
+```
+
+You can also open up a window to view the data:
+```{r, eval=FALSE}
+View(turnout)
+```
+
+### Measuring the Turnout in the US Elections
+
+
+Relevant questions with voter turnout
+
+  - What is a typical level of voter turnout? 
+  - Is turnout higher in presidential years or in midterm years?
+  - Is turnout higher or lower based on voting-eligible (VEP) or voting-age (VAP) populations? 
+We have a lot of people who are citizens 18 and older who are ineligible to vote. This makes the VEP denominator smaller than the VAP.
+
+Voter Turnout in the U.S.
+
+  - Numerator: `total`: Total votes cast (in thousands)
+  - Denominator:
+      - VAP: (voting-age population) from Census
+      - VEP (voting-eligible population) VEP = VAP + overseas voters - ineligible voters
+
+  - Additional Variables and Descriptions
+      - `year`: election year 
+      - `ANES`: ANES self-reported estimated turnout rate 
+      - `VEP`: Voting Eligible Population (in thousands) 
+      - `VAP`: Voting Age Population (in thousands) 
+      - `total`: total ballots cast for highest office (in thousands) 
+      - `felons`: total ineligible felons (in thousands) 
+      - `noncitizens`: total non-citizens (in thousands) 
+      - `overseas`: total eligible overseas voters (in thousands)
+      - `osvoters`: total ballots counted by overseas voters (in thousands) 
+
+
+### Getting to know your data
+
+
+```{r}
+## How many observations (the rows)?
+nrow(turnout)
+
+## How many variables (the columns)?
+ncol(turnout)
+
+## What are the variable names?
+names(turnout)
+
+## Show the first six rows
+head(turnout)
+```
+
+
+Extract a particular column (vector) from the data using the \$.
+```{r}
+turnout$year
+```
+
+Extract the 10th year. Just like before! We use 10 to indicate the value of the `year` column in position (row 10) of the data.
+
+```{r}
+turnout$year[10]
+```
+
+
+We can take the `mean()` of a particular column, too. Let's take it of the total number of voters.
+
+```{r}
+mean(turnout$total)
+```
+
+And get the `class()` (Note: integer is just a type of numeric variable)
+
+```{r}
+class(turnout$total)
+```
+
+
+We can also use brackets in the full data frame, but because our data frame has BOTH rows and columns, we cannot just supply one position `i`. Instead, we have to tell R which row AND which column by using a comma between the positions.
+
+```{r}
+turnout[1,2] # value in row 1, column 2
+```
+
+We can use the column name instead
+
+```{r}
+turnout[1, "VEP"]
+```
+
+If we leave the second entry blank, it will return all columns for the specified row
+
+```{r}
+turnout[1,] # All variable values for row 1
+```
+
+The opposite is true if we leave the first entry blank.
+```{r}
+turnout[,2] # VEP for all rows
+```
+
+## Comparing VEP and VAP turnout
+
+### Creating new variables in R
+
+Let's create a new variable that is VAP that adds overseas voters.
+
+```{r}
+# Use $ to add a new variable (i.e., column) to a dataframe
+turnout$VAPplusoverseas <- turnout$VAP + turnout$overseas
+```
+
+Under the hood, what this is doing is taking each value of `turnout$VAP` and adding it to its corresponding values of `turnout$overseas`.
+
+And, yes, this new variable shows up as a new column in `turnout`. Go ahead, `View()` it
+
+```{r, eval=F}
+View(turnout)
+```
+
+This does not change the underlying `turnout.csv` file, only the `turnout data.frame` we are working with in the current R session.
+
+  - This is an advantage of using an R script. 
+  - You don't have to worry about overwriting/messing up the raw data. 
+  - You start from the original raw data when you load {\tt turnout.csv}, and then everything else is done within R.
+
+
+This is our new denominator. Now we can calculate turnout based on this denominator.
+```{r}
+turnout$newVAPturnout <- turnout$total / turnout$VAPplusoverseas
+```
+
+Just like with adding two vectors, when we divide, each value in the first vector is divided by its corresponding value in the second vector.
+
+```{r}
+turnout$newVAPturnout
+```
+
+
+Let's calculate the VEP turnout rate and turn it into a percentage. This time, we do it in one step.
+
+  -  (total votes / VEP) $\times$ 100:
+
+```{r}
+turnout$newVEPturnout <- (turnout$total / turnout$VEP) * 100
+turnout$newVEPturnout
+```
+
+Let's change it from a proportion to a percentage. How? Multiply each value of `turnout$newVAP` by 100
+
+```{r}
+turnout$newVAPturnout <- turnout$newVAPturnout * 100
+```
+
+This multiplies each number within the vector by 100. 
+
+```{r}
+turnout$newVAPturnout
+```
+
+
+What is typical turnout?
+
+```{r}
+mean(turnout$newVAPturnout)
+
+mean(turnout$newVEPturnout)
+```
+
+We find that turnout based on the voting age population is lower than turnout based on the voting eligible population. This is a pattern that political scientists have examined, going back several decades. For example, in a 2001 article McDonald and Popkin show that is it the ineligible population that grew from the 1970s onward and not the population of people who simply prefer not to vote. (See more [here](https://www.jstor.org/stable/3117725).)
+
+![McDonald and Popkin 2001](images/VEP.png)
+
+## Comparing Presidential vs. Midterm turnout
+
+How does turnout compare in presidential vs. midterm years? Sometimes using a single summary of turnout may obscure important underlying differences in the data. To detect these differences, we may want to summarize different parts of the data.
+
+Oh dear. We need to extract specific years from the turnout data frame. Which rows contain the years we want?
+
+```{r}
+turnout$year
+```
+
+Ok: rows 1,3,5,7,9,11,13,14 are the presidential. And rows 2,4,6,8,10,12 are midterms.
+
+```{r}
+## we can extract all of these at once by using c()
+turnout$year[c(1,3,5,7,9,11,13,14)] # presidential
+```
+
+Let's take the mean VEP turnout for presidential years.
+
+```{r}
+mean(turnout$newVEPturnout[c(1,3,5,7,9,11,13,14)])
+```
+
+Let's take the mean VEP turnout for midterm years.
+
+```{r}
+mean(turnout$newVEPturnout[c(2,4,6,8,10,12)])
+```
+
+
+Let's take the difference by storing each mean and then subtracting
+
+```{r}
+mean.VEP.pres <- mean(turnout$newVEPturnout[c(1,3,5,7,9,11,13,14)])
+mean.VEP.mid <- mean(turnout$newVEPturnout[c(2,4,6,8,10,12)])
+mean.VEP.pres -  mean.VEP.mid
+```
+
+Presidential turnout, on average, is higher than midterm turnout.
+
+### R shortcut for writing vectors
+
+Sometimes we write numbers that are in a predictable sequence (e.g., 1,2,3,4,5). In R, we have functions that prevent us from having to type each number when this is the case.
+
+```{r}
+c(1,2,3,4,5) # is equivalent to:
+1:5 # is equivalent to:
+seq(from = 1, to = 5, by = 1)
+```
+
+We can use the last one to our advantage to extract the midterm years, which go by 2
+
+```{r}
+mean(turnout$newVEPturnout[c(2,4,6,8,10,12)]) # is the same as
+
+mean(turnout$newVEPturnout[seq(2, 12, 2)])
+```
+
+Not a big deal now, but imagine if you had to write 100 numbers or 1 MILLION NUMBERS!
+
+In this section, we have described voter turnout using multiple measures and types of elections. There are several other questions that political scientists may be interested in when it comes to voter turnout.
+
+For example, Texas and more than a dozen other states have passed new laws that change voting procedures in elections. What effect will these have on voter turnout? In the next section, we start to examine how to evaluate causal claims.
+
+![](images/texaslaw.png){width=60%}
 
 
 
