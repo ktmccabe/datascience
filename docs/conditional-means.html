@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Process of Describing | Data Science for Political Science</title>
-  <meta name="description" content="2.1 Process of Describing | Data Science for Political Science" />
+  <title>3.5 Conditional Means | Data Science for Political Science</title>
+  <meta name="description" content="3.5 Conditional Means | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta property="og:title" content="3.5 Conditional Means | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta name="twitter:title" content="3.5 Conditional Means | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="description.html"/>
-<link rel="next" href="summarizing-univariate-data.html"/>
+<link rel="prev" href="making-tables.html"/>
+<link rel="next" href="relational-operators-in-r.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,7 +50,6 @@
 
 
 
-<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -232,59 +231,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="process-of-describing" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Process of Describing</h2>
-<p>How do we go about a descriptive quantitative analysis?</p>
-<ol style="list-style-type: decimal">
-<li>Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)</li>
-<li>Find outcome data relevant to that question (e.g., GDP)
-<ul>
-<li>Start from a concept: what we want to describe (i.e., health of the economy)</li>
-<li>Move toward an “operationalization” (i.e., a way to measure it)</li>
-<li>Easy! except… social science is messy. Our concepts are rich, while
-our measures may be very narrow or concrete.
-<ul>
-<li>For example, GDP is one way to measure economic health, but is it
-the only measure?</li>
-<li>Choose measures based on validity, reliability, cost</li>
-</ul></li>
-</ul></li>
-<li>Find multiple relevant units or “data points”
-<ul>
-<li>E.g., Multiple years of data (e.g., U.S., from 1900 to 2020)</li>
-<li>E.g., Multiple countries from one year (e.g., U.S. to Germany to other
-countries)</li>
-</ul></li>
-<li>Summarize the data to help answer the question</li>
-</ol>
-<div id="example-process" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Example Process</h3>
-<ol style="list-style-type: decimal">
-<li>How is the economy doing?</li>
-<li>Find outcome data relevant to that question
-<ul>
-<li>Let’s ask people</li>
-</ul></li>
-<li>Find multiple relevant units or data points
-<ul>
-<li>We will ask several people. Each person will be a data point.</li>
-</ul></li>
-<li>Summarize the data
-<ul>
-<li>Let’s take the mean</li>
-</ul></li>
-</ol>
-<p><img src="images/economysurvey.png" style="width:50.0%" /></p>
-<p>How would you summarize information in explaining it to another person? You would probably want to describe how most people feel about the economy. In other words, you would describe the “central tendency” of people’s responses (the central tendency of the data).</p>
-</div>
+<div id="conditional-means" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Conditional Means</h2>
+<p>Another thing we can do with factor variables is to find how the average of one variable (e.g., our outcome- the callback rate) varies across different categories of our factor variable. For this, we use <code>tapply()</code>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="conditional-means.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## take the mean of input1 by categories of input2</span></span>
+<span id="cb31-2"><a href="conditional-means.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="do">## mean of call by race</span></span>
+<span id="cb31-3"><a href="conditional-means.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(resume<span class="sc">$</span>call, <span class="at">INDEX=</span>resume<span class="sc">$</span>race, mean)</span></code></pre></div>
+<pre><code>##      black      white 
+## 0.06447639 0.09650924</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="description.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="summarizing-univariate-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="making-tables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="relational-operators-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

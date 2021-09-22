@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Process of Describing | Data Science for Political Science</title>
-  <meta name="description" content="2.1 Process of Describing | Data Science for Political Science" />
+  <title>3.2 Randomized Controlled Trials | Data Science for Political Science</title>
+  <meta name="description" content="3.2 Randomized Controlled Trials | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta property="og:title" content="3.2 Randomized Controlled Trials | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta name="twitter:title" content="3.2 Randomized Controlled Trials | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="description.html"/>
-<link rel="next" href="summarizing-univariate-data.html"/>
+<link rel="prev" href="what-separates-causation-from-correlation.html"/>
+<link rel="next" href="application-is-there-racial-discrimination-in-the-labor-market.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,7 +50,6 @@
 
 
 
-<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -232,50 +231,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="process-of-describing" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Process of Describing</h2>
-<p>How do we go about a descriptive quantitative analysis?</p>
-<ol style="list-style-type: decimal">
-<li>Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)</li>
-<li>Find outcome data relevant to that question (e.g., GDP)
+<div id="randomized-controlled-trials" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Randomized Controlled Trials</h2>
+<p>One approach for addressing the fundamental problem of causal inference is to simulate two potential states of the world through random assignment: Randomized Controlled Trials / Experiments</p>
+<p>Experiments approximate factual vs. counterfactual comparison</p>
 <ul>
-<li>Start from a concept: what we want to describe (i.e., health of the economy)</li>
-<li>Move toward an “operationalization” (i.e., a way to measure it)</li>
-<li>Easy! except… social science is messy. Our concepts are rich, while
-our measures may be very narrow or concrete.
+<li>We randomly assign one group to receive a “treatment” and another not to receive a treatment (the control)</li>
+<li>When treatment assignment is <strong>randomized</strong>, the only thing that distinguishes the treatment group from the control group, besides the treatment itself, is chance.</li>
+</ul>
+<p>This allows us to compare the average outcomes between groups in order to estimate our causal effects (more on this below).</p>
+<div id="experiments-why-randomize" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Experiments: Why Randomize?</h3>
+<p>Randomization is essential for being able to “identify” and isolate the causal effect of the treatment on the outcome. Without randomization, there may be several reasons why two groups differ beyond the treatment of interest.</p>
+<p>For example, if we randomly assigned half of Rutgers seniors to watch the movie <em>Groundhog Day</em> and half to watch <em>Parasite</em> we would expect the groups to have about equal proportions of female students, average age, racial composition, majors, etc.</p>
 <ul>
-<li>For example, GDP is one way to measure economic health, but is it
-the only measure?</li>
-<li>Choose measures based on validity, reliability, cost</li>
-</ul></li>
-</ul></li>
-<li>Find multiple relevant units or “data points”
+<li>(If we didn’t randomly assign, and just let people “select” into watching a particular movie, the groups could look very different.)</li>
+</ul>
+<p>But because we randomized assignment, on average, we’d expect the two groups to be identical except for the treatment– in this case, which movie they watched.</p>
 <ul>
-<li>E.g., Multiple years of data (e.g., U.S., from 1900 to 2020)</li>
-<li>E.g., Multiple countries from one year (e.g., U.S. to Germany to other
-countries)</li>
-</ul></li>
-<li>Summarize the data to help answer the question</li>
-</ol>
-<div id="example-process" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Example Process</h3>
-<ol style="list-style-type: decimal">
-<li>How is the economy doing?</li>
-<li>Find outcome data relevant to that question
+<li>Great news! This means any differences in the outcomes between the two groups can be attributed to the treatment. So if we wanted to see if <em>Parasite</em> leads people to have nightmares about people living in their basements, we could compare the average number of reported nightmares between the seniors that watched <em>Parasite</em> vs. <em>Groundhog Day</em></li>
+</ul>
+</div>
+<div id="experiments-how-to-analyze" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Experiments: How to Analyze</h3>
+<p>Difference in Means: We compare each group’s average outcome by subtracting one from the other to estimate the average treatment effect (ATE) aka the average causal effect of the treatment.</p>
 <ul>
-<li>Let’s ask people</li>
-</ul></li>
-<li>Find multiple relevant units or data points
+<li><span class="math inline">\(\widehat{ATE} = \bar{Y}(treatment) - \bar{Y}(control)\)</span></li>
+</ul>
+<p>This is an estimate of, on average, how much our outcome would change if units went from being untreated to treated.</p>
 <ul>
-<li>We will ask several people. Each person will be a data point.</li>
-</ul></li>
-<li>Summarize the data
+<li>E.g., on average how much a person donates to a campaign if contacted by phone compared to if not contacted by phone.</li>
+</ul>
+</div>
+<div id="ingredients-of-an-experiment" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Ingredients of an Experiment</h3>
+<p>From <a href="https://www.bitbybitbook.com/en/1st-ed/running-experiments/"><em>Bit by Bit</em></a></p>
+<p><img src="images/bitbybitexp.png" /></p>
+<p>For every experiment, you should be able to</p>
 <ul>
-<li>Let’s take the mean</li>
-</ul></li>
-</ol>
-<p><img src="images/economysurvey.png" style="width:50.0%" /></p>
-<p>How would you summarize information in explaining it to another person? You would probably want to describe how most people feel about the economy. In other words, you would describe the “central tendency” of people’s responses (the central tendency of the data).</p>
+<li>State the causal question or relationship of interest</li>
+<li>Describe how the experiment will be implemented (e.g., recruitment of subjects)</li>
+<li>Identify and describe the randomization into treatment group(s) and control group and what happens in each group</li>
+<li>Identify the outcome of interest, how it is measured</li>
+<li>Evaluate the relevant comparison</li>
+</ul>
+<p>We will turn to an example in the next section.</p>
 </div>
 </div>
             </section>
@@ -283,8 +283,8 @@ countries)</li>
           </div>
         </div>
       </div>
-<a href="description.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="summarizing-univariate-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-separates-causation-from-correlation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="application-is-there-racial-discrimination-in-the-labor-market.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

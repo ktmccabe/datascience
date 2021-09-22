@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Process of Describing | Data Science for Political Science</title>
-  <meta name="description" content="2.1 Process of Describing | Data Science for Political Science" />
+  <title>3.8 Creating New Variables using Conditional statements | Data Science for Political Science</title>
+  <meta name="description" content="3.8 Creating New Variables using Conditional statements | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta property="og:title" content="3.8 Creating New Variables using Conditional statements | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta name="twitter:title" content="3.8 Creating New Variables using Conditional statements | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="description.html"/>
-<link rel="next" href="summarizing-univariate-data.html"/>
+<link rel="prev" href="subsetting-data-in-r.html"/>
+<link rel="next" href="types-of-experiments.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,7 +50,6 @@
 
 
 
-<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -232,50 +231,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="process-of-describing" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Process of Describing</h2>
-<p>How do we go about a descriptive quantitative analysis?</p>
-<ol style="list-style-type: decimal">
-<li>Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)</li>
-<li>Find outcome data relevant to that question (e.g., GDP)
+<div id="creating-new-variables-using-conditional-statements" class="section level2" number="3.8">
+<h2><span class="header-section-number">3.8</span> Creating New Variables using Conditional statements</h2>
+<p>We can instead create a new variable in our main dataframe. Let’s make a variable that takes the value 1 if a name is female and black sounding and 0, otherwise</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="creating-new-variables-using-conditional-statements.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a new variable called femaleblackname</span></span>
+<span id="cb44-2"><a href="creating-new-variables-using-conditional-statements.html#cb44-2" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb44-3"><a href="creating-new-variables-using-conditional-statements.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a 1 to our new variable where sex is female and race is black</span></span>
+<span id="cb44-4"><a href="creating-new-variables-using-conditional-statements.html#cb44-4" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname[resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb44-5"><a href="creating-new-variables-using-conditional-statements.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a 0 if sex is not female OR if race is not black</span></span>
+<span id="cb44-6"><a href="creating-new-variables-using-conditional-statements.html#cb44-6" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname[resume<span class="sc">$</span>sex <span class="sc">!=</span> <span class="st">&quot;female&quot;</span> <span class="sc">|</span> resume<span class="sc">$</span>race <span class="sc">!=</span> <span class="st">&quot;black&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
+<p>We can check our work</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="creating-new-variables-using-conditional-statements.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">name =</span> resume<span class="sc">$</span>firstname, <span class="at">femaleblack =</span> resume<span class="sc">$</span>femaleblackname)</span></code></pre></div>
+<pre><code>##           femaleblack
+## name         0   1
+##   Aisha      0 180
+##   Allison  232   0
+##   Anne     242   0
+##   Brad      63   0
+##   Brendan   65   0
+##   Brett     59   0
+##   Carrie   168   0
+##   Darnell   42   0
+##   Ebony      0 208
+##   Emily    227   0
+##   Geoffrey  59   0
+##   Greg      51   0
+##   Hakim     55   0
+##   Jamal     61   0
+##   Jay       67   0
+##   Jermaine  52   0
+##   Jill     203   0
+##   Kareem    64   0
+##   Keisha     0 183
+##   Kenya      0 196
+##   Kristen  213   0
+##   Lakisha    0 200
+##   Latonya    0 230
+##   Latoya     0 226
+##   Laurie   195   0
+##   Leroy     64   0
+##   Matthew   67   0
+##   Meredith 187   0
+##   Neil      76   0
+##   Rasheed   67   0
+##   Sarah    193   0
+##   Tamika     0 256
+##   Tanisha    0 207
+##   Todd      68   0
+##   Tremayne  69   0
+##   Tyrone    75   0</code></pre>
+<p>Let’s say we wanted to know the callback rates for just female black (sounding) names.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="creating-new-variables-using-conditional-statements.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(femaleblack<span class="sc">$</span>call)</span></code></pre></div>
+<pre><code>## [1] 0.06627784</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="creating-new-variables-using-conditional-statements.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>femaleblackname <span class="sc">==</span> <span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 0.06627784</code></pre>
+<p>BINGO: two ways to do the same thing.</p>
+<div id="ifelse-statements" class="section level3" number="3.8.1">
+<h3><span class="header-section-number">3.8.1</span> ifelse statements</h3>
+<p>Remember how we created the variable <code>femaleblack</code>, well there is another way to do that in R using what are called conditional statements with <code>ifelse()</code>.</p>
 <ul>
-<li>Start from a concept: what we want to describe (i.e., health of the economy)</li>
-<li>Move toward an “operationalization” (i.e., a way to measure it)</li>
-<li>Easy! except… social science is messy. Our concepts are rich, while
-our measures may be very narrow or concrete.
+<li>Can be read: If this relational statement is <code>TRUE</code>, I assign you A, otherwise I assign you B</li>
+</ul>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="creating-new-variables-using-conditional-statements.html#cb51-1" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb51-2"><a href="creating-new-variables-using-conditional-statements.html#cb51-2" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<p>Can be read: If sex is female and race is black, give the observation in the new variable a 1, otherwise give it a 0.</p>
+<p>Like most things, we can also get more complicated here. Let’s say we wanted to create a variable that indicated both race and sex.</p>
 <ul>
-<li>For example, GDP is one way to measure economic health, but is it
-the only measure?</li>
-<li>Choose measures based on validity, reliability, cost</li>
-</ul></li>
-</ul></li>
-<li>Find multiple relevant units or “data points”
-<ul>
-<li>E.g., Multiple years of data (e.g., U.S., from 1900 to 2020)</li>
-<li>E.g., Multiple countries from one year (e.g., U.S. to Germany to other
-countries)</li>
-</ul></li>
-<li>Summarize the data to help answer the question</li>
-</ol>
-<div id="example-process" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Example Process</h3>
-<ol style="list-style-type: decimal">
-<li>How is the economy doing?</li>
-<li>Find outcome data relevant to that question
-<ul>
-<li>Let’s ask people</li>
-</ul></li>
-<li>Find multiple relevant units or data points
-<ul>
-<li>We will ask several people. Each person will be a data point.</li>
-</ul></li>
-<li>Summarize the data
-<ul>
-<li>Let’s take the mean</li>
-</ul></li>
-</ol>
-<p><img src="images/economysurvey.png" style="width:50.0%" /></p>
-<p>How would you summarize information in explaining it to another person? You would probably want to describe how most people feel about the economy. In other words, you would describe the “central tendency” of people’s responses (the central tendency of the data).</p>
+<li>Can be read: If this relational statement is <code>TRUE</code>, I assign you A,</li>
+<li>Otherwise if this second relational statement is <code>TRUE</code>, I assign you B,</li>
+<li>Otherwise if this third relational statement is <code>TRUE</code>, I assign you C,</li>
+<li>Otherwise I assign you D</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="creating-new-variables-using-conditional-statements.html#cb52-1" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>racesex <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb52-2"><a href="creating-new-variables-using-conditional-statements.html#cb52-2" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;FemaleBlack&quot;</span>, </span>
+<span id="cb52-3"><a href="creating-new-variables-using-conditional-statements.html#cb52-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb52-4"><a href="creating-new-variables-using-conditional-statements.html#cb52-4" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>, <span class="st">&quot;FemaleWhite&quot;</span>,</span>
+<span id="cb52-5"><a href="creating-new-variables-using-conditional-statements.html#cb52-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;male&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb52-6"><a href="creating-new-variables-using-conditional-statements.html#cb52-6" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>, <span class="st">&quot;MaleWhite&quot;</span>, <span class="st">&quot;MaleBlack&quot;</span>)))</span></code></pre></div>
+<p>Note: what you assign can be numeric or text.</p>
 </div>
 </div>
             </section>
@@ -283,8 +316,8 @@ countries)</li>
           </div>
         </div>
       </div>
-<a href="description.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="summarizing-univariate-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="subsetting-data-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="types-of-experiments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

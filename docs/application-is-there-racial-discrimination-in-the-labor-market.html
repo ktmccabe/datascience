@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 Process of Describing | Data Science for Political Science</title>
-  <meta name="description" content="2.1 Process of Describing | Data Science for Political Science" />
+  <title>3.3 Application: Is there racial discrimination in the labor market? | Data Science for Political Science</title>
+  <meta name="description" content="3.3 Application: Is there racial discrimination in the labor market? | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta property="og:title" content="3.3 Application: Is there racial discrimination in the labor market? | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 Process of Describing | Data Science for Political Science" />
+  <meta name="twitter:title" content="3.3 Application: Is there racial discrimination in the labor market? | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="description.html"/>
-<link rel="next" href="summarizing-univariate-data.html"/>
+<link rel="prev" href="randomized-controlled-trials.html"/>
+<link rel="next" href="making-tables.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,7 +50,6 @@
 
 
 
-<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -232,50 +231,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="process-of-describing" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Process of Describing</h2>
-<p>How do we go about a descriptive quantitative analysis?</p>
-<ol style="list-style-type: decimal">
-<li>Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)</li>
-<li>Find outcome data relevant to that question (e.g., GDP)
+<div id="application-is-there-racial-discrimination-in-the-labor-market" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Application: Is there racial discrimination in the labor market?</h2>
+<p>Marianne Bertrand and Sendhil Mullainathan. 2004. “Are Emily and Greg more
+employable than Lakisha and Jamal? A field experiment on labor market discrimination.”</p>
+<p>“We perform a field experiment to measure racial discrimination in the labor market. We respond with fictitious resumes to help-wanted ads in Boston and Chicago newspapers.”</p>
 <ul>
-<li>Start from a concept: what we want to describe (i.e., health of the economy)</li>
-<li>Move toward an “operationalization” (i.e., a way to measure it)</li>
-<li>Easy! except… social science is messy. Our concepts are rich, while
-our measures may be very narrow or concrete.
+<li>Recruitment: Construct resumes to send to ads</li>
+<li>Randomization: To manipulate perception of race, each resume is (randomly) assigned</li>
+<li>Treatment: either a very African American sounding name</li>
+<li>Control: or a very White sounding name</li>
+<li>Outcome: Does the resume receive a callback?</li>
+<li>Comparison: Callback rates for African American (sounding) names vs. White (sounding) names (the difference in means between groups)</li>
+</ul>
+<p>Let’s load the data. Note: When we have variables that are text-based categories, we may want to tell R to treat these “strings” of text information as factor variables, a particular type of variable that represents data as a set of nominal (unordered) or ordinal (ordered) categories. We do this with the <code>stringsAsFactors</code> argument.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb1-1" aria-hidden="true" tabindex="-1"></a>resume <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;resume.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb2-1" aria-hidden="true" tabindex="-1"></a>resume <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/ktmccabe/teachingdata/main/resume.csv&quot;</span>,</span>
+<span id="cb2-2"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb2-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stringsAsFactors =</span> T)</span></code></pre></div>
+<p>Variables and Description</p>
 <ul>
-<li>For example, GDP is one way to measure economic health, but is it
-the only measure?</li>
-<li>Choose measures based on validity, reliability, cost</li>
+<li><code>firstname</code>: first name of the fictitious job applicant</li>
+<li><code>sex</code>: sex of applicant (female or male)</li>
+<li><code>race</code>: race of applicant (black or white)</li>
+<li><code>call</code>: whether a callback was made (1 = yes, 0 = no)</li>
+</ul>
+<p>The data contain 4870 resumes and 4 variables.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(resume) <span class="co"># number of rows</span></span></code></pre></div>
+<pre><code>## [1] 4870</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(resume) <span class="co"># number of columns</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(resume) <span class="co"># number of rows and columns</span></span></code></pre></div>
+<pre><code>## [1] 4870    4</code></pre>
+<p>Note: These data look a little different from what we used last week. For example, the <code>sex</code> and <code>race</code> variables contain words, not numbers.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resume)</span></code></pre></div>
+<pre><code>##   firstname    sex  race call
+## 1   Allison female white    0
+## 2   Kristen female white    0
+## 3   Lakisha female black    0
+## 4   Latonya female black    0
+## 5    Carrie female white    0
+## 6       Jay   male white    0</code></pre>
+<div id="variable-classes" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Variable classes</h3>
+<p>We can check the class of each variable: Look, we have a new type, a “factor” variable.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(resume<span class="sc">$</span>firstname)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(resume<span class="sc">$</span>sex)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(resume<span class="sc">$</span>race)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(resume<span class="sc">$</span>call)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>We have now encountered <code>numeric, character</code>, and <code>factor</code> vectors and/or variables in R. Note: This is simply how R understands them. Sometimes R can get it wrong. For example, if we write:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb19-1" aria-hidden="true" tabindex="-1"></a>somenumbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>)</span>
+<span id="cb19-2"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(somenumbers)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Because we put our numbers in quotation marks, R thinks the values in <code>somenumbers</code> are text. The number “3” might as well be the word “blue” for all R knows. Fortunately, we can easily switch between classes.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb21-1" aria-hidden="true" tabindex="-1"></a>somenumbers <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(somenumbers)</span>
+<span id="cb21-2"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(somenumbers)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>Here, we used <code>as.numeric()</code> to overwrite and change the character vector into a numeric vector.</p>
+<p>Rules of Thumb</p>
+<ul>
+<li>Usually, we want <code>character</code> variables to store text (e.g., open-ended survey responses)</li>
+<li>We want <code>numeric</code> variables to store numbers.</li>
+<li>Usually, we want <code>factor</code> variables to store categories.
+<ul>
+<li>Within R, factor variables assign a number to each category, which is given a label or <code>level</code> in the form of text.</li>
+<li>Categories might be ordinal or “ordered” (e.g., Very likely, Somewhat likely, Not likely) or</li>
+<li>Unordered (e.g., “male”, “female”)</li>
+<li>R won’t know if a factor variable is ordered or unordered. Alas, we have to be smarter than R.</li>
+<li>R might think you have a character variable when you want it to be a factor or the reverse.
+<ul>
+<li>That’s when <code>as.factor()</code> and <code>as.character()</code> are useful.</li>
 </ul></li>
 </ul></li>
-<li>Find multiple relevant units or “data points”
-<ul>
-<li>E.g., Multiple years of data (e.g., U.S., from 1900 to 2020)</li>
-<li>E.g., Multiple countries from one year (e.g., U.S. to Germany to other
-countries)</li>
-</ul></li>
-<li>Summarize the data to help answer the question</li>
-</ol>
-<div id="example-process" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Example Process</h3>
-<ol style="list-style-type: decimal">
-<li>How is the economy doing?</li>
-<li>Find outcome data relevant to that question
-<ul>
-<li>Let’s ask people</li>
-</ul></li>
-<li>Find multiple relevant units or data points
-<ul>
-<li>We will ask several people. Each person will be a data point.</li>
-</ul></li>
-<li>Summarize the data
-<ul>
-<li>Let’s take the mean</li>
-</ul></li>
-</ol>
-<p><img src="images/economysurvey.png" style="width:50.0%" /></p>
-<p>How would you summarize information in explaining it to another person? You would probably want to describe how most people feel about the economy. In other words, you would describe the “central tendency” of people’s responses (the central tendency of the data).</p>
+<li>Always check <code>class()</code> to find out the variable type</li>
+</ul>
 </div>
 </div>
             </section>
@@ -283,8 +315,8 @@ countries)</li>
           </div>
         </div>
       </div>
-<a href="description.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="summarizing-univariate-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="randomized-controlled-trials.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="making-tables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
