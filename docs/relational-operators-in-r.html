@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -214,6 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.9" data-path="types-of-experiments.html"><a href="types-of-experiments.html"><i class="fa fa-check"></i><b>3.9</b> Types of Experiments</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="application-social-status-and-economic-views.html"><a href="application-social-status-and-economic-views.html"><i class="fa fa-check"></i><b>4.1</b> Application: Social Status and Economic Views</a></li>
+<li class="chapter" data-level="4.2" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="boxplots.html"><a href="boxplots.html#data-summary-boxplot"><i class="fa fa-check"></i><b>4.2.1</b> Data Summary: Boxplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="barplots.html"><a href="barplots.html"><i class="fa fa-check"></i><b>4.3</b> Barplots</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="barplots.html"><a href="barplots.html#saving-plots"><i class="fa fa-check"></i><b>4.3.1</b> Saving Plots</a></li>
+<li class="chapter" data-level="4.3.2" data-path="barplots.html"><a href="barplots.html#creating-new-variables"><i class="fa fa-check"></i><b>4.3.2</b> Creating New Variables</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -239,16 +253,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>==, &lt;, &gt;, &lt;=, &gt;=, !=</code></li>
 <li>We have a statement and R evaluates it as <code>TRUE</code> or <code>FALSE</code></li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="relational-operators-in-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## for each observation, does the value of race equal &quot;black&quot;?</span></span>
-<span id="cb33-2"><a href="relational-operators-in-r.html#cb33-2" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="relational-operators-in-r.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="do">## for each observation, does the value of race equal &quot;black&quot;?</span></span>
+<span id="cb157-2"><a href="relational-operators-in-r.html#cb157-2" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span></span></code></pre></div>
 <p>By putting this logical statement within <code>[ ]</code>, we are asking R to take the <code>mean()</code> of the variable <code>resume$call</code> for the subset of observations for which this logical statement is <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="relational-operators-in-r.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="relational-operators-in-r.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] 0.06447639</code></pre>
 <p>Ultimately, each of these paths has led us to a place where we can estimate the average treatment effect by calculation the difference in means: the difference in callback rates for black and white applicants.</p>
 <p>We said the ATE = <span class="math inline">\(\bar{Y}(treatment) - \bar{Y}(control)\)</span></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="relational-operators-in-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a>ate <span class="ot">&lt;-</span> <span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>]) <span class="sc">-</span> </span>
-<span id="cb36-2"><a href="relational-operators-in-r.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>])</span>
-<span id="cb36-3"><a href="relational-operators-in-r.html#cb36-3" aria-hidden="true" tabindex="-1"></a>ate</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="relational-operators-in-r.html#cb160-1" aria-hidden="true" tabindex="-1"></a>ate <span class="ot">&lt;-</span> <span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>]) <span class="sc">-</span> </span>
+<span id="cb160-2"><a href="relational-operators-in-r.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>])</span>
+<span id="cb160-3"><a href="relational-operators-in-r.html#cb160-3" aria-hidden="true" tabindex="-1"></a>ate</span></code></pre></div>
 <pre><code>## [1] -0.03203285</code></pre>
 <p>How can we interpret this? Do white applicants have an advantage?</p>
 </div>

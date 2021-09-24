@@ -1,0 +1,277 @@
+# Visualization {#visualization}
+
+In this section, we discuss a set of tools for data visualization in R.
+
+Goals of data visualization
+
+  - Communicate information
+      + Transparently (show me the data!)
+      + Quickly
+      + Simply
+      + Accurately
+      + And with a little work: beautifully
+ 
+There are many resources for ideas and best practices for data visualization. See [here](https://www.tableau.com/learn/articles/best-data-visualization-blogs) and [here](https://serialmentor.com/dataviz/index.html).
+
+We will cover many types of visuals, each typically designed for a different purpose.
+
+What to communicate?
+
+  - Data summary
+      + Central tendency (e.g., mean, median)
+      + Spread (e.g., standard deviation, IQR)
+  - Comparison
+      + e.g., Callback rates for black vs. white sounding names
+  - Trend
+      + e.g., Economic confidence over time
+  - Relationship
+      + e.g., Correlation 
+
+
+## Application: Social Status and Economic Views
+
+We are going to explore different types of visualizations through different social science examples. The first application we visit is a survey experiment.
+
+Thal, A. (2020). The desire for social status and economic conservatism among affluent Americans. American Political Science Review, 114(2), 426-442.
+
+In the experiment, affluent Americans are randomly assigned to encounter Facebook posts in which others broadcast their economic success. These posts are designed in a way that encourages affluent respondents to view economic success as a means of achieving social status.
+
+Causal claims
+
+  - "I expect that exposure to these posts will cause affluent Americans to become more supportive of conservative economic policies." 
+  - "I also expect that exposure to these posts will cause especially large increases in economic conservatism among affluent men."
+
+
+The experiment includes a sample of 2010 affluent Americans-- people who report household incomes in the top 10 percent of the U.S. income distribution.
+
+Experiment Ingredients:
+
+  - Causal Question: Does desire for social status influence economic views of affluent Americans?
+  - Recruitment: Ask affluent Americans to take a survey online
+  - Randomization: Randomly assign respondents to view different fictional Facebook posts designed to signal different motivations
+  - Outcome: an index based on respondents' support for decreasing "taxes on households making \$150,000 or more a year," support for decreasing the "taxes on money people make from selling investments, also referred to as capital gains," and support for decreasing "government regulation of business and industry."
+  - Comparison: Average economic views between experimental conditions.
+
+Snapshot of status conditions
+
+![](images/status1.png){width=70%}
+
+
+Snapshot of Concrete and Placebo comparison conditions
+
+![](images/status2.png){width=70%}
+
+
+**Can you put this into the potential outcomes framework?**
+
+## Boxplots
+
+Let's load the data! Here, note that the data file is in a .RData format instead of .csv. This means that instead of using `read.csv`, we should use a function to load the data that is suitable for the .RData format. This will be `load`. That function works the following way:
+
+
+```{r, eval=T, echo=FALSE, include=FALSE}
+load("data/status.RData")
+```
+
+```{r,eval=F}
+load("status.RData")
+```
+
+After running the above code, an object will show up in your R environment.
+
+```{r}
+head(status)
+```
+
+The data include the following variables
+
+  - `condition`: Placebo, Concrete, Self-Esteem, Social Approval, Conspicuous Consumption
+  - `gender`: 1= male; 0= otherwise
+  - `econcon`: Economic views. Numeric variable from 0 to 1, with higher values reflecting more conservative views
+
+
+
+### Data Summary: Boxplot
+  
+Characterize the distributions of continuous numeric variables at once
+
+  - Features: box, whiskers, outliers
+  - We will supply the function with a column in our data, and the boxplot displays the distribution of that variable.
+
+![](images/agebox.png){width=80%}
+
+*Figure from Will Lowe*
+
+Here is an example of the `boxplot` using our `econcon` variable. 
+
+  - We have added a title and y-axis label to the plot through the `main` and `ylab` arguments. Play around with changing the words in those arguments.
+  
+```{r}
+boxplot(status$econcon,
+        main="Economic Views in the Survey Sample",
+        ylab="Economic Views")
+```
+
+After you  execute the plot code, a preview of the plot should appear in the bottom-right window of RStudio.
+
+
+Boxplots are also useful for data summary across multiple distribution: `boxplot(y ~ x, data = d)`
+
+```{r, fig.width=11}
+boxplot(econcon ~ condition, data=status,
+        main="Economic Views by Experimental Condition",
+        ylab="Economic Views",
+        names = c("Placebo", "Concrete", "Conspicuous", 
+                  "Self-Esteem", "Social"),
+        xlab = "Experimental Condition",
+        col = c("red3", rep("dodgerblue", 4)))
+```
+
+The additional arguments are just aesthetics. Play around with different settings. 
+
+  - For example, can you change the code to make the first two boxes red? Colors are supplied as a vector using the `col =` argument.
+      + To explore colors in R, run this function `colors()` in your R console.
+
+
+How should we interpret these results? Does status or social approval motivation, specifically, influence economic views? What about other potential motivations?
+
+## Barplots
+
+Comparing frequencies (raw N), proportions, and/or means across categories
+
+```{r, eval=T, echo=F}
+valuesbar <- c(20, 40, 50, 10, 60)
+
+namesbar <- c("Car rides \n to Malibu",
+              "Strawberry ice cream,\n One spoon for two",
+              "Trading jackets",
+              "Watching reruns \n of Glee",
+              "Being annoying \n Singing in harmony")
+
+barplot(valuesbar,
+        names=namesbar,
+        cex.names = .6,
+        main="Level of deja vu",
+        ylab="Avg. Feeling of deja vu",
+        cex.lab = .7, 
+        col="purple3")
+```
+
+We will use the `barplot()` function.
+
+  - In contrast to the boxplot, the barplot function takes a vector of values that will serve as the top of the bars in the plot-- it does not summarize a variable from within the function
+      + E.g., we could supply it a set of means to plot, not a raw variable 
+  - This means that barplots are pretty easy to create in R. We can supply it a short vector of any values (e.g., `valuesbar <- c(20, 40, 50, 10, 60)`), and we could also supply it a vector of any names to label those values. 
+      + For real applications, this means we could supply a barplot with the output of a `tapply()` function, a `table()` summarizing a single variable, or a set of `mean()` values we have combined into a vector.
+
+
+For example, in experiments, we may use barplots to compare the mean from the treatment group(s) $\bar{Y}(1)$ to the control $\bar{Y}(0)$ on some outcome. Let's do it!
+
+  - First, we need the means. Let's find the conditional means of economic views.
+
+```{r}
+condmeans <- tapply(status$econcon, status$condition, mean)
+condmeans # save as object to supply to the barplot function
+```
+
+
+
+The first input is the vector of means/proportions/frequency you want to plot.
+
+```{r}
+barplot(condmeans,
+        ylim =  c(0,1), # y-axis dimensions
+        names = c("Placebo", "Concrete", "Conspicuous", 
+                  "Self-Esteem", "Social"),
+        col = "black", # color of bars
+        main = "Mean Economic Views by Condition", # plot title
+        cex.main = .8, # size of plot title
+        cex.names = .8, # size of name labels
+        ylab = "Mean Views", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+```
+
+The remaining arguments alter the look of the plot to make it more informative.
+
+  - How could we improve this plot to make the interpretation easier?
+
+### Saving Plots
+
+You can save an image of your plot as a `png()` to your working directory. Place `png()` just before your plot with a name in quotations, and then specify the dimensions. Place `dev.off()` at the bottom.
+
+```{r, eval=F}
+png("mybarplot.png", width = 7, height = 4, res=300, units="in")
+barplot(condmeans,
+        ylim =  c(0,1), # y-axis dimensions
+        names = c("Placebo", "Concrete", "Conspicuous", 
+                  "Self-Esteem", "Social"),
+        col = "black", # color of bars
+        main = "Mean Economic Views by Condition", # plot title
+        cex.main = .8, # size of plot title
+        cex.names = .8, # size of name labels
+        ylab = "Mean Views", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+dev.off()
+```
+
+
+
+### Creating New Variables
+
+The author theorizes that social approval, self-esteem, and conspicuous consumption are all elements of "status motivation." We could analyze the results by collapsing them into a single category called "status motivation" and compare it to the other experimental groups.
+
+  - Create a new variable `conditionnew`
+  - Code the variable into new categories based on the values in the original `condition` variable
+  - Check the class of the new variable and convert if necessary
+  - Verify new variable by exploring values
+
+
+```{r}
+status$conditionnew <- NA # create new variable
+## Code new variable
+status$conditionnew[status$condition == "Placebo"] <- "Placebo"
+status$conditionnew[status$condition == "Concrete"] <- "Concrete"
+status$conditionnew[status$condition == "Conspicuous Consumption" |
+                     status$condition == "Self-Esteem" |  
+                      status$condition == "Social Approval"] <- "Status"
+
+# class(status$conditionnew) check the class
+status$conditionnew <- as.factor(status$conditionnew) # convert
+```
+
+
+An alternative way to create the new variable is through an `ifelse` statement. 
+
+  - Can be read: If this relational statement is  `TRUE`, I assign you A, otherwise I assign you B
+  - This often works best when we change factor variables to character
+
+```{r}
+status$conditionnew2 <- as.character(status$condition)
+status$conditionnew2 <- ifelse(status$condition == "Conspicuous Consumption" |
+                     status$condition == "Self-Esteem" |  
+                      status$condition == "Social Approval", 
+                     "Status", status$conditionnew2)
+status$conditionnew2 <- as.factor(status$conditionnew2)
+table(status$conditionnew2)
+```
+
+
+Note: Barplots don't have to display means. We could also display frequencies. For example, let's make a plot of the number of people in each condition using our new variable.
+
+```{r}
+freqobs <- table(status$conditionnew)
+
+
+barplot(freqobs,
+        ylim = c(0, 1200),
+        col = "black", # color of bars
+        main = "Number of People per Condition", # plot title
+        cex.main = .8, # size of plot title
+        cex.names = .8, # size of name labels
+        ylab = "N of Observations", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+```
+

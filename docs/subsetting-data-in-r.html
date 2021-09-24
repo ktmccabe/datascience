@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -214,6 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.9" data-path="types-of-experiments.html"><a href="types-of-experiments.html"><i class="fa fa-check"></i><b>3.9</b> Types of Experiments</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="application-social-status-and-economic-views.html"><a href="application-social-status-and-economic-views.html"><i class="fa fa-check"></i><b>4.1</b> Application: Social Status and Economic Views</a></li>
+<li class="chapter" data-level="4.2" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="boxplots.html"><a href="boxplots.html#data-summary-boxplot"><i class="fa fa-check"></i><b>4.2.1</b> Data Summary: Boxplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="barplots.html"><a href="barplots.html"><i class="fa fa-check"></i><b>4.3</b> Barplots</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="barplots.html"><a href="barplots.html#saving-plots"><i class="fa fa-check"></i><b>4.3.1</b> Saving Plots</a></li>
+<li class="chapter" data-level="4.3.2" data-path="barplots.html"><a href="barplots.html#creating-new-variables"><i class="fa fa-check"></i><b>4.3.2</b> Creating New Variables</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -239,15 +253,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>To do this, we will assign a new <code>data.frame</code> object that keeps only those rows where <code>sex == "female"</code> and retains all columns</li>
 <li>Below are two approaches for this subsetting, one that uses brackets and one that uses the <code>subset</code> function</li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="subsetting-data-in-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## option one</span></span>
-<span id="cb38-2"><a href="subsetting-data-in-r.html#cb38-2" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> resume[resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, ]</span>
-<span id="cb38-3"><a href="subsetting-data-in-r.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="do">## option two using subset()- preferred</span></span>
-<span id="cb38-4"><a href="subsetting-data-in-r.html#cb38-4" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> <span class="fu">subset</span>(resume, sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="subsetting-data-in-r.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="do">## option one</span></span>
+<span id="cb162-2"><a href="subsetting-data-in-r.html#cb162-2" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> resume[resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>, ]</span>
+<span id="cb162-3"><a href="subsetting-data-in-r.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="do">## option two using subset()- preferred</span></span>
+<span id="cb162-4"><a href="subsetting-data-in-r.html#cb162-4" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> <span class="fu">subset</span>(resume, sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span></code></pre></div>
 <p>Now that we have subset the data, this simplifies estimating the ATE for female applicants only.</p>
 <p>We said the ATE = <span class="math inline">\(\bar{Y}(treatment) - \bar{Y}(control)\)</span></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="subsetting-data-in-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a>ate.females <span class="ot">&lt;-</span> <span class="fu">mean</span>(females<span class="sc">$</span>call[females<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>]) <span class="sc">-</span></span>
-<span id="cb39-2"><a href="subsetting-data-in-r.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(females<span class="sc">$</span>call[females<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>])</span>
-<span id="cb39-3"><a href="subsetting-data-in-r.html#cb39-3" aria-hidden="true" tabindex="-1"></a>ate.females</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="subsetting-data-in-r.html#cb163-1" aria-hidden="true" tabindex="-1"></a>ate.females <span class="ot">&lt;-</span> <span class="fu">mean</span>(females<span class="sc">$</span>call[females<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>]) <span class="sc">-</span></span>
+<span id="cb163-2"><a href="subsetting-data-in-r.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(females<span class="sc">$</span>call[females<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>])</span>
+<span id="cb163-3"><a href="subsetting-data-in-r.html#cb163-3" aria-hidden="true" tabindex="-1"></a>ate.females</span></code></pre></div>
 <pre><code>## [1] -0.03264689</code></pre>
 <div id="getting-booooooooolean" class="section level3" number="3.7.1">
 <h3><span class="header-section-number">3.7.1</span> Getting Booooooooolean</h3>
@@ -255,9 +269,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>R allows use to use <code>&amp;</code> (and) and <code>|</code> (or)</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="subsetting-data-in-r.html#cb41-1" aria-hidden="true" tabindex="-1"></a>femaleblack <span class="ot">&lt;-</span> <span class="fu">subset</span>(resume, sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="subsetting-data-in-r.html#cb165-1" aria-hidden="true" tabindex="-1"></a>femaleblack <span class="ot">&lt;-</span> <span class="fu">subset</span>(resume, sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <p>We could now find the callback rate for Black females using the tools from above:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="subsetting-data-in-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(femaleblack<span class="sc">$</span>call)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="subsetting-data-in-r.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(femaleblack<span class="sc">$</span>call)</span></code></pre></div>
 <pre><code>## [1] 0.06627784</code></pre>
 </div>
 </div>

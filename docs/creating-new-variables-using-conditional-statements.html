@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -214,6 +215,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.9" data-path="types-of-experiments.html"><a href="types-of-experiments.html"><i class="fa fa-check"></i><b>3.9</b> Types of Experiments</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="application-social-status-and-economic-views.html"><a href="application-social-status-and-economic-views.html"><i class="fa fa-check"></i><b>4.1</b> Application: Social Status and Economic Views</a></li>
+<li class="chapter" data-level="4.2" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="boxplots.html"><a href="boxplots.html#data-summary-boxplot"><i class="fa fa-check"></i><b>4.2.1</b> Data Summary: Boxplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="barplots.html"><a href="barplots.html"><i class="fa fa-check"></i><b>4.3</b> Barplots</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="barplots.html"><a href="barplots.html#saving-plots"><i class="fa fa-check"></i><b>4.3.1</b> Saving Plots</a></li>
+<li class="chapter" data-level="4.3.2" data-path="barplots.html"><a href="barplots.html#creating-new-variables"><i class="fa fa-check"></i><b>4.3.2</b> Creating New Variables</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -234,14 +248,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-new-variables-using-conditional-statements" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Creating New Variables using Conditional statements</h2>
 <p>We can instead create a new variable in our main dataframe. Let’s make a variable that takes the value 1 if a name is female and black sounding and 0, otherwise</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="creating-new-variables-using-conditional-statements.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a new variable called femaleblackname</span></span>
-<span id="cb44-2"><a href="creating-new-variables-using-conditional-statements.html#cb44-2" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb44-3"><a href="creating-new-variables-using-conditional-statements.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a 1 to our new variable where sex is female and race is black</span></span>
-<span id="cb44-4"><a href="creating-new-variables-using-conditional-statements.html#cb44-4" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname[resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb44-5"><a href="creating-new-variables-using-conditional-statements.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a 0 if sex is not female OR if race is not black</span></span>
-<span id="cb44-6"><a href="creating-new-variables-using-conditional-statements.html#cb44-6" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname[resume<span class="sc">$</span>sex <span class="sc">!=</span> <span class="st">&quot;female&quot;</span> <span class="sc">|</span> resume<span class="sc">$</span>race <span class="sc">!=</span> <span class="st">&quot;black&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="creating-new-variables-using-conditional-statements.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a new variable called femaleblackname</span></span>
+<span id="cb168-2"><a href="creating-new-variables-using-conditional-statements.html#cb168-2" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb168-3"><a href="creating-new-variables-using-conditional-statements.html#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a 1 to our new variable where sex is female and race is black</span></span>
+<span id="cb168-4"><a href="creating-new-variables-using-conditional-statements.html#cb168-4" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname[resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb168-5"><a href="creating-new-variables-using-conditional-statements.html#cb168-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a 0 if sex is not female OR if race is not black</span></span>
+<span id="cb168-6"><a href="creating-new-variables-using-conditional-statements.html#cb168-6" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname[resume<span class="sc">$</span>sex <span class="sc">!=</span> <span class="st">&quot;female&quot;</span> <span class="sc">|</span> resume<span class="sc">$</span>race <span class="sc">!=</span> <span class="st">&quot;black&quot;</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
 <p>We can check our work</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="creating-new-variables-using-conditional-statements.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">name =</span> resume<span class="sc">$</span>firstname, <span class="at">femaleblack =</span> resume<span class="sc">$</span>femaleblackname)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="creating-new-variables-using-conditional-statements.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">name =</span> resume<span class="sc">$</span>firstname, <span class="at">femaleblack =</span> resume<span class="sc">$</span>femaleblackname)</span></code></pre></div>
 <pre><code>##           femaleblack
 ## name         0   1
 ##   Aisha      0 180
@@ -281,9 +295,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Tremayne  69   0
 ##   Tyrone    75   0</code></pre>
 <p>Let’s say we wanted to know the callback rates for just female black (sounding) names.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="creating-new-variables-using-conditional-statements.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(femaleblack<span class="sc">$</span>call)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="creating-new-variables-using-conditional-statements.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(femaleblack<span class="sc">$</span>call)</span></code></pre></div>
 <pre><code>## [1] 0.06627784</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="creating-new-variables-using-conditional-statements.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>femaleblackname <span class="sc">==</span> <span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="creating-new-variables-using-conditional-statements.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resume<span class="sc">$</span>call[resume<span class="sc">$</span>femaleblackname <span class="sc">==</span> <span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 0.06627784</code></pre>
 <p>BINGO: two ways to do the same thing.</p>
 <div id="ifelse-statements" class="section level3" number="3.8.1">
@@ -292,8 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Can be read: If this relational statement is <code>TRUE</code>, I assign you A, otherwise I assign you B</li>
 </ul>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="creating-new-variables-using-conditional-statements.html#cb51-1" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb51-2"><a href="creating-new-variables-using-conditional-statements.html#cb51-2" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="creating-new-variables-using-conditional-statements.html#cb175-1" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>femaleblackname <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb175-2"><a href="creating-new-variables-using-conditional-statements.html#cb175-2" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
 <p>Can be read: If sex is female and race is black, give the observation in the new variable a 1, otherwise give it a 0.</p>
 <p>Like most things, we can also get more complicated here. Let’s say we wanted to create a variable that indicated both race and sex.</p>
 <ul>
@@ -302,12 +316,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Otherwise if this third relational statement is <code>TRUE</code>, I assign you C,</li>
 <li>Otherwise I assign you D</li>
 </ul>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="creating-new-variables-using-conditional-statements.html#cb52-1" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>racesex <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb52-2"><a href="creating-new-variables-using-conditional-statements.html#cb52-2" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;FemaleBlack&quot;</span>, </span>
-<span id="cb52-3"><a href="creating-new-variables-using-conditional-statements.html#cb52-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb52-4"><a href="creating-new-variables-using-conditional-statements.html#cb52-4" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>, <span class="st">&quot;FemaleWhite&quot;</span>,</span>
-<span id="cb52-5"><a href="creating-new-variables-using-conditional-statements.html#cb52-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;male&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb52-6"><a href="creating-new-variables-using-conditional-statements.html#cb52-6" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>, <span class="st">&quot;MaleWhite&quot;</span>, <span class="st">&quot;MaleBlack&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="creating-new-variables-using-conditional-statements.html#cb176-1" aria-hidden="true" tabindex="-1"></a>resume<span class="sc">$</span>racesex <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb176-2"><a href="creating-new-variables-using-conditional-statements.html#cb176-2" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;black&quot;</span>, <span class="st">&quot;FemaleBlack&quot;</span>, </span>
+<span id="cb176-3"><a href="creating-new-variables-using-conditional-statements.html#cb176-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb176-4"><a href="creating-new-variables-using-conditional-statements.html#cb176-4" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>, <span class="st">&quot;FemaleWhite&quot;</span>,</span>
+<span id="cb176-5"><a href="creating-new-variables-using-conditional-statements.html#cb176-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(resume<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;male&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb176-6"><a href="creating-new-variables-using-conditional-statements.html#cb176-6" aria-hidden="true" tabindex="-1"></a>                                   resume<span class="sc">$</span>race <span class="sc">==</span> <span class="st">&quot;white&quot;</span>, <span class="st">&quot;MaleWhite&quot;</span>, <span class="st">&quot;MaleBlack&quot;</span>)))</span></code></pre></div>
 <p>Note: what you assign can be numeric or text.</p>
 </div>
 </div>
