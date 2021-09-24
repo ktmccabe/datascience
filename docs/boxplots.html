@@ -50,7 +50,6 @@
 
 
 
-<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -248,9 +247,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="boxplots" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Boxplots</h2>
 <p>Let’s load the data! Here, note that the data file is in a .RData format instead of .csv. This means that instead of using <code>read.csv</code>, we should use a function to load the data that is suitable for the .RData format. This will be <code>load</code>. That function works the following way:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="boxplots.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;status.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="boxplots.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;status.RData&quot;</span>)</span></code></pre></div>
 <p>After running the above code, an object will show up in your R environment.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="boxplots.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(status)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="boxplots.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(status)</span></code></pre></div>
 <pre><code>##         condition male   econcon
 ## 2        Concrete    1 0.7500000
 ## 3     Self-Esteem    1 1.0000000
@@ -277,20 +276,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>We have added a title and y-axis label to the plot through the <code>main</code> and <code>ylab</code> arguments. Play around with changing the words in those arguments.</li>
 </ul>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="boxplots.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(status<span class="sc">$</span>econcon,</span>
-<span id="cb180-2"><a href="boxplots.html#cb180-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Economic Views in the Survey Sample&quot;</span>,</span>
-<span id="cb180-3"><a href="boxplots.html#cb180-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Economic Views&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-87-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="boxplots.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(status<span class="sc">$</span>econcon,</span>
+<span id="cb4-2"><a href="boxplots.html#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Economic Views in the Survey Sample&quot;</span>,</span>
+<span id="cb4-3"><a href="boxplots.html#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Economic Views&quot;</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-4-1.svg" width="672" /></p>
 <p>After you execute the plot code, a preview of the plot should appear in the bottom-right window of RStudio.</p>
 <p>Boxplots are also useful for data summary across multiple distribution: <code>boxplot(y ~ x, data = d)</code></p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="boxplots.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(econcon <span class="sc">~</span> condition, <span class="at">data=</span>status,</span>
-<span id="cb181-2"><a href="boxplots.html#cb181-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Economic Views by Experimental Condition&quot;</span>,</span>
-<span id="cb181-3"><a href="boxplots.html#cb181-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Economic Views&quot;</span>,</span>
-<span id="cb181-4"><a href="boxplots.html#cb181-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Concrete&quot;</span>, <span class="st">&quot;Conspicuous&quot;</span>, </span>
-<span id="cb181-5"><a href="boxplots.html#cb181-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Self-Esteem&quot;</span>, <span class="st">&quot;Social&quot;</span>),</span>
-<span id="cb181-6"><a href="boxplots.html#cb181-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Experimental Condition&quot;</span>,</span>
-<span id="cb181-7"><a href="boxplots.html#cb181-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red3&quot;</span>, <span class="fu">rep</span>(<span class="st">&quot;dodgerblue&quot;</span>, <span class="dv">4</span>)))</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-88-1.svg" width="1056" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="boxplots.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(econcon <span class="sc">~</span> condition, <span class="at">data=</span>status,</span>
+<span id="cb5-2"><a href="boxplots.html#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Economic Views by Experimental Condition&quot;</span>,</span>
+<span id="cb5-3"><a href="boxplots.html#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Economic Views&quot;</span>,</span>
+<span id="cb5-4"><a href="boxplots.html#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Concrete&quot;</span>, <span class="st">&quot;Conspicuous&quot;</span>, </span>
+<span id="cb5-5"><a href="boxplots.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Self-Esteem&quot;</span>, <span class="st">&quot;Social&quot;</span>),</span>
+<span id="cb5-6"><a href="boxplots.html#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Experimental Condition&quot;</span>,</span>
+<span id="cb5-7"><a href="boxplots.html#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red3&quot;</span>, <span class="fu">rep</span>(<span class="st">&quot;dodgerblue&quot;</span>, <span class="dv">4</span>)))</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-5-1.svg" width="1056" /></p>
 <p>The additional arguments are just aesthetics. Play around with different settings.</p>
 <ul>
 <li>For example, can you change the code to make the first two boxes red? Colors are supplied as a vector using the <code>col =</code> argument.

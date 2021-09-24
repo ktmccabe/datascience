@@ -114,7 +114,6 @@ boxplot(status$econcon,
 
 After you  execute the plot code, a preview of the plot should appear in the bottom-right window of RStudio.
 
-
 Boxplots are also useful for data summary across multiple distribution: `boxplot(y ~ x, data = d)`
 
 ```{r, fig.width=11}
@@ -161,6 +160,7 @@ We will use the `barplot()` function.
 
   - In contrast to the boxplot, the barplot function takes a vector of values that will serve as the top of the bars in the plot-- it does not summarize a variable from within the function
       + E.g., we could supply it a set of means to plot, not a raw variable 
+  - Many of the other arguments are aesthetics that will give you [deja vu](https://www.youtube.com/watch?v=cii6ruuycQA&ab_channel=OliviaRodrigoVEVO) after working with boxplot.
   - This means that barplots are pretty easy to create in R. We can supply it a short vector of any values (e.g., `valuesbar <- c(20, 40, 50, 10, 60)`), and we could also supply it a vector of any names to label those values. 
       + For real applications, this means we could supply a barplot with the output of a `tapply()` function, a `table()` summarizing a single variable, or a set of `mean()` values we have combined into a vector.
 
