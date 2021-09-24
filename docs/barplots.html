@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -247,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="barplots" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Barplots</h2>
 <p>Comparing frequencies (raw N), proportions, and/or means across categories</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-6-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-90-1.svg" width="672" /></p>
 <p>We will use the <code>barplot()</code> function.</p>
 <ul>
 <li>In contrast to the boxplot, the barplot function takes a vector of values that will serve as the top of the bars in the plot– it does not summarize a variable from within the function
@@ -264,25 +265,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>First, we need the means. Let’s find the conditional means of economic views.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="barplots.html#cb6-1" aria-hidden="true" tabindex="-1"></a>condmeans <span class="ot">&lt;-</span> <span class="fu">tapply</span>(status<span class="sc">$</span>econcon, status<span class="sc">$</span>condition, mean)</span>
-<span id="cb6-2"><a href="barplots.html#cb6-2" aria-hidden="true" tabindex="-1"></a>condmeans <span class="co"># save as object to supply to the barplot function</span></span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="barplots.html#cb182-1" aria-hidden="true" tabindex="-1"></a>condmeans <span class="ot">&lt;-</span> <span class="fu">tapply</span>(status<span class="sc">$</span>econcon, status<span class="sc">$</span>condition, mean)</span>
+<span id="cb182-2"><a href="barplots.html#cb182-2" aria-hidden="true" tabindex="-1"></a>condmeans <span class="co"># save as object to supply to the barplot function</span></span></code></pre></div>
 <pre><code>##                 Placebo                Concrete Conspicuous Consumption 
 ##               0.6340948               0.6647485               0.6724065 
 ##             Self-Esteem         Social Approval 
 ##               0.6564103               0.6904444</code></pre>
 <p>The first input is the vector of means/proportions/frequency you want to plot.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="barplots.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(condmeans,</span>
-<span id="cb8-2"><a href="barplots.html#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="co"># y-axis dimensions</span></span>
-<span id="cb8-3"><a href="barplots.html#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Concrete&quot;</span>, <span class="st">&quot;Conspicuous&quot;</span>, </span>
-<span id="cb8-4"><a href="barplots.html#cb8-4" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Self-Esteem&quot;</span>, <span class="st">&quot;Social&quot;</span>),</span>
-<span id="cb8-5"><a href="barplots.html#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="co"># color of bars</span></span>
-<span id="cb8-6"><a href="barplots.html#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Mean Economic Views by Condition&quot;</span>, <span class="co"># plot title</span></span>
-<span id="cb8-7"><a href="barplots.html#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
-<span id="cb8-8"><a href="barplots.html#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> .<span class="dv">8</span>, <span class="co"># size of name labels</span></span>
-<span id="cb8-9"><a href="barplots.html#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Mean Views&quot;</span>, <span class="co"># yaxis label</span></span>
-<span id="cb8-10"><a href="barplots.html#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
-<span id="cb8-11"><a href="barplots.html#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-8-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="barplots.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(condmeans,</span>
+<span id="cb184-2"><a href="barplots.html#cb184-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="co"># y-axis dimensions</span></span>
+<span id="cb184-3"><a href="barplots.html#cb184-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Concrete&quot;</span>, <span class="st">&quot;Conspicuous&quot;</span>, </span>
+<span id="cb184-4"><a href="barplots.html#cb184-4" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Self-Esteem&quot;</span>, <span class="st">&quot;Social&quot;</span>),</span>
+<span id="cb184-5"><a href="barplots.html#cb184-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="co"># color of bars</span></span>
+<span id="cb184-6"><a href="barplots.html#cb184-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Mean Economic Views by Condition&quot;</span>, <span class="co"># plot title</span></span>
+<span id="cb184-7"><a href="barplots.html#cb184-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
+<span id="cb184-8"><a href="barplots.html#cb184-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> .<span class="dv">8</span>, <span class="co"># size of name labels</span></span>
+<span id="cb184-9"><a href="barplots.html#cb184-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Mean Views&quot;</span>, <span class="co"># yaxis label</span></span>
+<span id="cb184-10"><a href="barplots.html#cb184-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
+<span id="cb184-11"><a href="barplots.html#cb184-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-92-1.svg" width="672" /></p>
 <p>The remaining arguments alter the look of the plot to make it more informative.</p>
 <ul>
 <li>How could we improve this plot to make the interpretation easier?</li>
@@ -290,19 +291,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="saving-plots" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Saving Plots</h3>
 <p>You can save an image of your plot as a <code>png()</code> to your working directory. Place <code>png()</code> just before your plot with a name in quotations, and then specify the dimensions. Place <code>dev.off()</code> at the bottom.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="barplots.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">&quot;mybarplot.png&quot;</span>, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">res=</span><span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>)</span>
-<span id="cb9-2"><a href="barplots.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(condmeans,</span>
-<span id="cb9-3"><a href="barplots.html#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="co"># y-axis dimensions</span></span>
-<span id="cb9-4"><a href="barplots.html#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Concrete&quot;</span>, <span class="st">&quot;Conspicuous&quot;</span>, </span>
-<span id="cb9-5"><a href="barplots.html#cb9-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Self-Esteem&quot;</span>, <span class="st">&quot;Social&quot;</span>),</span>
-<span id="cb9-6"><a href="barplots.html#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="co"># color of bars</span></span>
-<span id="cb9-7"><a href="barplots.html#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Mean Economic Views by Condition&quot;</span>, <span class="co"># plot title</span></span>
-<span id="cb9-8"><a href="barplots.html#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
-<span id="cb9-9"><a href="barplots.html#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> .<span class="dv">8</span>, <span class="co"># size of name labels</span></span>
-<span id="cb9-10"><a href="barplots.html#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Mean Views&quot;</span>, <span class="co"># yaxis label</span></span>
-<span id="cb9-11"><a href="barplots.html#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
-<span id="cb9-12"><a href="barplots.html#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span>
-<span id="cb9-13"><a href="barplots.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="barplots.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">&quot;mybarplot.png&quot;</span>, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">res=</span><span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>)</span>
+<span id="cb185-2"><a href="barplots.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(condmeans,</span>
+<span id="cb185-3"><a href="barplots.html#cb185-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span>  <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="co"># y-axis dimensions</span></span>
+<span id="cb185-4"><a href="barplots.html#cb185-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Concrete&quot;</span>, <span class="st">&quot;Conspicuous&quot;</span>, </span>
+<span id="cb185-5"><a href="barplots.html#cb185-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Self-Esteem&quot;</span>, <span class="st">&quot;Social&quot;</span>),</span>
+<span id="cb185-6"><a href="barplots.html#cb185-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="co"># color of bars</span></span>
+<span id="cb185-7"><a href="barplots.html#cb185-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Mean Economic Views by Condition&quot;</span>, <span class="co"># plot title</span></span>
+<span id="cb185-8"><a href="barplots.html#cb185-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
+<span id="cb185-9"><a href="barplots.html#cb185-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> .<span class="dv">8</span>, <span class="co"># size of name labels</span></span>
+<span id="cb185-10"><a href="barplots.html#cb185-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Mean Views&quot;</span>, <span class="co"># yaxis label</span></span>
+<span id="cb185-11"><a href="barplots.html#cb185-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
+<span id="cb185-12"><a href="barplots.html#cb185-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span>
+<span id="cb185-13"><a href="barplots.html#cb185-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
 </div>
 <div id="creating-new-variables" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Creating New Variables</h3>
@@ -313,45 +314,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Check the class of the new variable and convert if necessary</li>
 <li>Verify new variable by exploring values</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="barplots.html#cb10-1" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># create new variable</span></span>
-<span id="cb10-2"><a href="barplots.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Code new variable</span></span>
-<span id="cb10-3"><a href="barplots.html#cb10-3" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew[status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Placebo&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Placebo&quot;</span></span>
-<span id="cb10-4"><a href="barplots.html#cb10-4" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew[status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Concrete&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Concrete&quot;</span></span>
-<span id="cb10-5"><a href="barplots.html#cb10-5" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew[status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Conspicuous Consumption&quot;</span> <span class="sc">|</span></span>
-<span id="cb10-6"><a href="barplots.html#cb10-6" aria-hidden="true" tabindex="-1"></a>                     status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Self-Esteem&quot;</span> <span class="sc">|</span>  </span>
-<span id="cb10-7"><a href="barplots.html#cb10-7" aria-hidden="true" tabindex="-1"></a>                      status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Social Approval&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Status&quot;</span></span>
-<span id="cb10-8"><a href="barplots.html#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="barplots.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># class(status$conditionnew) check the class</span></span>
-<span id="cb10-10"><a href="barplots.html#cb10-10" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(status<span class="sc">$</span>conditionnew) <span class="co"># convert</span></span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="barplots.html#cb186-1" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># create new variable</span></span>
+<span id="cb186-2"><a href="barplots.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Code new variable</span></span>
+<span id="cb186-3"><a href="barplots.html#cb186-3" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew[status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Placebo&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Placebo&quot;</span></span>
+<span id="cb186-4"><a href="barplots.html#cb186-4" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew[status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Concrete&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Concrete&quot;</span></span>
+<span id="cb186-5"><a href="barplots.html#cb186-5" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew[status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Conspicuous Consumption&quot;</span> <span class="sc">|</span></span>
+<span id="cb186-6"><a href="barplots.html#cb186-6" aria-hidden="true" tabindex="-1"></a>                     status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Self-Esteem&quot;</span> <span class="sc">|</span>  </span>
+<span id="cb186-7"><a href="barplots.html#cb186-7" aria-hidden="true" tabindex="-1"></a>                      status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Social Approval&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Status&quot;</span></span>
+<span id="cb186-8"><a href="barplots.html#cb186-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb186-9"><a href="barplots.html#cb186-9" aria-hidden="true" tabindex="-1"></a><span class="co"># class(status$conditionnew) check the class</span></span>
+<span id="cb186-10"><a href="barplots.html#cb186-10" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(status<span class="sc">$</span>conditionnew) <span class="co"># convert</span></span></code></pre></div>
 <p>An alternative way to create the new variable is through an <code>ifelse</code> statement.</p>
 <ul>
 <li>Can be read: If this relational statement is <code>TRUE</code>, I assign you A, otherwise I assign you B</li>
 <li>This often works best when we change factor variables to character</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="barplots.html#cb11-1" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew2 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(status<span class="sc">$</span>condition)</span>
-<span id="cb11-2"><a href="barplots.html#cb11-2" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Conspicuous Consumption&quot;</span> <span class="sc">|</span></span>
-<span id="cb11-3"><a href="barplots.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                     status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Self-Esteem&quot;</span> <span class="sc">|</span>  </span>
-<span id="cb11-4"><a href="barplots.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                      status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Social Approval&quot;</span>, </span>
-<span id="cb11-5"><a href="barplots.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Status&quot;</span>, status<span class="sc">$</span>conditionnew2)</span>
-<span id="cb11-6"><a href="barplots.html#cb11-6" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(status<span class="sc">$</span>conditionnew2)</span>
-<span id="cb11-7"><a href="barplots.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(status<span class="sc">$</span>conditionnew2)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="barplots.html#cb187-1" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew2 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(status<span class="sc">$</span>condition)</span>
+<span id="cb187-2"><a href="barplots.html#cb187-2" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Conspicuous Consumption&quot;</span> <span class="sc">|</span></span>
+<span id="cb187-3"><a href="barplots.html#cb187-3" aria-hidden="true" tabindex="-1"></a>                     status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Self-Esteem&quot;</span> <span class="sc">|</span>  </span>
+<span id="cb187-4"><a href="barplots.html#cb187-4" aria-hidden="true" tabindex="-1"></a>                      status<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;Social Approval&quot;</span>, </span>
+<span id="cb187-5"><a href="barplots.html#cb187-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Status&quot;</span>, status<span class="sc">$</span>conditionnew2)</span>
+<span id="cb187-6"><a href="barplots.html#cb187-6" aria-hidden="true" tabindex="-1"></a>status<span class="sc">$</span>conditionnew2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(status<span class="sc">$</span>conditionnew2)</span>
+<span id="cb187-7"><a href="barplots.html#cb187-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(status<span class="sc">$</span>conditionnew2)</span></code></pre></div>
 <pre><code>## 
 ## Concrete  Placebo   Status 
 ##      391      394     1157</code></pre>
 <p>Note: Barplots don’t have to display means. We could also display frequencies. For example, let’s make a plot of the number of people in each condition using our new variable.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="barplots.html#cb13-1" aria-hidden="true" tabindex="-1"></a>freqobs <span class="ot">&lt;-</span> <span class="fu">table</span>(status<span class="sc">$</span>conditionnew)</span>
-<span id="cb13-2"><a href="barplots.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="barplots.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="barplots.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(freqobs,</span>
-<span id="cb13-5"><a href="barplots.html#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>),</span>
-<span id="cb13-6"><a href="barplots.html#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="co"># color of bars</span></span>
-<span id="cb13-7"><a href="barplots.html#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Number of People per Condition&quot;</span>, <span class="co"># plot title</span></span>
-<span id="cb13-8"><a href="barplots.html#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
-<span id="cb13-9"><a href="barplots.html#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> .<span class="dv">8</span>, <span class="co"># size of name labels</span></span>
-<span id="cb13-10"><a href="barplots.html#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;N of Observations&quot;</span>, <span class="co"># yaxis label</span></span>
-<span id="cb13-11"><a href="barplots.html#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
-<span id="cb13-12"><a href="barplots.html#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-12-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="barplots.html#cb189-1" aria-hidden="true" tabindex="-1"></a>freqobs <span class="ot">&lt;-</span> <span class="fu">table</span>(status<span class="sc">$</span>conditionnew)</span>
+<span id="cb189-2"><a href="barplots.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="barplots.html#cb189-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-4"><a href="barplots.html#cb189-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(freqobs,</span>
+<span id="cb189-5"><a href="barplots.html#cb189-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>),</span>
+<span id="cb189-6"><a href="barplots.html#cb189-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="co"># color of bars</span></span>
+<span id="cb189-7"><a href="barplots.html#cb189-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Number of People per Condition&quot;</span>, <span class="co"># plot title</span></span>
+<span id="cb189-8"><a href="barplots.html#cb189-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
+<span id="cb189-9"><a href="barplots.html#cb189-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> .<span class="dv">8</span>, <span class="co"># size of name labels</span></span>
+<span id="cb189-10"><a href="barplots.html#cb189-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;N of Observations&quot;</span>, <span class="co"># yaxis label</span></span>
+<span id="cb189-11"><a href="barplots.html#cb189-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
+<span id="cb189-12"><a href="barplots.html#cb189-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-96-1.svg" width="672" /></p>
 
 </div>
 </div>

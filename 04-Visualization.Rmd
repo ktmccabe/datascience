@@ -66,6 +66,17 @@ Snapshot of Concrete and Placebo comparison conditions
 
 ## Boxplots
 
+For a video explainer of the code for boxplots and barplots, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=QmQr4lfrmUc")
+```
+
+
+
 Let's load the data! Here, note that the data file is in a .RData format instead of .csv. This means that instead of using `read.csv`, we should use a function to load the data that is suitable for the .RData format. This will be `load`. That function works the following way:
 
 

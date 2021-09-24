@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 504.00 360.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, polygon, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<rect x='74.40' y='209.22' width='66.21' height='75.09' style='stroke-width: 0.75; fill: #7D26CD;' />
+<rect x='153.85' y='134.13' width='66.21' height='150.18' style='stroke-width: 0.75; fill: #7D26CD;' />
+<rect x='233.30' y='96.58' width='66.21' height='187.72' style='stroke-width: 0.75; fill: #7D26CD;' />
+<rect x='312.74' y='246.76' width='66.21' height='37.54' style='stroke-width: 0.75; fill: #7D26CD;' />
+<rect x='392.19' y='59.04' width='66.21' height='225.27' style='stroke-width: 0.75; fill: #7D26CD;' />
+<text x='91.90' y='303.84' style='font-size: 7.20px; font-family: Arial;' textLength='31.21px' lengthAdjust='spacingAndGlyphs'>Car rides </text>
+<text x='91.90' y='312.48' style='font-size: 7.20px; font-family: Arial;' textLength='31.22px' lengthAdjust='spacingAndGlyphs'> to Malibu</text>
+<text x='151.94' y='303.84' style='font-size: 7.20px; font-family: Arial;' textLength='70.02px' lengthAdjust='spacingAndGlyphs'>Strawberry ice cream,</text>
+<text x='156.53' y='312.48' style='font-size: 7.20px; font-family: Arial;' textLength='60.83px' lengthAdjust='spacingAndGlyphs'> One spoon for two</text>
+<text x='241.99' y='312.48' style='font-size: 7.20px; font-family: Arial;' textLength='48.82px' lengthAdjust='spacingAndGlyphs'>Trading jackets</text>
+<text x='318.64' y='303.84' style='font-size: 7.20px; font-family: Arial;' textLength='54.42px' lengthAdjust='spacingAndGlyphs'>Watching reruns </text>
+<text x='333.24' y='312.48' style='font-size: 7.20px; font-family: Arial;' textLength='25.21px' lengthAdjust='spacingAndGlyphs'> of Glee</text>
+<text x='399.48' y='303.84' style='font-size: 7.20px; font-family: Arial;' textLength='51.64px' lengthAdjust='spacingAndGlyphs'>Being annoying </text>
+<text x='393.48' y='312.48' style='font-size: 7.20px; font-family: Arial;' textLength='63.64px' lengthAdjust='spacingAndGlyphs'> Singing in harmony</text>
+<text x='212.38' y='34.67' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='108.04px' lengthAdjust='spacingAndGlyphs'>Level of deja vu</text>
+<text transform='translate(12.96,215.53) rotate(-90)' style='font-size: 8.40px; font-family: Arial;' textLength='85.45px' lengthAdjust='spacingAndGlyphs'>Avg. Feeling of deja vu</text>
+<line x1='59.04' y1='284.31' x2='59.04' y2='59.04' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='284.31' x2='51.84' y2='284.31' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='246.76' x2='51.84' y2='246.76' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='209.22' x2='51.84' y2='209.22' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='171.67' x2='51.84' y2='171.67' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='134.13' x2='51.84' y2='134.13' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='96.58' x2='51.84' y2='96.58' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='59.04' x2='51.84' y2='59.04' style='stroke-width: 0.75;' />
+<text transform='translate(41.76,287.64) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text transform='translate(41.76,253.44) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text transform='translate(41.76,215.89) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text transform='translate(41.76,178.35) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text transform='translate(41.76,140.80) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text transform='translate(41.76,103.26) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>50</text>
+<text transform='translate(41.76,65.71) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>60</text>
+</svg>
