@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.5 Scatterplots | Data Science for Political Science</title>
+  <meta name="description" content="4.5 Scatterplots | Data Science for Political Science" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.5 Scatterplots | Data Science for Political Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.5 Scatterplots | Data Science for Political Science" />
+  
+  
+  
+
+<meta name="author" content="Instructor: Katherine McCabe" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="application-changing-minds-on-gay-marriage.html"/>
+<link rel="next" href="histograms.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course Notes</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html"><i class="fa fa-check"></i><b>1.1</b> What have I signed up for?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html#data-science-can-help-social-scientists"><i class="fa fa-check"></i><b>1.1.1</b> Data Science Can Help Social Scientists</a></li>
+<li class="chapter" data-level="1.1.2" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html#course-goals"><i class="fa fa-check"></i><b>1.1.2</b> Course Goals</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="rsetup.html"><a href="rsetup.html"><i class="fa fa-check"></i><b>1.2</b> Setup in R</a></li>
+<li class="chapter" data-level="1.3" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html"><i class="fa fa-check"></i><b>1.3</b> First Time Working in R and RStudio</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#open-rstudio"><i class="fa fa-check"></i><b>1.3.1</b> Open RStudio</a></li>
+<li class="chapter" data-level="1.3.2" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#using-r-as-a-calculator"><i class="fa fa-check"></i><b>1.3.2</b> Using R as a Calculator</a></li>
+<li class="chapter" data-level="1.3.3" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#working-in-an-r-script"><i class="fa fa-check"></i><b>1.3.3</b> Working in an R Script</a></li>
+<li class="chapter" data-level="1.3.4" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#preparing-your-r-script"><i class="fa fa-check"></i><b>1.3.4</b> Preparing your R script</a></li>
+<li class="chapter" data-level="1.3.5" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#executing-commands-in-your-r-script"><i class="fa fa-check"></i><b>1.3.5</b> Executing Commands in your R script</a></li>
+<li class="chapter" data-level="1.3.6" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#objects"><i class="fa fa-check"></i><b>1.3.6</b> Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="assignment-1.html"><a href="assignment-1.html"><i class="fa fa-check"></i><b>1.4</b> Assignment 1</a></li>
+<li class="chapter" data-level="1.5" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>1.5</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="r-markdown.html"><a href="r-markdown.html#how-to-get-setup-in-rmarkdown"><i class="fa fa-check"></i><b>1.5.1</b> How to get setup in RMarkdown</a></li>
+<li class="chapter" data-level="1.5.2" data-path="r-markdown.html"><a href="r-markdown.html#additional-rmarkdown-resources"><i class="fa fa-check"></i><b>1.5.2</b> Additional RMarkdown resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="description.html"><a href="description.html"><i class="fa fa-check"></i><b>2</b> Description</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="process-of-describing.html"><a href="process-of-describing.html"><i class="fa fa-check"></i><b>2.1</b> Process of Describing</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="process-of-describing.html"><a href="process-of-describing.html#example-process"><i class="fa fa-check"></i><b>2.1.1</b> Example Process</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summarizing-univariate-data.html"><a href="summarizing-univariate-data.html"><i class="fa fa-check"></i><b>2.2</b> Summarizing univariate data</a></li>
+<li class="chapter" data-level="2.3" data-path="functions-to-summarize-univariate-data.html"><a href="functions-to-summarize-univariate-data.html"><i class="fa fa-check"></i><b>2.3</b> Functions to summarize univariate data</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="functions-to-summarize-univariate-data.html"><a href="functions-to-summarize-univariate-data.html#using-functions-in-r-overview"><i class="fa fa-check"></i><b>2.3.1</b> Using functions in R (overview)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html"><i class="fa fa-check"></i><b>2.4</b> Loading data into R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html#working-with-datasets-in-r"><i class="fa fa-check"></i><b>2.4.1</b> Working with datasets in R</a></li>
+<li class="chapter" data-level="2.4.2" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html#measuring-the-turnout-in-the-us-elections"><i class="fa fa-check"></i><b>2.4.2</b> Measuring the Turnout in the US Elections</a></li>
+<li class="chapter" data-level="2.4.3" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html#getting-to-know-your-data"><i class="fa fa-check"></i><b>2.4.3</b> Getting to know your data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html"><i class="fa fa-check"></i><b>2.5</b> Comparing VEP and VAP turnout</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html#creating-new-variables-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Creating new variables in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="causation1.html"><a href="causation1.html"><i class="fa fa-check"></i><b>3</b> Causation with Experiments</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html"><i class="fa fa-check"></i><b>3.1</b> What separates causation from correlation?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html#potential-outcomes-framework"><i class="fa fa-check"></i><b>3.1.1</b> Potential Outcomes Framework</a></li>
+<li class="chapter" data-level="3.1.2" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html#causal-effects"><i class="fa fa-check"></i><b>3.1.2</b> Causal Effects</a></li>
+<li class="chapter" data-level="3.1.3" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html#fundamental-problem-of-causal-inference"><i class="fa fa-check"></i><b>3.1.3</b> Fundamental Problem of Causal Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html"><i class="fa fa-check"></i><b>3.2</b> Randomized Controlled Trials</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html#experiments-why-randomize"><i class="fa fa-check"></i><b>3.2.1</b> Experiments: Why Randomize?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html#experiments-how-to-analyze"><i class="fa fa-check"></i><b>3.2.2</b> Experiments: How to Analyze</a></li>
+<li class="chapter" data-level="3.2.3" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html#ingredients-of-an-experiment"><i class="fa fa-check"></i><b>3.2.3</b> Ingredients of an Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="application-is-there-racial-discrimination-in-the-labor-market.html"><a href="application-is-there-racial-discrimination-in-the-labor-market.html"><i class="fa fa-check"></i><b>3.3</b> Application: Is there racial discrimination in the labor market?</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="application-is-there-racial-discrimination-in-the-labor-market.html"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#variable-classes"><i class="fa fa-check"></i><b>3.3.1</b> Variable classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="making-tables.html"><a href="making-tables.html"><i class="fa fa-check"></i><b>3.4</b> Making tables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="making-tables.html"><a href="making-tables.html#crosstabulation"><i class="fa fa-check"></i><b>3.4.1</b> Crosstabulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="conditional-means.html"><a href="conditional-means.html"><i class="fa fa-check"></i><b>3.5</b> Conditional Means</a></li>
+<li class="chapter" data-level="3.6" data-path="relational-operators-in-r.html"><a href="relational-operators-in-r.html"><i class="fa fa-check"></i><b>3.6</b> Relational Operators in R</a></li>
+<li class="chapter" data-level="3.7" data-path="subsetting-data-in-r.html"><a href="subsetting-data-in-r.html"><i class="fa fa-check"></i><b>3.7</b> Subsetting data in R</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="subsetting-data-in-r.html"><a href="subsetting-data-in-r.html#getting-booooooooolean"><i class="fa fa-check"></i><b>3.7.1</b> Getting Booooooooolean</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="creating-new-variables-using-conditional-statements.html"><a href="creating-new-variables-using-conditional-statements.html"><i class="fa fa-check"></i><b>3.8</b> Creating New Variables using Conditional statements</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="creating-new-variables-using-conditional-statements.html"><a href="creating-new-variables-using-conditional-statements.html#ifelse-statements"><i class="fa fa-check"></i><b>3.8.1</b> ifelse statements</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="types-of-experiments.html"><a href="types-of-experiments.html"><i class="fa fa-check"></i><b>3.9</b> Types of Experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="application-social-status-and-economic-views.html"><a href="application-social-status-and-economic-views.html"><i class="fa fa-check"></i><b>4.1</b> Application: Social Status and Economic Views</a></li>
+<li class="chapter" data-level="4.2" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="boxplots.html"><a href="boxplots.html#data-summary-boxplot"><i class="fa fa-check"></i><b>4.2.1</b> Data Summary: Boxplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="barplots.html"><a href="barplots.html"><i class="fa fa-check"></i><b>4.3</b> Barplots</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="barplots.html"><a href="barplots.html#saving-plots"><i class="fa fa-check"></i><b>4.3.1</b> Saving Plots</a></li>
+<li class="chapter" data-level="4.3.2" data-path="barplots.html"><a href="barplots.html#creating-new-variables"><i class="fa fa-check"></i><b>4.3.2</b> Creating New Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html"><i class="fa fa-check"></i><b>4.4</b> Application: Changing Minds on Gay Marriage</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#creating-new-variable"><i class="fa fa-check"></i><b>4.4.1</b> Creating new variable</a></li>
+<li class="chapter" data-level="4.4.2" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#using-ifelse-to-create-new-variable"><i class="fa fa-check"></i><b>4.4.2</b> Using ifelse to create new variable</a></li>
+<li class="chapter" data-level="4.4.3" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#calculating-the-average-treatment-effect"><i class="fa fa-check"></i><b>4.4.3</b> Calculating the Average Treatment Effect</a></li>
+<li class="chapter" data-level="4.4.4" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#visualize-means-in-a-barplot"><i class="fa fa-check"></i><b>4.4.4</b> Visualize means in a barplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>4.5</b> Scatterplots</a></li>
+<li class="chapter" data-level="4.6" data-path="histograms.html"><a href="histograms.html"><i class="fa fa-check"></i><b>4.6</b> Histograms</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="histograms.html"><a href="histograms.html#happy-research-ending"><i class="fa fa-check"></i><b>4.6.1</b> Happy research ending</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="application-trends-during-covid.html"><a href="application-trends-during-covid.html"><i class="fa fa-check"></i><b>4.7</b> Application: Trends during COVID</a></li>
+<li class="chapter" data-level="4.8" data-path="line-plots-in-r.html"><a href="line-plots-in-r.html"><i class="fa fa-check"></i><b>4.8</b> Line Plots in R</a></li>
+<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs-after-comparisons.html"><a href="causal-claims-from-before-vs-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
+<li class="chapter" data-level="4.10" data-path="visual-tips-and-tricks.html"><a href="visual-tips-and-tricks.html"><i class="fa fa-check"></i><b>4.10</b> Visual tips and tricks</a></li>
+<li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
+<li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science for Political Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="scatterplots" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Scatterplots</h2>
+<p>It turns out that study was completely fabricated, and the article was eventually <a href="https://www.newyorker.com/science/maria-konnikova/how-a-gay-marriage-study-went-wrong">retracted</a>.</p>
+<p>How did people know? Well a team of researchers became suspicious based on exploratory analyses they conducted with the data. Let’s do a few of these to learn about scatterplots and histograms.</p>
+<p>Scatter plots show the relationship between two numeric variables.</p>
+<p>A common way to describe and quantify a relationship is through correlation.</p>
+<ul>
+<li>Correlation: When <span class="math inline">\(x\)</span> changes, <span class="math inline">\(y\)</span> also changes by a fixed proportion
+<ul>
+<li>Asks: If you are a certain degree above the mean of <span class="math inline">\(x\)</span>, are you similarly that much above the mean of <span class="math inline">\(y\)</span>?</li>
+<li>Positive correlation: data cloud slopes up;</li>
+<li>Negative correlation: data cloud slopes down;</li>
+<li>High positive or negative correlation: data cluster tightly around a sloped line</li>
+<li>Not affected by changes of scale: cm vs. inch, etc.</li>
+</ul></li>
+</ul>
+<p>Range of Correlation is between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span></p>
+<ul>
+<li>Look at the graphs below for examples of high and low positive and negative correlations.</li>
+</ul>
+<div class="figure">
+<img src="images/corrdummies.png" style="width:60.0%" alt="" />
+<p class="caption"><em>R for Dummies</em></p>
+</div>
+<p>The <code>plot()</code> function in R works using x and y coordinates.</p>
+<ul>
+<li>We have to tell R precisely at which x- and y- coordinates to place points (e.g., place a point at <code>x=20</code> and <code>y=40</code>)</li>
+<li>In practice, we will generally supply R with a vector of x-coordindates and a vector of corresponding y-coordinates.</li>
+</ul>
+<p>To illustrate a scatterplot, we will examine the relationship between the Wave 1 and Wave 2 feeling thermometer scores in the field experiment, for just the control “No Contact” condition.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="scatterplots.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Subset data to look at control only</span></span>
+<span id="cb202-2"><a href="scatterplots.html#cb202-2" aria-hidden="true" tabindex="-1"></a>controlonly <span class="ot">&lt;-</span> <span class="fu">subset</span>(marriage1, treatment <span class="sc">==</span> <span class="st">&quot;No Contact&quot;</span>)</span></code></pre></div>
+<p>In the <code>plot()</code>, we supply the x and y vectors.</p>
+<ul>
+<li><code>xlim</code> and <code>ylim</code> specify the range of the x and y axis.</li>
+<li><code>pch</code> is the point type. You can play around with that number to view different plot types</li>
+</ul>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="scatterplots.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>controlonly<span class="sc">$</span>therm1, <span class="at">y=</span>controlonly<span class="sc">$</span>therm2, </span>
+<span id="cb203-2"><a href="scatterplots.html#cb203-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Relationship between W1 and  W2&quot;</span>,</span>
+<span id="cb203-3"><a href="scatterplots.html#cb203-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Wave 1&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb203-4"><a href="scatterplots.html#cb203-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Wave 2&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb203-5"><a href="scatterplots.html#cb203-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-107-1.svg" width="672" /></p>
+<p>The correlation looks extremely high! It is positively sloped and tightly clustered.</p>
+<p>In fact, if we use R’s function to quantify a correlation between two variables, we will see it is a correlation above .99, very close to the maximum value.</p>
+<ul>
+<li>By default, R calculate the “pearson” correlation coefficient, a number that will be between -1 and 1. It represents the strength of the linear association between two variables.</li>
+</ul>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="scatterplots.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="do">## use = &quot;pairwise&quot; means to use all observations where neither variable has missing NA data</span></span>
+<span id="cb204-2"><a href="scatterplots.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(marriage1<span class="sc">$</span>therm1, marriage1<span class="sc">$</span>therm2, <span class="at">use =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 0.995313</code></pre>
+<p>This high correlation was unusual for this type of data.</p>
+<ul>
+<li>Feeling thermometers suffer from low reliability. How a person answers the question at one point in time (perhaps 83) in Wave 1 often differs from the numbers they say when asked again at a future point in time in Wave 2. A person’s responses often aren’t that stable.</li>
+<li>Because there was such a high correlation, it suggested that the data might not have been generated by real human responses</li>
+</ul>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="application-changing-minds-on-gay-marriage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="histograms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

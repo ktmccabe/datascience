@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.4 Application: Changing Minds on Gay Marriage | Data Science for Political Science</title>
+  <meta name="description" content="4.4 Application: Changing Minds on Gay Marriage | Data Science for Political Science" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.4 Application: Changing Minds on Gay Marriage | Data Science for Political Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.4 Application: Changing Minds on Gay Marriage | Data Science for Political Science" />
+  
+  
+  
+
+<meta name="author" content="Instructor: Katherine McCabe" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="barplots.html"/>
+<link rel="next" href="scatterplots.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course Notes</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html"><i class="fa fa-check"></i><b>1.1</b> What have I signed up for?</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html#data-science-can-help-social-scientists"><i class="fa fa-check"></i><b>1.1.1</b> Data Science Can Help Social Scientists</a></li>
+<li class="chapter" data-level="1.1.2" data-path="what-have-i-signed-up-for.html"><a href="what-have-i-signed-up-for.html#course-goals"><i class="fa fa-check"></i><b>1.1.2</b> Course Goals</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="rsetup.html"><a href="rsetup.html"><i class="fa fa-check"></i><b>1.2</b> Setup in R</a></li>
+<li class="chapter" data-level="1.3" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html"><i class="fa fa-check"></i><b>1.3</b> First Time Working in R and RStudio</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#open-rstudio"><i class="fa fa-check"></i><b>1.3.1</b> Open RStudio</a></li>
+<li class="chapter" data-level="1.3.2" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#using-r-as-a-calculator"><i class="fa fa-check"></i><b>1.3.2</b> Using R as a Calculator</a></li>
+<li class="chapter" data-level="1.3.3" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#working-in-an-r-script"><i class="fa fa-check"></i><b>1.3.3</b> Working in an R Script</a></li>
+<li class="chapter" data-level="1.3.4" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#preparing-your-r-script"><i class="fa fa-check"></i><b>1.3.4</b> Preparing your R script</a></li>
+<li class="chapter" data-level="1.3.5" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#executing-commands-in-your-r-script"><i class="fa fa-check"></i><b>1.3.5</b> Executing Commands in your R script</a></li>
+<li class="chapter" data-level="1.3.6" data-path="first-time-working-in-r-and-rstudio.html"><a href="first-time-working-in-r-and-rstudio.html#objects"><i class="fa fa-check"></i><b>1.3.6</b> Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="assignment-1.html"><a href="assignment-1.html"><i class="fa fa-check"></i><b>1.4</b> Assignment 1</a></li>
+<li class="chapter" data-level="1.5" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>1.5</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="r-markdown.html"><a href="r-markdown.html#how-to-get-setup-in-rmarkdown"><i class="fa fa-check"></i><b>1.5.1</b> How to get setup in RMarkdown</a></li>
+<li class="chapter" data-level="1.5.2" data-path="r-markdown.html"><a href="r-markdown.html#additional-rmarkdown-resources"><i class="fa fa-check"></i><b>1.5.2</b> Additional RMarkdown resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="description.html"><a href="description.html"><i class="fa fa-check"></i><b>2</b> Description</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="process-of-describing.html"><a href="process-of-describing.html"><i class="fa fa-check"></i><b>2.1</b> Process of Describing</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="process-of-describing.html"><a href="process-of-describing.html#example-process"><i class="fa fa-check"></i><b>2.1.1</b> Example Process</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="summarizing-univariate-data.html"><a href="summarizing-univariate-data.html"><i class="fa fa-check"></i><b>2.2</b> Summarizing univariate data</a></li>
+<li class="chapter" data-level="2.3" data-path="functions-to-summarize-univariate-data.html"><a href="functions-to-summarize-univariate-data.html"><i class="fa fa-check"></i><b>2.3</b> Functions to summarize univariate data</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="functions-to-summarize-univariate-data.html"><a href="functions-to-summarize-univariate-data.html#using-functions-in-r-overview"><i class="fa fa-check"></i><b>2.3.1</b> Using functions in R (overview)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html"><i class="fa fa-check"></i><b>2.4</b> Loading data into R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html#working-with-datasets-in-r"><i class="fa fa-check"></i><b>2.4.1</b> Working with datasets in R</a></li>
+<li class="chapter" data-level="2.4.2" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html#measuring-the-turnout-in-the-us-elections"><i class="fa fa-check"></i><b>2.4.2</b> Measuring the Turnout in the US Elections</a></li>
+<li class="chapter" data-level="2.4.3" data-path="loading-data-into-r.html"><a href="loading-data-into-r.html#getting-to-know-your-data"><i class="fa fa-check"></i><b>2.4.3</b> Getting to know your data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html"><i class="fa fa-check"></i><b>2.5</b> Comparing VEP and VAP turnout</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html#creating-new-variables-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Creating new variables in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="causation1.html"><a href="causation1.html"><i class="fa fa-check"></i><b>3</b> Causation with Experiments</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html"><i class="fa fa-check"></i><b>3.1</b> What separates causation from correlation?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html#potential-outcomes-framework"><i class="fa fa-check"></i><b>3.1.1</b> Potential Outcomes Framework</a></li>
+<li class="chapter" data-level="3.1.2" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html#causal-effects"><i class="fa fa-check"></i><b>3.1.2</b> Causal Effects</a></li>
+<li class="chapter" data-level="3.1.3" data-path="what-separates-causation-from-correlation.html"><a href="what-separates-causation-from-correlation.html#fundamental-problem-of-causal-inference"><i class="fa fa-check"></i><b>3.1.3</b> Fundamental Problem of Causal Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html"><i class="fa fa-check"></i><b>3.2</b> Randomized Controlled Trials</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html#experiments-why-randomize"><i class="fa fa-check"></i><b>3.2.1</b> Experiments: Why Randomize?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html#experiments-how-to-analyze"><i class="fa fa-check"></i><b>3.2.2</b> Experiments: How to Analyze</a></li>
+<li class="chapter" data-level="3.2.3" data-path="randomized-controlled-trials.html"><a href="randomized-controlled-trials.html#ingredients-of-an-experiment"><i class="fa fa-check"></i><b>3.2.3</b> Ingredients of an Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="application-is-there-racial-discrimination-in-the-labor-market.html"><a href="application-is-there-racial-discrimination-in-the-labor-market.html"><i class="fa fa-check"></i><b>3.3</b> Application: Is there racial discrimination in the labor market?</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="application-is-there-racial-discrimination-in-the-labor-market.html"><a href="application-is-there-racial-discrimination-in-the-labor-market.html#variable-classes"><i class="fa fa-check"></i><b>3.3.1</b> Variable classes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="making-tables.html"><a href="making-tables.html"><i class="fa fa-check"></i><b>3.4</b> Making tables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="making-tables.html"><a href="making-tables.html#crosstabulation"><i class="fa fa-check"></i><b>3.4.1</b> Crosstabulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="conditional-means.html"><a href="conditional-means.html"><i class="fa fa-check"></i><b>3.5</b> Conditional Means</a></li>
+<li class="chapter" data-level="3.6" data-path="relational-operators-in-r.html"><a href="relational-operators-in-r.html"><i class="fa fa-check"></i><b>3.6</b> Relational Operators in R</a></li>
+<li class="chapter" data-level="3.7" data-path="subsetting-data-in-r.html"><a href="subsetting-data-in-r.html"><i class="fa fa-check"></i><b>3.7</b> Subsetting data in R</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="subsetting-data-in-r.html"><a href="subsetting-data-in-r.html#getting-booooooooolean"><i class="fa fa-check"></i><b>3.7.1</b> Getting Booooooooolean</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="creating-new-variables-using-conditional-statements.html"><a href="creating-new-variables-using-conditional-statements.html"><i class="fa fa-check"></i><b>3.8</b> Creating New Variables using Conditional statements</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="creating-new-variables-using-conditional-statements.html"><a href="creating-new-variables-using-conditional-statements.html#ifelse-statements"><i class="fa fa-check"></i><b>3.8.1</b> ifelse statements</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="types-of-experiments.html"><a href="types-of-experiments.html"><i class="fa fa-check"></i><b>3.9</b> Types of Experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="application-social-status-and-economic-views.html"><a href="application-social-status-and-economic-views.html"><i class="fa fa-check"></i><b>4.1</b> Application: Social Status and Economic Views</a></li>
+<li class="chapter" data-level="4.2" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="boxplots.html"><a href="boxplots.html#data-summary-boxplot"><i class="fa fa-check"></i><b>4.2.1</b> Data Summary: Boxplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="barplots.html"><a href="barplots.html"><i class="fa fa-check"></i><b>4.3</b> Barplots</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="barplots.html"><a href="barplots.html#saving-plots"><i class="fa fa-check"></i><b>4.3.1</b> Saving Plots</a></li>
+<li class="chapter" data-level="4.3.2" data-path="barplots.html"><a href="barplots.html#creating-new-variables"><i class="fa fa-check"></i><b>4.3.2</b> Creating New Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html"><i class="fa fa-check"></i><b>4.4</b> Application: Changing Minds on Gay Marriage</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#creating-new-variable"><i class="fa fa-check"></i><b>4.4.1</b> Creating new variable</a></li>
+<li class="chapter" data-level="4.4.2" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#using-ifelse-to-create-new-variable"><i class="fa fa-check"></i><b>4.4.2</b> Using ifelse to create new variable</a></li>
+<li class="chapter" data-level="4.4.3" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#calculating-the-average-treatment-effect"><i class="fa fa-check"></i><b>4.4.3</b> Calculating the Average Treatment Effect</a></li>
+<li class="chapter" data-level="4.4.4" data-path="application-changing-minds-on-gay-marriage.html"><a href="application-changing-minds-on-gay-marriage.html#visualize-means-in-a-barplot"><i class="fa fa-check"></i><b>4.4.4</b> Visualize means in a barplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i><b>4.5</b> Scatterplots</a></li>
+<li class="chapter" data-level="4.6" data-path="histograms.html"><a href="histograms.html"><i class="fa fa-check"></i><b>4.6</b> Histograms</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="histograms.html"><a href="histograms.html#happy-research-ending"><i class="fa fa-check"></i><b>4.6.1</b> Happy research ending</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="application-trends-during-covid.html"><a href="application-trends-during-covid.html"><i class="fa fa-check"></i><b>4.7</b> Application: Trends during COVID</a></li>
+<li class="chapter" data-level="4.8" data-path="line-plots-in-r.html"><a href="line-plots-in-r.html"><i class="fa fa-check"></i><b>4.8</b> Line Plots in R</a></li>
+<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs-after-comparisons.html"><a href="causal-claims-from-before-vs-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
+<li class="chapter" data-level="4.10" data-path="visual-tips-and-tricks.html"><a href="visual-tips-and-tricks.html"><i class="fa fa-check"></i><b>4.10</b> Visual tips and tricks</a></li>
+<li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
+<li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science for Political Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="application-changing-minds-on-gay-marriage" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Application: Changing Minds on Gay Marriage</h2>
+<p>We now turn to a study that asks the question</p>
+<ul>
+<li>Research Question Can we effectively persuade people to change their minds?
+<ul>
+<li><em>Contact Hypothesis</em>: outgroup hostility diminishes through extended positive contact</li>
+</ul></li>
+</ul>
+<p>The authors conduct two randomized control trials in Los Angeles</p>
+<ul>
+<li><em>Target population</em>: voters in Los Angeles</li>
+<li><em>Recruitment</em>: select people from a registered voter list</li>
+<li><em>Randomized treatment conditions</em>:
+<ul>
+<li>Canvassers have a conversation about same-sex marriage vs. </li>
+<li>Recycling scripts (placebo)</li>
+<li>Control group: no canvassing</li>
+</ul></li>
+<li><em>Outcome measures</em>:
+<ul>
+<li>Feeling towards gay couples (survey responses over multiple waves)</li>
+</ul></li>
+<li><em>Comparison</em>
+<ul>
+<li>Compare average change in feelings between treatment conditions</li>
+</ul></li>
+</ul>
+<p>Let’s load the data. Data available through QSS. See QSS Chapter 2 for additional discussion.</p>
+<ul>
+<li><code>study</code>: Which study is the data from (<code>1</code> = Study1, <code>2</code> = Study2)</li>
+<li><code>treatment</code>: Five possible treatment assignment options</li>
+<li><code>therm1</code>: Survey thermometer rating of feeling towards gay couples in waves 1 (0–100) (asked before people were canvassed)</li>
+<li><code>therm2</code>: Survey thermometer rating of feeling towards gay couples in waves 2 (0–100) (asked after people were canvassed)</li>
+</ul>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="application-changing-minds-on-gay-marriage.html#cb190-1" aria-hidden="true" tabindex="-1"></a>marriage <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;gayreshaped.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="application-changing-minds-on-gay-marriage.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="do">## How many rows and columns</span></span>
+<span id="cb191-2"><a href="application-changing-minds-on-gay-marriage.html#cb191-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(marriage)</span></code></pre></div>
+<pre><code>## [1] 11948     6</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="application-changing-minds-on-gay-marriage.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="do">## How many observations in each treatment group, in each study</span></span>
+<span id="cb193-2"><a href="application-changing-minds-on-gay-marriage.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(marriage<span class="sc">$</span>treatment, marriage<span class="sc">$</span>study)</span></code></pre></div>
+<pre><code>##                                                 
+##                                                     1    2
+##   No Contact                                     5238 1203
+##   Recycling Script by Gay Canvasser              1046    0
+##   Recycling Script by Straight Canvasser         1039    0
+##   Same-Sex Marriage Script by Gay Canvasser      1151 1238
+##   Same-Sex Marriage Script by Straight Canvasser 1033    0</code></pre>
+<p>Let’s focus on study 1 only.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="application-changing-minds-on-gay-marriage.html#cb195-1" aria-hidden="true" tabindex="-1"></a>marriage1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(marriage, study <span class="sc">==</span>  <span class="dv">1</span>)</span></code></pre></div>
+<p>We have to do some work to prepare our outcome and treatment conditions.</p>
+<p>In experiments, we compare the mean from the treatment group(s) <span class="math inline">\(\bar{Y}(1)\)</span> to the control <span class="math inline">\(\bar{Y}(0)\)</span> on some outcome</p>
+<ul>
+<li>Here are outcome is Change in Support for gay couples: Wave 2 - Wave 1 feeling thermometer scores</li>
+</ul>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="application-changing-minds-on-gay-marriage.html#cb196-1" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>outcome <span class="ot">&lt;-</span> marriage1<span class="sc">$</span>therm2 <span class="sc">-</span> marriage1<span class="sc">$</span>therm1</span></code></pre></div>
+<div id="creating-new-variable" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Creating new variable</h3>
+<p>Let’s create a new variable <code>treatmentnew</code> that collapses the two Recycling and Same-Sex marriage conditions.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="application-changing-minds-on-gay-marriage.html#cb197-1" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb197-2"><a href="application-changing-minds-on-gay-marriage.html#cb197-2" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew[marriage1<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;No Contact&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;No Contact&quot;</span></span>
+<span id="cb197-3"><a href="application-changing-minds-on-gay-marriage.html#cb197-3" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew[marriage1<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;Recycling Script by Gay Canvasser&quot;</span> <span class="sc">|</span></span>
+<span id="cb197-4"><a href="application-changing-minds-on-gay-marriage.html#cb197-4" aria-hidden="true" tabindex="-1"></a>                         marriage1<span class="sc">$</span>treatment <span class="sc">==</span> </span>
+<span id="cb197-5"><a href="application-changing-minds-on-gay-marriage.html#cb197-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;Recycling Script by Straight Canvasser&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Recycling&quot;</span></span>
+<span id="cb197-6"><a href="application-changing-minds-on-gay-marriage.html#cb197-6" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew[marriage1<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;Same-Sex Marriage Script by Gay Canvasser&quot;</span> <span class="sc">|</span></span>
+<span id="cb197-7"><a href="application-changing-minds-on-gay-marriage.html#cb197-7" aria-hidden="true" tabindex="-1"></a>                         marriage1<span class="sc">$</span>treatment <span class="sc">==</span></span>
+<span id="cb197-8"><a href="application-changing-minds-on-gay-marriage.html#cb197-8" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;Same-Sex Marriage Script by Straight Canvasser&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Marriage&quot;</span></span>
+<span id="cb197-9"><a href="application-changing-minds-on-gay-marriage.html#cb197-9" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(marriage1<span class="sc">$</span>treatmentnew)</span>
+<span id="cb197-10"><a href="application-changing-minds-on-gay-marriage.html#cb197-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-11"><a href="application-changing-minds-on-gay-marriage.html#cb197-11" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(marriage1<span class="sc">$</span>treatmentnew)</span></code></pre></div>
+<pre><code>## 
+##   Marriage No Contact  Recycling 
+##       2184       5238       2085</code></pre>
+</div>
+<div id="using-ifelse-to-create-new-variable" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Using ifelse to create new variable</h3>
+<p>An alternative way we could create a variable is to use <code>ifelse</code></p>
+<p>Let’s try another way using the <code>ifelse</code> command.</p>
+<ul>
+<li>Can be read: If this relational statement is <code>TRUE</code>, I assign you A (in this case “No Contact”), otherwise (<code>ifelse()</code>)</li>
+<li>if this alternative relational statement is <code>TRUE</code>, I assign you B (in this case “Recycling”), otherwise (<code>ifelse()</code>)</li>
+<li>if this alternative relational statement is <code>TRUE</code>, I assign you C (in this case “Marriage”), otherwise</li>
+<li>If all of those were <code>FALSE</code> I assign you D (in this case an <code>NA</code>)</li>
+</ul>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="application-changing-minds-on-gay-marriage.html#cb199-1" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(marriage1<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;No Contact&quot;</span>, <span class="st">&quot;No Contact&quot;</span>,</span>
+<span id="cb199-2"><a href="application-changing-minds-on-gay-marriage.html#cb199-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">ifelse</span>(marriage1<span class="sc">$</span>treatment <span class="sc">==</span> </span>
+<span id="cb199-3"><a href="application-changing-minds-on-gay-marriage.html#cb199-3" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;Recycling Script by Gay Canvasser&quot;</span> <span class="sc">|</span></span>
+<span id="cb199-4"><a href="application-changing-minds-on-gay-marriage.html#cb199-4" aria-hidden="true" tabindex="-1"></a>                                           marriage1<span class="sc">$</span>treatment <span class="sc">==</span>  </span>
+<span id="cb199-5"><a href="application-changing-minds-on-gay-marriage.html#cb199-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;Recycling Script by Straight Canvasser&quot;</span>,  </span>
+<span id="cb199-6"><a href="application-changing-minds-on-gay-marriage.html#cb199-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;Recycling&quot;</span>,</span>
+<span id="cb199-7"><a href="application-changing-minds-on-gay-marriage.html#cb199-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">ifelse</span>(marriage1<span class="sc">$</span>treatment <span class="sc">==</span></span>
+<span id="cb199-8"><a href="application-changing-minds-on-gay-marriage.html#cb199-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Same-Sex Marriage Script by Gay Canvasser&quot;</span> <span class="sc">|</span>  </span>
+<span id="cb199-9"><a href="application-changing-minds-on-gay-marriage.html#cb199-9" aria-hidden="true" tabindex="-1"></a>                                            marriage1<span class="sc">$</span>treatment <span class="sc">==</span></span>
+<span id="cb199-10"><a href="application-changing-minds-on-gay-marriage.html#cb199-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Same-Sex Marriage Script by Straight Canvasser&quot;</span>,</span>
+<span id="cb199-11"><a href="application-changing-minds-on-gay-marriage.html#cb199-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Marriage&quot;</span>, </span>
+<span id="cb199-12"><a href="application-changing-minds-on-gay-marriage.html#cb199-12" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">NA</span>)))</span>
+<span id="cb199-13"><a href="application-changing-minds-on-gay-marriage.html#cb199-13" aria-hidden="true" tabindex="-1"></a>marriage1<span class="sc">$</span>treatmentnew2 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(marriage1<span class="sc">$</span>treatmentnew2)</span></code></pre></div>
+</div>
+<div id="calculating-the-average-treatment-effect" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Calculating the Average Treatment Effect</h3>
+<p>We now have our outcome and our treatment conditions. In an experiment, we want to look at the difference in means between conditions. Let’s calculate the means.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="application-changing-minds-on-gay-marriage.html#cb200-1" aria-hidden="true" tabindex="-1"></a>outs <span class="ot">&lt;-</span> <span class="fu">tapply</span>(marriage1<span class="sc">$</span>outcome, marriage1<span class="sc">$</span>treatmentnew, mean, <span class="at">na.rm=</span>T)</span></code></pre></div>
+<p>Note: Sometimes data include missing cells. In R, these have an <code>NA</code>. To ignore these when calculating a mean, we add <code>na.rm = T</code> to the <code>mean()</code> or <code>tapply()</code> functions.</p>
+</div>
+<div id="visualize-means-in-a-barplot" class="section level3" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Visualize means in a barplot</h3>
+<p>Let’s also add a line at 0 using <code>abline()</code></p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="application-changing-minds-on-gay-marriage.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(outs,</span>
+<span id="cb201-2"><a href="application-changing-minds-on-gay-marriage.html#cb201-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb201-3"><a href="application-changing-minds-on-gay-marriage.html#cb201-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span>  <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="co"># y-axis dimensions</span></span>
+<span id="cb201-4"><a href="application-changing-minds-on-gay-marriage.html#cb201-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>, <span class="co"># removes bar borders</span></span>
+<span id="cb201-5"><a href="application-changing-minds-on-gay-marriage.html#cb201-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Change in FT W2-W1 by Type of Treatment&quot;</span>, <span class="co"># plot title</span></span>
+<span id="cb201-6"><a href="application-changing-minds-on-gay-marriage.html#cb201-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.main =</span> .<span class="dv">8</span>, <span class="co"># size of plot title</span></span>
+<span id="cb201-7"><a href="application-changing-minds-on-gay-marriage.html#cb201-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Mean Change in FT W2-W1&quot;</span>, <span class="co"># yaxis label</span></span>
+<span id="cb201-8"><a href="application-changing-minds-on-gay-marriage.html#cb201-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
+<span id="cb201-9"><a href="application-changing-minds-on-gay-marriage.html#cb201-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span>
+<span id="cb201-10"><a href="application-changing-minds-on-gay-marriage.html#cb201-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># adds horizontal line at 0 with dashes </span></span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-105-1.svg" width="672" /></p>
+<p>How should we interpret these results?</p>
+<ul>
+<li>In the Marriage condition, it looks like on average, views toward gay couples became warmer (the bar is positive) after the conversations with canvassers about same-sex marriage.</li>
+<li>In contrast, the views of people in the Recycling or No Contact conditions did not change much and if anything, became slightly colder.</li>
+<li>Comparing between these bars, then, it seems like there is an “average treatment effect” given that the change in the Marriage condition was different from the Recycling an No Contact control groups.</li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="barplots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scatterplots.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

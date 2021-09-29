@@ -286,3 +286,749 @@ barplot(freqobs,
         las = 1) # controls angle of axis labels
 ```
 
+
+## Application: Changing Minds on Gay Marriage
+
+
+We now turn to a study that asks the question
+
+  - Research Question Can we effectively persuade people to change their minds?
+      + *Contact Hypothesis*: outgroup hostility diminishes through extended positive contact
+
+The authors conduct two randomized control trials in Los Angeles
+
+  - *Target population*: voters in Los Angeles 
+  - *Recruitment*: select people from a registered voter list 
+  - *Randomized treatment conditions*: 
+      + Canvassers have a conversation about same-sex marriage vs. 
+      + Recycling scripts (placebo)
+      + Control group: no canvassing
+  - *Outcome measures*: 
+      + Feeling towards gay couples (survey responses over multiple waves)
+  - *Comparison*
+      + Compare average change in feelings between treatment conditions
+
+
+Let's load the data. Data available through QSS. See QSS Chapter 2 for additional discussion.
+
+  - `study`: Which study is the data from (`1` = Study1, `2` = Study2)
+  - `treatment`: Five possible treatment assignment options
+  - `therm1`: Survey thermometer rating of feeling towards gay couples in waves 1 (0--100) (asked before people were canvassed)
+  - `therm2`: Survey thermometer rating of feeling towards gay couples in waves 2 (0--100) (asked after people were canvassed)
+
+```{r, echo=F}
+marriage <- read.csv("data/gayreshaped.csv", stringsAsFactors = T)
+```
+
+```{r, eval=F}
+marriage <- read.csv("gayreshaped.csv", stringsAsFactors = T)
+```
+
+```{r}
+## How many rows and columns
+dim(marriage)
+
+## How many observations in each treatment group, in each study
+table(marriage$treatment, marriage$study)
+```
+
+Let's focus on study 1 only.
+
+```{r}
+marriage1 <- subset(marriage, study ==  1)
+```
+
+We have to do some work to prepare our outcome and treatment conditions.
+
+
+In experiments, we compare the mean from the treatment group(s) $\bar{Y}(1)$ to the control $\bar{Y}(0)$ on some outcome
+
+  - Here are outcome is Change in Support for gay couples:  Wave 2 - Wave 1 feeling thermometer scores
+
+```{r}
+marriage1$outcome <- marriage1$therm2 - marriage1$therm1
+```
+
+
+### Creating new variable
+
+Let's create a new variable `treatmentnew` that collapses the two Recycling and Same-Sex marriage conditions.
+
+```{r}
+marriage1$treatmentnew <- NA
+marriage1$treatmentnew[marriage1$treatment == "No Contact"] <- "No Contact"
+marriage1$treatmentnew[marriage1$treatment == "Recycling Script by Gay Canvasser" |
+                         marriage1$treatment == 
+                         "Recycling Script by Straight Canvasser"] <- "Recycling"
+marriage1$treatmentnew[marriage1$treatment == "Same-Sex Marriage Script by Gay Canvasser" |
+                         marriage1$treatment ==
+                         "Same-Sex Marriage Script by Straight Canvasser"] <- "Marriage"
+marriage1$treatmentnew <- as.factor(marriage1$treatmentnew)
+
+table(marriage1$treatmentnew)
+```
+
+
+### Using ifelse to create new variable
+
+An alternative way we could create a variable is to use `ifelse`
+
+
+Let's try another way using the `ifelse` command.
+
+  - Can be read: If this relational statement is `TRUE`, I assign you A (in this case "No Contact"), otherwise (`ifelse()`)
+  - if this alternative relational statement is `TRUE`, I assign you B (in this case "Recycling"), otherwise (`ifelse()`)
+  - if this alternative relational statement is `TRUE`, I assign you C (in this case "Marriage"), otherwise
+  - If all of those were `FALSE` I assign you D (in this case an `NA`)
+
+```{r}
+marriage1$treatmentnew2 <- ifelse(marriage1$treatment == "No Contact", "No Contact",
+                                  ifelse(marriage1$treatment == 
+                                           "Recycling Script by Gay Canvasser" |
+                                           marriage1$treatment ==  
+                                           "Recycling Script by Straight Canvasser",  
+                                         "Recycling",
+                                    ifelse(marriage1$treatment ==
+                                        "Same-Sex Marriage Script by Gay Canvasser" |  
+                                            marriage1$treatment ==
+                                        "Same-Sex Marriage Script by Straight Canvasser",
+                                        "Marriage", 
+                                        NA)))
+marriage1$treatmentnew2 <- as.factor(marriage1$treatmentnew2)
+```
+
+
+### Calculating the Average Treatment Effect
+
+We now have our outcome and our treatment conditions. In an experiment, we want to look at the difference in means between conditions. Let's calculate the means.
+
+```{r}
+outs <- tapply(marriage1$outcome, marriage1$treatmentnew, mean, na.rm=T)
+```
+
+Note: Sometimes data include missing cells. In R, these have an `NA`. To ignore these when calculating a mean, we add `na.rm = T` to the `mean()` or `tapply()` functions.
+
+### Visualize means in a barplot
+
+Let's also add a line at 0 using `abline()`
+
+```{r}
+barplot(outs,
+        col="black",
+        ylim =  c(-2, 2), # y-axis dimensions
+        border = NA, # removes bar borders
+        main = "Change in FT W2-W1 by Type of Treatment", # plot title
+        cex.main = .8, # size of plot title
+        ylab = "Mean Change in FT W2-W1", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+abline(h=0, lty=2, col = "red", lwd=2) # adds horizontal line at 0 with dashes 
+
+```
+
+
+
+How should we interpret these results?
+
+  - In the Marriage condition, it looks like on average, views toward gay couples became warmer (the bar is positive) after the conversations with canvassers about same-sex marriage.
+  - In contrast, the views of people in the Recycling or No Contact conditions did not change much and if anything, became slightly colder.
+  - Comparing between these bars, then, it seems like there is an "average treatment effect" given that the change in the Marriage condition was different from the Recycling an No Contact control groups.
+  
+
+## Scatterplots
+
+It turns out that study was completely fabricated, and the article was eventually [retracted](https://www.newyorker.com/science/maria-konnikova/how-a-gay-marriage-study-went-wrong). 
+
+How did people know? Well a team of researchers became suspicious based on exploratory analyses they conducted with the data. Let's do a few of these to learn about scatterplots and histograms.
+
+Scatter plots show the relationship between two numeric variables. 
+
+A common way to describe and quantify a relationship is through correlation.
+
+  - Correlation: When $x$ changes, $y$ also changes by a fixed proportion
+      + Asks: If you are a certain degree above the mean of $x$, are you similarly that much above the mean of $y$?
+      + Positive correlation: data cloud slopes up; 
+      + Negative correlation: data cloud slopes down;
+      + High positive or negative correlation: data cluster tightly around a sloped line
+      + Not affected by changes of scale: cm vs. inch, etc.
+
+
+Range of Correlation is between $-1$ and $1$
+  
+  - Look at the graphs below for examples of high and low positive and negative correlations.
+
+![*R for Dummies*](images/corrdummies.png){width=60%}
+
+The `plot()` function in R works using x and y coordinates. 
+
+  - We have to tell R precisely at which x- and y- coordinates to place points (e.g., place a point at `x=20` and `y=40`)
+  - In practice, we will generally supply R with a vector of x-coordindates and a vector of corresponding y-coordinates.
+  
+
+To illustrate a scatterplot, we will examine the relationship between the Wave 1 and Wave 2 feeling thermometer scores in the field experiment, for just the control "No Contact" condition.
+
+```{r}
+## Subset data to look at control only
+controlonly <- subset(marriage1, treatment == "No Contact")
+```
+
+In the `plot()`, we supply the x and y vectors.
+
+  - `xlim` and `ylim` specify the range of the x and y axis. 
+  - `pch` is the point type. You can play around with that number to view different plot types
+  
+```{r}
+plot(x=controlonly$therm1, y=controlonly$therm2, 
+     main = "Relationship between W1 and  W2",
+     xlab = "Wave 1", xlim = c(0, 100),
+     ylab = "Wave 2", ylim = c(0, 100),
+     pch = 20)
+```
+
+The correlation looks extremely high! It is positively sloped and tightly clustered.
+
+In fact, if we use R's function to quantify a correlation between two variables, we will see it is a correlation above .99, very close to the maximum value.
+
+  - By default, R calculate the "pearson" correlation coefficient, a number that will be between -1 and 1. It represents the strength of the linear association between two variables.
+
+```{r}
+## use = "pairwise" means to use all observations where neither variable has missing NA data
+cor(marriage1$therm1, marriage1$therm2, use = "pairwise")
+```
+
+This high correlation was unusual for this type of data. 
+
+  - Feeling thermometers suffer from low reliability. How a person answers the question at one point in time (perhaps 83) in Wave 1 often differs from the numbers they say when asked again at a future point in time in Wave 2. A person's responses often aren't that stable.
+  - Because there was such a high correlation, it suggested that the data might not have been generated by real human responses
+  
+  
+## Histograms
+
+The researchers later discovered the Wave 1 data was suspiciously correlated with an existing survey: 2012 CCAP. 
+
+  - They believe the researcher likely used CCAP for Wave 1 - used survey responses from real humans that took a real survey -- but not the humans that the researcher claimed to interview in the experiment.
+  - Then the researcher generated the Wave 2 data by adding random noise to the Wave 1 data
+  - Part of why they believe this has to do with a histogram plot they generated to compare Waves 1 and 2
+  
+A histogram is a useful plot for summarizing the distribution of a single variable.
+
+  - It shows the frequency of observations (e.g., the number of survey respondents) who give an answer within a particular interval of numeric values
+
+Because a histogram is a single variable summary, we just supply R with the numeric variable we want to summarize.
+
+  - The new argument here `breaks` tells R how many of the individual rectangles we want. You can play around with that number to see how the plot changes.
+  
+
+```{r}
+hist(x=controlonly$therm1, breaks=50,
+     main = "W1 Histogram", ylim = c(0,1000))
+hist(x=controlonly$therm2,breaks=50,
+     main = "W2 Histogram", ylim = c(0,1000))  
+```
+
+The researchers noticed that the heaping patterns were different between Wave 1 and Wave 2. 
+
+  - When real humans answer these types of feeling thermometer questions, we often see heaping (tall spikes) at values of 0, 50, and 100. Humans tend to gravitate toward those nice round numbers to anchor their responses. In addition, often researchers might recode people with missing responses (people who skip a question), as having a score of 50, increasing the number at that point.
+      + Wave 1 has a lot of this heaping-- look at the higher bars around 0, 50, and 100, suggesting a lot of survey respondents gave those answers.
+      + However, Wave 2 has less heaping, particularly at 50. This suggested to the researchers that the Wave 2 data were likely generated by a computer and not real humans
+      
+
+### Happy research ending
+
+While the original article  was retracted
+
+  - Researchers who found irregularities received funding to conduct similar studies with real data this time
+  - Multiple publications suggest the canvassing approach was effective: 
+      + Broockman and Kalla. 2016. "Durably reducing transphobia: A field experiment on door-to-door canvassing" Science 352 no. 6282.
+      + Broockman and Kalla. 2020. "Reducing exclusionary attitudes through interpersonal conversation: evidence from three field experiments." American Political Science Review 
+      + Kalla and Broockman. 2021. "Which narrative strategies durably reduce prejudice? Evidence from field and survey experiments supporting the efficacy of perspective-getting." American Journal of Political Science. Forthcoming.
+
+
+## Application: Trends during COVID
+
+
+For a video companion for sections 4.7-4.9 and the code for line/trend plots, see below. The video only discusses the notes and code. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=UNJximu2suM")
+```
+
+
+
+Since the onset of the pandemic in 2020, researchers have evaluated attitudinal and behavioral responses to policy changes, political messages, and COVID case/hospitalization/death rates. 
+
+  - Survey data on attitudes and self-reported behavior
+  - Health care provider administrative data
+  - Mobile phone data to track locations
+  - Social media data to track attitudes and mobility
+
+***Example: Using Survey data from over 1.1 million responses*** to measure concern about the coronavirus over time.
+
+  - Clinton, Joshua, et al. "[Partisan pandemic: How partisanship and public health concerns affect individuals' social mobility during COVID-19](https://www.science.org/doi/10.1126/sciadv.abd7204)." Science advances 7.2 (2021): eabd7204.
+
+![](images/covidsurvey.png)
+
+***Example: Using the geotracking data of 15 million smartphones*** per day to compute percentage reduction in general movement and visiting non-essential services relative to before COVID-19 (before March 9).
+
+  - Gollwitzer, Anton, et al. "[Partisan differences in physical distancing are linked to health outcomes during the COVID-19 pandemic](https://www.nature.com/articles/s41562-020-00977-7)." Nature human behaviour 4.11 (2020): 1186-1197.
+
+
+![](images/covidphone.png)
+
+***Example: Using Twitter geolocation data*** to track how much movement users have by looking at the distances from all locations where a given user has tweeted. 
+
+  - Paiheng Xu, Mark Dredze, David A Broniatowski. "[The Twitter Social Mobility Index: Measuring Social Distancing Practices from Geolocated Tweets](https://socialmobility.covid19dataresources.org/)." Journal of Medical Internet Research (JMIR), 2020.
+
+![](images/covidtwitter.png)
+
+
+We will use the Twitter social mobility index to study how the movement of geo-located Twitter users changed from 2019 into September 2021.
+
+  - We will compare this movement for users located in the Northeast vs. South
+
+Each row of the dataset represents a week of the year. Each column represents a particular geography for which social mobility was calculated by the researchers.
+
+  - `Dates` indicates the date 
+  - `Northeast`: social mobility data for those in the northeast of the U.S.
+  - `South`: social mobility data for those in the south of the U.S.
+
+```{r}
+## Load the data from the author Mark Dredze's website
+covid <- read.csv("https://raw.githubusercontent.com/mdredze/covid19_social_mobility.github.io/master/data/longitudinal_compiled.csv")
+```
+
+Just like we have encountered numeric, factor, and character variables, R also has the ability to treat variables specifically as dates. We will want R to treat the date variable we read in as a date, and not as raw text or some other variable type. To do this, we will use the `as.Date` function.
+
+```{r}
+## Date variable original format and class
+head(covid$Dates)
+class(covid$Dates)
+
+## Convert to class Date
+covid$Dates <- as.Date(covid$Date)
+head(covid$Dates)
+class(covid$Dates)
+```
+
+
+The researchers continue to add to these data. Let's look at the portion of data from 2019 to September 2021.
+
+  - Note the use of `as.Date` again to make sure R knows our text should be treated as a date
+  - Note the use of the greater than or equal  to `>=` and less than or equal signs `<=` to specify which rows we want to keep in the data. We want rows that are in dates after January 1, 2019 and (`&`) on or before September 1, 2021.
+  
+```{r}
+covidsub <- subset(covid, Dates >= as.Date("2019-01-01") &
+                     Dates <= as.Date("2021-09-01"))
+```
+
+
+## Line Plots in R
+
+Where we are going ...
+
+```{r, echo=F}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2, cex.axis=.7)
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), cex = .7, lty=1,lwd=2,
+       bty="n")
+```
+
+
+Starting from the bottom ...
+
+  - Let's first create a scatterplot by providing R with our two variables
+  - In a trend/line plot, we want time on the x-axis, in this case the `Dates` column
+  - We want our outcome on the y-axis, in this case, social mobility
+  - Ultimately we will want to compare the Northeast with the South. We will plot one line at a time, starting with the Northeast
+  
+```{r}
+plot(x=covidsub$Dates,y=covidsub$Northeast, pch=16) # pch is point type
+```
+
+We now transform it to a line by specifying `type="l"`
+
+  - By default, R creates a plot with `type=p` for points. R also has `type=b` which has both a line and points.
+
+```{r}
+plot(x=covidsub$Dates,y=covidsub$Northeast,type="l") # makes it a line
+```
+
+
+Let us change the aesthetics a bit by adding labels and removing the border with `bty="n"`.
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", 
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), # y-axis limits
+     las=1, # orientation of axis labels
+     lwd=2, # line width
+     bty="n") # removes border
+```
+
+
+Let's add a comparison line with the `lines()` function to look at trends for the south. 
+
+  - Note that this is outside of the `plot()` function, but the inputs are very similar. We supply a set of x and y coordindates.
+  
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n")
+## Add line to the plot 
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+```
+
+
+Let's create our own axis for the plot to add detail. To do this, we add `xaxt` to the `plot` function and then use `axis()` below the function.
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n") # remove original x-axis
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+## create the numbers we want to add to the new x-axis
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+## add the axis the "1" means x-axis. A "2" would create a y-axis
+## the format argument is unique to this date example
+### "%b-%Y" are telling R to display the month and year, with the month in words
+axis(1, at = axisdates, labels=format(axisdates, "%b-%Y"), las=2)
+```
+
+Finally, let's add a `legend()`. Now we're here!
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2)
+
+## Add legend, "bottomleft" indicates where on the plot to locate it
+## Could use "topright" instead, for example
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), 
+       cex = .7, # size of legend
+       lwd=2,
+       bty="n")
+```
+
+
+
+  
+## Causal claims from before vs. after comparisons
+
+***What types of research questions could these trends generate?***
+
+```{r, echo=F}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2)
+
+## Add legend, "bottomleft" indicates where on the plot to locate it
+## Could use "topright" instead, for example
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), 
+       cex = .7, # size of legend
+       lwd=2,
+       bty="n")
+```
+
+What would you want to know about how movement has changed since the start of COVID? 
+
+  - We will do an initial exploration to reveal some of the difficulties with making causal claims when we do not have the luxury of conducting an experiment. This discussion will continue in the next section.
+
+One thing that becomes apparent in the trend data is that mobility decreased substantially after mid-March of 2020. As many of us know all too well, that corresponds to shortly after the onset of the pandemic in the United States.
+
+With that said, we may ask
+
+  - What specifically caused the sudden decrease in mobility?
+      + Did the announcement of federal guidelines to "slow the spread" have a causal effect on mobility?
+      + Did the rise in COVID cases during that time have a causal effect on mobility?
+      + Did gubernatorial actions at the state level cause mobility to decrease?
+      
+For each of these questions, we could implement the potential outcomes framework. 
+
+  - For example, we want to compare mobility ($Y$) in the state of the world where a governor has announced social distancing and stay-at-home restrictions ($Y(1)_{governor}$) to mobility in a state of the world where the governor has not announced those restrictions ($Y(0)_{governor}$), holding everything else the same. Here we run into two problems.
+      + Our friend, the fundamental problem of causal inference. We only get to observe one state of the world for any particular governor.
+      + It would be hard to turn this into an experiment. We cannot go back in time and ask governors to come together for a field experiment that randomly assigns which states get restrictions and which do not. 
+          - While there is variation-- not all states had restrictions, this was not random.
+  - Likewise, if we wanted to compare mobility ($Y$) in the state of the world where the federal government has announced social distancing and stay-at-home restrictions ($Y(1)_{president}$) to mobility in a state of the world where the president has not announced those restrictions ($Y(0)_{president}$), holding everything else the same. Here we run into the same two problems.
+      + The fundamental problem of causal inference. We only get to observe one state of the world at any given point in time.
+      + It may be hard to generate an experiment that simulates the idea of these two states of the world.
+      
+So what can we do?
+
+  - Researchers try to form comparison groups, in a strategic way, with the data they have (i.e., "observational" or "non-experimental" data).
+  - Because they cannot randomly assign two different experiences of the world, instead they choose two cases or two groups of cases that 
+      + Seem extremely similar except
+      + One has the treatment of interest, and one does not
+  
+**Example: Before vs. After Comparison**  
+
+Let's examine social mobility just before vs. just after the federal announcement of social distancing guidelines to stop the spread of COVID-19. 
+
+  - To do so, we will draw a verticle line at March 16, 2020
+      + Note we use `abline(v=)` to indicate a vertical line at a location
+  - We will also add text to inform views what that line represents
+      + Note we use `text(x= , y=, labels)` to indicate where to put text
+  
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2, cex.axis=.7)
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), cex = .7, lty=1,lwd=2,
+       bty="n")
+
+## add dashed blue vertical line
+abline(v=as.Date("2020-03-16"), lty=2, col="dodgerblue", lwd=1.5)
+
+## add text near the line
+## the \n breaks the text into different lines
+text(x=as.Date("2020-05-01"), y=65, labels = "Federal \n Announcement", cex=.6)
+```  
+
+We see mobility does appear to be lower after the announcement relative to before the announcement. Is this causal?
+
+  - Assumption: We would want to be able to argue that social mobility in the weeks following the announcement (after time period) would look similar to social mobility in the weeks prior to the announcement (before period) **if not for the federal announcement**
+      + That the before vs. after time periods would be similar in any meaningful way if not for the presence of the treatment in the after period.
+
+Does this seem like a plausible argument? Could other things (confounders) occurring around the time of the federal announcement also have caused the steep decline in social mobility?
+
+  - If we think something else happened around the same time that might have caused mobility to go down anyway, then we may be doubtful that this is a *causal* effect.
+      
+
+We will continue to discuss similar causal designs in the next section.
+
+
+
+## Visual tips and tricks
+
+Recall we said the goals of visualization are to communicate information
+
+  - Transparently (show me the data!)
+  - Quickly
+  - Simply
+  - Accurately
+  - And with a little work: beautifully
+
+What NOT to communicate?
+ 
+![](images/honestrunway.jpeg){width=70%}
+
+Claus Wilke provides an overview of rules of thumb to fall when creating a data visualization on the Serial Mentor [website](https://serialmentor.com/dataviz/).
+
+An example is below
+  
+![](images/ugbadwrong.png)
+
+Overall, the best thing to do is to look at your visual from a consumer's [point of view](https://www.youtube.com/watch?v=nQJEp-k-ogs&ab_channel=ArianaGrandeVevo). You want your visuals to be intuitive enough for a viewer to be able to interpret it without too much help from you or explanatory text elsewhere in a paper or presentation. Our goal is to help consumers of our data understand the main takeaways of our research easily and accurately.
+
+  - We want to make sure our visuals always have informative labels that a lay person can understand (instead of technical variable names, we can use plain language)
+      + We may need to add a legend or additional text to a visual to help with this
+  - We want to choose colors to convey information. We want to avoid colors that are hard to see or might distract consumers.
+  - The axis dimensions should not be misleading. If the goal is to compare two or more plots to each other, we would want them to have similar axes, for example.
+
+
+## Common R plotting functions and arguments
+
+Here is a refresher of several of the functions and arguments we have come across.
+
+Create a plot
+
+  - `plot()`: for scatterplots and trend plots
+  - `barplot()`: for barplot comparisons across categories
+  - `boxplot()`: boxplot for summaries of numeric variables
+  - `hist()`: for histogram summaries of a single numeric variable
+  
+Aesthetic arguments within a plot
+
+  - `main = `: Specifies the main title of the plot. Supply text (e.g.,  `main = "my title"`) 
+  - `ylab = `: Specifies the title of the y-axis. Supply text (e.g.,  `ylab = "Mean of variable"`) 
+  - `xlab = `: Specifies the title of the x-axis. Supply text (e.g.,  `xlab = "X variable name"`)
+  - `ylim =`: Specifies the range of the y-axis. Supply vector of two numbers (e.g., `ylim = c(0, 100)`)
+  - `xlim =`: Specifies the range of the x-axis. Supply vector of two numbers (e.g., `xlim = c(0, 100)`)
+  - `bty="n"`: Removes the border box around the plot
+  - `cex`, `cex.main`, `cex.names`, `cex.lab`, `cex.axis`: Changes the size of different elements of a plot. Default is 1, so a value of .8 would be smaller than default, and 1.2 would be bigger than normal.
+  - `type =`: Specifies the type of plot (e.g., `type="l"` is a line plot, `type="b"` is a plot with points and lines connecting them)
+  - `lwd=`: Specifies the width of a line on a plot. Default is 1. E.g., `lwd=3` makes a line much thicker
+  - `pch=`: Specifies the point type. E.g., `pch=15`
+  - `lty=`: Specifies the line type. E.g., `lty=2` is a dashed line
+  - `col=`: Specifies the color of the central element of the plot. Can take a single color or vector of colors. Use `colors()` in the console to see all R colors.
+  - `names`: Specifies a set of labels in a barplot
+  
+
+Ways to annotate a plot (generally added below the initial plotting function)
+
+  - `abline()`: Adds a line to the plot at a particular point on the x- or y- intercept, either horizontal, vertical, or of a particular slope
+      + Example: Adding a horizontal line at a particular at a y value of 2 `abline(h=2)`
+      + Example: Adding a vertical line at a particular at a x value of 2 `abline(v=2)`
+  - `lines(x=, y=)`: Adds a line connecting pairs of x- and y-coordinates. We used this to add the South line to the social mobility plot.
+  - `axis()`: Used to replace the default x- or y- axis that R will create with a customized axis
+      + To create an original y-axis, use `axis(2, vectorofvalues, labels)` and specify `yaxt="n"` inside the plotting function to remove the original y-axis.
+      + To create an original x-axis, use `axis(1, vectorofvalues, labels)` and specify `xaxt="n"` inside the plotting function to remove the original x-axis.
+  - `legend()`: Adds a legend to a plot. Can specify the location as the first argument (e.g., `"bottomleft"` or `"topright"`)
+  - `text()`: Adds text to a plot at specific x- and y- locations. (E.g., `text(x=3, y=4, "Here is a point"`). The x and y arguments can be single numbers or a vector of numbers. x and y need to be the same length.
+
+
+## A note on `ggplot`
+
+R has a number of open-source packages that people can use to expand the set of capabilities for visualization and analysis. These can be installed through RStudio. We will look at one of these packages: `ggplot2`.
+
+***Using ggplot will be extra-credit at this point in the course. We may return to it later in the semester as part of the main curriculum. Reviewing this section of the notes is optional.***
+
+The "gg" in ggplot2 stands for the "Grammar of Graphics." This program provides another framework for creating figures in R. According to Hadley Wickham, "ggplot2 provides beautiful, hassle-free plots that take care of fiddly details like drawing legends."
+
+Practically speaking, `ggplot()` is another tool to plot the same types of figures we have been making in class. Some people prefer `ggplot2` because they find the logic of building figures more intuitive using this framework and/or more aesthetically pleasing. However, both `ggplot()` and the plots we have been making in class can accomplish the same ultimate goals of data visualization-- to communicate information transparently, quickly, accurately, simply, and beautifully. Which types of plots you may prefer is up to your own taste.
+
+Think of packages like apps on a smartphone.
+
+  - If RStudio is our smartphone, we install a package like you install an app on the phone. You only have to do this once, though occasionally you may want or need to update the installation to a new version.
+  
+```{r, eval=F}
+## Run this line in your R console
+install.packages("ggplot2")
+```
+
+  - On a smartphone, every time you want to use an app after you have installed it, you have to open the app. Similarly, every time we want to open a package in RStudio, we have to open it by using the `library()` command
+  
+```{r}
+## Add and run this line in your R script, above the code where you will use functions from the package
+library(ggplot2)
+```
+
+
+The main plotting function in `ggplot2` is the `ggplot()` function. It will give you access to barplots, boxplots, scatterplots, histograms, etc.
+
+  - The syntax within this package is a little different from the base R plotting functions. We will investigate below. For now, here is an example of using `ggplot` to create a boxplot using the experiment on social status from earlier in this section.
+  
+```{r}
+ggplot(data=status, mapping = aes(x=condition, y=econcon)) +
+  geom_boxplot()
+```
+
+The three primary components of a ggplot() are a dataframe (`data =`), a set of mapping aesthetics (`aes()`), and `geoms` (e.g., geom boxplot, geom bar, geom point, geom line, etc.).
+
+  - The function `ggplot()` first takes a dataframe that includes the values you would like to plot (e.g., `data = status`).
+  - The aesthetics then include the variable names that you want to plot on the x and y axis (e.g., `aes(x=condition, y=econcon)`)
+      + Additional mapping aesthetics can be specified. For example, a third variable (or a repeat of a previous variable) can also be specified (e.g., `fill =`, `colour =`, `shape =`), which acts as a grouping variable. If this is specified, `ggplot()` will create a corresponding legend for the plot and will color/make different shapes for different groups within this third variable (See the boxplot below for an example of grouping by condition).
+  - After closing out the first `ggplot()` parentheses, you then annotate the plot by adding (`+`) a geometric layer. This is essentially where you specify the type of plot (though it is possible to have multiple geometric layers). 
+  - Just like with the other plotting functions in R, you can also specify a number of other arguments to make your plot more informative and aesthetically pleasing. Here, you do this by adding (`+`) additional arguments. See examples below (e.g., `ggtitle`, `xlab`, `ylab` for titles, `ylim` for y-axis limits, etc.)
+  - Likewise, just like with the other plotting functions, you can save your plots as a pdf or png. To do so here, you include the line `ggsave()` just below your plot.
+
+There are many more possibilities for plotting with `ggplot()`, but these should get you started. For additional resources on all that is gg, I recommend the [R Graphics Cookbook](https:// r-graphics.org/).
+
+
+Here is a second version of the boxplot with more aesthetics specified.
+
+  - We will color in the boxes based on the collapsed condition variable.
+```{r}
+ggplot(data=status, mapping = aes(x=condition, y=econcon, fill=conditionnew)) +
+  ## Specifies plot type. E.g., also have geom_point(), geom_bar()
+  geom_boxplot()+
+  ## Note many arguments are similar to other R functions but the syntax is a little different
+  ggtitle("Economic Views by Experimental Condition")+
+  ylab("Economic Views")+
+  xlab("Experimental Condition")+
+  ylim(0,1)+
+  ## Changes the overall theme (i.e., color scheme, borders, etc.)
+  theme_bw()+
+  theme(legend.position="bottom")
+
+```
+
+Here is an example of a histogram from the application on views toward gay couples.
+
+```{r}
+ggplot(controlonly, aes(x=therm1)) +
+  geom_histogram(binwidth = 1) +
+  ggtitle("W1 Histogram") +
+  theme_minimal()
+```
+
+Instead of displaying multiple categories through different shapes or colors, we could also create multiple mini plots instead. This is done through `facet`. Let's look at a histogram for each condition for the thermometers in wave 2.
+
+```{r}
+ggplot(marriage1, aes(x=therm2)) +
+  geom_histogram(binwidth = 1) +
+  ggtitle("W2 Histogram by Condition") +
+  xlab("Feeling Thermometer Wave 2")+
+  theme_bw()+
+  facet_wrap(~treatmentnew)
+```
+
+
+We can similarly create a scatter and line plot. Let's use the social mobility data. Here we see `geom_point` and `geom_line`.
+
+```{r}
+## Scatterplot
+ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
+  geom_point() +
+  ggtitle("Average Social Mobility in US") +
+  xlab("Date")+
+  ylab("Avg Social Mobility")
+
+## Line plot
+ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
+  geom_line() +
+  ggtitle("Average Social Mobility in US") +
+  xlab("Date")+
+  ylab("Avg Social Mobility")
+```
+
+
+
