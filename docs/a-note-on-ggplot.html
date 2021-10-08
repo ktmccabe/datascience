@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="common-r-plotting-functions-and-arguments.html"/>
-
+<link rel="next" href="causalityii.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -246,6 +246,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="causalityii.html"><a href="causalityii.html"><i class="fa fa-check"></i><b>5</b> Causality with Non-Experimental Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html"><i class="fa fa-check"></i><b>5.1</b> Why can’t we always experiment?</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html#what-can-we-do-instead"><i class="fa fa-check"></i><b>5.1.1</b> What can we do instead?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html"><i class="fa fa-check"></i><b>5.2</b> Causal Identification Strategies</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#three-common-identification-strategies"><i class="fa fa-check"></i><b>5.2.1</b> Three Common Identification Strategies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-cross-section-designs"><i class="fa fa-check"></i><b>5.2.2</b> Threats to Cross-Section Designs</a></li>
+<li class="chapter" data-level="5.2.3" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-before-after-designs"><i class="fa fa-check"></i><b>5.2.3</b> Threats to Before-After Designs</a></li>
+<li class="chapter" data-level="5.2.4" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-diff-in-diff-designs"><i class="fa fa-check"></i><b>5.2.4</b> Threats to Diff-in-Diff Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html"><i class="fa fa-check"></i><b>5.3</b> Application: Economic Effects of Basque Terrorism</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html#applying-3-identification-strategies"><i class="fa fa-check"></i><b>5.3.1</b> Applying 3 Identification Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="placebo-tests.html"><a href="placebo-tests.html"><i class="fa fa-check"></i><b>5.4</b> Placebo Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="wrapping-up-causality.html"><a href="wrapping-up-causality.html"><i class="fa fa-check"></i><b>5.5</b> Wrapping Up Causality</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -286,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="a-note-on-ggplot.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>status, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>condition, <span class="at">y=</span>econcon)) <span class="sc">+</span></span>
 <span id="cb227-2"><a href="a-note-on-ggplot.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-125-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-126-1.svg" width="672" /></p>
 <p>The three primary components of a ggplot() are a dataframe (<code>data =</code>), a set of mapping aesthetics (<code>aes()</code>), and <code>geoms</code> (e.g., geom boxplot, geom bar, geom point, geom line, etc.).</p>
 <ul>
 <li>The function <code>ggplot()</code> first takes a dataframe that includes the values you would like to plot (e.g., <code>data = status</code>).</li>
@@ -314,38 +334,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb228-9"><a href="a-note-on-ggplot.html#cb228-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Changes the overall theme (i.e., color scheme, borders, etc.)</span></span>
 <span id="cb228-10"><a href="a-note-on-ggplot.html#cb228-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb228-11"><a href="a-note-on-ggplot.html#cb228-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-126-1.svg" width="672" /></p>
-<p>Here is an example of a histogram from the application on views toward gay couples.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="a-note-on-ggplot.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(controlonly, <span class="fu">aes</span>(<span class="at">x=</span>therm1)) <span class="sc">+</span></span>
-<span id="cb229-2"><a href="a-note-on-ggplot.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb229-3"><a href="a-note-on-ggplot.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;W1 Histogram&quot;</span>) <span class="sc">+</span></span>
-<span id="cb229-4"><a href="a-note-on-ggplot.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-127-1.svg" width="672" /></p>
-<p>Instead of displaying multiple categories through different shapes or colors, we could also create multiple mini plots instead. This is done through <code>facet</code>. Let’s look at a histogram for each condition for the thermometers in wave 2.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="a-note-on-ggplot.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(marriage1, <span class="fu">aes</span>(<span class="at">x=</span>therm2)) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="a-note-on-ggplot.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;myboxplot.pdf&quot;</span>, <span class="at">width=</span><span class="dv">7</span>, <span class="at">height=</span><span class="dv">5</span>)</span></code></pre></div>
+<p>Here is an example of a histogram from the application on views toward gay couples.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="a-note-on-ggplot.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(controlonly, <span class="fu">aes</span>(<span class="at">x=</span>therm1)) <span class="sc">+</span></span>
 <span id="cb230-2"><a href="a-note-on-ggplot.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb230-3"><a href="a-note-on-ggplot.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;W2 Histogram by Condition&quot;</span>) <span class="sc">+</span></span>
-<span id="cb230-4"><a href="a-note-on-ggplot.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Feeling Thermometer Wave 2&quot;</span>)<span class="sc">+</span></span>
-<span id="cb230-5"><a href="a-note-on-ggplot.html#cb230-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb230-6"><a href="a-note-on-ggplot.html#cb230-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>treatmentnew)</span></code></pre></div>
-<pre><code>## Warning: Removed 1042 rows containing non-finite values (stat_bin).</code></pre>
+<span id="cb230-3"><a href="a-note-on-ggplot.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;W1 Histogram&quot;</span>) <span class="sc">+</span></span>
+<span id="cb230-4"><a href="a-note-on-ggplot.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-128-1.svg" width="672" /></p>
-<p>We can similarly create a scatter and line plot. Let’s use the social mobility data. Here we see <code>geom_point</code> and <code>geom_line</code>.</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="a-note-on-ggplot.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Scatterplot</span></span>
-<span id="cb232-2"><a href="a-note-on-ggplot.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covidsub, <span class="fu">aes</span>(<span class="at">x=</span>Dates, <span class="at">y=</span>avg_USA)) <span class="sc">+</span></span>
-<span id="cb232-3"><a href="a-note-on-ggplot.html#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb232-4"><a href="a-note-on-ggplot.html#cb232-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Average Social Mobility in US&quot;</span>) <span class="sc">+</span></span>
-<span id="cb232-5"><a href="a-note-on-ggplot.html#cb232-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="sc">+</span></span>
-<span id="cb232-6"><a href="a-note-on-ggplot.html#cb232-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Avg Social Mobility&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<p>Instead of displaying multiple categories through different shapes or colors, we could also create multiple mini plots instead. This is done through <code>facet</code>. Let’s look at a histogram for each condition for the thermometers in wave 2.</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="a-note-on-ggplot.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(marriage1, <span class="fu">aes</span>(<span class="at">x=</span>therm2)) <span class="sc">+</span></span>
+<span id="cb231-2"><a href="a-note-on-ggplot.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb231-3"><a href="a-note-on-ggplot.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;W2 Histogram by Condition&quot;</span>) <span class="sc">+</span></span>
+<span id="cb231-4"><a href="a-note-on-ggplot.html#cb231-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Feeling Thermometer Wave 2&quot;</span>)<span class="sc">+</span></span>
+<span id="cb231-5"><a href="a-note-on-ggplot.html#cb231-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb231-6"><a href="a-note-on-ggplot.html#cb231-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>treatmentnew)</span></code></pre></div>
+<pre><code>## Warning: Removed 1042 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-129-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="a-note-on-ggplot.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Line plot</span></span>
-<span id="cb234-2"><a href="a-note-on-ggplot.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covidsub, <span class="fu">aes</span>(<span class="at">x=</span>Dates, <span class="at">y=</span>avg_USA)) <span class="sc">+</span></span>
-<span id="cb234-3"><a href="a-note-on-ggplot.html#cb234-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb234-4"><a href="a-note-on-ggplot.html#cb234-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Average Social Mobility in US&quot;</span>) <span class="sc">+</span></span>
-<span id="cb234-5"><a href="a-note-on-ggplot.html#cb234-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="sc">+</span></span>
-<span id="cb234-6"><a href="a-note-on-ggplot.html#cb234-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Avg Social Mobility&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-129-2.svg" width="672" /></p>
+<p>We can similarly create a scatter and line plot. Let’s use the social mobility data. Here we see <code>geom_point</code> and <code>geom_line</code>.</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="a-note-on-ggplot.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Scatterplot</span></span>
+<span id="cb233-2"><a href="a-note-on-ggplot.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covidsub, <span class="fu">aes</span>(<span class="at">x=</span>Dates, <span class="at">y=</span>avg_USA)) <span class="sc">+</span></span>
+<span id="cb233-3"><a href="a-note-on-ggplot.html#cb233-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb233-4"><a href="a-note-on-ggplot.html#cb233-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Average Social Mobility in US&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-5"><a href="a-note-on-ggplot.html#cb233-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="sc">+</span></span>
+<span id="cb233-6"><a href="a-note-on-ggplot.html#cb233-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Avg Social Mobility&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-130-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="a-note-on-ggplot.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Line plot</span></span>
+<span id="cb235-2"><a href="a-note-on-ggplot.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covidsub, <span class="fu">aes</span>(<span class="at">x=</span>Dates, <span class="at">y=</span>avg_USA)) <span class="sc">+</span></span>
+<span id="cb235-3"><a href="a-note-on-ggplot.html#cb235-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb235-4"><a href="a-note-on-ggplot.html#cb235-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Average Social Mobility in US&quot;</span>) <span class="sc">+</span></span>
+<span id="cb235-5"><a href="a-note-on-ggplot.html#cb235-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>)<span class="sc">+</span></span>
+<span id="cb235-6"><a href="a-note-on-ggplot.html#cb235-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Avg Social Mobility&quot;</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-130-2.svg" width="672" /></p>
 
 </div>
 <!-- </div> -->
@@ -354,8 +375,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="common-r-plotting-functions-and-arguments.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="common-r-plotting-functions-and-arguments.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="causalityii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

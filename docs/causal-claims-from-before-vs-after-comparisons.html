@@ -246,6 +246,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="causalityii.html"><a href="causalityii.html"><i class="fa fa-check"></i><b>5</b> Causality with Non-Experimental Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html"><i class="fa fa-check"></i><b>5.1</b> Why can’t we always experiment?</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html#what-can-we-do-instead"><i class="fa fa-check"></i><b>5.1.1</b> What can we do instead?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html"><i class="fa fa-check"></i><b>5.2</b> Causal Identification Strategies</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#three-common-identification-strategies"><i class="fa fa-check"></i><b>5.2.1</b> Three Common Identification Strategies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-cross-section-designs"><i class="fa fa-check"></i><b>5.2.2</b> Threats to Cross-Section Designs</a></li>
+<li class="chapter" data-level="5.2.3" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-before-after-designs"><i class="fa fa-check"></i><b>5.2.3</b> Threats to Before-After Designs</a></li>
+<li class="chapter" data-level="5.2.4" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-diff-in-diff-designs"><i class="fa fa-check"></i><b>5.2.4</b> Threats to Diff-in-Diff Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html"><i class="fa fa-check"></i><b>5.3</b> Application: Economic Effects of Basque Terrorism</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html#applying-3-identification-strategies"><i class="fa fa-check"></i><b>5.3.1</b> Applying 3 Identification Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="placebo-tests.html"><a href="placebo-tests.html"><i class="fa fa-check"></i><b>5.4</b> Placebo Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="wrapping-up-causality.html"><a href="wrapping-up-causality.html"><i class="fa fa-check"></i><b>5.5</b> Wrapping Up Causality</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -266,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="causal-claims-from-before-vs.-after-comparisons" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Causal claims from before vs. after comparisons</h2>
 <p><strong><em>What types of research questions could these trends generate?</em></strong></p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-121-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-122-1.svg" width="672" /></p>
 <p>What would you want to know about how movement has changed since the start of COVID?</p>
 <ul>
 <li>We will do an initial exploration to reveal some of the difficulties with making causal claims when we do not have the luxury of conducting an experiment. This discussion will continue in the next section.</li>
@@ -340,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb224-20"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-20" aria-hidden="true" tabindex="-1"></a><span class="do">## add text near the line</span></span>
 <span id="cb224-21"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-21" aria-hidden="true" tabindex="-1"></a><span class="do">## the \n breaks the text into different lines</span></span>
 <span id="cb224-22"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">as.Date</span>(<span class="st">&quot;2020-05-01&quot;</span>), <span class="at">y=</span><span class="dv">65</span>, <span class="at">labels =</span> <span class="st">&quot;Federal </span><span class="sc">\n</span><span class="st"> Announcement&quot;</span>, <span class="at">cex=</span>.<span class="dv">6</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-122-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-123-1.svg" width="672" /></p>
 <p>We see mobility does appear to be lower after the announcement relative to before the announcement. Is this causal?</p>
 <ul>
 <li>Assumption: We would want to be able to argue that social mobility in the weeks following the announcement (after time period) would look similar to social mobility in the weeks prior to the announcement (before period) <strong>if not for the federal announcement</strong>

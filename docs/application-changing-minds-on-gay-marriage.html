@@ -246,6 +246,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="causalityii.html"><a href="causalityii.html"><i class="fa fa-check"></i><b>5</b> Causality with Non-Experimental Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html"><i class="fa fa-check"></i><b>5.1</b> Why can’t we always experiment?</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html#what-can-we-do-instead"><i class="fa fa-check"></i><b>5.1.1</b> What can we do instead?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html"><i class="fa fa-check"></i><b>5.2</b> Causal Identification Strategies</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#three-common-identification-strategies"><i class="fa fa-check"></i><b>5.2.1</b> Three Common Identification Strategies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-cross-section-designs"><i class="fa fa-check"></i><b>5.2.2</b> Threats to Cross-Section Designs</a></li>
+<li class="chapter" data-level="5.2.3" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-before-after-designs"><i class="fa fa-check"></i><b>5.2.3</b> Threats to Before-After Designs</a></li>
+<li class="chapter" data-level="5.2.4" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-diff-in-diff-designs"><i class="fa fa-check"></i><b>5.2.4</b> Threats to Diff-in-Diff Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html"><i class="fa fa-check"></i><b>5.3</b> Application: Economic Effects of Basque Terrorism</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html#applying-3-identification-strategies"><i class="fa fa-check"></i><b>5.3.1</b> Applying 3 Identification Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="placebo-tests.html"><a href="placebo-tests.html"><i class="fa fa-check"></i><b>5.4</b> Placebo Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="wrapping-up-causality.html"><a href="wrapping-up-causality.html"><i class="fa fa-check"></i><b>5.5</b> Wrapping Up Causality</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -311,6 +331,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Recycling Script by Straight Canvasser         1039    0
 ##   Same-Sex Marriage Script by Gay Canvasser      1151 1238
 ##   Same-Sex Marriage Script by Straight Canvasser 1033    0</code></pre>
+<p>For a video explainer of the code for the barplot, scatter plot and histogram created with this application, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/ukexpAulAAk" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <p>Let’s focus on study 1 only.</p>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="application-changing-minds-on-gay-marriage.html#cb195-1" aria-hidden="true" tabindex="-1"></a>marriage1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(marriage, study <span class="sc">==</span>  <span class="dv">1</span>)</span></code></pre></div>
 <p>We have to do some work to prepare our outcome and treatment conditions.</p>
@@ -380,7 +406,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb201-8"><a href="application-changing-minds-on-gay-marriage.html#cb201-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> .<span class="dv">8</span>,<span class="co"># size of yaxis label</span></span>
 <span id="cb201-9"><a href="application-changing-minds-on-gay-marriage.html#cb201-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">1</span>) <span class="co"># controls angle of axis labels</span></span>
 <span id="cb201-10"><a href="application-changing-minds-on-gay-marriage.html#cb201-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># adds horizontal line at 0 with dashes </span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-105-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-106-1.svg" width="672" /></p>
 <p>How should we interpret these results?</p>
 <ul>
 <li>In the Marriage condition, it looks like on average, views toward gay couples became warmer (the bar is positive) after the conversations with canvassers about same-sex marriage.</li>

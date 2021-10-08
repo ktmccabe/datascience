@@ -246,6 +246,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="causalityii.html"><a href="causalityii.html"><i class="fa fa-check"></i><b>5</b> Causality with Non-Experimental Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html"><i class="fa fa-check"></i><b>5.1</b> Why can’t we always experiment?</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html#what-can-we-do-instead"><i class="fa fa-check"></i><b>5.1.1</b> What can we do instead?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html"><i class="fa fa-check"></i><b>5.2</b> Causal Identification Strategies</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#three-common-identification-strategies"><i class="fa fa-check"></i><b>5.2.1</b> Three Common Identification Strategies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-cross-section-designs"><i class="fa fa-check"></i><b>5.2.2</b> Threats to Cross-Section Designs</a></li>
+<li class="chapter" data-level="5.2.3" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-before-after-designs"><i class="fa fa-check"></i><b>5.2.3</b> Threats to Before-After Designs</a></li>
+<li class="chapter" data-level="5.2.4" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-diff-in-diff-designs"><i class="fa fa-check"></i><b>5.2.4</b> Threats to Diff-in-Diff Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html"><i class="fa fa-check"></i><b>5.3</b> Application: Economic Effects of Basque Terrorism</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html#applying-3-identification-strategies"><i class="fa fa-check"></i><b>5.3.1</b> Applying 3 Identification Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="placebo-tests.html"><a href="placebo-tests.html"><i class="fa fa-check"></i><b>5.4</b> Placebo Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="wrapping-up-causality.html"><a href="wrapping-up-causality.html"><i class="fa fa-check"></i><b>5.5</b> Wrapping Up Causality</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -281,10 +301,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="histograms.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="at">x=</span>controlonly<span class="sc">$</span>therm1, <span class="at">breaks=</span><span class="dv">50</span>,</span>
 <span id="cb206-2"><a href="histograms.html#cb206-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;W1 Histogram&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>))</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-109-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-110-1.svg" width="672" /></p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="histograms.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="at">x=</span>controlonly<span class="sc">$</span>therm2,<span class="at">breaks=</span><span class="dv">50</span>,</span>
 <span id="cb207-2"><a href="histograms.html#cb207-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;W2 Histogram&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>))  </span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-109-2.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-110-2.svg" width="672" /></p>
 <p>The researchers noticed that the heaping patterns were different between Wave 1 and Wave 2.</p>
 <ul>
 <li>When real humans answer these types of feeling thermometer questions, we often see heaping (tall spikes) at values of 0, 50, and 100. Humans tend to gravitate toward those nice round numbers to anchor their responses. In addition, often researchers might recode people with missing responses (people who skip a question), as having a score of 50, increasing the number at that point.

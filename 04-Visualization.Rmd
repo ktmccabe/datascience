@@ -332,6 +332,17 @@ dim(marriage)
 table(marriage$treatment, marriage$study)
 ```
 
+
+For a video explainer of the code for the barplot, scatter plot and histogram created with this application, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=ukexpAulAAk")
+```
+
+
 Let's focus on study 1 only.
 
 ```{r}
@@ -988,7 +999,7 @@ ggplot(data=status, mapping = aes(x=condition, y=econcon, fill=conditionnew)) +
   ## Changes the overall theme (i.e., color scheme, borders, etc.)
   theme_bw()+
   theme(legend.position="bottom")
-
+ggsave("myboxplot.pdf", width=7, height=5)
 ```
 
 Here is an example of a histogram from the application on views toward gay couples.

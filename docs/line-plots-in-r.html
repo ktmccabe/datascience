@@ -246,6 +246,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="causalityii.html"><a href="causalityii.html"><i class="fa fa-check"></i><b>5</b> Causality with Non-Experimental Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html"><i class="fa fa-check"></i><b>5.1</b> Why can’t we always experiment?</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="why-cant-we-always-experiment.html"><a href="why-cant-we-always-experiment.html#what-can-we-do-instead"><i class="fa fa-check"></i><b>5.1.1</b> What can we do instead?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html"><i class="fa fa-check"></i><b>5.2</b> Causal Identification Strategies</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#three-common-identification-strategies"><i class="fa fa-check"></i><b>5.2.1</b> Three Common Identification Strategies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-cross-section-designs"><i class="fa fa-check"></i><b>5.2.2</b> Threats to Cross-Section Designs</a></li>
+<li class="chapter" data-level="5.2.3" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-before-after-designs"><i class="fa fa-check"></i><b>5.2.3</b> Threats to Before-After Designs</a></li>
+<li class="chapter" data-level="5.2.4" data-path="causal-identification-strategies.html"><a href="causal-identification-strategies.html#threats-to-diff-in-diff-designs"><i class="fa fa-check"></i><b>5.2.4</b> Threats to Diff-in-Diff Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html"><i class="fa fa-check"></i><b>5.3</b> Application: Economic Effects of Basque Terrorism</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="application-economic-effects-of-basque-terrorism.html"><a href="application-economic-effects-of-basque-terrorism.html#applying-3-identification-strategies"><i class="fa fa-check"></i><b>5.3.1</b> Applying 3 Identification Strategies</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="placebo-tests.html"><a href="placebo-tests.html"><i class="fa fa-check"></i><b>5.4</b> Placebo Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="wrapping-up-causality.html"><a href="wrapping-up-causality.html"><i class="fa fa-check"></i><b>5.5</b> Wrapping Up Causality</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -266,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="line-plots-in-r" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Line Plots in R</h2>
 <p>Where we are going …</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-114-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-115-1.svg" width="672" /></p>
 <p>Starting from the bottom …</p>
 <ul>
 <li>Let’s first create a scatterplot by providing R with our two variables</li>
@@ -275,13 +295,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Ultimately we will want to compare the Northeast with the South. We will plot one line at a time, starting with the Northeast</li>
 </ul>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="line-plots-in-r.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covidsub<span class="sc">$</span>Dates,<span class="at">y=</span>covidsub<span class="sc">$</span>Northeast, <span class="at">pch=</span><span class="dv">16</span>) <span class="co"># pch is point type</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-115-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-116-1.svg" width="672" /></p>
 <p>We now transform it to a line by specifying <code>type="l"</code></p>
 <ul>
 <li>By default, R creates a plot with <code>type=p</code> for points. R also has <code>type=b</code> which has both a line and points.</li>
 </ul>
 <div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="line-plots-in-r.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covidsub<span class="sc">$</span>Dates,<span class="at">y=</span>covidsub<span class="sc">$</span>Northeast,<span class="at">type=</span><span class="st">&quot;l&quot;</span>) <span class="co"># makes it a line</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-116-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-117-1.svg" width="672" /></p>
 <p>Let us change the aesthetics a bit by adding labels and removing the border with <code>bty="n"</code>.</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="line-plots-in-r.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>Northeast,</span>
 <span id="cb220-2"><a href="line-plots-in-r.html#cb220-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, </span>
@@ -292,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb220-7"><a href="line-plots-in-r.html#cb220-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">las=</span><span class="dv">1</span>, <span class="co"># orientation of axis labels</span></span>
 <span id="cb220-8"><a href="line-plots-in-r.html#cb220-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd=</span><span class="dv">2</span>, <span class="co"># line width</span></span>
 <span id="cb220-9"><a href="line-plots-in-r.html#cb220-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty=</span><span class="st">&quot;n&quot;</span>) <span class="co"># removes border</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-117-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-118-1.svg" width="672" /></p>
 <p>Let’s add a comparison line with the <code>lines()</code> function to look at trends for the south.</p>
 <ul>
 <li>Note that this is outside of the <code>plot()</code> function, but the inputs are very similar. We supply a set of x and y coordindates.</li>
@@ -307,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb221-8"><a href="line-plots-in-r.html#cb221-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span>
 <span id="cb221-9"><a href="line-plots-in-r.html#cb221-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Add line to the plot </span></span>
 <span id="cb221-10"><a href="line-plots-in-r.html#cb221-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>South, <span class="at">col=</span><span class="st">&quot;red3&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-118-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-119-1.svg" width="672" /></p>
 <p>Let’s create our own axis for the plot to add detail. To do this, we add <code>xaxt</code> to the <code>plot</code> function and then use <code>axis()</code> below the function.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="line-plots-in-r.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>Northeast,</span>
 <span id="cb222-2"><a href="line-plots-in-r.html#cb222-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>,</span>
@@ -325,7 +345,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb222-14"><a href="line-plots-in-r.html#cb222-14" aria-hidden="true" tabindex="-1"></a><span class="do">## the format argument is unique to this date example</span></span>
 <span id="cb222-15"><a href="line-plots-in-r.html#cb222-15" aria-hidden="true" tabindex="-1"></a><span class="do">### &quot;%b-%Y&quot; are telling R to display the month and year, with the month in words</span></span>
 <span id="cb222-16"><a href="line-plots-in-r.html#cb222-16" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> axisdates, <span class="at">labels=</span><span class="fu">format</span>(axisdates, <span class="st">&quot;%b-%Y&quot;</span>), <span class="at">las=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-119-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-120-1.svg" width="672" /></p>
 <p>Finally, let’s add a <code>legend()</code>. Now we’re here!</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="line-plots-in-r.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>Northeast,</span>
 <span id="cb223-2"><a href="line-plots-in-r.html#cb223-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>,</span>
@@ -347,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb223-18"><a href="line-plots-in-r.html#cb223-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> .<span class="dv">7</span>, <span class="co"># size of legend</span></span>
 <span id="cb223-19"><a href="line-plots-in-r.html#cb223-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">2</span>,</span>
 <span id="cb223-20"><a href="line-plots-in-r.html#cb223-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-120-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-121-1.svg" width="672" /></p>
 </div>
             </section>
 
