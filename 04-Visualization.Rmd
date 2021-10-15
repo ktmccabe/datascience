@@ -934,6 +934,7 @@ Ways to annotate a plot (generally added below the initial plotting function)
       + To create an original x-axis, use `axis(1, vectorofvalues, labels)` and specify `xaxt="n"` inside the plotting function to remove the original x-axis.
   - `legend()`: Adds a legend to a plot. Can specify the location as the first argument (e.g., `"bottomleft"` or `"topright"`)
   - `text()`: Adds text to a plot at specific x- and y- locations. (E.g., `text(x=3, y=4, "Here is a point"`). The x and y arguments can be single numbers or a vector of numbers. x and y need to be the same length.
+  - `points()`: Adds points to a plot at specific x- and y- locations. Inputs are much like `plot`
 
 
 ## A note on `ggplot`
@@ -1000,6 +1001,7 @@ ggplot(data=status, mapping = aes(x=condition, y=econcon, fill=conditionnew)) +
   theme_bw()+
   theme(legend.position="bottom")
 ggsave("myboxplot.pdf", width=7, height=5)
+
 ```
 
 Here is an example of a histogram from the application on views toward gay couples.
