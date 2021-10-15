@@ -2828,7 +2828,7 @@ In many situations, we want to repeat the same calculations with
 different inputs. Loops allow you to avoid writing many similar code
 chunks. 
 
-  - The function `for(i in X)}` will create a loop in
+  - The function `for(i in X){}}` will create a loop in
 your programming code where `i` is a counter and 
   - `X` is a placeholder for a vector for the possible values of the counter.  
   
@@ -3003,6 +3003,15 @@ Many people predicted it would. See this [FiveThirtyEight article](https://fivet
 
 We will explore how he changed the Court, with a focus on how the location of the median U.S. Supreme Court Justice shifted over time.
 
+For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=gA1OZ8-SO9E")
+```
+The link to the video is https://youtu.be/gA1OZ8-SO9E. 
 
 Why does the median matter? A refresher on the Court
 

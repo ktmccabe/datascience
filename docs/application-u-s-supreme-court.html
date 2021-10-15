@@ -314,6 +314,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/kav.png" style="width:50.0%" /></p>
 <p><img src="images/kavcourt.png" /></p>
 <p>We will explore how he changed the Court, with a focus on how the location of the median U.S. Supreme Court Justice shifted over time.</p>
+<p>For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/gA1OZ8-SO9E" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
+<p>The link to the video is <a href="https://youtu.be/gA1OZ8-SO9E" class="uri">https://youtu.be/gA1OZ8-SO9E</a>.</p>
 <p>Why does the median matter? A refresher on the Court</p>
 <ul>
 <li>President nominates the justice. Senate must confirm.</li>
@@ -356,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb289-9"><a href="application-u-s-supreme-court.html#cb289-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
 <span id="cb289-10"><a href="application-u-s-supreme-court.html#cb289-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
 <span id="cb289-11"><a href="application-u-s-supreme-court.html#cb289-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-166-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-167-1.svg" width="672" /></p>
 <p>We see a conservative shift at the end of the plot. However, we cannot tell whether this represents a shift within a particular justice’s ideology or a shift in which justice has become the median, due perhaps, to the change in the Court’s composition.</p>
 <p><strong><em>We need to find which justice is the median!</em></strong></p>
 <p>Loops to the rescue!</p>
@@ -438,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb305-11"><a href="application-u-s-supreme-court.html#cb305-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Add the names to the plot</span></span>
 <span id="cb305-12"><a href="application-u-s-supreme-court.html#cb305-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: we want to make sure medians and results are in the same order for this to work</span></span>
 <span id="cb305-13"><a href="application-u-s-supreme-court.html#cb305-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">names</span>(results), <span class="at">y=</span>(medians <span class="sc">-</span> .<span class="dv">14</span>), <span class="at">labels=</span>results, <span class="at">cex=</span>.<span class="dv">35</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-176-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-177-1.svg" width="672" /></p>
 <p>We have now used the <code>text()</code> function. Similar to plot, the <code>text()</code> takes a set of x and y coordinates that tells R the location of where you want to add a piece(s) of text to the plot. The third input is the actual text.</p>
 <p>Why did the Court shift more conservative at the end of the time trend?</p>
 <ul>
@@ -478,7 +485,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb306-25"><a href="application-u-s-supreme-court.html#cb306-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb306-26"><a href="application-u-s-supreme-court.html#cb306-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds custom x-axis at the specific years included in names(medians)</span></span>
 <span id="cb306-27"><a href="application-u-s-supreme-court.html#cb306-27" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">names</span>(medians), <span class="at">cex.axis=</span>.<span class="dv">6</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-177-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-178-1.svg" width="672" /></p>
 <p>We have used the <code>points()</code> function. This adds an additional layer of points to a plot. It works much like the <code>plot</code> function in that in takes a set of x and y coordinates.</p>
 <p>We could change the look of the plot even more by adding a legend and altering the borders and look of the plot.</p>
 <div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="application-u-s-supreme-court.html#cb307-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
@@ -510,7 +517,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb307-27"><a href="application-u-s-supreme-court.html#cb307-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb307-28"><a href="application-u-s-supreme-court.html#cb307-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds our custom x-axis</span></span>
 <span id="cb307-29"><a href="application-u-s-supreme-court.html#cb307-29" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">names</span>(medians), <span class="at">cex.axis=</span>.<span class="dv">6</span>, <span class="at">tick=</span>F)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-178-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-179-1.svg" width="672" /></p>
 </div>
 <div id="wrapping-up" class="section level3" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Wrapping Up</h3>
