@@ -14,142 +14,3278 @@ output:
 
 # Course Notes
 
-Placeholder
+This document will include important links and course notes for 01:790:391:01: Data Science for Political Science.
+
+  - This site will be updated throughout the semester with new content. 
+  - The Canvas modules will provide links to the relevant sections to review for a given week of the course.
+  - The primary text for the course is [Quantitative Social Science: An Introduction](https://qss.princeton.press/qss-an-introduction/) by Kosuke Imai. We will refer to this as QSS in the notes.
+  - This is a new and living document. If you spot errors or have questions or suggestions, please email me at k.mccabe@rutgers.edu or post to the course Piazza site.
+  - Occasionally the notes are updated with embedded video explainers of the code in different sections. A list of these is [here](https://www.youtube.com/watch?v=80tbdiWuljc&list=PLx0unV_UpWcXDDBO2Bg5Cf6N4m0_LKULl&ab_channel=kt2mccabe).
+
+<!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
+
+<!-- Instructions: https://ontheline.trincoll.edu/bookdown.html -->
 
 
 ## What have I signed up for?
+
+
+First: What is Data Science?
+
+  - Data Science involves a combination of math/statistics and programming/coding skills, which, for our purposes, we will combine with social science knowledge.
+    + [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) has a nice venn diagram of how these different skill sets intersect.
+    + Note: This course will not assume prior familiarity with data science in general or coding, specifically. For those brand new to data science, the idea of learning to code may seem intimidating, but anyone can succeed with a bit of patience and an open mind.
+
+![](images/venn.png)
+  
+Next: What is political science?
+  
+  - The science of politics, of course! Politics focuses on studying governance and the distribution of power in society, broadly conceived. 
+      + How else might you define politics and political science? What do we study in political science?
+
+
 ### Data Science Can Help Social Scientists
+
+
+***Example: Mapping poverty using mobile phone and satellite data***
+
+Researchers used modern data sources, including mobile phone data, as a way to ***predict*** and ***describe*** poverty in different geographic regions. These tools helped social scientists come up with methods that are much more cost-effective and efficient, but still as accurate as traditional methods for this type of measurement.
+
+  - How might measures of global poverty be useful to political scientists?
+
+
+![](images/blum.jpg){width=90%}
+
+*[Steele et al. 2017](https://royalsocietypublishing.org/doi/full/10.1098/rsif.2016.0690): Poverty is one of the most important determinants of adverse health outcomes globally, a major cause of societal instability and one of the largest causes of lost human potential. Traditional approaches to measuring and targeting poverty rely heavily on census data, which in most low- and middle-income countries (LMICs) are unavailable or out-of-date. Alternate measures are needed to complement and update estimates between censuses. This study demonstrates how public and private data sources that are commonly available for LMICs can be used to provide novel insight into the spatial distribution of poverty.* 
+
+
+***Social Science Goals***
+
+We have several goals in social science. Here are four that data science can help us pursue:
+
+  - **Describe** and measure
+      + Has the U.S. population increased?
+  - **Explain**, evaluate, and recommend (study of causation)
+      + Does expanding Medicaid improve health outcomes?
+  - **Predict**
+      + Who will win the next election?
+  - **Discover**
+      + How do policies diffuse across states?
+
+What are other examples of these goals?
+
+
+
+Note: In this course, we are exploiting the benefits of quantitative data to help achieve goals of social science. However, quantitative data have their shortcomings, too. We will also discuss the limitations of various applications of social science data, and we encourage you to always think critically about how we are using data.
+
 ### Course Goals
+
+This course will provide you with a taste of each of these social science goals, and how the use of data can help achieve these goals. By the end of the course, you should be able to
+
+  - Provide examples of how quantitative data may be used to help answer social science research questions.
+  - Compare and contrast the goals of description, causation, prediction, and discovery in social science research.
+  - Use the programming language R to import and explore social science data and conduct basic statistical analyses.
+  - Interpret and describe visual displays of social science data, such as graphs and maps. 
+  - Develop your own analyses and visualizations to understand social science phenomena.
+
+
+If you are someone that loves data, we hope you will find this course engaging. If you are someone who loathes or finds the idea of working with data and statistics alarming, we hope you keep an open mind. We will meet you where you are. This course will not assume knowledge of statistical software, and there will be plenty of opportunities to ask questions and seek help from classmates and the instructor throughout the semester. 
+
+The first section of course will walk people through how to use the statistical program-- R-- that we will employ this semester. 
+
+***Will this course help me in the future?***
+
+Even if you do not plan on becoming a social scientist or a data scientist, an introduction to these skills may prove helpful throughout your academic and professional careers.
+
+  - To become an informed consumer of news articles and research involving quantitative analyses.
+  - To practice analytical thinking to make informed arguments and decisions.
+  - To expand your toolkit for getting a job that may involve consuming or performing some data analysis, even if that is not the traditional role.
+    + Example: Journalism- [How 5 Data Dynamos Do Their Jobs](https://www.nytimes.com/2019/06/12/reader-center/data-reporting-spreadsheets.html) 
+
+
+
 ## Setup in R {#rsetup}
+
+**Goal**
+
+By the end of the first week of the course, you will want to have R and RStudio installed on your computer (both free) and feel comfortable using R as a calculator.
+
+R is an application that processes the R programming language in a statistical computing environment. RStudio is also an application, which serves as a user interface that makes working in R easier. We will primarily open and use RStudio to work with R.   
+
+In other classes, you may come across Stata, SPSS, Excel, or SAS, which are programs that also conduct data analysis. R has the advantage of being free and open-source. Even after you leave the university setting, you will be able to use R/RStudio for free. As an open-source program, it is very flexible, and a community of active R/RStudio users is constantly adding to and improving the program.   
+
+
+**R and RStudio Installation**
+
+This content follows and reinforces QSS 1.3. Additional resources are also linked below.
+
+  - This [video](http://www.youtube.com/embed/ulIv0NiVTs4?rel=0) from Professor Christopher Bail explains why many social scientists use R and describes the R and RStudio installation process. This involves
+    1. Going to [cran](https://cran.r-project.org/), select the link that matches your operating system, and
+then follow the installation instructions, and 
+    2. Visiting [RStudio](http://www.rstudio.com/) and follow the download and installation instructions. R is the statistical software and programming language used for analysis. RStudio provides a convenient user interface for running R code. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=ulIv0NiVTs4")
+```
+
+
+ 
+
 ## First Time Working in R and RStudio
+
+This next section provides a few notes on using R and RStudio now that you have installed it. In this section, we cover the following materials:
+
+  - Using R as a calculator and assigning objects using `<-`
+  - Setting your working directory and the `setwd()` function.
+  - Creating and saving an R script
+
+This section highlights important concepts from QSS chapter 1.
+
 ### Open RStudio
+
+RStudio is an open-source and free program that greatly facilitates the use of R, especially for users new to programming. Once you have downloaded and installed R and RStudio, to work in R, all you need to do now is ***open RStudio*** (it will open R). It should look like this, though your version numbers will be different:
+
+![](images/rconsole1.png)
+
+**Note:** The first time you open RStudio, you likely only have the three windows above. We will want to create a fourth window by **opening an R script** to create the fourth window. 
+
+  - To do this, in RStudio, click on File -> New -> R script in your computer's toolbar. This will open a blank document for text editing in the upper left of the RStudio window. We will return to this window in a moment.
+      + You can alternatively click on the green + sign indicator in the top-left corner of the RStudio window, which should give you the option to create a new R script document.
+
+Now you should have something that looks like this, similar to Figure 1.1. in QSS:
+
+![](images/rconsole2.png)
+
+  
+  - The upper-left window has our script document that will contain code.
+  - The lower-left window is the console. This will show the output of the code we run. We will also be able to type directly in the console.
+  - The upper-right window shows the environment (and other tabs, such as the history of commands). When we load and store data in RStudio, we will see a summary of that in the environment.
+  - The lower-right window will enable us to view plots and search help files, among other things.
+
+
+
 ### Using R as a Calculator
+
+The *bottom left* window in your RStudio is the Console. You can type in this window to use R as a calculator or to try out commands. It will show the raw output of any commands you type. For example, we can try to use R as a calculator. Type the following in the Console (the bottom left window) and hit "enter" or "return" on your keyboard:
+
+```{r}
+5 + 3
+
+5 - 3
+
+5^2
+
+5 * 3
+
+5/3
+
+(5 + 3) * 2
+```
+
+In the other RStudio windows, the upper right will show a history of commands that you have sent from the text editor to the R console, along with other items. The lower right will show graphs, help documents and other features. These will be useful later in the course.
+
 ### Working in an R Script
+
+Earlier, I asked you to open an R script in the upper left window by doing File, then New File, then R Script. Let's go back to working in that window.
+
+**Set your working directory `setwd()`**
+
+(Almost) every time you work in RStudio, the first thing you will do is set your working directory. This is a designated folder in your computer where you will save your R scripts and datasets.
+
+There are many ways to do this.
+
+  - An easy way is to go to Session -> Set Working Directory -> Choose Directory. I suggest choosing a folder in your computer that you can easily find and that you will routinely use for this class. Go ahead and create/select it. 
+  - Note: when you selected your directory, code came out in the bottom left Console window. This is the `setwd()` command which can also be used directly to set your working directory in the future.
+  - If you aren't sure where your directory has been set, you can also type `getwd()` in your Console. Try it now
+
+
+```{r, eval=F}
+## Example of where my directory was
+getwd()
+```
+
+
+If I want to  change the working directory, I can go to the top toolbar of my computer and use Session -> Set Working Directory -> Choose Directory or just type my file pathway using the `setwd()` below:
+
+```{r, eval=FALSE}
+## Example of setting the working directory using setwd().
+## Your computer will have your own file path.
+setwd("/Users/ktmccabe/Dropbox/Rutgers Teaching/")
+```
+
+
+**Saving the R Script**
+
+Let's now save our R script to our working directory and give it an informative name. To do so, go to File, then Save As, make sure you are in the same folder on your computer as the folder you chose for your working directory.
+
+Give the file an informative name, such as: "McCabeWeek1.R". Note: all of your R scripts will have the .R extension.
+
+
 ### Preparing your R script
+
+Now that we have saved our R script, let's work inside of it. Remember, we are in the top-left RStudio window now.
+
+  - Just like the beginning of a paper, you will want to title your R script. In R, any line that you start with a \# will not be treated as a programming command. You can use this to your advantage to write titles/comments. Below is a screenshot example of a template R script.
+  - You can specify your working directory at the top, too. Add your own filepath inside `setwd()`
+
+![](images/templateR.png)
+
+
+  - Then you can start answering problems in the rest of the script.
+  - Think of the R script as where you write the final draft of your paper. In the Console (the bottom-left window), you can mess around and try different things, like you might when you are taking notes or outlining an essay. Then, write the final programming steps that lead you to your answer in the R script. For example, if I wanted to add 5 + 3, I might try different ways of typing it in the Console, and then when I found out `5 + 3` is the right approach, I would type that into my script.
+
+
 ### Executing Commands in your R script
+
+The last thing we will note in this initial handout is how to execute commands in your R script.
+
+To run / execute a command in your R script (the upper left window), you can
+
+  1. Highlight the code you want to run, and then hold down "command + return" on a Mac or "control + enter" on Windows
+  2. Place your cursor at the end of the line of code (far right), and hit "command + return" on a Mac or "control + return" on Windows, or
+  3. Do 1 or 2, but instead of using the keyboard to execute the commands, click "Run" in the top right corner of the upper-left window.
+
+Try it: Type `5 + 3` in the R script. Then, try to execute `5 + 3`. It should look something like this:
+
+
+![](images/rtemplate2.png)
+
+After you executed the code, you should see it pop out in your Console:
+```{r}
+5 + 3
+```
+
+![](images/runningcode.png){width=90%}
+
+Note: The symbol \# also allows for annotation behind commands or on a separate line. Everything that follows \# will be ignored by R. You can annotate your own code so that you and others can understand what each part of the code is designed to do.
+
+```{r}
+## Example
+sum53 <- 5 + 3 # example of assigning an addition calculation
+```
+
 ### Objects
+
+Sometimes we will want to store our calculations as "objects" in R. We use `<-` to assign objects by placing it [to the left](https://www.youtube.com/watch?v=vLZA67L7gIo&ab_channel=BeyonceSasha1) of what we want to store. For example, let's store the calculation `5 + 3` as an object named `sum53`:
+
+```{r}
+sum53 <- 5 + 3
+```
+
+After we execute this code, `sum53 now stores the calculation. This means, that if we execute a line of code that just has `sum53`, it will output 8. Try  it:
+
+```{r}
+sum53
+```
+
+Now we no longer have to type `5 + 3`, we can just type `sum53`. For example, let's say we wanted to subtract 2 from this calculation. We could do:
+
+```{r}
+sum53 - 2
+```
+
+Let's say we wanted to divide two stored calculations:
+```{r}
+ten <- 5 + 5
+two <- 1 + 1
+ten / two
+```
+
+The information stored does not have to be numeric. For example, it can be a word, or what we would call a character string, in which case you need to use quotation marks.
+
+```{r}
+mccabe <- "professor for this course"
+mccabe
+```
+
+
+*Note:* Object names cannot begin with numbers and no spacing is allowed. Avoid using special characters such as \% and \$, which have specific meanings in R. Finally, use concise and intuitive object names.
+
+  - GOOD CODE: `practice.calc <- 5 + 3`
+  - BAD CODE: `meaningless.and.unnecessarily.long.name <- 5 + 3`
+
+While these are simple examples, we will use objects all the time for more complicated things to store (e.g., like full datasets!) throughout the course.
+
+We can also store an array or "vector" of information using `c()`
+
+```{r}
+somenumbers <- c(3, 6, 8, 9)
+somenumbers
+```
+
+**Importance of Clean Code**
+
+Ideally, when you are done with your R script, you should be able to highlight the entire script and execute it without generating any error messages. This means your code is clean. Code with typos in it may generate a red error message in the Console upon execution. This can happen when there are typos or commands are misused.
+
+For example, R is case sensitive. Let's say we assigned our object like before:
+```{r}
+sum53 <- 5 + 3
+```
+
+However, when we went to execute `sum53`, we accidentally typed `Sum53`:
+```{r, error=TRUE}
+Sum53
+```
+
+Only certain types of objects can be used in mathematical calculations. Let's say we tried to divide `mccabe` by 2:
+
+```{r, error=TRUE}
+mccabe / 2
+```
+
+A big part of learning to use R will be learning how to troubleshoot and detect typos in your code that generate error messages.
+
+![](images/punctuation.png){width=80%}
+
+
 ## Assignment 1 
+
+Below is an exercise that will demonstrate you are able to use R as a calculator and create R scripts, as well as locate important course platforms.
+
+We will walk through this assignment together during class, but you are welcome to try to do this ahead of time on your own. You will submit, on Canvas, two documents prior to the deadline.
+
+  - An R script (.R) file with your code. Follow the best practices by titling your script and using \# comments to explain your steps. This code should be clean. I should be able to run your code to verify that the code produces the answers you write down.
+  - A Word document / Google Docs document or pdf with answers to the written questions (Problems 3-6 below). This document should also have a title with your name on it.
+      + You may also alternatively submit a compiled RMarkdown document. We will discuss what RMarkdown is during class.
+
+***Assignment Exercises***
+
+  1. Create an R script saved as ``LastnameSetup1.R" (use your last name). Within the R script, follow the example from  this handout and title the script.
+  2. Set your working directory, and include the file pathway (within `setwd()`) at the top of your .R script.
+  3. Do the calculation 8 + 3 - 2 in R. Store it as an object with an informative name. Report the answer.
+  4. Do the calculation 5 x 3 in R. Store it as an object with an informative name. Report the answer.
+  5. Add these two calculations together. Note: do this by adding together the objects you created, not the underlying raw calculations. Report the answer.
+  6.  Write down how you will complete your R assignments this semester. For example, if you have a personal laptop with R and RStudio on it, you will simply write "I will use my personal laptop." If you don't have a personal computer or laptop, please indicate where on campus or off-campus you will have regular access to a computer with R/RStudio to do your work. It is essential that you have regular access to a computer so that you will not fall behind in this course.
+  7. Navigate to the course Piazza site and post a message. This can be as simple as "hello" or a reply to another person's post. (No need to report this in your submission.)
+
 ## R Markdown
+
+An R Markdown document, which you can create in RStudio, allows you to weave together regular text, R code, and the output of R code in the same document. This can be very convenient when conducting data analysis because it allows you more space to explain what you are doing in each step. It can also be an effective platform for writing a report on a data analysis, similar to what you do when you write up a problem set.
+
+***Note: RMarkdown is not required for this course. It is up to you if you would like to write your problem sets in RMarkdown***
+
+R Markdown documents can be "compiled" into html, pdf, or docx documents. Below is an example of what a compiled html file looks like.
+
+  - Note that the image has both written text and a gray chunk, within which there is some R code, as well as the output of the R code (e.g., the number 8 and the image of the histogram plot)
+
+<center> ![](images/rmarkdownscreenshot.png){width=60%}</center>
+
+We say this is a "compiled" RMarkdown document because it differs from the raw version of the file, which is a .Rmd file format. Below is an example of what the raw .Rmd version looks like, compared to the compiled html version.
+
+![](images/rmarkdownraw.png){width=45%} ![](images/rmarkdownscreenshot.png){width=40%}
+
+
 ### How to get setup in RMarkdown
+
+Just like with a regular R script, to work in RMarkdown, you will open up RStudio.
+
+The **first time** you will be working in RMarkdown, you will want to install two packages: `rmarkdown` and `knitr`. You can do this in the Console window in RStudio.
+
+Type the following into the Console window and hit enter/return.
+
+```{r, eval=F}
+install.packages("rmarkdown")
+install.packages("knitr")
+```
+
+Once you have those installed, now, each time you want to create an RMarkdown document, you will open up a .Rmd R Markdown file and get to work.
+
+  1. Go to File -> New File -> R Markdown in RStudio
+      - Alternatively, you can click the green + symbol at the top left of your RStudio window
+  2. This should open up a window with several options, similar to the image below
+      - Create an informative title and change the author name to match your own
+      - For now, we will keep the file type as html. In the future, you can create pdf or .doc documents. However, these require additional programs installed on your computer.
+
+![](images/rmarkdownnewfile.png)
+
+
+  3. After you hit "OK" a new .Rmd script file will open in your top-left window with some template language and code chunks, similar to the image below. 
+  
+![](images/rmarkdowntemplate.png)
+  
+  4. ***Save as .Rmd file.*** Save the file by going to "File -> Save as" in RStudio
+      - Give the file an informative name like your LastnamePractice1.Rmd
+  5. ***Key Components.*** Now you are ready to work within the Rmd script file. We will point to four basic components of this file, and you can build your knowledge of RMarkdown from there.
+      1. The top part bracketed by `---` on top and bottom is the YAML component. This tells RStudio the pertinent information about how to "compile" the Rmd file. Most of the time you can leave this alone, but you can always edit the title, author, or date as you wish.
+      2. The next component are the global options for the document. It is conveniently labeled "setup." By default what this is saying is that the compiled version will "echo" (i.e., display all code chunks and output) unless you specifically specify otherwise. For example, note that it says `include = FALSE` for the setup chunk. That setting means that this code chunk will "run" but it will not appear in the nicely compiled .html file. Most of the time you will not need to edit those settings.
+      3. The third component I want to bring attention to is the body text. The \# symbol in RMarkdown is used to indicate that you have a new section of the document. For example, in the compiled images at the beginning, this resulted in the text being larger and bolded when it said "Problem 2." In addition to just using a single \#, using \#\# or \#\#\# can indicate subsections or subsubsections. Other than that symbol, you can generally write text just as you would in any word processing program, with some exceptions, such as how to make text bold or italicized. (See bottom of section for resources on the Markdown language.)
+      4. The final component I want to call attention to are the other main body code chunks. These are specific parts of the document where you want to create a mini R script. To create these, you can simply click the + C symbol toward the top of the top left window of RStudio and indicate you want an R chunk.
+      
+      <center>
+![](images/rmarkdownnewchunk.png){width=20%}</center>
+        - For example, in the image above, there is an R code chunk labeled `cars`. The `cars` component is just a label for the code chunk. Labeling code chunks is not necessary. By default, a new R code chunk will just have `r` in the brackets, and that is sufficient.
+    
+  6. ***Writing R Code.*** Within a code chunk, you can type R code just like you would in any R script. To run ("execute") the R code, you can run a single line the exact same way you do in a regular R script by moving the cursor to the end of a line of code or highlighting a portion of code and hitting "Run." However, in RMarkdown, you also have the option of running an entire code chunk at once by hitting the green triangle at the top-right of a given code chunk.
+    
+![](images/codechunkexample.png){width=70%}
+
+  7. ***Knitting the document.*** Once you have added a code chunk and/or some text, you are ready to compile or "Knit" the document. This is what generates the .html document.
+      - To do so, click on the Knit button toward the top of the top-left window of Rstudio. After a few moments, this should open up a preview window displaying the compiled html file. 
+      - It will also save an actual .html file in your working directory (the same location on your computer where you have saved the .Rmd file)
+      - Try to locate this compiled .html file on your computer and open it. For most computers, .html files will open in your default web browser, such as Google Chrome or Safari. 
+      - This step is a common place where errors are detected and generated. Sometimes the compiling process fails due to errors in the R code in your code chunks or an error in the Markdown syntax. If your document fails to knit, the next step is to try to troubleshoot the error messages the compiling process generates. The best way to reduce and more easily detect errors is to "knit as you go." Try to knit your document after each chunk of code you create. 
+
 ### Additional RMarkdown resources
+
+Here are a few additional resources for working with RMarkdown.
+
+  - This [website](https://monashbioinformaticsplatform.github.io/2017-11-16-open-science-training/topics/rmarkdown.html) provides some basic syntax for the Markdown language, such as how to display bulleted lists and how to bold or italicize text.
+  - This [page](https://rpubs.com/brandonkopp/RMarkdown) walks through the setup of RMarkdown documents similar to what the course notes just did. This provides a second set of instructions and additional examples of settings you can use to customize your RMarkdown output (e.g., how large figures are when they are displayed).
+  - This [page](https://rmarkdown.rstudio.com/articles_intro.html) talks more about compiling aka rendering aka knitting Rmd documents into different formats, such as html, pdf, or Word doc files.
+  
+
+See the course Canvas page for additional templates for working with RMarkdown in problem sets.
+
 
 <!--chapter:end:index.Rmd-->
 
 
 # Description {#description}
 
-Placeholder
+What are things we want to describe in political science?
 
+  - Unemployment rate, GDP
+  - Voter turnout, vote share for a party in an election 
+  - Percentage of women in the labor force
+  - Poverty rates over time
+
+What else? What does description help us achieve?
+
+  - Identify tendencies
+  - Identify patterns or trends
+  - Identify relationships between two or more factors
+  - Help us generalize from anecdotes, what is common vs. what is uncommon?
+  - Diagnose demand, needs, potential problems, likely outcomes 
+  
+Generate ideas for other goals, such as explanation and prediction
 
 ## Process of Describing
+
+How do we go about a descriptive quantitative analysis?
+  
+  1. Substantive Expertise: Start with a topic, puzzle, or question (e.g., How is the economy doing?)
+  2. Find outcome data relevant to that question (e.g., GDP)
+      - Start from a concept: what we want to describe (i.e., health of the economy)
+      - Move toward an "operationalization" (i.e., a way to measure it)
+      - Easy! except... social science is messy. Our concepts are rich, while
+our measures may be very narrow or concrete.
+        + For example, GDP is one way to measure economic health, but is it
+the only measure?
+        + Choose measures based on validity, reliability, cost
+  3. Find multiple relevant units or "data points"
+      - E.g., Multiple years of data (e.g., U.S., from 1900 to 2020) 
+      - E.g., Multiple countries from one year (e.g., U.S. to Germany to other
+countries)
+  4. Summarize the data to help answer the question 
+  
 ### Example Process
+
+  1. How is the economy doing?
+  2. Find outcome data relevant to that question 
+      - Let's ask people
+  3. Find multiple relevant units or data points
+      - We will ask several people. Each person will be a data point.
+  4. Summarize the data
+      - Let's take the mean
+
+![](images/economysurvey.png){width=50%}
+
+How would you summarize information in explaining it to another person? You would probably want to describe how most people feel about the economy. In other words, you would describe the "central tendency" of people's responses (the central tendency of the data).
+
 ## Summarizing univariate data
+
+For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=80tbdiWuljc")
+```
+
+
+Univariate data refers to data coming from one "variable," where a variable captures the values of a changing characteristic.
+
+Our set of values is Outcome = \{0,0,0,0,1,1,0,1,0,1\}.
+
+  - We will call this a vector of values, where a vector is just a collection of things.
+  - Because our vector contains only numbers, we will call it a *numeric* vector.
+  - Each value can be indexed by `i`, denoting the position of the value in the
+  - For example, Jesse is in position `i=10` of the vector, and his value is 1
+
+We can create vectors in R by using `c()` and assigning `<-` it to an object we will call `Outcome`.
+
+```{r}
+Outcome <- c(0,0,0,0,1,1,0,1,0,1) # Use commas to separate values
+```
+
+
+We can extract a particular value within our vector using brackets
+
+```{r}
+Outcome[10]
+```
+
+We can label our outcomes using `names()`
+
+```{r}
+names(Outcome) <-c("Joe","Sally", "Trevor", "Emily", "Mark",
+                   "Sarah Jane", "Stacey", "Steve", "Phoebe", "Jesse")
+Outcome[10]
+```
+
+
+We can overwrite whole vectors or values within a vector
+
+```{r}
+Outcome <- c(5,0,2, 6,1,1, 7, 8, 0, 1) # oops we put the wrong numbers
+Outcome
+Outcome <- c(0,0,0,0,1,1,0,1,0,1) # no problem, just overwrite it
+Outcome
+```
+
+Oops we accidentally type a 0 for Jesse.
+
+```{r}
+Outcome <- c(0,0,0,0,1,1,0,1,0,0) # oops typo for Jesse
+Outcome
+Outcome[10] <- 1 # no prob bob. Assign a 1 in position 10
+Outcome
+```
+
+
+Vectors do not have to be numeric. Character vectors contain a collection of words and phrases. In R, we use quotations around character values
+
+Example: let's create a vector of names that we will call `People`.
+
+```{r}
+People <- c("Joe","Sally", "Trevor", "Emily", "Mark", "Sarah Jane", "Stacey", "Steve", "Phoebe", "Jesse")
+People[10]
+```
+
+We can use the R function `class()` to tell us the type of object we have.
+
+```{r}
+class(Outcome)
+class(People)
+```
+
 ## Functions to summarize univariate data
+
+For univariate data, often we are interested in describing the range of the values and their central tendency.
+
+  - range: the minimum (`min()`) and maximum (`max()`) values
+  - mean: the average value (`mean()`)
+
+The average is the sum of the values divided by the number of values:
+
+$\bar{X} = \frac{\text{sum of values}}{\text{number of values}} = \frac{x_1 + x_2 + ... + x_N}{N}=\frac{1}{N}\sum_{i=1}^{i=N} x_i$
+
+
+Let's do this in R for our set of 10 values
+
+```{r}
+(0 + 0 + 0 + 0 + 1 + 1 + 0 + 1 + 0 + 1)/10
+```
+
+The average outcome is .4. Note: when a variable contains only 0's and 1's its mean is the proportion of 1's. 40\% of people think the economy is doing well. 
+
+
 ### Using functions in R (overview)
+
+A function is an action(s) that you request R to perform on an object or set of objects. For example, we will use the `mean()` function to ask R to take the mean or "average" of a vector.
+
+  - Inside the function you place inputs or "arguments."
+
+
+```{r}
+mean(Outcome)
+```
+
+R also has functions that take the sum `sum()` of a vector of values.
+
+```{r}
+sumofvalues <- sum(Outcome)
+```
+
+And that count the total number of values or "length" `length()` of the vector.
+
+```{r}
+numberofvalues <- length(Outcome)
+```
+
+Note that the below is also equivalent to the mean
+
+```{r}
+sumofvalues / numberofvalues
+```
+
+Returning to our example, we found that 40\% of people surveyed thought the economy was doing well. Surveying people about their opinions on how the country doing is a common way that social scientists use description. We could extend this exercise in many ways going forward, even with the same question.
+
+  - Start with a question: How is the economy doing?
+  - Let's find a measure: Ask people if the economy is doing well.
+  - Find data points: Multiple people (we could stop there with the average!), or add more variables:
+      + Across time: Survey people across multiple years
+      + Across type of people: Survey different partisan groups
+
+These types of survey trends are often used by news organizations and public opinion organizations like, Gallup.
+
+![](images/economyconf.png){width=70%}
+
+
+This was just a first example of description in political science. There are many other ways to describe how the economy is doing and many other topics we might want to describe in politics. 
+
+
 ## Loading data into R
+
+For this section, our motivating example will be methods to measure voter turnout in the United States.
+
+Describing voter turnout
+
+  - What is a typical level of voter turnout?
+  - How has turnout changed over time?
+  - Is turnout higher in presidential years or in midterm years?
+
+How can we measure turnout? Think about the validity, reliability, and cost of different approaches.
+
+Example: Dataset on Voter Turnout in the U.S. across multiple years
+
+![](images/turnoutframe.png){width=80%}
+
+In this dataset, each row is an election year. Each column contains information about the population, potential voters, or voter turnout. These will help us compute the turnout rate in a given year. To work with this dataset, we need to load it into R.
+
+
 ### Working with datasets in R
+
+For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=rm_g0rrglEQ")
+```
+
+
+Often the variables we care about are stored inside of rectangular datasets
+
+  - These have a number of rows `nrow()` and columns `ncol()`
+  - Each row is an "observation," representing the information collected from an individual or entity
+  - Each column is a variable, representing a changing characteristic across multiple observations
+  
+
+When we import a dataset into R, we have a few options.
+
+Option 1: Download dataset to your computer
+
+  - Move the dataset to your working directory
+  - Identify the file type (e.g., csv, dta, RData, txt)
+  - Pick the appropriate R function to match the type (e.g., `read.csv(), read.dta(), load(), read.table()`)
+  - Assign the dataset to an object. This object will now be `class()` of `data.frame`
+
+```{r, eval=F}
+turnout <- read.csv("turnout.csv")
+```
+
+
+Option 2: Read file from a url provided
+  
+  - Need an active internet connection for this to work
+  - URL generally must be public
+  - Include the url inside the function used to read the data
+
+```{r}
+turnout <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/turnout.csv")
+```
+
+```{r}
+class(turnout)
+```
+
+You can also open up a window to view the data:
+```{r, eval=FALSE}
+View(turnout)
+```
+
 ### Measuring the Turnout in the US Elections
+
+
+Relevant questions with voter turnout
+
+  - What is a typical level of voter turnout? 
+  - Is turnout higher in presidential years or in midterm years?
+  - Is turnout higher or lower based on voting-eligible (VEP) or voting-age (VAP) populations? 
+We have a lot of people who are citizens 18 and older who are ineligible to vote. This makes the VEP denominator smaller than the VAP.
+
+Voter Turnout in the U.S.
+
+  - Numerator: `total`: Total votes cast (in thousands)
+  - Denominator:
+      - VAP: (voting-age population) from Census
+      - VEP (voting-eligible population) VEP = VAP + overseas voters - ineligible voters
+
+  - Additional Variables and Descriptions
+      - `year`: election year 
+      - `ANES`: ANES self-reported estimated turnout rate 
+      - `VEP`: Voting Eligible Population (in thousands) 
+      - `VAP`: Voting Age Population (in thousands) 
+      - `total`: total ballots cast for highest office (in thousands) 
+      - `felons`: total ineligible felons (in thousands) 
+      - `noncitizens`: total non-citizens (in thousands) 
+      - `overseas`: total eligible overseas voters (in thousands)
+      - `osvoters`: total ballots counted by overseas voters (in thousands) 
+
+
 ### Getting to know your data
+
+
+```{r}
+## How many observations (the rows)?
+nrow(turnout)
+
+## How many variables (the columns)?
+ncol(turnout)
+
+## What are the variable names?
+names(turnout)
+
+## Show the first six rows
+head(turnout)
+```
+
+
+Extract a particular column (vector) from the data using the \$.
+```{r}
+turnout$year
+```
+
+Extract the 10th year. Just like before! We use 10 to indicate the value of the `year` column in position (row 10) of the data.
+
+```{r}
+turnout$year[10]
+```
+
+
+We can take the `mean()` of a particular column, too. Let's take it of the total number of voters.
+
+```{r}
+mean(turnout$total)
+```
+
+And get the `class()` (Note: integer is just a type of numeric variable)
+
+```{r}
+class(turnout$total)
+```
+
+
+We can also use brackets in the full data frame, but because our data frame has BOTH rows and columns, we cannot just supply one position `i`. Instead, we have to tell R which row AND which column by using a comma between the positions.
+
+```{r}
+turnout[1,2] # value in row 1, column 2
+```
+
+We can use the column name instead
+
+```{r}
+turnout[1, "VEP"]
+```
+
+If we leave the second entry blank, it will return all columns for the specified row
+
+```{r}
+turnout[1,] # All variable values for row 1
+```
+
+The opposite is true if we leave the first entry blank.
+```{r}
+turnout[,2] # VEP for all rows
+```
+
 ## Comparing VEP and VAP turnout
+
 ### Creating new variables in R
+
+Let's create a new variable that is VAP that adds overseas voters.
+
+```{r}
+# Use $ to add a new variable (i.e., column) to a dataframe
+turnout$VAPplusoverseas <- turnout$VAP + turnout$overseas
+```
+
+Under the hood, what this is doing is taking each value of `turnout$VAP` and adding it to its corresponding values of `turnout$overseas`.
+
+And, yes, this new variable shows up as a new column in `turnout`. Go ahead, `View()` it
+
+```{r, eval=F}
+View(turnout)
+```
+
+This does not change the underlying `turnout.csv` file, only the `turnout data.frame` we are working with in the current R session.
+
+  - This is an advantage of using an R script. 
+  - You don't have to worry about overwriting/messing up the raw data. 
+  - You start from the original raw data when you load {\tt turnout.csv}, and then everything else is done within R.
+
+
+This is our new denominator. Now we can calculate turnout based on this denominator.
+```{r}
+turnout$newVAPturnout <- turnout$total / turnout$VAPplusoverseas
+```
+
+Just like with adding two vectors, when we divide, each value in the first vector is divided by its corresponding value in the second vector.
+
+```{r}
+turnout$newVAPturnout
+```
+
+
+Let's calculate the VEP turnout rate and turn it into a percentage. This time, we do it in one step.
+
+  -  (total votes / VEP) $\times$ 100:
+
+```{r}
+turnout$newVEPturnout <- (turnout$total / turnout$VEP) * 100
+turnout$newVEPturnout
+```
+
+Let's change it from a proportion to a percentage. How? Multiply each value of `turnout$newVAP` by 100
+
+```{r}
+turnout$newVAPturnout <- turnout$newVAPturnout * 100
+```
+
+This multiplies each number within the vector by 100. 
+
+```{r}
+turnout$newVAPturnout
+```
+
+
+What is typical turnout?
+
+```{r}
+mean(turnout$newVAPturnout)
+
+mean(turnout$newVEPturnout)
+```
+
+We find that turnout based on the voting age population is lower than turnout based on the voting eligible population. This is a pattern that political scientists have examined, going back several decades. For example, in a 2001 article McDonald and Popkin show that is it the ineligible population that grew from the 1970s onward and not the population of people who simply prefer not to vote. (See more [here](https://www.jstor.org/stable/3117725).)
+
+![McDonald and Popkin 2001](images/VEP.png)
+
 ## Comparing Presidential vs. Midterm turnout
+
+How does turnout compare in presidential vs. midterm years? Sometimes using a single summary of turnout may obscure important underlying differences in the data. To detect these differences, we may want to summarize different parts of the data.
+
+Oh dear. We need to extract specific years from the turnout data frame. Which rows contain the years we want?
+
+```{r}
+turnout$year
+```
+
+Ok: rows 1,3,5,7,9,11,13,14 are the presidential. And rows 2,4,6,8,10,12 are midterms.
+
+```{r}
+## we can extract all of these at once by using c()
+turnout$year[c(1,3,5,7,9,11,13,14)] # presidential
+```
+
+Let's take the mean VEP turnout for presidential years.
+
+```{r}
+mean(turnout$newVEPturnout[c(1,3,5,7,9,11,13,14)])
+```
+
+Let's take the mean VEP turnout for midterm years.
+
+```{r}
+mean(turnout$newVEPturnout[c(2,4,6,8,10,12)])
+```
+
+
+Let's take the difference by storing each mean and then subtracting
+
+```{r}
+mean.VEP.pres <- mean(turnout$newVEPturnout[c(1,3,5,7,9,11,13,14)])
+mean.VEP.mid <- mean(turnout$newVEPturnout[c(2,4,6,8,10,12)])
+mean.VEP.pres -  mean.VEP.mid
+```
+
+Presidential turnout, on average, is higher than midterm turnout.
+
 ### R shortcut for writing vectors
+
+Sometimes we write numbers that are in a predictable sequence (e.g., 1,2,3,4,5). In R, we have functions that prevent us from having to type each number when this is the case.
+
+```{r}
+c(1,2,3,4,5) # is equivalent to:
+1:5 # is equivalent to:
+seq(from = 1, to = 5, by = 1)
+```
+
+We can use the last one to our advantage to extract the midterm years, which go by 2
+
+```{r}
+mean(turnout$newVEPturnout[c(2,4,6,8,10,12)]) # is the same as
+
+mean(turnout$newVEPturnout[seq(2, 12, 2)])
+```
+
+Not a big deal now, but imagine if you had to write 100 numbers or 1 MILLION NUMBERS!
+
+In this section, we have described voter turnout using multiple measures and types of elections. There are several other questions that political scientists may be interested in when it comes to voter turnout.
+
+For example, Texas and more than a dozen other states have passed new laws that change voting procedures in elections. What effect will these have on voter turnout? In the next section, we start to examine how to evaluate causal claims.
+
+![](images/texaslaw.png){width=60%}
+
+
+
 
 <!--chapter:end:02-Description.Rmd-->
 
-
 # Causation with Experiments {#causation1}
 
-Placeholder
+Recall that we said, four primary goals of social science include:
 
+  - **Describe** and measure
+      + Has the U.S. population increased?
+  - **Explain**, evaluate, and recommend (study of causation)
+      + Does expanding Medicaid improve health outcomes?
+  - **Predict**
+      + Who will win the next election?
+  - **Discover**
+      + How do policies diffuse across states?
+
+In this section, we start to explore the goal of explanation--making causal claims.
 
 ## What separates causation from correlation?
+
+Here's an example. In 2016, researchers at the [NY Times](https://www.nytimes.com/interactive/2016/12/26/upshot/duck-dynasty-vs-modern-family-television-maps.html) noticed that areas in the country where the television show *Duck Dynasty* was popular also tended to support Donald Trump at higher rates. 
+
+![](images/duckdynasty.png)
+
+
+If we put our social scientist hat on, we might want to distinguish whether this is a causal or, more likely, just a correlational relationship:
+
+  - Correlation: Areas that watch Duck Dynasty are more likely to support Trump (degree to which two  variables "move together")
+  - Causality: Watching Duck Dynasty (vs. not watching) increases your support of Trump. 
+
+Causal Question: Does the manipulation of one factor (the treatment), (holding everything else constant), cause a change in an outcome?
+
 ### Potential Outcomes Framework
+
+When studying causal relationships, we distinguish two concepts:
+
+  - treatment: variable whose change may produce a change in the outcome 
+  - outcome ($Y$): what may change as a result
+
+We imagine two states of the world or "potential outcomes."
+
+  - $Y(1)$: the outcome if the treatment is administered 
+  - $Y(0)$: the outcome if the treatment is NOT administered (or maybe something else is)
+
+Example: How does voter turnout ($Y$) change as a result of varying whether someone receives a mail-in ballot (the treatment)?
+
+  - $Y(\text{sent a mail-in ballot})$: do you vote or not
+  - $Y(\text{not sent a mail-in ballot})$: do you vote or not 
+  
+We compare your likelihood of turning out to vote in a world where you did receive a mail-in ballot vs. a counterfactual state of the world in which you did not receive a mail-in ballot, generally assuming that this is the only thing that is different between these two potential states of the world. 
+
+In many cases in social science, we might start by observing some connection in the real world (a factual observation). To make a causal claim, we then have to imagine what that counterfactual state of the world would be. Examples:  
+
+  - Causal Question: Does the minimum wage increase the unemployment rate?
+      + (Hypothetical) Factual: An unemployment rate went up after the minimum wage increased
+      + Implied Counterfactual: Would the unemployment rate have gone up, had the minimum wage increase not occurred?
+  - Causal Question: Does race affect one's job prospects?
+      + (Hypothetical) Factual: Jamal applied for a job but did not get it
+      + Implied Counterfactual: Would Jamal have gotten a job if he were white?
+
+
+We use causal logic all of the time outside of social science. 
+
+
+For example, many viewers get angry after watching the movie [*Titanic*](https://www.youtube.com/watch?v=3gK_2XdjOdY) because they believe Jack did not have to die. We can place their claims in our causal framework: 
+
+![](images/titanicdoor.jpeg)
+
+  - Outcome: Jack Surviving the Titanic
+  - Potential Outcomes in two states of the world
+      + Rose did not share the floating door, and Jack died.
+      + Counterfactual question: If Rose had shared the floating door, would Jack have lived?
+
+
+
+In [*Bit by Bit*](https://www.bitbybitbook.com/en/1st-ed/running-experiments/), Matt Salganik notes that sometimes cause-and-effect questions are implicit. For example, in more general questions about maximization of some performance metric, we might want to compare several alternatives: 
+
+The question "What color should the donate button be on an NGO's website?" is really lots of questions about the effect of different button colors on donations.
+
+  - Factual: A voter donates some amount with a black button
+  - Counterfactual: What would a voter donate if the button were blue?
+  - Counterfactual: What would a voter donate if the button were red?
+
+What other causal questions might social scientists or data scientists ask?
+
 ### Causal Effects
+
+When we are conducting a causal analysis, we will want to estimate a causal effect.
+
+A causal effect is the change in the outcome Y that is caused by a change in the treatment variable.
+  
+  - $Y(1) - Y(0)$ = causal effect or "treatment effect"
+      + e.g., Donation if contacted - Donation if not contacted
+
+
+We often want to know the **average treatment effect** in some population, not just the causal effect for a single individual. Here, we might ask, on average, how much would our outcome change if our units were treated instead of untreated. To do so, we simply sum up all of the causal effects and divide them by the number of units in our population.
+
+  - $\frac{1}{N} \sum_{i=1}^N (Y_i (1)-Y_i (0))$ = "average treatment effect" (ATE)
+      + e.g., Average donations if contacted - Average donations if not contacted
+
+
 ### Fundamental Problem of Causal Inference
+
+The problem: Fundamental Problem of Causal Inference
+
+What makes the evaluation of causal claims difficult, is that in the real world, we suffer from the fundamental problem of causal inference:
+
+  - For any individual, we only get to see (observe) the result from one state of the world
+      + This makes that subtraction of potential outcomes impossible.
+
+(Unless we are in [Groundhog Day](https://www.youtube.com/watch?v=5E0M6Rh9qpg) or *Russian Doll*)
+
 ## Randomized Controlled Trials
+
+One approach for addressing the fundamental problem of causal inference is to simulate two potential states of the world through random assignment: Randomized Controlled Trials / Experiments
+
+Experiments approximate factual vs. counterfactual comparison
+  
+  - We randomly assign one group to receive a "treatment" and another not to receive a treatment (the control)
+  - When treatment assignment is **randomized**, the only thing that distinguishes the treatment group from the control group, besides the treatment itself, is chance.
+
+This allows us to compare the average outcomes between groups in order to estimate our causal effects (more on this below).
+
 ### Experiments: Why Randomize?
+
+Randomization is essential for being able to "identify" and isolate the causal effect of the treatment on the outcome. Without randomization, there may be several reasons why two groups differ beyond the treatment of interest.
+
+For example, if we randomly assigned half of Rutgers seniors to watch the movie *Groundhog Day* and half to watch *Parasite* we would expect the groups to have about equal proportions of female students, average age, racial composition, majors, etc.
+  
+  - (If we didn't randomly assign, and just let people "select" into watching a particular movie, the groups could look very different.)
+
+But because we randomized assignment, on average, we'd expect the two groups to be identical except for the treatment-- in this case, which movie they watched.
+
+  - Great news! This means any differences in the outcomes between the two groups can be attributed to the treatment. So if we wanted to see if *Parasite* leads people to have nightmares about people living in their basements, we could compare the average number of reported nightmares between the seniors that watched *Parasite* vs. *Groundhog Day* 
+  
+
 ### Experiments: How to Analyze
+
+Difference in Means: We compare each group's average outcome by subtracting one from the other to estimate the average treatment effect (ATE) aka the average causal effect of the treatment.
+
+  - $\widehat{ATE} = \bar{Y}(treatment) - \bar{Y}(control)$
+
+This is an estimate of, on average, how much our outcome would change if units went from being untreated to treated. 
+
+  - E.g., on average how much a person donates to a campaign if contacted by phone compared to if not contacted by phone.
+
+
+
 ### Ingredients of an Experiment
+
+From [*Bit by Bit*](https://www.bitbybitbook.com/en/1st-ed/running-experiments/)
+
+![](images/bitbybitexp.png)
+
+For every experiment, you should be able to
+
+  - State the causal question or relationship of interest
+  - Describe how the experiment will be implemented (e.g., recruitment of subjects)
+  - Identify and describe the randomization into treatment group(s) and control group and what happens in each group
+  - Identify the outcome of interest, how it is measured
+  - Evaluate the relevant comparison
+
+We will turn to an example in the next section.
+
 ## Application: Is there racial discrimination in the labor market?
+
+Marianne Bertrand and Sendhil Mullainathan. 2004. "Are Emily and Greg more
+employable than Lakisha and Jamal? A field experiment on labor market discrimination."
+
+
+"We perform a field experiment to measure racial discrimination in the labor market. We respond with fictitious resumes to help-wanted ads in Boston and Chicago newspapers." 
+
+  - Recruitment: Construct resumes to send to ads 
+  - Randomization:  To manipulate perception of race, each resume is (randomly) assigned
+  - Treatment: either a very African American sounding name 
+  - Control: or a very White sounding name
+  - Outcome: Does the resume receive a callback?
+  - Comparison: Callback rates for African American (sounding) names vs. White (sounding) names (the difference in means between groups)
+
+*For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=LeJkRydMruM")
+```
+
+Let's load the data. Note: When we have variables that are text-based categories, we may want to tell R to treat these "strings" of text information as factor variables, a particular type of variable that represents data as a set of nominal (unordered) or ordinal (ordered) categories. We do this with the `stringsAsFactors` argument.
+
+```{r, eval=F}
+resume <- read.csv("resume.csv", stringsAsFactors = T)
+```
+
+```{r}
+resume <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/resume.csv",
+                   stringsAsFactors = T)
+```
+
+Variables and Description
+  
+  - `firstname`: first name of the fictitious job applicant 
+  - `sex`: sex of applicant (female or male) 
+  - `race`:  race of applicant (black or white) 
+  - `call`: whether a callback was made (1 = yes, 0 = no) 
+  
+
+The data contain 4870 resumes and 4 variables.
+```{r}
+nrow(resume) # number of rows
+ncol(resume) # number of columns
+dim(resume) # number of rows and columns
+```
+
+
+
+Note: These data look a little different from what we used last week. For example, the `sex` and `race` variables contain words, not numbers.
+
+```{r}
+head(resume)
+```
+
 ### Variable classes
+
+We can check the class of each variable: Look, we have a new type, a "factor" variable.
+
+```{r}
+class(resume$firstname)
+class(resume$sex)
+class(resume$race)
+class(resume$call)
+```
+
+
+We have now encountered `numeric, character`, and `factor` vectors and/or variables in R. Note: This is simply how R understands them. Sometimes R can get it wrong. For example, if we write:
+
+```{r}
+somenumbers <- c("1", "3", "4")
+class(somenumbers)
+```
+
+Because we put our numbers in quotation marks, R thinks the values in `somenumbers` are text. The number "3" might as well be the word "blue" for all R knows. Fortunately, we can easily switch between classes.
+
+```{r}
+somenumbers <- as.numeric(somenumbers)
+class(somenumbers)
+```
+
+Here,  we used `as.numeric()` to overwrite and change the character vector into a numeric vector. 
+
+Rules of Thumb
+  
+  - Usually, we want `character` variables to store text (e.g., open-ended survey responses)
+  - We want `numeric` variables to store numbers.
+  - Usually, we want `factor` variables to store categories. 
+      + Within R, factor variables assign a number to each category, which is given a label or `level` in the form of text.
+      + Categories might be ordinal or "ordered" (e.g., Very likely, Somewhat likely, Not likely) or
+      + Unordered (e.g., "male", "female")
+      + R won't know if a factor variable is ordered or unordered. Alas, we have to be smarter than R.
+      + R might think you have a character variable when you want it to be a factor or the reverse. 
+          - That's when `as.factor()` and `as.character()` are useful. 
+  - Always check `class()` to find out the variable type
+
+
 ## Making tables
+
+A nice thing about numeric and factor variables is we can use the `table` command to see how many observations in our data fall into each category or numerical value.
+
+```{r}
+## Example: how many black vs. white sounding resumes
+table(resume$race)
+```
+
+As mentioned, `factor` variables have levels:
+
+```{r}
+levels(resume$race)
+```
+
 ### Crosstabulation
+
+We can also use the `table` command to show a crosstabulation: a table that displays the frequency of observations across two variables.
+
+```{r}
+## Example: how many black vs. white sounding resumes by call backs
+## We can label the two dimensions of the table with the =
+table(calledback = resume$call, race = resume$race)
+```
+
+
+Sometimes we will want to show the proportion instead of the frequency using `prop.table`
+
+```{r}
+## Example: proportion black vs. white sounding resumes by call backs
+## Convert to proportion
+prop.table(table(calledback = resume$call, race = resume$race), margin = 2) # 1 for row sum, 2 for col
+```
+
+***How can we interpret this crosstabulation? It should let us see the causal effect-- the callback rate for each group***
+
 ## Conditional Means
+
+Another thing we can do with factor variables is to find how the average of one variable (e.g., our outcome- the callback rate) varies across different categories of our factor variable. For this, we use `tapply()`.
+
+```{r}
+## take the mean of input1 by categories of input2
+## mean of call by race
+tapply(resume$call, INDEX=resume$race, mean)
+```
+
+
 ## Relational Operators in R
+
+Goal: Compare callback rates for white sounding names to black sounding names, so we need to be able to filter by race. 
+
+Good news: We have several relational operators in R that evaluate logical statements:
+  
+  -  `==, <, >, <=, >=, !=`
+  - We have a statement and R evaluates it as `TRUE` or `FALSE`
+
+```{r, eval=F}
+## for each observation, does the value of race equal "black"?
+resume$race == "black"
+```
+
+By putting this logical statement within `[ ]`, we are asking R to take the `mean()` of the variable `resume$call` for the subset of observations for which this logical statement is `TRUE`.
+
+```{r}
+mean(resume$call[resume$race == "black"])
+```
+
+
+Ultimately, each of these paths has led us to a place where we can estimate the average treatment effect by calculation the difference in means: the difference in callback rates for black and white applicants.
+
+We said the ATE = $\bar{Y}(treatment) - \bar{Y}(control)$ 
+
+```{r}
+ate <- mean(resume$call[resume$race == "black"]) - 
+  mean(resume$call[resume$race == "white"])
+ate
+```
+
+How can we interpret this? Do white applicants have an advantage?
+
 ## Subsetting data in R
+
+Subsetting Dataframes in R
+
+Maybe we are interested in differences in callbacks for females. One approach for looking at the treatment effect for female applicants, only, is to subset our data to include only female names.
+
+  - To do this, we will  assign a new `data.frame` object that keeps only those rows where `sex == "female"` and retains all columns 
+  - Below are two approaches for this subsetting, one that uses brackets and one that uses the `subset` function
+
+```{r}
+## option one
+females <- resume[resume$sex == "female", ]
+## option two using subset()- preferred
+females <- subset(resume, sex == "female")
+```
+
+Now that we have subset the data, this simplifies estimating the ATE for female applicants only.
+
+We said the ATE = $\bar{Y}(treatment) - \bar{Y}(control)$
+
+```{r}
+ate.females <- mean(females$call[females$race == "black"]) -
+  mean(females$call[females$race == "white"])
+ate.females
+```
+
+
 ### Getting Booooooooolean
+
+We can make this slightly more complex by adding more criteria. Let's say we wanted to know the callback rates for just female black (sounding) names.
+
+  - R allows use to use `&` (and) and `|` (or)
+
+```{r}
+femaleblack <- subset(resume, sex == "female" & race == "black")
+```
+
+We could now find the callback rate for Black females using the tools from above:
+
+```{r}
+mean(femaleblack$call)
+```
+
+
 ## Creating New Variables using Conditional statements
+
+We can instead create a new variable in our main dataframe. Let's make a variable that takes the value 1 if a name is female and black sounding and 0, otherwise
+
+```{r}
+# Initialize a new variable called femaleblackname
+resume$femaleblackname <- NA
+# Assign a 1 to our new variable where sex is female and race is black
+resume$femaleblackname[resume$sex == "female" & resume$race == "black"] <- 1
+# Assign a 0 if sex is not female OR if race is not black
+resume$femaleblackname[resume$sex != "female" | resume$race != "black"] <- 0
+```
+
+
+We can check our work
+```{r}
+table(name = resume$firstname, femaleblack = resume$femaleblackname)
+```
+
+
+Let's say we wanted to  know the callback rates for just female black (sounding) names.
+
+```{r}
+mean(femaleblack$call)
+
+mean(resume$call[resume$femaleblackname == 1])
+
+```
+BINGO: two ways to do the same thing.
+
 ### ifelse statements
+
+Remember how we created the variable `femaleblack`, well there is another way to do that in R using what are called conditional statements with `ifelse()`.
+
+  - Can be read: If this relational statement is `TRUE`, I assign you A, otherwise I assign you B
+
+```{r}
+resume$femaleblackname <- ifelse(resume$sex == "female" &
+                                   resume$race == "black", 1, 0)
+```
+
+Can be read: If sex is female and race is black, give the observation in the new variable a 1, otherwise give it a 0.
+
+
+Like most things, we can also get more complicated here. Let's say we wanted to create a variable that indicated both race and sex.
+
+  - Can be read: If this relational statement is `TRUE`, I assign you A, 
+  - Otherwise if this second relational statement is `TRUE`, I assign you B,
+  - Otherwise if this third relational statement is `TRUE`, I assign you  C,
+  - Otherwise I assign you D
+
+```{r}
+resume$racesex <- ifelse(resume$sex == "female" &
+                                   resume$race == "black", "FemaleBlack", 
+                         ifelse(resume$sex == "female" &
+                                   resume$race == "white", "FemaleWhite",
+                                ifelse(resume$sex == "male" &
+                                   resume$race == "white", "MaleWhite", "MaleBlack")))
+```
+Note: what you assign can be numeric or text.
+
+
+
 ## Types of Experiments
+
+Experiments can vary:
+
+  - Setting: Lab, Survey, Field
+  - Mode: Analog vs. Digital
+  - And in Validity
+      + Internal: were the processes conducted in a correct, reliable way?
+      + External: can we generalize from the experiment to the real world, or would the results change?
+      + Context: Would people act the same way outside of the experiment?
+      + Recruitment: Are the people in our experiment representative of the people we care about?
+      + Construct
+          - Treatment: Is the experimental treatment similar to what people see in the real world?
+          - Outcome: Is the outcome something we care about in the real world? Are we measuring it in a realistic, accurate way?
+
+
+Review [*Bit by Bit*](https://www.bitbybitbook.com/en/1st-ed/running-experiments/) chapter 4 for more examples of social science experiments.
+
+
+
 
 <!--chapter:end:03-CausalityI.Rmd-->
 
-
 # Visualization {#visualization}
 
-Placeholder
+In this section, we discuss a set of tools for data visualization in R.
+
+Goals of data visualization
+
+  - Communicate information
+      + Transparently (show me the data!)
+      + Quickly
+      + Simply
+      + Accurately
+      + And with a little work: beautifully
+ 
+There are many resources for ideas and best practices for data visualization. See [here](https://www.tableau.com/learn/articles/best-data-visualization-blogs) and [here](https://serialmentor.com/dataviz/index.html).
+
+We will cover many types of visuals, each typically designed for a different purpose.
+
+What to communicate?
+
+  - Data summary
+      + Central tendency (e.g., mean, median)
+      + Spread (e.g., standard deviation, IQR)
+  - Comparison
+      + e.g., Callback rates for black vs. white sounding names
+  - Trend
+      + e.g., Economic confidence over time
+  - Relationship
+      + e.g., Correlation 
 
 
 ## Application: Social Status and Economic Views
+
+We are going to explore different types of visualizations through different social science examples. The first application we visit is a survey experiment.
+
+Thal, A. (2020). The desire for social status and economic conservatism among affluent Americans. American Political Science Review, 114(2), 426-442.
+
+In the experiment, affluent Americans are randomly assigned to encounter Facebook posts in which others broadcast their economic success. These posts are designed in a way that encourages affluent respondents to view economic success as a means of achieving social status.
+
+Causal claims
+
+  - "I expect that exposure to these posts will cause affluent Americans to become more supportive of conservative economic policies." 
+  - "I also expect that exposure to these posts will cause especially large increases in economic conservatism among affluent men."
+
+
+The experiment includes a sample of 2010 affluent Americans-- people who report household incomes in the top 10 percent of the U.S. income distribution.
+
+Experiment Ingredients:
+
+  - Causal Question: Does desire for social status influence economic views of affluent Americans?
+  - Recruitment: Ask affluent Americans to take a survey online
+  - Randomization: Randomly assign respondents to view different fictional Facebook posts designed to signal different motivations
+  - Outcome: an index based on respondents' support for decreasing "taxes on households making \$150,000 or more a year," support for decreasing the "taxes on money people make from selling investments, also referred to as capital gains," and support for decreasing "government regulation of business and industry."
+  - Comparison: Average economic views between experimental conditions.
+
+Snapshot of status conditions
+
+![](images/status1.png){width=70%}
+
+
+Snapshot of Concrete and Placebo comparison conditions
+
+![](images/status2.png){width=70%}
+
+
+**Can you put this into the potential outcomes framework?**
+
 ## Boxplots
+
+For a video explainer of the code for boxplots and barplots, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=QmQr4lfrmUc")
+```
+
+
+
+Let's load the data! Here, note that the data file is in a .RData format instead of .csv. This means that instead of using `read.csv`, we should use a function to load the data that is suitable for the .RData format. This will be `load`. That function works the following way:
+
+
+```{r, eval=T, echo=FALSE, include=FALSE}
+load("data/status.RData")
+```
+
+```{r,eval=F}
+load("status.RData")
+```
+
+After running the above code, an object will show up in your R environment.
+
+```{r}
+head(status)
+```
+
+The data include the following variables
+
+  - `condition`: Placebo, Concrete, Self-Esteem, Social Approval, Conspicuous Consumption
+  - `gender`: 1= male; 0= otherwise
+  - `econcon`: Economic views. Numeric variable from 0 to 1, with higher values reflecting more conservative views
+
+
+
 ### Data Summary: Boxplot
+  
+Characterize the distributions of continuous numeric variables at once
+
+  - Features: box, whiskers, outliers
+  - We will supply the function with a column in our data, and the boxplot displays the distribution of that variable.
+
+![](images/agebox.png){width=80%}
+
+*Figure from Will Lowe*
+
+Here is an example of the `boxplot` using our `econcon` variable. 
+
+  - We have added a title and y-axis label to the plot through the `main` and `ylab` arguments. Play around with changing the words in those arguments.
+  
+```{r}
+boxplot(status$econcon,
+        main="Economic Views in the Survey Sample",
+        ylab="Economic Views")
+```
+
+After you  execute the plot code, a preview of the plot should appear in the bottom-right window of RStudio.
+
+Boxplots are also useful for data summary across multiple distribution: `boxplot(y ~ x, data = d)`
+
+```{r, fig.width=11}
+boxplot(econcon ~ condition, data=status,
+        main="Economic Views by Experimental Condition",
+        ylab="Economic Views",
+        names = c("Placebo", "Concrete", "Conspicuous", 
+                  "Self-Esteem", "Social"),
+        xlab = "Experimental Condition",
+        col = c("red3", rep("dodgerblue", 4)))
+```
+
+The additional arguments are just aesthetics. Play around with different settings. 
+
+  - For example, can you change the code to make the first two boxes red? Colors are supplied as a vector using the `col =` argument.
+      + To explore colors in R, run this function `colors()` in your R console.
+
+
+How should we interpret these results? Does status or social approval motivation, specifically, influence economic views? What about other potential motivations?
+
 ## Barplots
+
+Comparing frequencies (raw N), proportions, and/or means across categories
+
+```{r, eval=T, echo=F}
+valuesbar <- c(20, 40, 50, 10, 60)
+
+namesbar <- c("Car rides \n to Malibu",
+              "Strawberry ice cream,\n One spoon for two",
+              "Trading jackets",
+              "Watching reruns \n of Glee",
+              "Being annoying \n Singing in harmony")
+
+barplot(valuesbar,
+        names=namesbar,
+        cex.names = .6,
+        main="Level of deja vu",
+        ylab="Avg. Feeling of deja vu",
+        cex.lab = .7, 
+        col="purple3")
+```
+
+We will use the `barplot()` function.
+
+  - In contrast to the boxplot, the barplot function takes a vector of values that will serve as the top of the bars in the plot-- it does not summarize a variable from within the function
+      + E.g., we could supply it a set of means to plot, not a raw variable 
+  - Many of the other arguments are aesthetics that will give you [deja vu](https://www.youtube.com/watch?v=cii6ruuycQA&ab_channel=OliviaRodrigoVEVO) after working with boxplot.
+  - This means that barplots are pretty easy to create in R. We can supply it a short vector of any values (e.g., `valuesbar <- c(20, 40, 50, 10, 60)`), and we could also supply it a vector of any names to label those values. 
+      + For real applications, this means we could supply a barplot with the output of a `tapply()` function, a `table()` summarizing a single variable, or a set of `mean()` values we have combined into a vector.
+
+
+For example, in experiments, we may use barplots to compare the mean from the treatment group(s) $\bar{Y}(1)$ to the control $\bar{Y}(0)$ on some outcome. Let's do it!
+
+  - First, we need the means. Let's find the conditional means of economic views.
+
+```{r}
+condmeans <- tapply(status$econcon, status$condition, mean)
+condmeans # save as object to supply to the barplot function
+```
+
+
+
+The first input is the vector of means/proportions/frequency you want to plot.
+
+```{r}
+barplot(condmeans,
+        ylim =  c(0,1), # y-axis dimensions
+        names = c("Placebo", "Concrete", "Conspicuous", 
+                  "Self-Esteem", "Social"),
+        col = "black", # color of bars
+        main = "Mean Economic Views by Condition", # plot title
+        cex.main = .8, # size of plot title
+        cex.names = .8, # size of name labels
+        ylab = "Mean Views", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+```
+
+The remaining arguments alter the look of the plot to make it more informative.
+
+  - How could we improve this plot to make the interpretation easier?
+
 ### Saving Plots
+
+You can save an image of your plot as a `png()` to your working directory. Place `png()` just before your plot with a name in quotations, and then specify the dimensions. Place `dev.off()` at the bottom.
+
+```{r, eval=F}
+png("mybarplot.png", width = 7, height = 4, res=300, units="in")
+barplot(condmeans,
+        ylim =  c(0,1), # y-axis dimensions
+        names = c("Placebo", "Concrete", "Conspicuous", 
+                  "Self-Esteem", "Social"),
+        col = "black", # color of bars
+        main = "Mean Economic Views by Condition", # plot title
+        cex.main = .8, # size of plot title
+        cex.names = .8, # size of name labels
+        ylab = "Mean Views", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+dev.off()
+```
+
+
+
 ### Creating New Variables
+
+The author theorizes that social approval, self-esteem, and conspicuous consumption are all elements of "status motivation." We could analyze the results by collapsing them into a single category called "status motivation" and compare it to the other experimental groups.
+
+  - Create a new variable `conditionnew`
+  - Code the variable into new categories based on the values in the original `condition` variable
+  - Check the class of the new variable and convert if necessary
+  - Verify new variable by exploring values
+
+
+```{r}
+status$conditionnew <- NA # create new variable
+## Code new variable
+status$conditionnew[status$condition == "Placebo"] <- "Placebo"
+status$conditionnew[status$condition == "Concrete"] <- "Concrete"
+status$conditionnew[status$condition == "Conspicuous Consumption" |
+                     status$condition == "Self-Esteem" |  
+                      status$condition == "Social Approval"] <- "Status"
+
+# class(status$conditionnew) check the class
+status$conditionnew <- as.factor(status$conditionnew) # convert
+```
+
+
+An alternative way to create the new variable is through an `ifelse` statement. 
+
+  - Can be read: If this relational statement is  `TRUE`, I assign you A, otherwise I assign you B
+  - This often works best when we change factor variables to character
+
+```{r}
+status$conditionnew2 <- as.character(status$condition)
+status$conditionnew2 <- ifelse(status$condition == "Conspicuous Consumption" |
+                     status$condition == "Self-Esteem" |  
+                      status$condition == "Social Approval", 
+                     "Status", status$conditionnew2)
+status$conditionnew2 <- as.factor(status$conditionnew2)
+table(status$conditionnew2)
+```
+
+
+Note: Barplots don't have to display means. We could also display frequencies. For example, let's make a plot of the number of people in each condition using our new variable.
+
+```{r}
+freqobs <- table(status$conditionnew)
+
+
+barplot(freqobs,
+        ylim = c(0, 1200),
+        col = "black", # color of bars
+        main = "Number of People per Condition", # plot title
+        cex.main = .8, # size of plot title
+        cex.names = .8, # size of name labels
+        ylab = "N of Observations", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+```
+
+
 ## Application: Changing Minds on Gay Marriage
+
+
+We now turn to a study that asks the question
+
+  - Research Question Can we effectively persuade people to change their minds?
+      + *Contact Hypothesis*: outgroup hostility diminishes through extended positive contact
+
+The authors conduct two randomized control trials in Los Angeles
+
+  - *Target population*: voters in Los Angeles 
+  - *Recruitment*: select people from a registered voter list 
+  - *Randomized treatment conditions*: 
+      + Canvassers have a conversation about same-sex marriage vs. 
+      + Recycling scripts (placebo)
+      + Control group: no canvassing
+  - *Outcome measures*: 
+      + Feeling towards gay couples (survey responses over multiple waves)
+  - *Comparison*
+      + Compare average change in feelings between treatment conditions
+
+
+Let's load the data. Data available through QSS. See QSS Chapter 2 for additional discussion.
+
+  - `study`: Which study is the data from (`1` = Study1, `2` = Study2)
+  - `treatment`: Five possible treatment assignment options
+  - `therm1`: Survey thermometer rating of feeling towards gay couples in waves 1 (0--100) (asked before people were canvassed)
+  - `therm2`: Survey thermometer rating of feeling towards gay couples in waves 2 (0--100) (asked after people were canvassed)
+
+```{r, echo=F}
+marriage <- read.csv("data/gayreshaped.csv", stringsAsFactors = T)
+```
+
+```{r, eval=F}
+marriage <- read.csv("gayreshaped.csv", stringsAsFactors = T)
+```
+
+```{r}
+## How many rows and columns
+dim(marriage)
+
+## How many observations in each treatment group, in each study
+table(marriage$treatment, marriage$study)
+```
+
+
+For a video explainer of the code for the barplot, scatter plot and histogram created with this application, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=ukexpAulAAk")
+```
+
+
+Let's focus on study 1 only.
+
+```{r}
+marriage1 <- subset(marriage, study ==  1)
+```
+
+We have to do some work to prepare our outcome and treatment conditions.
+
+
+In experiments, we compare the mean from the treatment group(s) $\bar{Y}(1)$ to the control $\bar{Y}(0)$ on some outcome
+
+  - Here are outcome is Change in Support for gay couples:  Wave 2 - Wave 1 feeling thermometer scores
+
+```{r}
+marriage1$outcome <- marriage1$therm2 - marriage1$therm1
+```
+
+
 ### Creating new variable
+
+Let's create a new variable `treatmentnew` that collapses the two Recycling and Same-Sex marriage conditions.
+
+```{r}
+marriage1$treatmentnew <- NA
+marriage1$treatmentnew[marriage1$treatment == "No Contact"] <- "No Contact"
+marriage1$treatmentnew[marriage1$treatment == "Recycling Script by Gay Canvasser" |
+                         marriage1$treatment == 
+                         "Recycling Script by Straight Canvasser"] <- "Recycling"
+marriage1$treatmentnew[marriage1$treatment == "Same-Sex Marriage Script by Gay Canvasser" |
+                         marriage1$treatment ==
+                         "Same-Sex Marriage Script by Straight Canvasser"] <- "Marriage"
+marriage1$treatmentnew <- as.factor(marriage1$treatmentnew)
+
+table(marriage1$treatmentnew)
+```
+
+
 ### Using ifelse to create new variable
+
+An alternative way we could create a variable is to use `ifelse`
+
+
+Let's try another way using the `ifelse` command.
+
+  - Can be read: If this relational statement is `TRUE`, I assign you A (in this case "No Contact"), otherwise (`ifelse()`)
+  - if this alternative relational statement is `TRUE`, I assign you B (in this case "Recycling"), otherwise (`ifelse()`)
+  - if this alternative relational statement is `TRUE`, I assign you C (in this case "Marriage"), otherwise
+  - If all of those were `FALSE` I assign you D (in this case an `NA`)
+
+```{r}
+marriage1$treatmentnew2 <- ifelse(marriage1$treatment == "No Contact", "No Contact",
+                                  ifelse(marriage1$treatment == 
+                                           "Recycling Script by Gay Canvasser" |
+                                           marriage1$treatment ==  
+                                           "Recycling Script by Straight Canvasser",  
+                                         "Recycling",
+                                    ifelse(marriage1$treatment ==
+                                        "Same-Sex Marriage Script by Gay Canvasser" |  
+                                            marriage1$treatment ==
+                                        "Same-Sex Marriage Script by Straight Canvasser",
+                                        "Marriage", 
+                                        NA)))
+marriage1$treatmentnew2 <- as.factor(marriage1$treatmentnew2)
+```
+
+
 ### Calculating the Average Treatment Effect
+
+We now have our outcome and our treatment conditions. In an experiment, we want to look at the difference in means between conditions. Let's calculate the means.
+
+```{r}
+outs <- tapply(marriage1$outcome, marriage1$treatmentnew, mean, na.rm=T)
+```
+
+Note: Sometimes data include missing cells. In R, these have an `NA`. To ignore these when calculating a mean, we add `na.rm = T` to the `mean()` or `tapply()` functions.
+
 ### Visualize means in a barplot
+
+Let's also add a line at 0 using `abline()`
+
+```{r}
+barplot(outs,
+        col="black",
+        ylim =  c(-2, 2), # y-axis dimensions
+        border = NA, # removes bar borders
+        main = "Change in FT W2-W1 by Type of Treatment", # plot title
+        cex.main = .8, # size of plot title
+        ylab = "Mean Change in FT W2-W1", # yaxis label
+        cex.lab = .8,# size of yaxis label
+        las = 1) # controls angle of axis labels
+abline(h=0, lty=2, col = "red", lwd=2) # adds horizontal line at 0 with dashes 
+
+```
+
+
+
+How should we interpret these results?
+
+  - In the Marriage condition, it looks like on average, views toward gay couples became warmer (the bar is positive) after the conversations with canvassers about same-sex marriage.
+  - In contrast, the views of people in the Recycling or No Contact conditions did not change much and if anything, became slightly colder.
+  - Comparing between these bars, then, it seems like there is an "average treatment effect" given that the change in the Marriage condition was different from the Recycling an No Contact control groups.
+  
+
 ## Scatterplots
+
+It turns out that study was completely fabricated, and the article was eventually [retracted](https://www.newyorker.com/science/maria-konnikova/how-a-gay-marriage-study-went-wrong). 
+
+How did people know? Well a team of researchers became suspicious based on exploratory analyses they conducted with the data. Let's do a few of these to learn about scatterplots and histograms.
+
+Scatter plots show the relationship between two numeric variables. 
+
+A common way to describe and quantify a relationship is through correlation.
+
+  - Correlation: When $x$ changes, $y$ also changes by a fixed proportion
+      + Asks: If you are a certain degree above the mean of $x$, are you similarly that much above the mean of $y$?
+      + Positive correlation: data cloud slopes up; 
+      + Negative correlation: data cloud slopes down;
+      + High positive or negative correlation: data cluster tightly around a sloped line
+      + Not affected by changes of scale: cm vs. inch, etc.
+
+
+Range of Correlation is between $-1$ and $1$
+  
+  - Look at the graphs below for examples of high and low positive and negative correlations.
+
+![*R for Dummies*](images/corrdummies.png){width=60%}
+
+The `plot()` function in R works using x and y coordinates. 
+
+  - We have to tell R precisely at which x- and y- coordinates to place points (e.g., place a point at `x=20` and `y=40`)
+  - In practice, we will generally supply R with a vector of x-coordindates and a vector of corresponding y-coordinates.
+  
+
+To illustrate a scatterplot, we will examine the relationship between the Wave 1 and Wave 2 feeling thermometer scores in the field experiment, for just the control "No Contact" condition.
+
+```{r}
+## Subset data to look at control only
+controlonly <- subset(marriage1, treatment == "No Contact")
+```
+
+In the `plot()`, we supply the x and y vectors.
+
+  - `xlim` and `ylim` specify the range of the x and y axis. 
+  - `pch` is the point type. You can play around with that number to view different plot types
+  
+```{r}
+plot(x=controlonly$therm1, y=controlonly$therm2, 
+     main = "Relationship between W1 and  W2",
+     xlab = "Wave 1", xlim = c(0, 100),
+     ylab = "Wave 2", ylim = c(0, 100),
+     pch = 20)
+```
+
+The correlation looks extremely high! It is positively sloped and tightly clustered.
+
+In fact, if we use R's function to quantify a correlation between two variables, we will see it is a correlation above .99, very close to the maximum value.
+
+  - By default, R calculate the "pearson" correlation coefficient, a number that will be between -1 and 1. It represents the strength of the linear association between two variables.
+
+```{r}
+## use = "pairwise" means to use all observations where neither variable has missing NA data
+cor(marriage1$therm1, marriage1$therm2, use = "pairwise")
+```
+
+This high correlation was unusual for this type of data. 
+
+  - Feeling thermometers suffer from low reliability. How a person answers the question at one point in time (perhaps 83) in Wave 1 often differs from the numbers they say when asked again at a future point in time in Wave 2. A person's responses often aren't that stable.
+  - Because there was such a high correlation, it suggested that the data might not have been generated by real human responses
+  
+  
 ## Histograms
+
+The researchers later discovered the Wave 1 data was suspiciously correlated with an existing survey: 2012 CCAP. 
+
+  - They believe the researcher likely used CCAP for Wave 1 - used survey responses from real humans that took a real survey -- but not the humans that the researcher claimed to interview in the experiment.
+  - Then the researcher generated the Wave 2 data by adding random noise to the Wave 1 data
+  - Part of why they believe this has to do with a histogram plot they generated to compare Waves 1 and 2
+  
+A histogram is a useful plot for summarizing the distribution of a single variable.
+
+  - It shows the frequency of observations (e.g., the number of survey respondents) who give an answer within a particular interval of numeric values
+
+Because a histogram is a single variable summary, we just supply R with the numeric variable we want to summarize.
+
+  - The new argument here `breaks` tells R how many of the individual rectangles we want. You can play around with that number to see how the plot changes.
+  
+
+```{r}
+hist(x=controlonly$therm1, breaks=50,
+     main = "W1 Histogram", ylim = c(0,1000))
+hist(x=controlonly$therm2,breaks=50,
+     main = "W2 Histogram", ylim = c(0,1000))  
+```
+
+The researchers noticed that the heaping patterns were different between Wave 1 and Wave 2. 
+
+  - When real humans answer these types of feeling thermometer questions, we often see heaping (tall spikes) at values of 0, 50, and 100. Humans tend to gravitate toward those nice round numbers to anchor their responses. In addition, often researchers might recode people with missing responses (people who skip a question), as having a score of 50, increasing the number at that point.
+      + Wave 1 has a lot of this heaping-- look at the higher bars around 0, 50, and 100, suggesting a lot of survey respondents gave those answers.
+      + However, Wave 2 has less heaping, particularly at 50. This suggested to the researchers that the Wave 2 data were likely generated by a computer and not real humans
+      
+
 ### Happy research ending
+
+While the original article  was retracted
+
+  - Researchers who found irregularities received funding to conduct similar studies with real data this time
+  - Multiple publications suggest the canvassing approach was effective: 
+      + Broockman and Kalla. 2016. "Durably reducing transphobia: A field experiment on door-to-door canvassing" Science 352 no. 6282.
+      + Broockman and Kalla. 2020. "Reducing exclusionary attitudes through interpersonal conversation: evidence from three field experiments." American Political Science Review 
+      + Kalla and Broockman. 2021. "Which narrative strategies durably reduce prejudice? Evidence from field and survey experiments supporting the efficacy of perspective-getting." American Journal of Political Science. Forthcoming.
+
+
 ## Application: Trends during COVID
+
+
+For a video companion for sections 4.7-4.9 and the code for line/trend plots, see below. The video only discusses the notes and code. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=UNJximu2suM")
+```
+
+
+
+Since the onset of the pandemic in 2020, researchers have evaluated attitudinal and behavioral responses to policy changes, political messages, and COVID case/hospitalization/death rates. 
+
+  - Survey data on attitudes and self-reported behavior
+  - Health care provider administrative data
+  - Mobile phone data to track locations
+  - Social media data to track attitudes and mobility
+
+***Example: Using Survey data from over 1.1 million responses*** to measure concern about the coronavirus over time.
+
+  - Clinton, Joshua, et al. "[Partisan pandemic: How partisanship and public health concerns affect individuals' social mobility during COVID-19](https://www.science.org/doi/10.1126/sciadv.abd7204)." Science advances 7.2 (2021): eabd7204.
+
+![](images/covidsurvey.png)
+
+***Example: Using the geotracking data of 15 million smartphones*** per day to compute percentage reduction in general movement and visiting non-essential services relative to before COVID-19 (before March 9).
+
+  - Gollwitzer, Anton, et al. "[Partisan differences in physical distancing are linked to health outcomes during the COVID-19 pandemic](https://www.nature.com/articles/s41562-020-00977-7)." Nature human behaviour 4.11 (2020): 1186-1197.
+
+
+![](images/covidphone.png)
+
+***Example: Using Twitter geolocation data*** to track how much movement users have by looking at the distances from all locations where a given user has tweeted. 
+
+  - Paiheng Xu, Mark Dredze, David A Broniatowski. "[The Twitter Social Mobility Index: Measuring Social Distancing Practices from Geolocated Tweets](https://socialmobility.covid19dataresources.org/)." Journal of Medical Internet Research (JMIR), 2020.
+
+![](images/covidtwitter.png)
+
+
+We will use the Twitter social mobility index to study how the movement of geo-located Twitter users changed from 2019 into September 2021.
+
+  - We will compare this movement for users located in the Northeast vs. South
+
+Each row of the dataset represents a week of the year. Each column represents a particular geography for which social mobility was calculated by the researchers.
+
+  - `Dates` indicates the date 
+  - `Northeast`: social mobility data for those in the northeast of the U.S.
+  - `South`: social mobility data for those in the south of the U.S.
+
+```{r}
+## Load the data from the author Mark Dredze's website
+covid <- read.csv("https://raw.githubusercontent.com/mdredze/covid19_social_mobility.github.io/master/data/longitudinal_compiled.csv")
+```
+
+Just like we have encountered numeric, factor, and character variables, R also has the ability to treat variables specifically as dates. We will want R to treat the date variable we read in as a date, and not as raw text or some other variable type. To do this, we will use the `as.Date` function.
+
+```{r}
+## Date variable original format and class
+head(covid$Dates)
+class(covid$Dates)
+
+## Convert to class Date
+covid$Dates <- as.Date(covid$Date)
+head(covid$Dates)
+class(covid$Dates)
+```
+
+
+The researchers continue to add to these data. Let's look at the portion of data from 2019 to September 2021.
+
+  - Note the use of `as.Date` again to make sure R knows our text should be treated as a date
+  - Note the use of the greater than or equal  to `>=` and less than or equal signs `<=` to specify which rows we want to keep in the data. We want rows that are in dates after January 1, 2019 and (`&`) on or before September 1, 2021.
+  
+```{r}
+covidsub <- subset(covid, Dates >= as.Date("2019-01-01") &
+                     Dates <= as.Date("2021-09-01"))
+```
+
+
 ## Line Plots in R
+
+Where we are going ...
+
+```{r, echo=F}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2, cex.axis=.7)
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), cex = .7, lty=1,lwd=2,
+       bty="n")
+```
+
+
+Starting from the bottom ...
+
+  - Let's first create a scatterplot by providing R with our two variables
+  - In a trend/line plot, we want time on the x-axis, in this case the `Dates` column
+  - We want our outcome on the y-axis, in this case, social mobility
+  - Ultimately we will want to compare the Northeast with the South. We will plot one line at a time, starting with the Northeast
+  
+```{r}
+plot(x=covidsub$Dates,y=covidsub$Northeast, pch=16) # pch is point type
+```
+
+We now transform it to a line by specifying `type="l"`
+
+  - By default, R creates a plot with `type=p` for points. R also has `type=b` which has both a line and points.
+
+```{r}
+plot(x=covidsub$Dates,y=covidsub$Northeast,type="l") # makes it a line
+```
+
+
+Let us change the aesthetics a bit by adding labels and removing the border with `bty="n"`.
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", 
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), # y-axis limits
+     las=1, # orientation of axis labels
+     lwd=2, # line width
+     bty="n") # removes border
+```
+
+
+Let's add a comparison line with the `lines()` function to look at trends for the south. 
+
+  - Note that this is outside of the `plot()` function, but the inputs are very similar. We supply a set of x and y coordindates.
+  
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n")
+## Add line to the plot 
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+```
+
+
+Let's create our own axis for the plot to add detail. To do this, we add `xaxt` to the `plot` function and then use `axis()` below the function.
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n") # remove original x-axis
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+## create the numbers we want to add to the new x-axis
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+## add the axis the "1" means x-axis. A "2" would create a y-axis
+## the format argument is unique to this date example
+### "%b-%Y" are telling R to display the month and year, with the month in words
+axis(1, at = axisdates, labels=format(axisdates, "%b-%Y"), las=2)
+```
+
+Finally, let's add a `legend()`. Now we're here!
+
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2)
+
+## Add legend, "bottomleft" indicates where on the plot to locate it
+## Could use "topright" instead, for example
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), 
+       cex = .7, # size of legend
+       lwd=2,
+       bty="n")
+```
+
+
+
+  
 ## Causal claims from before vs. after comparisons
+
+***What types of research questions could these trends generate?***
+
+```{r, echo=F}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2)
+
+## Add legend, "bottomleft" indicates where on the plot to locate it
+## Could use "topright" instead, for example
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), 
+       cex = .7, # size of legend
+       lwd=2,
+       bty="n")
+```
+
+What would you want to know about how movement has changed since the start of COVID? 
+
+  - We will do an initial exploration to reveal some of the difficulties with making causal claims when we do not have the luxury of conducting an experiment. This discussion will continue in the next section.
+
+One thing that becomes apparent in the trend data is that mobility decreased substantially after mid-March of 2020. As many of us know all too well, that corresponds to shortly after the onset of the pandemic in the United States.
+
+With that said, we may ask
+
+  - What specifically caused the sudden decrease in mobility?
+      + Did the announcement of federal guidelines to "slow the spread" have a causal effect on mobility?
+      + Did the rise in COVID cases during that time have a causal effect on mobility?
+      + Did gubernatorial actions at the state level cause mobility to decrease?
+      
+For each of these questions, we could implement the potential outcomes framework. 
+
+  - For example, we want to compare mobility ($Y$) in the state of the world where a governor has announced social distancing and stay-at-home restrictions ($Y(1)_{governor}$) to mobility in a state of the world where the governor has not announced those restrictions ($Y(0)_{governor}$), holding everything else the same. Here we run into two problems.
+      + Our friend, the fundamental problem of causal inference. We only get to observe one state of the world for any particular governor.
+      + It would be hard to turn this into an experiment. We cannot go back in time and ask governors to come together for a field experiment that randomly assigns which states get restrictions and which do not. 
+          - While there is variation-- not all states had restrictions, this was not random.
+  - Likewise, if we wanted to compare mobility ($Y$) in the state of the world where the federal government has announced social distancing and stay-at-home restrictions ($Y(1)_{president}$) to mobility in a state of the world where the president has not announced those restrictions ($Y(0)_{president}$), holding everything else the same. Here we run into the same two problems.
+      + The fundamental problem of causal inference. We only get to observe one state of the world at any given point in time.
+      + It may be hard to generate an experiment that simulates the idea of these two states of the world.
+      
+So what can we do?
+
+  - Researchers try to form comparison groups, in a strategic way, with the data they have (i.e., "observational" or "non-experimental" data).
+  - Because they cannot randomly assign two different experiences of the world, instead they choose two cases or two groups of cases that 
+      + Seem extremely similar except
+      + One has the treatment of interest, and one does not
+  
+**Example: Before vs. After Comparison**  
+
+Let's examine social mobility just before vs. just after the federal announcement of social distancing guidelines to stop the spread of COVID-19. 
+
+  - To do so, we will draw a verticle line at March 16, 2020
+      + Note we use `abline(v=)` to indicate a vertical line at a location
+  - We will also add text to inform views what that line represents
+      + Note we use `text(x= , y=, labels)` to indicate where to put text
+  
+```{r}
+plot(x=covid$Dates,y=covid$Northeast,
+     type="l", pch=15,
+     main="Social Mobility by Date and Region",
+     ylab="Twitter Social Mobility Index",
+     xlab="",
+     ylim = c(0, 80), las=1,
+     lwd=2,
+     bty="n",
+     xaxt="n")
+lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
+axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
+axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2, cex.axis=.7)
+legend("bottomleft",  col=c("red3", "black"), 
+       c("South", "Northeast"), cex = .7, lty=1,lwd=2,
+       bty="n")
+
+## add dashed blue vertical line
+abline(v=as.Date("2020-03-16"), lty=2, col="dodgerblue", lwd=1.5)
+
+## add text near the line
+## the \n breaks the text into different lines
+text(x=as.Date("2020-05-01"), y=65, labels = "Federal \n Announcement", cex=.6)
+```  
+
+We see mobility does appear to be lower after the announcement relative to before the announcement. Is this causal?
+
+  - Assumption: We would want to be able to argue that social mobility in the weeks following the announcement (after time period) would look similar to social mobility in the weeks prior to the announcement (before period) **if not for the federal announcement**
+      + That the before vs. after time periods would be similar in any meaningful way if not for the presence of the treatment in the after period.
+
+Does this seem like a plausible argument? Could other things (confounders) occurring around the time of the federal announcement also have caused the steep decline in social mobility?
+
+  - If we think something else happened around the same time that might have caused mobility to go down anyway, then we may be doubtful that this is a *causal* effect.
+      
+
+We will continue to discuss similar causal designs in the next section.
+
+
+
 ## Visual tips and tricks
+
+Recall we said the goals of visualization are to communicate information
+
+  - Transparently (show me the data!)
+  - Quickly
+  - Simply
+  - Accurately
+  - And with a little work: beautifully
+
+What NOT to communicate?
+ 
+![](images/honestrunway.jpeg){width=70%}
+
+Claus Wilke provides an overview of rules of thumb to fall when creating a data visualization on the Serial Mentor [website](https://serialmentor.com/dataviz/).
+
+An example is below
+  
+![](images/ugbadwrong.png)
+
+Overall, the best thing to do is to look at your visual from a consumer's [point of view](https://www.youtube.com/watch?v=nQJEp-k-ogs&ab_channel=ArianaGrandeVevo). You want your visuals to be intuitive enough for a viewer to be able to interpret it without too much help from you or explanatory text elsewhere in a paper or presentation. Our goal is to help consumers of our data understand the main takeaways of our research easily and accurately.
+
+  - We want to make sure our visuals always have informative labels that a lay person can understand (instead of technical variable names, we can use plain language)
+      + We may need to add a legend or additional text to a visual to help with this
+  - We want to choose colors to convey information. We want to avoid colors that are hard to see or might distract consumers.
+  - The axis dimensions should not be misleading. If the goal is to compare two or more plots to each other, we would want them to have similar axes, for example.
+
+
 ## Common R plotting functions and arguments
+
+Here is a refresher of several of the functions and arguments we have come across.
+
+Create a plot
+
+  - `plot()`: for scatterplots and trend plots
+  - `barplot()`: for barplot comparisons across categories
+  - `boxplot()`: boxplot for summaries of numeric variables
+  - `hist()`: for histogram summaries of a single numeric variable
+  
+Aesthetic arguments within a plot
+
+  - `main = `: Specifies the main title of the plot. Supply text (e.g.,  `main = "my title"`) 
+  - `ylab = `: Specifies the title of the y-axis. Supply text (e.g.,  `ylab = "Mean of variable"`) 
+  - `xlab = `: Specifies the title of the x-axis. Supply text (e.g.,  `xlab = "X variable name"`)
+  - `ylim =`: Specifies the range of the y-axis. Supply vector of two numbers (e.g., `ylim = c(0, 100)`)
+  - `xlim =`: Specifies the range of the x-axis. Supply vector of two numbers (e.g., `xlim = c(0, 100)`)
+  - `bty="n"`: Removes the border box around the plot
+  - `cex`, `cex.main`, `cex.names`, `cex.lab`, `cex.axis`: Changes the size of different elements of a plot. Default is 1, so a value of .8 would be smaller than default, and 1.2 would be bigger than normal.
+  - `type =`: Specifies the type of plot (e.g., `type="l"` is a line plot, `type="b"` is a plot with points and lines connecting them)
+  - `lwd=`: Specifies the width of a line on a plot. Default is 1. E.g., `lwd=3` makes a line much thicker
+  - `pch=`: Specifies the point type. E.g., `pch=15`
+  - `lty=`: Specifies the line type. E.g., `lty=2` is a dashed line
+  - `col=`: Specifies the color of the central element of the plot. Can take a single color or vector of colors. Use `colors()` in the console to see all R colors.
+  - `names`: Specifies a set of labels in a barplot
+  
+
+Ways to annotate a plot (generally added below the initial plotting function)
+
+  - `abline()`: Adds a line to the plot at a particular point on the x- or y- intercept, either horizontal, vertical, or of a particular slope
+      + Example: Adding a horizontal line at a particular at a y value of 2 `abline(h=2)`
+      + Example: Adding a vertical line at a particular at a x value of 2 `abline(v=2)`
+  - `lines(x=, y=)`: Adds a line connecting pairs of x- and y-coordinates. We used this to add the South line to the social mobility plot.
+  - `axis()`: Used to replace the default x- or y- axis that R will create with a customized axis
+      + To create an original y-axis, use `axis(2, vectorofvalues, labels)` and specify `yaxt="n"` inside the plotting function to remove the original y-axis.
+      + To create an original x-axis, use `axis(1, vectorofvalues, labels)` and specify `xaxt="n"` inside the plotting function to remove the original x-axis.
+  - `legend()`: Adds a legend to a plot. Can specify the location as the first argument (e.g., `"bottomleft"` or `"topright"`)
+  - `text()`: Adds text to a plot at specific x- and y- locations. (E.g., `text(x=3, y=4, "Here is a point"`). The x and y arguments can be single numbers or a vector of numbers. x and y need to be the same length.
+  - `points()`: Adds points to a plot at specific x- and y- locations. Inputs are much like `plot`
+
+
 ## A note on `ggplot`
+
+R has a number of open-source packages that people can use to expand the set of capabilities for visualization and analysis. These can be installed through RStudio. We will look at one of these packages: `ggplot2`.
+
+***Using ggplot will be extra-credit at this point in the course. We may return to it later in the semester as part of the main curriculum. Reviewing this section of the notes is optional.***
+
+The "gg" in ggplot2 stands for the "Grammar of Graphics." This program provides another framework for creating figures in R. According to Hadley Wickham, "ggplot2 provides beautiful, hassle-free plots that take care of fiddly details like drawing legends."
+
+Practically speaking, `ggplot()` is another tool to plot the same types of figures we have been making in class. Some people prefer `ggplot2` because they find the logic of building figures more intuitive using this framework and/or more aesthetically pleasing. However, both `ggplot()` and the plots we have been making in class can accomplish the same ultimate goals of data visualization-- to communicate information transparently, quickly, accurately, simply, and beautifully. Which types of plots you may prefer is up to your own taste.
+
+Think of packages like apps on a smartphone.
+
+  - If RStudio is our smartphone, we install a package like you install an app on the phone. You only have to do this once, though occasionally you may want or need to update the installation to a new version.
+  
+```{r, eval=F}
+## Run this line in your R console
+install.packages("ggplot2")
+```
+
+  - On a smartphone, every time you want to use an app after you have installed it, you have to open the app. Similarly, every time we want to open a package in RStudio, we have to open it by using the `library()` command
+  
+```{r}
+## Add and run this line in your R script, above the code where you will use functions from the package
+library(ggplot2)
+```
+
+
+The main plotting function in `ggplot2` is the `ggplot()` function. It will give you access to barplots, boxplots, scatterplots, histograms, etc.
+
+  - The syntax within this package is a little different from the base R plotting functions. We will investigate below. For now, here is an example of using `ggplot` to create a boxplot using the experiment on social status from earlier in this section.
+  
+```{r}
+ggplot(data=status, mapping = aes(x=condition, y=econcon)) +
+  geom_boxplot()
+```
+
+The three primary components of a ggplot() are a dataframe (`data =`), a set of mapping aesthetics (`aes()`), and `geoms` (e.g., geom boxplot, geom bar, geom point, geom line, etc.).
+
+  - The function `ggplot()` first takes a dataframe that includes the values you would like to plot (e.g., `data = status`).
+  - The aesthetics then include the variable names that you want to plot on the x and y axis (e.g., `aes(x=condition, y=econcon)`)
+      + Additional mapping aesthetics can be specified. For example, a third variable (or a repeat of a previous variable) can also be specified (e.g., `fill =`, `colour =`, `shape =`), which acts as a grouping variable. If this is specified, `ggplot()` will create a corresponding legend for the plot and will color/make different shapes for different groups within this third variable (See the boxplot below for an example of grouping by condition).
+  - After closing out the first `ggplot()` parentheses, you then annotate the plot by adding (`+`) a geometric layer. This is essentially where you specify the type of plot (though it is possible to have multiple geometric layers). 
+  - Just like with the other plotting functions in R, you can also specify a number of other arguments to make your plot more informative and aesthetically pleasing. Here, you do this by adding (`+`) additional arguments. See examples below (e.g., `ggtitle`, `xlab`, `ylab` for titles, `ylim` for y-axis limits, etc.)
+  - Likewise, just like with the other plotting functions, you can save your plots as a pdf or png. To do so here, you include the line `ggsave()` just below your plot.
+
+There are many more possibilities for plotting with `ggplot()`, but these should get you started. For additional resources on all that is gg, I recommend the [R Graphics Cookbook](https:// r-graphics.org/).
+
+
+Here is a second version of the boxplot with more aesthetics specified.
+
+  - We will color in the boxes based on the collapsed condition variable.
+```{r}
+ggplot(data=status, mapping = aes(x=condition, y=econcon, fill=conditionnew)) +
+  ## Specifies plot type. E.g., also have geom_point(), geom_bar()
+  geom_boxplot()+
+  ## Note many arguments are similar to other R functions but the syntax is a little different
+  ggtitle("Economic Views by Experimental Condition")+
+  ylab("Economic Views")+
+  xlab("Experimental Condition")+
+  ylim(0,1)+
+  ## Changes the overall theme (i.e., color scheme, borders, etc.)
+  theme_bw()+
+  theme(legend.position="bottom")
+ggsave("myboxplot.pdf", width=7, height=5)
+
+```
+
+Here is an example of a histogram from the application on views toward gay couples.
+
+```{r}
+ggplot(controlonly, aes(x=therm1)) +
+  geom_histogram(binwidth = 1) +
+  ggtitle("W1 Histogram") +
+  theme_minimal()
+```
+
+Instead of displaying multiple categories through different shapes or colors, we could also create multiple mini plots instead. This is done through `facet`. Let's look at a histogram for each condition for the thermometers in wave 2.
+
+```{r}
+ggplot(marriage1, aes(x=therm2)) +
+  geom_histogram(binwidth = 1) +
+  ggtitle("W2 Histogram by Condition") +
+  xlab("Feeling Thermometer Wave 2")+
+  theme_bw()+
+  facet_wrap(~treatmentnew)
+```
+
+
+We can similarly create a scatter and line plot. Let's use the social mobility data. Here we see `geom_point` and `geom_line`.
+
+```{r}
+## Scatterplot
+ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
+  geom_point() +
+  ggtitle("Average Social Mobility in US") +
+  xlab("Date")+
+  ylab("Avg Social Mobility")
+
+## Line plot
+ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
+  geom_line() +
+  ggtitle("Average Social Mobility in US") +
+  xlab("Date")+
+  ylab("Avg Social Mobility")
+```
+
+
+
 
 <!--chapter:end:04-Visualization.Rmd-->
 
-
 # Causality with Non-Experimental Data {#causalityii}
 
-Placeholder
+In this section, we continue to evaluate causal claims, but this time we will not have the benefit of experiments.
+
+
+***Recall: Why do we use experiments?***
+  
+We want to evaluate causal claims: 
+
+  - Does manipulating one factor (a  "treatment") cause a change in an outcome? ($Y_i(1) - Y_i(0)$)
+      + But we have a problem: the fundamental problem of causal inference 
+      + (Can't simultaneously both be treated and untreated -  e.g., you can't simultaneously be contacted and not contacted by a campaign)
+      + So instead, we randomly assign  some units to receive a treatment, and some not to, and then compare their average outcomes in an experiment
+
+And because of  random assignment of the treatment, we can be confident that the groups are similar EXCEPT for the treatment
+
+  - Therefore, any difference between the two groups in average outcomes can be attributed to the treatment
+
+***But what if we can't randomize the treatment?***
 
 
 ## Why can't we always experiment?
+
+
+Example: Did the way President Biden went about troop removal in Afghanistan cause the government to fail?
+
+  - Our outcome: The stability of the Afghanistan government
+  - Our causal effect of interest $Y_i(1) - Y_i(0)$:
+      + The Afghanistan government based on President Biden's troop removal plan in 2021 vs.
+      + The Afghanistan government based on an alternative troop removal plan.
+
+What would be our ideal experimental design? We'd want to randomly assign the treatment: troop removal in Afghanistan?
+
+  - We probably would not want to randomize that.
+
+
+Example: Do political leaders tend to matter for democracy?
+
+  - Our outcome: how democratic nations are
+  - Our causal effect of interest:
+      + On average, how democratic nations are with their current leaders -
+      + On average, how democratic nations would be with different leaders
+  - Possible Experimental Designs to randomly assign half of countries to receive a different political leader 
+      + Rig elections (I.e., Election fraud- Illegal, unethical)
+      + Forcibly remove half from office (Probably illegal)
+      + Assassinations (Illegal, Immoral, Unethical, etc.)
+
+Again, we have problems!!
+
 ### What can we do instead?
+    
+Let's say we want to make a causal claim about the effect of one variable on an outcome, but we can't think of an experimental design that will help us estimate this.
+
+![](images/popquiz.png)
+
+What do you do?
+
 ## Causal Identification Strategies
+
+Our goal: Try to "identify" the causal effect of one variable on an outcome. As Montell Jordan once said, this is how we do it:
+
+  - Use data we have (that exist out in the world)
+  - Compare those  who are ``treated" to a relevant comparison group who is not treated
+
+However, we can't randomize treatment so....
+
+  - We do our best to try to choose a good comparison (one very similar to the treatment group, but happens not to be treated)
+
+We want to rule out all possible confounding variables and "alternative explanations" for the outcomes we observed.
+
 ### Three Common Identification Strategies
+
+Example: Does drinking Sprite make a person a better basketball player? (Inspired by 1990s commercial where a kid believes drinking Sprite will cause him to play basketball better.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=zbavu2Al-ME")
+```
+
+  - **Cross-section comparison**: Compare Grant Hill (who drinks Sprite) to others (who don't) 
+  - **Before-and-after**: Compare Grant Hill after he started drinking Sprite to Grant Hill before 
+  - **Difference-in-differences**: Compare Grant Hill before and after drinking Sprite and subtract from this the difference for some other person (who never drank Sprite) during the same two periods 
+
+(Note: "drinking Sprite" is our treatment.)  
+
+
 ### Threats to Cross-Section Designs
+
+***Assumption***: Must assume no confounders and any alternative explanations related to differences between the treated and control subjects that also relate to the outcome. The Threat: Your two groups may differ in ways beyond the "treatment" in ways that are relevant to the outcome you care about. 
+
+  - Compare Grant Hill, a tall NBA player who currently drinks Sprite (treatment group) to 
+  - Yourself, assuming you and they do not drink Sprite (control group) 
+  - Compare your basketball skill levels (the outcome). 
+  - Suppose Grant Hill is better (a positive treatment effect).
+      + Can we conclude Sprite *causes* a person to be a better player?
+
+Nope, because other things that affect basketball talent differ between you and Grant Hill, and these things, not Sprite, may explain the difference in basketball talent. 
+
+Moreover, even if we compared just among NBA players (Grant Hill vs. non-Sprite drinking players of his era), it's possible that Sprite targeted all-stars to recruit to drink Sprite. In this way, pre-existing basketball talent (a *confounder*) both explains why Grant Hill drank Sprite (relates to the treatment) and explains his higher level of basketball talent (relates to the outcome) in the time period after drinking Sprite. 
+
+  - For a cross-sectional comparison to be plausible, we need to choose a very similar comparison in order to isolate the treatment as the main variable that is causing a change in an outcome.
+
+
 ### Threats to Before-After Designs
+
+***Assumption***: Must assume no confounding time trend. Threat: Something else may be changing over time, aside from the treatment, that is affecting your outcome.
+
+  - Compare Grant Hill in the years after he started drinking Sprite (treated) to
+  - Grant Hill the years before he started drinking Sprite (control)
+  - Compare his basketball skill levels (outcome). 
+  - Suppose Grant Hill after Sprite is better (a positive treatment effect).
+  - Can we conclude Sprite causes a person to be a better player?
+
+Not if something else Grant Hill started doing during that time period made him better (e.g., maybe during that time the NBA provided higher quality coaches and trainers, and everyone (including Grant Hill) got better). 
+
+  - You want your treatment to be the only thing relevant to basketball talent changing over time.
+
 ### Threats to Diff-in-Diff Designs
+
+
+***Assumption***: Must assume parallel trends: That in the absence of treatment, your treatment group would have changed in the same way as your control 
+
+  - Compare Grant Hill in the years before vs. after he started drinking Sprite to Grant Hill's teammate, who never drank sprite, in the same two time periods (before Hill drinks Sprite vs. after Hill drinks Sprite)
+  - Compare the **change in each player's basketball skill levels**. Suppose Grant Hill's skills increased to a greater degree than his teammate's over the same time period.
+  - Can we conclude Sprite causes a person to be a better player?
+
+If we are confident that Grant Hill did not have a unique (non-Sprite) advantage over that time period relative to other players, then our assumption might be plausible-- that Grant Hill and other players would have experienced a similar growth in their skills if not for Grant Hill getting the extra benefit of Sprite.
+
+Instead, if, for example, Grant Hill got a new trainer during this period  AND  his teammate did not, then we might have expected Grant Hill to  see more improvement even if he didn't start drinking Sprite. A violation of the parallel trends assumption!
+
+  - Causality is hard!
+
+
+
 ## Application: Economic Effects of Basque Terrorism
+
+
+Research Question: What is the economic impact of terrorism?
+
+  - Factual ($Y(1)$): Economy given Basque region hit with terrorism in early 1970s
+      + From 1973 to late 1990s, ETA killed almost 800 people
+      + Activity localized to Basque area
+  - Counterfactual ($Y(0)$): How would Basque economy have fared in the absence of the terrorism?
+      + Basque was the 3rd richest region in Spain at onset
+      + Dropped to the 6th position by late 1990s
+      + Would this fall have happened in the absence of terrorism?
+
+Problem: We can't observe the counterfactual. We can't go back in time to manipulate the experience of terrorism.
+
+
 ### Applying 3 Identification Strategies
+
+  - Compare Basque to others after 1973 (Cross-section comparison)
+  - Compare Basque before and after 1973 (Before-and-after)
+  - Compare others before and after 1973 and subtract the
+    difference from Basque's difference (Difference-in-differences)
+
+For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=E4PqZgcv5IQ")
+```
+
+```{r, include=FALSE}
+basque <- read.csv("data/basque.csv")
+```
+
+```{r, eval=F}
+basque <- read.csv("basque.csv")
+```
+
+```{r}
+head(basque)
+```
+
+Variables
+
+  - `region`: 17 regions including Basque
+  - `year`: 1955 -- 1997
+  - `gdpcap`:  real GDP per capita (in 1986 USD, thousands)
+
+Subset Basque Data into Four Groups
+
+```{r}
+## Basque before terrorism
+basqueBefore <- subset(basque, (year < 1973) &
+                            (region == "Basque Country"))
+## Basque after terrorism
+basqueAfter <- subset(basque, (year >= 1973) &
+                           (region == "Basque Country"))
+## others before terrorism
+othersBefore <- subset(basque, (year < 1973) &
+                            (region != "Basque Country"))
+## others after terrorism
+othersAfter <- subset(basque, (year >= 1973) &
+                           (region != "Basque Country"))
+```
+
+
+What is the economic impact of terrorism?
+
+Cross-section comparison
+
+```{r}
+mean(basqueAfter$gdpcap) - mean(othersAfter$gdpcap)
+```
+
+Before-and-after design
+
+```{r}
+mean(basqueAfter$gdpcap) - mean(basqueBefore$gdpcap)
+```
+
+Difference-in-Differences design
+
+```{r}
+treatDiff <- mean(basqueAfter$gdpcap) -
+    mean(basqueBefore$gdpcap)
+controlDiff <- mean(othersAfter$gdpcap) -
+    mean(othersBefore$gdpcap)
+treatDiff - controlDiff
+```
+
+Here is a way to visualize this difference-in-differences. Our estimated causal effect is the difference between the observed growth in the Basque region and what we assume the growth would have been in the absence of terrorism (the treatment).
+
+```{r, echo=F}
+plot(c(1, 2),
+     c(mean(basqueBefore$gdpcap), mean(basqueAfter$gdpcap)), type="b",
+     ylim = c(2, 9),xlab="",
+     ylab="GDP", xaxt="n", main="Pre/Post 1973 Economy in Spain", cex.main=.8)
+points(c(1,2), c(mean(othersBefore$gdpcap), mean(othersAfter$gdpcap)), type="b", col="red3")
+points(c(1,2), c(mean(basqueBefore$gdpcap), (mean(basqueBefore$gdpcap) + controlDiff)), 
+       type="b", lty=2)
+
+axis(1, 1:2, c("Before", "After"))
+legend("topleft", c("Basque", "Other", "Assumed Basque Trend \n in absence of Treatment"), 
+       col=c("Black", "Red", "Black"), bty="n",lwd=1, lty=c(1, 1,2) ,cex=.7)
+```
+
+
+What should we conclude from each approach?
+
+  - Each approach resulted in a different estimate of the impact of terrorism on the economy. We should choose the approach for which we think the underlying assumptions are most plausible.
+
 ## Placebo Tests
+
+Which Results Should We Believe? Role of Placebo Tests
+
+
+Cross-section comparison
+
+```{r}
+## were there pre-existing differences between the groups?
+mean(basqueBefore$gdpcap) - mean(othersBefore$gdpcap)
+```
+
+Before-and-After design
+
+```{r}
+## was there a change in a group we don't think should have changed?
+mean(othersAfter$gdpcap) - mean(othersBefore$gdpcap)
+```
+
+What about the Difference-in-Differences design?
+
+```{r}
+## here we go back in time even further to examine "pre-treatment" trends
+## we want them to be similar
+(basqueBefore$gdpcap[basqueBefore$year == 1972] -
+ basqueBefore$gdpcap[basqueBefore$year == 1955]) -
+    (mean(othersBefore$gdpcap[othersBefore$year == 1972]) -
+     mean(othersBefore$gdpcap[othersBefore$year == 1955]))
+```
+
+These "placebo" checks are closest to zero for diff-in-diff, so we may believe that the most.
+
+
+
+*Thanks to Will Lowe and QSS for providing the foundations for this example*
+
+
 ## Wrapping Up Causality
+
+Do you get this joke?
+
+![](images/causality-cartoon.png)
+
+
+
+
+
 
 <!--chapter:end:05-Causalityii.Rmd-->
 
-
 # Loops in R {#loops}
 
-Placeholder
+In this brief section, we will go over conducting loops in R.
 
+Loops are a tool in R that are useful for situations where we want to do something over and over and over and ... over again, where we just change something small each time.
+
+A quick example using the Basque data from the previous section:
+
+
+```{r, include=F}
+basque <- read.csv("data/basque.csv", stringsAsFactors = T)
+```
+
+```{r, eval=FALSE}
+basque <- read.csv("basque.csv", stringsAsFactors = T)
+```
+
+Let's say I wanted to know the GDP for each region for the earliest year they are in the data.
+
+```{r}
+regionsubset <- subset(basque, region == "Andalucia")
+regionsubset$gdpcap[regionsubset$year == min(regionsubset$year)]
+
+## Repeat for a new region
+regionsubset <- subset(basque, region == "Aragon")
+regionsubset$gdpcap[regionsubset$year == min(regionsubset$year)]
+
+## Repeat for a new region
+regionsubset <- subset(basque, region == "Baleares")
+regionsubset$gdpcap[regionsubset$year == min(regionsubset$year)]
+```
+
+Ughhh can we automate this? we have 17 regions!!!
+```{r}
+unique(basque$region)
+```
+
+Where we will be going by the end of this section:
+
+```{r}
+gdpminyear <- rep(NA, 17) # empty "container" vector
+regions <- unique(basque$region) # what we iterate through
+names(gdpminyear) <- unique(basque$region) # labels for our output
+
+for(i in 1:17){
+  regionsubset <- subset(basque, region == regions[i])
+  gdpminyear[i] <- regionsubset$gdpcap[regionsubset$year == 
+                                         min(regionsubset$year)]
+}
+head(gdpminyear) # output
+```
+
+We got all of the answers with just one chunk of code!
 
 ## The anatomy of a loop
+
+In many situations, we want to repeat the same calculations with
+different inputs. Loops allow you to avoid writing many similar code
+chunks. 
+
+  - The function `for(i in X){}}` will create a loop in
+your programming code where `i` is a counter and 
+  - `X` is a placeholder for a vector for the possible values of the counter.  
+  
+We use the following syntax:
+
+`for (i in X) {`
+
+  `command1...`
+
+  `command2...`
+
+  `...`
+
+`}`
+
+to indicate we want to repeat command1 and command2 and .... as many commands as we want, for each `i` in the set of possible values for `i` stored in `X`.
+
+
 ### The key parts of a loop
+
+The meat: the command or set of commands you want to do over and over.
+
+```{r}
+## the meat
+result <- 6 + 2
+result <- 8 + 2
+result <- 4 + 2
+result <- 7 + 2
+result <- 11 + 2
+```
+
+Note the pattern: we take some number and + 2 each time.
+
+  - It is the number that is changing -> what we will iterate.
+  
+For a loop, you want to:
+
+  1. The Meat: Write down the code for one version.
+```{r}
+result <- 6 + 2
+```
+  2. The Bread: Embed this code in the loop syntax (`for(i in X){}`)
+```{r, eval=F}
+for(i in X){
+    result <- 6 + 2
+    }
+```
+  3. Create a vector that contains the values you want to loop through
+
+```{r}
+somenumbers <- c(6, 8, 4, 7, 11)
+```
+  4. Create a storage vector that will contain the results 
+```{r}
+result <- rep(NA, length(somenumbers))
+```
+  5. Modify the meat and bread to iterate by using `[i]`, and replace `X`.
+```{r}
+for(i in 1:length(somenumbers)){
+  result[i] <- somenumbers[i] + 2
+}
+```
+      where `1:length(somenumbers)` reflects possible values `i` will take 
+
+```{r}
+1:length(somenumbers)
+```
+
+
 ### A short example
+Let's put these parts together:
+
+Suppose we want to add 2 to a set of numbers `c(6, 8, 4, 7, 11)`
+
+```{r}
+somenumbers <- c(6, 8, 4, 7, 11) # iteration vector
+result <- rep(NA, length(somenumbers)) # container vector
+
+for(i in 1:length(somenumbers)){
+  result[i] <- somenumbers[i] + 2
+}
+result
+```
+
+How does this work? Every iteration, the value of i changes.
+
+  - For example, when `i` is 1, we take the first value in our `somenumbers` vector  `somenumbers[1]`, add 2 to it, and store it in the first position of our container vector `result[1]`. When `i` is 2, we switch the number in the brackets to 2, corresponding to the second entry in each vector, and so on.
+  
+```{r}
+# Suppose i is 1
+result[1] <- somenumbers[1] + 2
+result[1]
+
+# Suppose i is 2
+result[2] <- somenumbers[2] + 2
+result[2]
+
+# Suppose i is 3
+result[3] <- somenumbers[3] + 2
+result[3]
+```
+
+
 ### Troubleshooting a loop
+
+The inside part of the loop should run if we set `i` to a particular value.
+
+```{r}
+i <- 1
+result[i] <- somenumbers[i] + 2
+```
+
+If you get an error here, there is something wrong with the meat! (and not necessarily the loop) 
+
+```{r}
+result[i]
+```
+
+For example, if we had a typo, we'd get an error. Try running the below!
+
+```{r, eval=F}
+i <- 1
+result[i] <- somenumberz[i] + 2
+```
+
+
 ### Your turn
+
+Using a loop, for each value in our poll results, add 10 and divide by 100. Store in a vector called `adjustedpollresults`.
+
+```{r}
+pollresults <- c(70, 40, 45, 60, 43, 80, 23)
+```
+
+Remember the steps:
+
+  1. The Meat: Write down the code for one version.
+  2. The Bread: Embed this code in the loop syntax (`for(i in X){}`)
+  3. Create a vector that contains the values you want to loop through (here it's `pollresults`)
+  4. Create a storage vector that will contain the results (here it's `adjustedpollresults`)
+  5. Modify the meat and bread to iterate by using `[i]` and replace `X`.
+
+<details> <summary>Try on your own, then expand for the solution.</summary>
+
+```{r}
+pollresults <- c(70, 40, 45, 60, 43, 80, 23)
+adjustedpollresults <- rep(NA, length(pollresults))
+
+for(i in 1:length(pollresults)){
+  adjustedpollresults[i] <- (pollresults[i] + 10)/100 
+}
+adjustedpollresults
+```
+
+</details>
+
+
 ## Application: U.S. Supreme Court
+
+The Court has changed a lot recently in its composition.
+
+<center>![](images/sccourt6.jpeg){width=40%} ![](images/sccourt.jpg){width=35%}</center>
+<center> ![](images/sccourt5.jpeg){width=40%} </center>
+
+Ideology on the U.S. Supreme Court: With Kennedy out, Kavanaugh in, did the Court have a Conservative shift? 
+
+Many people predicted it would. See this [FiveThirtyEight article](https://fivethirtyeight.com/features/how-kavanaugh-will-change-the-supreme-court/) as an example. The graph from the article shows Kavanaugh's predicted ideology. 
+
+![](images/kav.png){width=50%}
+
+![](images/kavcourt.png)
+
+We will explore how he changed the Court, with a focus on how the location of the median U.S. Supreme Court Justice shifted over time.
+
+For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=gA1OZ8-SO9E")
+```
+The link to the video is https://youtu.be/gA1OZ8-SO9E. 
+
+Why does the median matter? A refresher on the Court
+
+  - President nominates the justice. Senate must confirm.
+  - Justices serve lifetime appointments.
+  - Trump nominated Gorsuch, following Scalia death, confirmed 2017.
+  - Trump nominated Kavanaugh, following Kennedy retirement, confirmed 2018.
+  - The Court typically has 9 justices, so whichever justice is the median in terms of ideology, can act as the "swing" vote in cases where the Court is divided 
+      + Anthony Kennedy was often the "swing" justice for a decade.
+  - With Kennedy out, the prediction is that the Court would return to similar balance as when O'Connor was the median. 
+      + In 2020, Amy Coney Barrett confirmed to Court, likely shifting the Court again. We can continue to update the data to examine what happened.
+
+
+Let's load and explore our data. 
+
+  - `term`: is the year of the SC (1991-2019 except for 2005), 
+  - `justiceName`: contains the name of the Justice, and  
+  - `post_mn`: includes the "ideal point"-- this is the estimated ideology 
+
+Martin-Quinn Scores assess ideology based on how judges "cluster" together in their voting patterns. Every Justice gets an ideology score, and this score can change each SC term (year) they are on the Court. Higher scores are more conservative justices, and lower, more liberal. More information is available  at the [MQScores website](http://mqscores.lsa.umich.edu/measures.php)
+
+```{r, include=F}
+justices <- read.csv("data/justices.csv", stringsAsFactors = T)
+```
+
+```{r, eval=F}
+justices <- read.csv("justices.csv", stringsAsFactors = T)
+
+## alternative
+justices <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/justices.csv", stringsAsFactors = T)
+```
+
+We are going to make the name variable a character class. This will make R treat the names as raw text rather than valued categories. This will be useful later on in the application.
+
+```{r}
+## justice Name as character
+justices$justiceName <- as.character(justices$justiceName)
+```
+
+
+We can use `tapply()` to see the median "ideal point" (ideology score) each term in our data.
+
+```{r}
+## Note: we use tapply like before but replace mean with median
+medians <- tapply(justices$post_mn, justices$term, median)
+
+plot(x =names(medians),
+     y= medians, 
+    ylim = c(-.4, 1),
+     type = "b",
+    cex=1.5,
+     ylab="Conservatism",
+     xlab="Term",
+     main="Median of US Supreme Court over Time")
+```
+
+
+We see a conservative shift at the end of the plot. However, we cannot tell whether this represents a shift within a particular justice's ideology or a shift in which justice has become the median, due perhaps, to the change in the Court's composition.
+
+***We need to find which justice is the median!***
+
+Loops to the rescue!
+
+
+We will start our process by definding the meat of the operation.
+
+  - We want to find the median SC Justice for each term. To get started, let's pretend we only have to find the median Supreme Court Justice for one term.
+
+```{r}
+SCterms <- sort(unique(justices$term))
+SCterms
+```
+
+Note that where you have a vector where some entries in the vector are repeated (such as terms on the Supreme Court), you can extract the unique elements of that vector using the `unique()` function. You can also `sort()` them in numeric or alphabetical order. This won't be necessary most times.
+
+
+First, let's think about how we would do this for just one of the Supreme Court terms. Well we would first subset our data frame to contain only that one Supreme Court term.
+
+```{r}
+## Example for the first term
+SCterms[1]
+
+## Subset data to include only rows from 1991
+subterm <- subset(justices, term == 1991)
+```
+
+Then, we would take the median of these ideal points
+
+```{r}
+median.ip <- median(subterm$post_mn)
+```
+
+Finally, we would figure out which justice has this median.
+
+```{r}
+result <- subterm$justiceName[subterm$post_mn == median.ip]
+result
+```
+
+
+Now let's put it into our loop syntax
+
+```{r, eval=F}
+# for(i  in . . . ){
+#  subterm <- subset(justices, term == 1991)
+#  median.ip <- median(subterm$post_mn)
+#  result <- subterm$justiceName[subterm$post_mn == median.ip]
+#}
+```
+
+Now, we need our container vector and iteration vectors.
+
+```{r}
+SCterms <- sort(unique(justices$term))
+results <- rep(NA, length(SCterms))
+names(results) <- SCterms
+```
+
+Finally, we would modify our loop syntax with `i` and `[i]`
+
+```{r}
+for(i  in 1:length(SCterms)){
+  subterm <- subset(justices, term == SCterms[i])
+  median.ip <- median(subterm$post_mn)
+  results[i] <- subterm$justiceName[subterm$post_mn == median.ip]
+}
+```
+
+Did it work?
+
+```{r}
+results
+```
+
 ### Troubleshooting the loop
+
+Recall, the inside part of the loop should run if we set `i` to a particular value.
+
+```{r}
+  i <- 1
+  subterm <- subset(justices, term == SCterms[i])
+  median.ip <- median(subterm$post_mn)
+  results[i] <- subterm$justiceName[subterm$post_mn == median.ip]
+  
+  results[i]
+```
+
+We are in good shape! If we had a typo, we'd get an error message there, and that would be a sign that we need to work on the inside part of the code before putting it back into the loop structure.
+
 ### Visualizing the Results
+
+To get a bit more practice with plots, let's visualize the results and make our interpretations.
+
+```{r}
+medians <- tapply(justices$post_mn, justices$term, median)
+plot(x =names(medians),
+     y= medians, 
+     ylim = c(-.4, 1),
+     type = "b",
+     cex=1.5,
+     ylab="Conservatism",
+     xlab="Term",
+     main="Median of US Supreme Court over Time")
+
+## Add the names to the plot
+## Note: we want to make sure medians and results are in the same order for this to work
+text(x=names(results), y=(medians - .14), labels=results, cex=.35)
+```
+
+We have now used the `text()` function. Similar to plot, the `text()` takes a set of x and y coordinates that tells R the location of where you want to add a piece(s) of text to the plot. The third input is the actual text.
+
+Why did the Court shift more conservative at the end of the time trend?
+
+  - Well we see that Justice Roberts became the median!
+
+As [FiveThirtyEight](https://fivethirtyeight.com/features/roberts-is-the-new-swing-justice-that-doesnt-mean-hes-becoming-more-liberal/) notes, just because Justice Roberts is the new median, does not mean he has become more liberal. The Court composition is shifting, and the MQ scores also depend on the issues being heard before the Court.
+
+![](images/sccourt.png)
+
+
+Recall, the Martin-Quinn scores measure justice ideology based on voting patterns. What are the strengths and weaknesses of using this type of information to score the ideology of a justice?
+
+
+
+
 ### Enhancing the plot
+
+Let's make the plot more beautiful by color coding.
+
+```{r}
+medians <- tapply(justices$post_mn, justices$term, median)
+plot(x =names(medians),
+     y= medians, 
+     ylim = c(-.4, 1),
+     type = "b",
+     ylab="Conservatism",
+     xlab="Term",
+     main="Median of US Supreme Court over Time",
+     xaxt="n", ## removes the x-axis
+     las=1)
+
+## Adds text
+text(x=names(results), y=(medians - .14), results, cex=.35)
+
+## Adds color-coded points on top of existing points
+points(x =names(medians),
+     y= medians,
+     
+     ## Adds colors according to how results is coded
+     col= ifelse(results == "AMKennedy", "orange", 
+                 ifelse(results =="SDOConnor", "light blue", 
+                        "purple")), 
+     pch=15, # point type- squares 
+     cex=1.5) # size of points
+
+## Adds custom x-axis at the specific years included in names(medians)
+axis(1, names(medians), cex.axis=.6)
+```
+
+We have used the `points()` function. This adds an additional layer of points to a plot. It works much like the `plot` function in that in takes a set of x and y coordinates.
+
+
+We could change the look of the plot even more by adding a legend and altering the borders and look of the plot.
+
+```{r, warning=F}
+medians <- tapply(justices$post_mn, justices$term, median)
+plot(x =names(medians),
+     y= medians, 
+     ylim = c(-.4, 1),
+     type = "b",
+     ylab="Conservatism",
+     xlab="Term",
+     main="Median of US Supreme Court over Time",
+     xaxt="n", # removes x axis
+     las=1, # changes the orientation of the axis labels
+     lwd=2, # increases the thickness of the lines
+     tick=F, # removes the tick marks from the axis
+     bty="n") # removes the plot border
+
+## adds horizontal dashed gray lines
+abline(h=seq(-.4, 1, .2), lty=2, col="light gray")
+
+## Adds a legend
+legend("bottomleft", pch=15, col = c("orange", "light blue", "purple"),
+       c("Kennedy", "O'Connor", "Roberts"), bty="n")
+
+## Adds the color-coded points
+points(x =names(medians), y= medians,
+     col= ifelse(results == "AMKennedy", "orange", 
+                 ifelse(results =="SDOConnor", "light blue", "purple")), 
+     pch=15, cex=2)
+
+## Adds our custom x-axis
+axis(1, names(medians), cex.axis=.6, tick=F)
+```
+
+
 ### Wrapping Up
+
+We have calculated and visualized how the median U.S. Supreme Court Justice and Justice's ideology has changed over the past three decades.
+
+  - This gave us additional practice with loops and visualization
+  - We also gained exposure to an example of how political scientists take a large amount of information-- votes on all Supreme Court cases-- and try to summarize it using a single number that represents how liberal or conservative a justice is
+  
+This type of information can be used for many social science goals: 1) To describe trends in the Court 2) To help explain why the Court has voted a particular way on recent cases 3) To predict how the Court will vote in the future as new justices arrive.
+
+With Amy Coney Barrett now on the Court, we can start to see initial changes in the Court composition. The MQ scores will continue to be updated to allow for future exploration of these dynamics.
+
+![[FiveThirtyEight](https://fivethirtyeight.com/features/the-supreme-courts-conservative-supermajority-is-just-beginning-to-flex-its-muscles
+)](images/sccourt3.png)
+
+
+
+
 
 <!--chapter:end:06-Loops.Rmd-->
 
@@ -234,6 +3370,331 @@ Predict (estimate/guess) some unknown using information we have -- and do so as 
 
 Eventually, after you have tested the approach and are satisfied with the accuracy, you may start applying it to new data for which you do not know the right answer.
 
+
+## Example: Forecasting 2020 US Election based on 2016 Results
+
+Let's try to predict the 2020 election results using just the 2016 results.
+
+
+
+```{r, include=F}
+results2020 <- read.csv("data/elecresults2020.csv", stringsAsFactors = T)
+```
+
+```{r, eval=F}
+results2020 <- read.csv("elecresults2020.csv", stringsAsFactors = T)
+```
+
+Variables
+
+  - `state`: state or state and district
+  - `called`: result of 2020 election
+  - `margin2016`: two-party margin in 2016. Positive values indicate Democratic win, negative indicate Republican win
+  - `EV`: Electoral votes associated with a state/ district of a state
+
+
+![](images/result2020.png){width=80%}
+
+
+```{r}
+sum(results2020$EV[results2020$called == "R"])
+sum(results2020$EV[results2020$called == "D"])
+```
+
+
+### Choose Approach
+
+1) Choose an approach: Using an observed (known) measure as a direct proxy to predict an outcome
+
+  - Let's use the 2016 result as a direct proxy to predict 2020.
+
+```{r}
+results2020$predicted2020 <- ifelse(results2020$margin2016 < 0, "R", "D")
+results2020$predicted2020 <- as.factor(results2020$predicted2020)
+```
+
+
+### Assess Accuracy
+
+2) Assess accuracy
+
+
+What proportion of states did we get correct?
+
+```{r}
+mean(results2020$predicted2020 == results2020$called)
+```
+
+
+Classification
+
+We want to correctly predict the winner of each state
+
+Prediction of binary outcome variable = classification problem
+
+  - true positive: correctly predicting Biden to be the
+      winner
+  - false positive: incorrectly predicting Biden to be
+      the winner (misclassification)
+  - true negative: correctly predicting Biden to be the
+      loser
+  - false negative: incorrectly predicting Biden to be
+      the loser (misclassification)
+
+We define one outcome as the "positive" and one as the "negative." Here we will say a Biden win is the positive and a Trump win is the negative. You could flip this and make a Trump win the positive and a Biden win the negative. This terminology comes from settings where there is a more objective positive vs. negative result (e.g., a positive medical test result) than most social science settings. The key thing is that we are trying to identify different types of correct classifications vs. misclassifications.  
+  
+Confusion Matrix: Tells us how we went right, how we went wrong.
+
+```{r}
+table(predicted=results2020$predicted2020, actual = results2020$called)
+```
+
+
+Which states did we get wrong?
+
+```{r}
+results2020$state[results2020$predicted2020 != results2020$called]
+```
+
+### Iterate to improve predictions
+
+Start back at step one. We continue to repeat steps 1 and 2 until we are confident in our predictions.
+
+
+How could we improve our predictions of elections? What other information could we use?
+
+
+## Example: Using polls to predict the 2020 election results
+
+Many forecasters use pre-election polls in their models to predict election outcomes. In 2016 and 2020, polling-based forecasts received a lot of criticism
+
+
+Prior to the 2016 elections, forecasts that used polls seemed confident that Hillary Clinton would win the election. [Political analysts](https://www.youtube.com/watch?v=zerWCVpXTr8) also seemed to think the polls were favorable to Clinton.
+
+
+![*NY Upshot*](images/clintonupshot.png) 
+
+We all know that afterwards, Clinton did not win.
+
+![*Pew*](images/afterpolls.png){width=70%}
+
+
+This led public opinion scholars and practitioners to do a deep investigation into the quality of pre-election polling. Like 2016, following the 2020 election, a similar team investigated the quality of pre-election polling in 2020. Here, while many polls pointed to a favorable outcome for Biden, the results seemed closer than one might have anticipated.
+
+
+![](images/aaportitle.png)
+
+The results of these findings are in the [AAPOR report](https://www.aapor.org/AAPOR_Main/media/MainSiteFiles/AAPOR-Task-Force-on-2020-Pre-Election-Polling_Report-FNL.pdf).
+
+### Choose an approach: Let's analyze some polls
+
+
+We are going to do our own analysis of pre-election polls as a prediction of the 2020 election results. We will use a large number of state polls conducted from May-November 2020 that were made available to the public on FiveThirtyEight.
+
+```{r, include=F}
+polls2020 <- read.csv("data/pollsandresults2020.csv", stringsAsFactors = T)
+```
+ 
+```{r, eval=F}
+polls2020 <- read.csv("pollsandresults2020.csv", stringsAsFactors = T)
+```
+
+
+Variables
+
+  - `TrumpPoll, BidenPoll`: Poll-based vote share for Biden or Trump
+  - `TrumpResult, BidenResult`: Actual vote share for Biden or Trump
+  - `EV`: Electoral votes associated with state/CD
+  - `days_to_election`: Days until Election Day
+  - `stateid`: state abbreviation
+  - `fte_grade`: FiveThirtyEight Pollster grade
+  - `sample_size`: Poll sample size
+
+
+Can we predict the outcome of an election using polls?
+
+Let's create our outcome variables.
+
+```{r}
+## Biden's margin of victory (or defeat) in  the polls
+polls2020$polldiff <- polls2020$BidenPoll - polls2020$TrumpPoll
+
+## Biden's margin of victory (or defeat) in the actual election result
+polls2020$resultdiff <- polls2020$BidenResult - polls2020$TrumpResult
+```
+
+Positive numbers mean Biden was ahead/won. Negative mean Trump was ahead/won.
+
+
+![](images/result2020.png){width=80%}
+
+Let's predict the amount of electoral votes for Biden based on polls in each state close to Election Day.
+
+Let's start with 1 state.
+
+  - Let's grab all polls within 2 weeks of the election or the most recent day polled (for areas that did not have recent polls)
+
+```{r}
+## Iteration vector
+states <- unique(polls2020$stateid)
+states[1]
+## Subset to just Alabama
+subdata <- subset(polls2020, stateid == states[1])
+
+## Further subset to the "latest polls"
+subdata <- subset(subdata, days_to_election < 15 | 
+                      days_to_election == min(subdata$days_to_election) )
+```
+
+
+Now let's extract the actual margin for Biden, the poll-based predicted margin, and finally, let's assign electoral votes based on our prediction.
+
+```{r}
+## Find the margin for the actual result
+result.marginAL <- mean(subdata$resultdiff)
+result.marginAL
+## Find the margin for our prediction
+polls.marginAL <- mean(subdata$polldiff)
+polls.marginAL
+## Allocate votes for Biden according to the margin
+bidenvotesAL <- ifelse(mean(subdata$polldiff) > 0, 
+                            unique(subdata$EV), 0)
+bidenvotesAL
+```
+
+We predicted Biden would lose Alabama because the `polls.marginAL` is negative. Therefore, we assigned Biden 0 electoral votes in this example.
+
+
+### Loop through all states
+
+```{r}
+## Iteration vector
+states <- unique(polls2020$stateid)
+## Container vector
+polls.margin <- result.margin <- bidenvotes <- 
+  rep(NA, length(states))
+
+names(polls.margin) <- names(result.margin) <- 
+  names(bidenvotes)  <-as.character(unique(states))
+
+## Loop
+for(i in 1:length(states)){
+  subdata <- subset(polls2020, stateid == states[i] )
+  subdata <- subset(subdata, days_to_election < 15 | 
+                      days_to_election == min(subdata$days_to_election) )
+  result.margin[i] <- mean(subdata$resultdiff)
+  polls.margin[i] <- mean(subdata$polldiff)
+  bidenvotes[i] <- ifelse(mean(subdata$polldiff) > 0, 
+                            unique(subdata$EV), 0)
+ }
+sum(bidenvotes) # predicted
+```
+
+
+### Check Accuracy
+
+
+#### Quantitative Measures of Accuracy
+
+Let's calculate two common measures of prediction error: bias (the average prediction error) and root-mean-squared error (a typical magnitude of the prediction error).
+
+```{r}
+## Calculate Bias (Predicted Biden - True Biden)
+predictionerror <- polls.margin -result.margin 
+bias <- mean(predictionerror)
+
+## Root Mean Squared Error
+sqrt(mean((predictionerror)^2))
+```
+
+On average, the poll-based prediction was more than 4 points larger for Biden's margin than the actual result.
+
+
+We can create a plot similar to the left plot from the AAPOR report.
+
+![](images/aaporhist20.png)
+
+
+```{r}
+## Histogram of Prediction Errors to Show Bias
+hist(predictionerror, 
+     xlab = "Prediction Error (Predicted Biden Margin - Actual)",
+     main = "Histogram of Prediction Error in Latest Polls")
+abline(v=mean(predictionerror), col="red")
+abline(v=0)
+```
+
+
+Another way to visualize the prediction error
+
+  - Let's create our own version of this AAPOR Plot
+
+
+![](images/aapor20.png)
+
+
+We will plot the prediction error on the x-axis, and list the corresponding states on the y-axis.
+
+  - We will sort the prediction error to make it easier to see the pattern of results.
+
+```{r}
+plot(x=sort(predictionerror), y=1:length(predictionerror),
+     main="Average Prediction Error by State \n Biden - Trump Margin",
+     ylab="State",
+     xlab="Prediction Error (Predicted Biden Margin - Actual Margin)",
+     yaxt="n",
+     bty="n",
+     xlim = c(-5, 15)) 
+abline(v=0, lty=2)
+axis(2, 1:length(predictionerror), labels=names(sort(predictionerror)), las=1, 
+     cex.axis=.5,tick=F)
+axis(1, seq(-5, 15, 5), seq(-5, 15, 5))
+text(-3, 15, "Poll Margin \n Skewed Toward Trump", cex=.7)
+text(8, 15, "Poll Margin \n Skewed Toward Biden", cex=.7)
+```
+
+
+#### Classification
+
+
+Instead of quantifying how far we were off, let's see where we were right vs. where we were wrong.
+  
+
+Classification
+
+  - true positive: correctly predicting Biden to be the winner
+  - false positive: incorrectly predicting Biden to be the winner
+  - true negative: correctly predicting Biden to be the
+      loser
+  - false negative: incorrectly predicting Biden to be
+      the loser
+
+  
+Confusion Matrix
+
+Let's classify our predictions.
+
+```{r}
+actualwins <- ifelse(result.margin > 0, "Biden Won", "Trump Won")
+predictedwins <- ifelse(polls.margin > 0, "Biden Won", "Trump Won")
+```
+
+```{r}
+table(predictedwins, actualwins)
+```
+
+Where did the polls get it wrong?
+
+```{r}
+actualwins[actualwins != predictedwins]
+```
+
+
+What's your conclusion?
+
+  - Are the polls alright? 
+  - How could you improve the prediction?
+  - Wait a second... why even poll?
 
 
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.2 Application: U.S. Supreme Court | Data Science for Political Science</title>
   <meta name="description" content="6.2 Application: U.S. Supreme Court | Data Science for Political Science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.2 Application: U.S. Supreme Court | Data Science for Political Science" />
   <meta property="og:type" content="book" />
@@ -31,9 +31,10 @@
   
   
 <link rel="prev" href="the-anatomy-of-a-loop.html"/>
-
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="next" href="prediction.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -176,9 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html#creating-new-variables-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Creating new variables in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
+<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs.-midterm-turnout.html"><a href="comparing-presidential-vs.-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
+<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs.-midterm-turnout.html"><a href="comparing-presidential-vs.-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="causation1.html"><a href="causation1.html"><i class="fa fa-check"></i><b>3</b> Causation with Experiments</a>
@@ -241,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="application-trends-during-covid.html"><a href="application-trends-during-covid.html"><i class="fa fa-check"></i><b>4.7</b> Application: Trends during COVID</a></li>
 <li class="chapter" data-level="4.8" data-path="line-plots-in-r.html"><a href="line-plots-in-r.html"><i class="fa fa-check"></i><b>4.8</b> Line Plots in R</a></li>
-<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs-after-comparisons.html"><a href="causal-claims-from-before-vs-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
+<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs.-after-comparisons.html"><a href="causal-claims-from-before-vs.-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
 <li class="chapter" data-level="4.10" data-path="visual-tips-and-tricks.html"><a href="visual-tips-and-tricks.html"><i class="fa fa-check"></i><b>4.10</b> Visual tips and tricks</a></li>
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
@@ -275,12 +278,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.3" data-path="the-anatomy-of-a-loop.html"><a href="the-anatomy-of-a-loop.html#troubleshooting-a-loop"><i class="fa fa-check"></i><b>6.1.3</b> Troubleshooting a loop</a></li>
 <li class="chapter" data-level="6.1.4" data-path="the-anatomy-of-a-loop.html"><a href="the-anatomy-of-a-loop.html#your-turn"><i class="fa fa-check"></i><b>6.1.4</b> Your turn</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html"><i class="fa fa-check"></i><b>6.2</b> Application: U.S. Supreme Court</a>
+<li class="chapter" data-level="6.2" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html"><i class="fa fa-check"></i><b>6.2</b> Application: U.S. Supreme Court</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#troubleshooting-the-loop"><i class="fa fa-check"></i><b>6.2.1</b> Troubleshooting the loop</a></li>
-<li class="chapter" data-level="6.2.2" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#visualizing-the-results"><i class="fa fa-check"></i><b>6.2.2</b> Visualizing the Results</a></li>
-<li class="chapter" data-level="6.2.3" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#enhancing-the-plot"><i class="fa fa-check"></i><b>6.2.3</b> Enhancing the plot</a></li>
-<li class="chapter" data-level="6.2.4" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#wrapping-up"><i class="fa fa-check"></i><b>6.2.4</b> Wrapping Up</a></li>
+<li class="chapter" data-level="6.2.1" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#troubleshooting-the-loop"><i class="fa fa-check"></i><b>6.2.1</b> Troubleshooting the loop</a></li>
+<li class="chapter" data-level="6.2.2" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#visualizing-the-results"><i class="fa fa-check"></i><b>6.2.2</b> Visualizing the Results</a></li>
+<li class="chapter" data-level="6.2.3" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#enhancing-the-plot"><i class="fa fa-check"></i><b>6.2.3</b> Enhancing the plot</a></li>
+<li class="chapter" data-level="6.2.4" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#wrapping-up"><i class="fa fa-check"></i><b>6.2.4</b> Wrapping Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="prediction-overview.html"><a href="prediction-overview.html"><i class="fa fa-check"></i><b>7.1</b> Prediction Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="process-of-prediction.html"><a href="process-of-prediction.html"><i class="fa fa-check"></i><b>7.2</b> Process of Prediction</a></li>
+<li class="chapter" data-level="7.3" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html"><i class="fa fa-check"></i><b>7.3</b> Example: Forecasting 2020 US Election based on 2016 Results</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#choose-approach"><i class="fa fa-check"></i><b>7.3.1</b> Choose Approach</a></li>
+<li class="chapter" data-level="7.3.2" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#assess-accuracy"><i class="fa fa-check"></i><b>7.3.2</b> Assess Accuracy</a></li>
+<li class="chapter" data-level="7.3.3" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#iterate-to-improve-predictions"><i class="fa fa-check"></i><b>7.3.3</b> Iterate to improve predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html"><i class="fa fa-check"></i><b>7.4</b> Example: Using polls to predict the 2020 election results</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#choose-an-approach-lets-analyze-some-polls"><i class="fa fa-check"></i><b>7.4.1</b> Choose an approach: Let’s analyze some polls</a></li>
+<li class="chapter" data-level="7.4.2" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#loop-through-all-states"><i class="fa fa-check"></i><b>7.4.2</b> Loop through all states</a></li>
+<li class="chapter" data-level="7.4.3" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#check-accuracy"><i class="fa fa-check"></i><b>7.4.3</b> Check Accuracy</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -344,25 +364,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>post_mn</code>: includes the “ideal point”– this is the estimated ideology</li>
 </ul>
 <p>Martin-Quinn Scores assess ideology based on how judges “cluster” together in their voting patterns. Every Justice gets an ideology score, and this score can change each SC term (year) they are on the Court. Higher scores are more conservative justices, and lower, more liberal. More information is available at the <a href="http://mqscores.lsa.umich.edu/measures.php">MQScores website</a></p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="application-u-s-supreme-court.html#cb287-1" aria-hidden="true" tabindex="-1"></a>justices <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;justices.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span>
-<span id="cb287-2"><a href="application-u-s-supreme-court.html#cb287-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb287-3"><a href="application-u-s-supreme-court.html#cb287-3" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative</span></span>
-<span id="cb287-4"><a href="application-u-s-supreme-court.html#cb287-4" aria-hidden="true" tabindex="-1"></a>justices <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/ktmccabe/teachingdata/main/justices.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="application-u.s.-supreme-court.html#cb287-1" aria-hidden="true" tabindex="-1"></a>justices <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;justices.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span>
+<span id="cb287-2"><a href="application-u.s.-supreme-court.html#cb287-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-3"><a href="application-u.s.-supreme-court.html#cb287-3" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative</span></span>
+<span id="cb287-4"><a href="application-u.s.-supreme-court.html#cb287-4" aria-hidden="true" tabindex="-1"></a>justices <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/ktmccabe/teachingdata/main/justices.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span></code></pre></div>
 <p>We are going to make the name variable a character class. This will make R treat the names as raw text rather than valued categories. This will be useful later on in the application.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="application-u-s-supreme-court.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="do">## justice Name as character</span></span>
-<span id="cb288-2"><a href="application-u-s-supreme-court.html#cb288-2" aria-hidden="true" tabindex="-1"></a>justices<span class="sc">$</span>justiceName <span class="ot">&lt;-</span> <span class="fu">as.character</span>(justices<span class="sc">$</span>justiceName)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="application-u.s.-supreme-court.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="do">## justice Name as character</span></span>
+<span id="cb288-2"><a href="application-u.s.-supreme-court.html#cb288-2" aria-hidden="true" tabindex="-1"></a>justices<span class="sc">$</span>justiceName <span class="ot">&lt;-</span> <span class="fu">as.character</span>(justices<span class="sc">$</span>justiceName)</span></code></pre></div>
 <p>We can use <code>tapply()</code> to see the median “ideal point” (ideology score) each term in our data.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="application-u-s-supreme-court.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: we use tapply like before but replace mean with median</span></span>
-<span id="cb289-2"><a href="application-u-s-supreme-court.html#cb289-2" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
-<span id="cb289-3"><a href="application-u-s-supreme-court.html#cb289-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb289-4"><a href="application-u-s-supreme-court.html#cb289-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
-<span id="cb289-5"><a href="application-u-s-supreme-court.html#cb289-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
-<span id="cb289-6"><a href="application-u-s-supreme-court.html#cb289-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
-<span id="cb289-7"><a href="application-u-s-supreme-court.html#cb289-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
-<span id="cb289-8"><a href="application-u-s-supreme-court.html#cb289-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cex=</span><span class="fl">1.5</span>,</span>
-<span id="cb289-9"><a href="application-u-s-supreme-court.html#cb289-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
-<span id="cb289-10"><a href="application-u-s-supreme-court.html#cb289-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
-<span id="cb289-11"><a href="application-u-s-supreme-court.html#cb289-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="application-u.s.-supreme-court.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: we use tapply like before but replace mean with median</span></span>
+<span id="cb289-2"><a href="application-u.s.-supreme-court.html#cb289-2" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
+<span id="cb289-3"><a href="application-u.s.-supreme-court.html#cb289-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb289-4"><a href="application-u.s.-supreme-court.html#cb289-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
+<span id="cb289-5"><a href="application-u.s.-supreme-court.html#cb289-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
+<span id="cb289-6"><a href="application-u.s.-supreme-court.html#cb289-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
+<span id="cb289-7"><a href="application-u.s.-supreme-court.html#cb289-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb289-8"><a href="application-u.s.-supreme-court.html#cb289-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cex=</span><span class="fl">1.5</span>,</span>
+<span id="cb289-9"><a href="application-u.s.-supreme-court.html#cb289-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
+<span id="cb289-10"><a href="application-u.s.-supreme-court.html#cb289-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
+<span id="cb289-11"><a href="application-u.s.-supreme-court.html#cb289-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-167-1.svg" width="672" /></p>
 <p>We see a conservative shift at the end of the plot. However, we cannot tell whether this represents a shift within a particular justice’s ideology or a shift in which justice has become the median, due perhaps, to the change in the Court’s composition.</p>
 <p><strong><em>We need to find which justice is the median!</em></strong></p>
@@ -371,41 +391,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>We want to find the median SC Justice for each term. To get started, let’s pretend we only have to find the median Supreme Court Justice for one term.</li>
 </ul>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="application-u-s-supreme-court.html#cb290-1" aria-hidden="true" tabindex="-1"></a>SCterms <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(justices<span class="sc">$</span>term))</span>
-<span id="cb290-2"><a href="application-u-s-supreme-court.html#cb290-2" aria-hidden="true" tabindex="-1"></a>SCterms</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="application-u.s.-supreme-court.html#cb290-1" aria-hidden="true" tabindex="-1"></a>SCterms <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(justices<span class="sc">$</span>term))</span>
+<span id="cb290-2"><a href="application-u.s.-supreme-court.html#cb290-2" aria-hidden="true" tabindex="-1"></a>SCterms</span></code></pre></div>
 <pre><code>##  [1] 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2006
 ## [16] 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019</code></pre>
 <p>Note that where you have a vector where some entries in the vector are repeated (such as terms on the Supreme Court), you can extract the unique elements of that vector using the <code>unique()</code> function. You can also <code>sort()</code> them in numeric or alphabetical order. This won’t be necessary most times.</p>
 <p>First, let’s think about how we would do this for just one of the Supreme Court terms. Well we would first subset our data frame to contain only that one Supreme Court term.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="application-u-s-supreme-court.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example for the first term</span></span>
-<span id="cb292-2"><a href="application-u-s-supreme-court.html#cb292-2" aria-hidden="true" tabindex="-1"></a>SCterms[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="application-u.s.-supreme-court.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example for the first term</span></span>
+<span id="cb292-2"><a href="application-u.s.-supreme-court.html#cb292-2" aria-hidden="true" tabindex="-1"></a>SCterms[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 1991</code></pre>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="application-u-s-supreme-court.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Subset data to include only rows from 1991</span></span>
-<span id="cb294-2"><a href="application-u-s-supreme-court.html#cb294-2" aria-hidden="true" tabindex="-1"></a>subterm <span class="ot">&lt;-</span> <span class="fu">subset</span>(justices, term <span class="sc">==</span> <span class="dv">1991</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="application-u.s.-supreme-court.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Subset data to include only rows from 1991</span></span>
+<span id="cb294-2"><a href="application-u.s.-supreme-court.html#cb294-2" aria-hidden="true" tabindex="-1"></a>subterm <span class="ot">&lt;-</span> <span class="fu">subset</span>(justices, term <span class="sc">==</span> <span class="dv">1991</span>)</span></code></pre></div>
 <p>Then, we would take the median of these ideal points</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="application-u-s-supreme-court.html#cb295-1" aria-hidden="true" tabindex="-1"></a>median.ip <span class="ot">&lt;-</span> <span class="fu">median</span>(subterm<span class="sc">$</span>post_mn)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="application-u.s.-supreme-court.html#cb295-1" aria-hidden="true" tabindex="-1"></a>median.ip <span class="ot">&lt;-</span> <span class="fu">median</span>(subterm<span class="sc">$</span>post_mn)</span></code></pre></div>
 <p>Finally, we would figure out which justice has this median.</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="application-u-s-supreme-court.html#cb296-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> subterm<span class="sc">$</span>justiceName[subterm<span class="sc">$</span>post_mn <span class="sc">==</span> median.ip]</span>
-<span id="cb296-2"><a href="application-u-s-supreme-court.html#cb296-2" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="application-u.s.-supreme-court.html#cb296-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> subterm<span class="sc">$</span>justiceName[subterm<span class="sc">$</span>post_mn <span class="sc">==</span> median.ip]</span>
+<span id="cb296-2"><a href="application-u.s.-supreme-court.html#cb296-2" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
 <pre><code>## [1] &quot;SDOConnor&quot;</code></pre>
 <p>Now let’s put it into our loop syntax</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="application-u-s-supreme-court.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for(i  in . . . ){</span></span>
-<span id="cb298-2"><a href="application-u-s-supreme-court.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  subterm &lt;- subset(justices, term == 1991)</span></span>
-<span id="cb298-3"><a href="application-u-s-supreme-court.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  median.ip &lt;- median(subterm$post_mn)</span></span>
-<span id="cb298-4"><a href="application-u-s-supreme-court.html#cb298-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  result &lt;- subterm$justiceName[subterm$post_mn == median.ip]</span></span>
-<span id="cb298-5"><a href="application-u-s-supreme-court.html#cb298-5" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="application-u.s.-supreme-court.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for(i  in . . . ){</span></span>
+<span id="cb298-2"><a href="application-u.s.-supreme-court.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  subterm &lt;- subset(justices, term == 1991)</span></span>
+<span id="cb298-3"><a href="application-u.s.-supreme-court.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  median.ip &lt;- median(subterm$post_mn)</span></span>
+<span id="cb298-4"><a href="application-u.s.-supreme-court.html#cb298-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  result &lt;- subterm$justiceName[subterm$post_mn == median.ip]</span></span>
+<span id="cb298-5"><a href="application-u.s.-supreme-court.html#cb298-5" aria-hidden="true" tabindex="-1"></a><span class="co">#}</span></span></code></pre></div>
 <p>Now, we need our container vector and iteration vectors.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="application-u-s-supreme-court.html#cb299-1" aria-hidden="true" tabindex="-1"></a>SCterms <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(justices<span class="sc">$</span>term))</span>
-<span id="cb299-2"><a href="application-u-s-supreme-court.html#cb299-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(SCterms))</span>
-<span id="cb299-3"><a href="application-u-s-supreme-court.html#cb299-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(results) <span class="ot">&lt;-</span> SCterms</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="application-u.s.-supreme-court.html#cb299-1" aria-hidden="true" tabindex="-1"></a>SCterms <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(justices<span class="sc">$</span>term))</span>
+<span id="cb299-2"><a href="application-u.s.-supreme-court.html#cb299-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(SCterms))</span>
+<span id="cb299-3"><a href="application-u.s.-supreme-court.html#cb299-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(results) <span class="ot">&lt;-</span> SCterms</span></code></pre></div>
 <p>Finally, we would modify our loop syntax with <code>i</code> and <code>[i]</code></p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="application-u-s-supreme-court.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i  <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(SCterms)){</span>
-<span id="cb300-2"><a href="application-u-s-supreme-court.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  subterm <span class="ot">&lt;-</span> <span class="fu">subset</span>(justices, term <span class="sc">==</span> SCterms[i])</span>
-<span id="cb300-3"><a href="application-u-s-supreme-court.html#cb300-3" aria-hidden="true" tabindex="-1"></a>  median.ip <span class="ot">&lt;-</span> <span class="fu">median</span>(subterm<span class="sc">$</span>post_mn)</span>
-<span id="cb300-4"><a href="application-u-s-supreme-court.html#cb300-4" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">&lt;-</span> subterm<span class="sc">$</span>justiceName[subterm<span class="sc">$</span>post_mn <span class="sc">==</span> median.ip]</span>
-<span id="cb300-5"><a href="application-u-s-supreme-court.html#cb300-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="application-u.s.-supreme-court.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i  <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(SCterms)){</span>
+<span id="cb300-2"><a href="application-u.s.-supreme-court.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  subterm <span class="ot">&lt;-</span> <span class="fu">subset</span>(justices, term <span class="sc">==</span> SCterms[i])</span>
+<span id="cb300-3"><a href="application-u.s.-supreme-court.html#cb300-3" aria-hidden="true" tabindex="-1"></a>  median.ip <span class="ot">&lt;-</span> <span class="fu">median</span>(subterm<span class="sc">$</span>post_mn)</span>
+<span id="cb300-4"><a href="application-u.s.-supreme-court.html#cb300-4" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">&lt;-</span> subterm<span class="sc">$</span>justiceName[subterm<span class="sc">$</span>post_mn <span class="sc">==</span> median.ip]</span>
+<span id="cb300-5"><a href="application-u.s.-supreme-court.html#cb300-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Did it work?</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="application-u-s-supreme-court.html#cb301-1" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="application-u.s.-supreme-court.html#cb301-1" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div>
 <pre><code>##        1991        1992        1993        1994        1995        1996 
 ## &quot;SDOConnor&quot; &quot;SDOConnor&quot; &quot;AMKennedy&quot; &quot;SDOConnor&quot; &quot;AMKennedy&quot; &quot;AMKennedy&quot; 
 ##        1997        1998        1999        2000        2001        2002 
@@ -419,12 +439,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="troubleshooting-the-loop" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Troubleshooting the loop</h3>
 <p>Recall, the inside part of the loop should run if we set <code>i</code> to a particular value.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="application-u-s-supreme-court.html#cb303-1" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb303-2"><a href="application-u-s-supreme-court.html#cb303-2" aria-hidden="true" tabindex="-1"></a>  subterm <span class="ot">&lt;-</span> <span class="fu">subset</span>(justices, term <span class="sc">==</span> SCterms[i])</span>
-<span id="cb303-3"><a href="application-u-s-supreme-court.html#cb303-3" aria-hidden="true" tabindex="-1"></a>  median.ip <span class="ot">&lt;-</span> <span class="fu">median</span>(subterm<span class="sc">$</span>post_mn)</span>
-<span id="cb303-4"><a href="application-u-s-supreme-court.html#cb303-4" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">&lt;-</span> subterm<span class="sc">$</span>justiceName[subterm<span class="sc">$</span>post_mn <span class="sc">==</span> median.ip]</span>
-<span id="cb303-5"><a href="application-u-s-supreme-court.html#cb303-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb303-6"><a href="application-u-s-supreme-court.html#cb303-6" aria-hidden="true" tabindex="-1"></a>  results[i]</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="application-u.s.-supreme-court.html#cb303-1" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb303-2"><a href="application-u.s.-supreme-court.html#cb303-2" aria-hidden="true" tabindex="-1"></a>  subterm <span class="ot">&lt;-</span> <span class="fu">subset</span>(justices, term <span class="sc">==</span> SCterms[i])</span>
+<span id="cb303-3"><a href="application-u.s.-supreme-court.html#cb303-3" aria-hidden="true" tabindex="-1"></a>  median.ip <span class="ot">&lt;-</span> <span class="fu">median</span>(subterm<span class="sc">$</span>post_mn)</span>
+<span id="cb303-4"><a href="application-u.s.-supreme-court.html#cb303-4" aria-hidden="true" tabindex="-1"></a>  results[i] <span class="ot">&lt;-</span> subterm<span class="sc">$</span>justiceName[subterm<span class="sc">$</span>post_mn <span class="sc">==</span> median.ip]</span>
+<span id="cb303-5"><a href="application-u.s.-supreme-court.html#cb303-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb303-6"><a href="application-u.s.-supreme-court.html#cb303-6" aria-hidden="true" tabindex="-1"></a>  results[i]</span></code></pre></div>
 <pre><code>##        1991 
 ## &quot;SDOConnor&quot;</code></pre>
 <p>We are in good shape! If we had a typo, we’d get an error message there, and that would be a sign that we need to work on the inside part of the code before putting it back into the loop structure.</p>
@@ -432,19 +452,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="visualizing-the-results" class="section level3" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Visualizing the Results</h3>
 <p>To get a bit more practice with plots, let’s visualize the results and make our interpretations.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="application-u-s-supreme-court.html#cb305-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
-<span id="cb305-2"><a href="application-u-s-supreme-court.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
-<span id="cb305-3"><a href="application-u-s-supreme-court.html#cb305-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
-<span id="cb305-4"><a href="application-u-s-supreme-court.html#cb305-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
-<span id="cb305-5"><a href="application-u-s-supreme-court.html#cb305-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
-<span id="cb305-6"><a href="application-u-s-supreme-court.html#cb305-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">1.5</span>,</span>
-<span id="cb305-7"><a href="application-u-s-supreme-court.html#cb305-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
-<span id="cb305-8"><a href="application-u-s-supreme-court.html#cb305-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
-<span id="cb305-9"><a href="application-u-s-supreme-court.html#cb305-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>)</span>
-<span id="cb305-10"><a href="application-u-s-supreme-court.html#cb305-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb305-11"><a href="application-u-s-supreme-court.html#cb305-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Add the names to the plot</span></span>
-<span id="cb305-12"><a href="application-u-s-supreme-court.html#cb305-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: we want to make sure medians and results are in the same order for this to work</span></span>
-<span id="cb305-13"><a href="application-u-s-supreme-court.html#cb305-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">names</span>(results), <span class="at">y=</span>(medians <span class="sc">-</span> .<span class="dv">14</span>), <span class="at">labels=</span>results, <span class="at">cex=</span>.<span class="dv">35</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="application-u.s.-supreme-court.html#cb305-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
+<span id="cb305-2"><a href="application-u.s.-supreme-court.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
+<span id="cb305-3"><a href="application-u.s.-supreme-court.html#cb305-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
+<span id="cb305-4"><a href="application-u.s.-supreme-court.html#cb305-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
+<span id="cb305-5"><a href="application-u.s.-supreme-court.html#cb305-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb305-6"><a href="application-u.s.-supreme-court.html#cb305-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">1.5</span>,</span>
+<span id="cb305-7"><a href="application-u.s.-supreme-court.html#cb305-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
+<span id="cb305-8"><a href="application-u.s.-supreme-court.html#cb305-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
+<span id="cb305-9"><a href="application-u.s.-supreme-court.html#cb305-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>)</span>
+<span id="cb305-10"><a href="application-u.s.-supreme-court.html#cb305-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb305-11"><a href="application-u.s.-supreme-court.html#cb305-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Add the names to the plot</span></span>
+<span id="cb305-12"><a href="application-u.s.-supreme-court.html#cb305-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: we want to make sure medians and results are in the same order for this to work</span></span>
+<span id="cb305-13"><a href="application-u.s.-supreme-court.html#cb305-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">names</span>(results), <span class="at">y=</span>(medians <span class="sc">-</span> .<span class="dv">14</span>), <span class="at">labels=</span>results, <span class="at">cex=</span>.<span class="dv">35</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-177-1.svg" width="672" /></p>
 <p>We have now used the <code>text()</code> function. Similar to plot, the <code>text()</code> takes a set of x and y coordinates that tells R the location of where you want to add a piece(s) of text to the plot. The third input is the actual text.</p>
 <p>Why did the Court shift more conservative at the end of the time trend?</p>
@@ -458,65 +478,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="enhancing-the-plot" class="section level3" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Enhancing the plot</h3>
 <p>Let’s make the plot more beautiful by color coding.</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="application-u-s-supreme-court.html#cb306-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
-<span id="cb306-2"><a href="application-u-s-supreme-court.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
-<span id="cb306-3"><a href="application-u-s-supreme-court.html#cb306-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
-<span id="cb306-4"><a href="application-u-s-supreme-court.html#cb306-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
-<span id="cb306-5"><a href="application-u-s-supreme-court.html#cb306-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
-<span id="cb306-6"><a href="application-u-s-supreme-court.html#cb306-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
-<span id="cb306-7"><a href="application-u-s-supreme-court.html#cb306-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
-<span id="cb306-8"><a href="application-u-s-supreme-court.html#cb306-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>,</span>
-<span id="cb306-9"><a href="application-u-s-supreme-court.html#cb306-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="do">## removes the x-axis</span></span>
-<span id="cb306-10"><a href="application-u-s-supreme-court.html#cb306-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">las=</span><span class="dv">1</span>)</span>
-<span id="cb306-11"><a href="application-u-s-supreme-court.html#cb306-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb306-12"><a href="application-u-s-supreme-court.html#cb306-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds text</span></span>
-<span id="cb306-13"><a href="application-u-s-supreme-court.html#cb306-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">names</span>(results), <span class="at">y=</span>(medians <span class="sc">-</span> .<span class="dv">14</span>), results, <span class="at">cex=</span>.<span class="dv">35</span>)</span>
-<span id="cb306-14"><a href="application-u-s-supreme-court.html#cb306-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb306-15"><a href="application-u-s-supreme-court.html#cb306-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds color-coded points on top of existing points</span></span>
-<span id="cb306-16"><a href="application-u-s-supreme-court.html#cb306-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
-<span id="cb306-17"><a href="application-u-s-supreme-court.html#cb306-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians,</span>
-<span id="cb306-18"><a href="application-u-s-supreme-court.html#cb306-18" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb306-19"><a href="application-u-s-supreme-court.html#cb306-19" aria-hidden="true" tabindex="-1"></a>     <span class="do">## Adds colors according to how results is coded</span></span>
-<span id="cb306-20"><a href="application-u-s-supreme-court.html#cb306-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span> <span class="fu">ifelse</span>(results <span class="sc">==</span> <span class="st">&quot;AMKennedy&quot;</span>, <span class="st">&quot;orange&quot;</span>, </span>
-<span id="cb306-21"><a href="application-u-s-supreme-court.html#cb306-21" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">ifelse</span>(results <span class="sc">==</span><span class="st">&quot;SDOConnor&quot;</span>, <span class="st">&quot;light blue&quot;</span>, </span>
-<span id="cb306-22"><a href="application-u-s-supreme-court.html#cb306-22" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;purple&quot;</span>)), </span>
-<span id="cb306-23"><a href="application-u-s-supreme-court.html#cb306-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">15</span>, <span class="co"># point type- squares </span></span>
-<span id="cb306-24"><a href="application-u-s-supreme-court.html#cb306-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">1.5</span>) <span class="co"># size of points</span></span>
-<span id="cb306-25"><a href="application-u-s-supreme-court.html#cb306-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb306-26"><a href="application-u-s-supreme-court.html#cb306-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds custom x-axis at the specific years included in names(medians)</span></span>
-<span id="cb306-27"><a href="application-u-s-supreme-court.html#cb306-27" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">names</span>(medians), <span class="at">cex.axis=</span>.<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="application-u.s.-supreme-court.html#cb306-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
+<span id="cb306-2"><a href="application-u.s.-supreme-court.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
+<span id="cb306-3"><a href="application-u.s.-supreme-court.html#cb306-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
+<span id="cb306-4"><a href="application-u.s.-supreme-court.html#cb306-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
+<span id="cb306-5"><a href="application-u.s.-supreme-court.html#cb306-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb306-6"><a href="application-u.s.-supreme-court.html#cb306-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
+<span id="cb306-7"><a href="application-u.s.-supreme-court.html#cb306-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
+<span id="cb306-8"><a href="application-u.s.-supreme-court.html#cb306-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>,</span>
+<span id="cb306-9"><a href="application-u.s.-supreme-court.html#cb306-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="do">## removes the x-axis</span></span>
+<span id="cb306-10"><a href="application-u.s.-supreme-court.html#cb306-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb306-11"><a href="application-u.s.-supreme-court.html#cb306-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-12"><a href="application-u.s.-supreme-court.html#cb306-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds text</span></span>
+<span id="cb306-13"><a href="application-u.s.-supreme-court.html#cb306-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">names</span>(results), <span class="at">y=</span>(medians <span class="sc">-</span> .<span class="dv">14</span>), results, <span class="at">cex=</span>.<span class="dv">35</span>)</span>
+<span id="cb306-14"><a href="application-u.s.-supreme-court.html#cb306-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-15"><a href="application-u.s.-supreme-court.html#cb306-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds color-coded points on top of existing points</span></span>
+<span id="cb306-16"><a href="application-u.s.-supreme-court.html#cb306-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
+<span id="cb306-17"><a href="application-u.s.-supreme-court.html#cb306-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians,</span>
+<span id="cb306-18"><a href="application-u.s.-supreme-court.html#cb306-18" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb306-19"><a href="application-u.s.-supreme-court.html#cb306-19" aria-hidden="true" tabindex="-1"></a>     <span class="do">## Adds colors according to how results is coded</span></span>
+<span id="cb306-20"><a href="application-u.s.-supreme-court.html#cb306-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span> <span class="fu">ifelse</span>(results <span class="sc">==</span> <span class="st">&quot;AMKennedy&quot;</span>, <span class="st">&quot;orange&quot;</span>, </span>
+<span id="cb306-21"><a href="application-u.s.-supreme-court.html#cb306-21" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">ifelse</span>(results <span class="sc">==</span><span class="st">&quot;SDOConnor&quot;</span>, <span class="st">&quot;light blue&quot;</span>, </span>
+<span id="cb306-22"><a href="application-u.s.-supreme-court.html#cb306-22" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;purple&quot;</span>)), </span>
+<span id="cb306-23"><a href="application-u.s.-supreme-court.html#cb306-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">15</span>, <span class="co"># point type- squares </span></span>
+<span id="cb306-24"><a href="application-u.s.-supreme-court.html#cb306-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">1.5</span>) <span class="co"># size of points</span></span>
+<span id="cb306-25"><a href="application-u.s.-supreme-court.html#cb306-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-26"><a href="application-u.s.-supreme-court.html#cb306-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds custom x-axis at the specific years included in names(medians)</span></span>
+<span id="cb306-27"><a href="application-u.s.-supreme-court.html#cb306-27" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">names</span>(medians), <span class="at">cex.axis=</span>.<span class="dv">6</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-178-1.svg" width="672" /></p>
 <p>We have used the <code>points()</code> function. This adds an additional layer of points to a plot. It works much like the <code>plot</code> function in that in takes a set of x and y coordinates.</p>
 <p>We could change the look of the plot even more by adding a legend and altering the borders and look of the plot.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="application-u-s-supreme-court.html#cb307-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
-<span id="cb307-2"><a href="application-u-s-supreme-court.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
-<span id="cb307-3"><a href="application-u-s-supreme-court.html#cb307-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
-<span id="cb307-4"><a href="application-u-s-supreme-court.html#cb307-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
-<span id="cb307-5"><a href="application-u-s-supreme-court.html#cb307-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
-<span id="cb307-6"><a href="application-u-s-supreme-court.html#cb307-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
-<span id="cb307-7"><a href="application-u-s-supreme-court.html#cb307-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
-<span id="cb307-8"><a href="application-u-s-supreme-court.html#cb307-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>,</span>
-<span id="cb307-9"><a href="application-u-s-supreme-court.html#cb307-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="co"># removes x axis</span></span>
-<span id="cb307-10"><a href="application-u-s-supreme-court.html#cb307-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">las=</span><span class="dv">1</span>, <span class="co"># changes the orientation of the axis labels</span></span>
-<span id="cb307-11"><a href="application-u-s-supreme-court.html#cb307-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd=</span><span class="dv">2</span>, <span class="co"># increases the thickness of the lines</span></span>
-<span id="cb307-12"><a href="application-u-s-supreme-court.html#cb307-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">tick=</span>F, <span class="co"># removes the tick marks from the axis</span></span>
-<span id="cb307-13"><a href="application-u-s-supreme-court.html#cb307-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty=</span><span class="st">&quot;n&quot;</span>) <span class="co"># removes the plot border</span></span>
-<span id="cb307-14"><a href="application-u-s-supreme-court.html#cb307-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-15"><a href="application-u-s-supreme-court.html#cb307-15" aria-hidden="true" tabindex="-1"></a><span class="do">## adds horizontal dashed gray lines</span></span>
-<span id="cb307-16"><a href="application-u-s-supreme-court.html#cb307-16" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>, .<span class="dv">2</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;light gray&quot;</span>)</span>
-<span id="cb307-17"><a href="application-u-s-supreme-court.html#cb307-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-18"><a href="application-u-s-supreme-court.html#cb307-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds a legend</span></span>
-<span id="cb307-19"><a href="application-u-s-supreme-court.html#cb307-19" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;light blue&quot;</span>, <span class="st">&quot;purple&quot;</span>),</span>
-<span id="cb307-20"><a href="application-u-s-supreme-court.html#cb307-20" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">&quot;Kennedy&quot;</span>, <span class="st">&quot;O&#39;Connor&quot;</span>, <span class="st">&quot;Roberts&quot;</span>), <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb307-21"><a href="application-u-s-supreme-court.html#cb307-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-22"><a href="application-u-s-supreme-court.html#cb307-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds the color-coded points</span></span>
-<span id="cb307-23"><a href="application-u-s-supreme-court.html#cb307-23" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span><span class="fu">names</span>(medians), <span class="at">y=</span> medians,</span>
-<span id="cb307-24"><a href="application-u-s-supreme-court.html#cb307-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span> <span class="fu">ifelse</span>(results <span class="sc">==</span> <span class="st">&quot;AMKennedy&quot;</span>, <span class="st">&quot;orange&quot;</span>, </span>
-<span id="cb307-25"><a href="application-u-s-supreme-court.html#cb307-25" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">ifelse</span>(results <span class="sc">==</span><span class="st">&quot;SDOConnor&quot;</span>, <span class="st">&quot;light blue&quot;</span>, <span class="st">&quot;purple&quot;</span>)), </span>
-<span id="cb307-26"><a href="application-u-s-supreme-court.html#cb307-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">15</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
-<span id="cb307-27"><a href="application-u-s-supreme-court.html#cb307-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-28"><a href="application-u-s-supreme-court.html#cb307-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds our custom x-axis</span></span>
-<span id="cb307-29"><a href="application-u-s-supreme-court.html#cb307-29" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">names</span>(medians), <span class="at">cex.axis=</span>.<span class="dv">6</span>, <span class="at">tick=</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="application-u.s.-supreme-court.html#cb307-1" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(justices<span class="sc">$</span>post_mn, justices<span class="sc">$</span>term, median)</span>
+<span id="cb307-2"><a href="application-u.s.-supreme-court.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span><span class="fu">names</span>(medians),</span>
+<span id="cb307-3"><a href="application-u.s.-supreme-court.html#cb307-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span> medians, </span>
+<span id="cb307-4"><a href="application-u.s.-supreme-court.html#cb307-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>),</span>
+<span id="cb307-5"><a href="application-u.s.-supreme-court.html#cb307-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb307-6"><a href="application-u.s.-supreme-court.html#cb307-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Conservatism&quot;</span>,</span>
+<span id="cb307-7"><a href="application-u.s.-supreme-court.html#cb307-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Term&quot;</span>,</span>
+<span id="cb307-8"><a href="application-u.s.-supreme-court.html#cb307-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Median of US Supreme Court over Time&quot;</span>,</span>
+<span id="cb307-9"><a href="application-u.s.-supreme-court.html#cb307-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="co"># removes x axis</span></span>
+<span id="cb307-10"><a href="application-u.s.-supreme-court.html#cb307-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">las=</span><span class="dv">1</span>, <span class="co"># changes the orientation of the axis labels</span></span>
+<span id="cb307-11"><a href="application-u.s.-supreme-court.html#cb307-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd=</span><span class="dv">2</span>, <span class="co"># increases the thickness of the lines</span></span>
+<span id="cb307-12"><a href="application-u.s.-supreme-court.html#cb307-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">tick=</span>F, <span class="co"># removes the tick marks from the axis</span></span>
+<span id="cb307-13"><a href="application-u.s.-supreme-court.html#cb307-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty=</span><span class="st">&quot;n&quot;</span>) <span class="co"># removes the plot border</span></span>
+<span id="cb307-14"><a href="application-u.s.-supreme-court.html#cb307-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-15"><a href="application-u.s.-supreme-court.html#cb307-15" aria-hidden="true" tabindex="-1"></a><span class="do">## adds horizontal dashed gray lines</span></span>
+<span id="cb307-16"><a href="application-u.s.-supreme-court.html#cb307-16" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">seq</span>(<span class="sc">-</span>.<span class="dv">4</span>, <span class="dv">1</span>, .<span class="dv">2</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;light gray&quot;</span>)</span>
+<span id="cb307-17"><a href="application-u.s.-supreme-court.html#cb307-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-18"><a href="application-u.s.-supreme-court.html#cb307-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds a legend</span></span>
+<span id="cb307-19"><a href="application-u.s.-supreme-court.html#cb307-19" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;light blue&quot;</span>, <span class="st">&quot;purple&quot;</span>),</span>
+<span id="cb307-20"><a href="application-u.s.-supreme-court.html#cb307-20" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">&quot;Kennedy&quot;</span>, <span class="st">&quot;O&#39;Connor&quot;</span>, <span class="st">&quot;Roberts&quot;</span>), <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb307-21"><a href="application-u.s.-supreme-court.html#cb307-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-22"><a href="application-u.s.-supreme-court.html#cb307-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds the color-coded points</span></span>
+<span id="cb307-23"><a href="application-u.s.-supreme-court.html#cb307-23" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span><span class="fu">names</span>(medians), <span class="at">y=</span> medians,</span>
+<span id="cb307-24"><a href="application-u.s.-supreme-court.html#cb307-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span> <span class="fu">ifelse</span>(results <span class="sc">==</span> <span class="st">&quot;AMKennedy&quot;</span>, <span class="st">&quot;orange&quot;</span>, </span>
+<span id="cb307-25"><a href="application-u.s.-supreme-court.html#cb307-25" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">ifelse</span>(results <span class="sc">==</span><span class="st">&quot;SDOConnor&quot;</span>, <span class="st">&quot;light blue&quot;</span>, <span class="st">&quot;purple&quot;</span>)), </span>
+<span id="cb307-26"><a href="application-u.s.-supreme-court.html#cb307-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">15</span>, <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb307-27"><a href="application-u.s.-supreme-court.html#cb307-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-28"><a href="application-u.s.-supreme-court.html#cb307-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Adds our custom x-axis</span></span>
+<span id="cb307-29"><a href="application-u.s.-supreme-court.html#cb307-29" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">names</span>(medians), <span class="at">cex.axis=</span>.<span class="dv">6</span>, <span class="at">tick=</span>F)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-179-1.svg" width="672" /></p>
 </div>
 <div id="wrapping-up" class="section level3" number="6.2.4">
@@ -541,12 +561,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="the-anatomy-of-a-loop.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="the-anatomy-of-a-loop.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prediction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -565,6 +584,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -585,6 +605,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

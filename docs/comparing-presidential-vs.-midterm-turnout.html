@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science</title>
   <meta name="description" content="2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.6 Comparing Presidential vs. Midterm turnout | Data Science for Political Science" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="comparing-vep-and-vap-turnout.html"/>
 <link rel="next" href="causation1.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -176,9 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html#creating-new-variables-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Creating new variables in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
+<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs.-midterm-turnout.html"><a href="comparing-presidential-vs.-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
+<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs.-midterm-turnout.html"><a href="comparing-presidential-vs.-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="causation1.html"><a href="causation1.html"><i class="fa fa-check"></i><b>3</b> Causation with Experiments</a>
@@ -241,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="application-trends-during-covid.html"><a href="application-trends-during-covid.html"><i class="fa fa-check"></i><b>4.7</b> Application: Trends during COVID</a></li>
 <li class="chapter" data-level="4.8" data-path="line-plots-in-r.html"><a href="line-plots-in-r.html"><i class="fa fa-check"></i><b>4.8</b> Line Plots in R</a></li>
-<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs-after-comparisons.html"><a href="causal-claims-from-before-vs-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
+<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs.-after-comparisons.html"><a href="causal-claims-from-before-vs.-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
 <li class="chapter" data-level="4.10" data-path="visual-tips-and-tricks.html"><a href="visual-tips-and-tricks.html"><i class="fa fa-check"></i><b>4.10</b> Visual tips and tricks</a></li>
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
@@ -275,12 +278,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.3" data-path="the-anatomy-of-a-loop.html"><a href="the-anatomy-of-a-loop.html#troubleshooting-a-loop"><i class="fa fa-check"></i><b>6.1.3</b> Troubleshooting a loop</a></li>
 <li class="chapter" data-level="6.1.4" data-path="the-anatomy-of-a-loop.html"><a href="the-anatomy-of-a-loop.html#your-turn"><i class="fa fa-check"></i><b>6.1.4</b> Your turn</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html"><i class="fa fa-check"></i><b>6.2</b> Application: U.S. Supreme Court</a>
+<li class="chapter" data-level="6.2" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html"><i class="fa fa-check"></i><b>6.2</b> Application: U.S. Supreme Court</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#troubleshooting-the-loop"><i class="fa fa-check"></i><b>6.2.1</b> Troubleshooting the loop</a></li>
-<li class="chapter" data-level="6.2.2" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#visualizing-the-results"><i class="fa fa-check"></i><b>6.2.2</b> Visualizing the Results</a></li>
-<li class="chapter" data-level="6.2.3" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#enhancing-the-plot"><i class="fa fa-check"></i><b>6.2.3</b> Enhancing the plot</a></li>
-<li class="chapter" data-level="6.2.4" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#wrapping-up"><i class="fa fa-check"></i><b>6.2.4</b> Wrapping Up</a></li>
+<li class="chapter" data-level="6.2.1" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#troubleshooting-the-loop"><i class="fa fa-check"></i><b>6.2.1</b> Troubleshooting the loop</a></li>
+<li class="chapter" data-level="6.2.2" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#visualizing-the-results"><i class="fa fa-check"></i><b>6.2.2</b> Visualizing the Results</a></li>
+<li class="chapter" data-level="6.2.3" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#enhancing-the-plot"><i class="fa fa-check"></i><b>6.2.3</b> Enhancing the plot</a></li>
+<li class="chapter" data-level="6.2.4" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#wrapping-up"><i class="fa fa-check"></i><b>6.2.4</b> Wrapping Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="prediction-overview.html"><a href="prediction-overview.html"><i class="fa fa-check"></i><b>7.1</b> Prediction Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="process-of-prediction.html"><a href="process-of-prediction.html"><i class="fa fa-check"></i><b>7.2</b> Process of Prediction</a></li>
+<li class="chapter" data-level="7.3" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html"><i class="fa fa-check"></i><b>7.3</b> Example: Forecasting 2020 US Election based on 2016 Results</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#choose-approach"><i class="fa fa-check"></i><b>7.3.1</b> Choose Approach</a></li>
+<li class="chapter" data-level="7.3.2" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#assess-accuracy"><i class="fa fa-check"></i><b>7.3.2</b> Assess Accuracy</a></li>
+<li class="chapter" data-level="7.3.3" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#iterate-to-improve-predictions"><i class="fa fa-check"></i><b>7.3.3</b> Iterate to improve predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html"><i class="fa fa-check"></i><b>7.4</b> Example: Using polls to predict the 2020 election results</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#choose-an-approach-lets-analyze-some-polls"><i class="fa fa-check"></i><b>7.4.1</b> Choose an approach: Let’s analyze some polls</a></li>
+<li class="chapter" data-level="7.4.2" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#loop-through-all-states"><i class="fa fa-check"></i><b>7.4.2</b> Loop through all states</a></li>
+<li class="chapter" data-level="7.4.3" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#check-accuracy"><i class="fa fa-check"></i><b>7.4.3</b> Check Accuracy</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -304,37 +324,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.6</span> Comparing Presidential vs. Midterm turnout</h2>
 <p>How does turnout compare in presidential vs. midterm years? Sometimes using a single summary of turnout may obscure important underlying differences in the data. To detect these differences, we may want to summarize different parts of the data.</p>
 <p>Oh dear. We need to extract specific years from the turnout data frame. Which rows contain the years we want?</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb105-1" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb105-1" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year</span></code></pre></div>
 <pre><code>##  [1] 1980 1982 1984 1986 1988 1990 1992 1994 1996 1998 2000 2002 2004 2008</code></pre>
 <p>Ok: rows 1,3,5,7,9,11,13,14 are the presidential. And rows 2,4,6,8,10,12 are midterms.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="do">## we can extract all of these at once by using c()</span></span>
-<span id="cb107-2"><a href="comparing-presidential-vs-midterm-turnout.html#cb107-2" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)] <span class="co"># presidential</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="do">## we can extract all of these at once by using c()</span></span>
+<span id="cb107-2"><a href="comparing-presidential-vs.-midterm-turnout.html#cb107-2" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)] <span class="co"># presidential</span></span></code></pre></div>
 <pre><code>## [1] 1980 1984 1988 1992 1996 2000 2004 2008</code></pre>
 <p>Let’s take the mean VEP turnout for presidential years.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)])</span></code></pre></div>
 <pre><code>## [1] 55.983</code></pre>
 <p>Let’s take the mean VEP turnout for midterm years.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)])</span></code></pre></div>
 <pre><code>## [1] 39.5712</code></pre>
 <p>Let’s take the difference by storing each mean and then subtracting</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb113-1" aria-hidden="true" tabindex="-1"></a>mean.VEP.pres <span class="ot">&lt;-</span> <span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)])</span>
-<span id="cb113-2"><a href="comparing-presidential-vs-midterm-turnout.html#cb113-2" aria-hidden="true" tabindex="-1"></a>mean.VEP.mid <span class="ot">&lt;-</span> <span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)])</span>
-<span id="cb113-3"><a href="comparing-presidential-vs-midterm-turnout.html#cb113-3" aria-hidden="true" tabindex="-1"></a>mean.VEP.pres <span class="sc">-</span>  mean.VEP.mid</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb113-1" aria-hidden="true" tabindex="-1"></a>mean.VEP.pres <span class="ot">&lt;-</span> <span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>)])</span>
+<span id="cb113-2"><a href="comparing-presidential-vs.-midterm-turnout.html#cb113-2" aria-hidden="true" tabindex="-1"></a>mean.VEP.mid <span class="ot">&lt;-</span> <span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)])</span>
+<span id="cb113-3"><a href="comparing-presidential-vs.-midterm-turnout.html#cb113-3" aria-hidden="true" tabindex="-1"></a>mean.VEP.pres <span class="sc">-</span>  mean.VEP.mid</span></code></pre></div>
 <pre><code>## [1] 16.41181</code></pre>
 <p>Presidential turnout, on average, is higher than midterm turnout.</p>
 <div id="r-shortcut-for-writing-vectors" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> R shortcut for writing vectors</h3>
 <p>Sometimes we write numbers that are in a predictable sequence (e.g., 1,2,3,4,5). In R, we have functions that prevent us from having to type each number when this is the case.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>) <span class="co"># is equivalent to:</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>) <span class="co"># is equivalent to:</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># is equivalent to:</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># is equivalent to:</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <p>We can use the last one to our advantage to extract the midterm years, which go by 2</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)]) <span class="co"># is the same as</span></span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>)]) <span class="co"># is the same as</span></span></code></pre></div>
 <pre><code>## [1] 39.5712</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="comparing-presidential-vs-midterm-turnout.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">2</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="comparing-presidential-vs.-midterm-turnout.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>newVEPturnout[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">2</span>)])</span></code></pre></div>
 <pre><code>## [1] 39.5712</code></pre>
 <p>Not a big deal now, but imagine if you had to write 100 numbers or 1 MILLION NUMBERS!</p>
 <p>In this section, we have described voter turnout using multiple measures and types of elections. There are several other questions that political scientists may be interested in when it comes to voter turnout.</p>
@@ -354,7 +374,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -373,6 +392,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -393,6 +413,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

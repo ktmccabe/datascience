@@ -80,5 +80,330 @@ Predict (estimate/guess) some unknown using information we have -- and do so as 
 Eventually, after you have tested the approach and are satisfied with the accuracy, you may start applying it to new data for which you do not know the right answer.
 
 
+## Example: Forecasting 2020 US Election based on 2016 Results
+
+Let's try to predict the 2020 election results using just the 2016 results.
+
+
+
+```{r, include=F}
+results2020 <- read.csv("data/elecresults2020.csv", stringsAsFactors = T)
+```
+
+```{r, eval=F}
+results2020 <- read.csv("elecresults2020.csv", stringsAsFactors = T)
+```
+
+Variables
+
+  - `state`: state or state and district
+  - `called`: result of 2020 election
+  - `margin2016`: two-party margin in 2016. Positive values indicate Democratic win, negative indicate Republican win
+  - `EV`: Electoral votes associated with a state/ district of a state
+
+
+![](images/result2020.png){width=80%}
+
+
+```{r}
+sum(results2020$EV[results2020$called == "R"])
+sum(results2020$EV[results2020$called == "D"])
+```
+
+
+### Choose Approach
+
+1) Choose an approach: Using an observed (known) measure as a direct proxy to predict an outcome
+
+  - Let's use the 2016 result as a direct proxy to predict 2020.
+
+```{r}
+results2020$predicted2020 <- ifelse(results2020$margin2016 < 0, "R", "D")
+results2020$predicted2020 <- as.factor(results2020$predicted2020)
+```
+
+
+### Assess Accuracy
+
+2) Assess accuracy
+
+
+What proportion of states did we get correct?
+
+```{r}
+mean(results2020$predicted2020 == results2020$called)
+```
+
+
+Classification
+
+We want to correctly predict the winner of each state
+
+Prediction of binary outcome variable = classification problem
+
+  - true positive: correctly predicting Biden to be the
+      winner
+  - false positive: incorrectly predicting Biden to be
+      the winner (misclassification)
+  - true negative: correctly predicting Biden to be the
+      loser
+  - false negative: incorrectly predicting Biden to be
+      the loser (misclassification)
+
+We define one outcome as the "positive" and one as the "negative." Here we will say a Biden win is the positive and a Trump win is the negative. You could flip this and make a Trump win the positive and a Biden win the negative. This terminology comes from settings where there is a more objective positive vs. negative result (e.g., a positive medical test result) than most social science settings. The key thing is that we are trying to identify different types of correct classifications vs. misclassifications.  
+  
+Confusion Matrix: Tells us how we went right, how we went wrong.
+
+```{r}
+table(predicted=results2020$predicted2020, actual = results2020$called)
+```
+
+
+Which states did we get wrong?
+
+```{r}
+results2020$state[results2020$predicted2020 != results2020$called]
+```
+
+### Iterate to improve predictions
+
+Start back at step one. We continue to repeat steps 1 and 2 until we are confident in our predictions.
+
+
+How could we improve our predictions of elections? What other information could we use?
+
+
+## Example: Using polls to predict the 2020 election results
+
+Many forecasters use pre-election polls in their models to predict election outcomes. In 2016 and 2020, polling-based forecasts received a lot of criticism
+
+
+Prior to the 2016 elections, forecasts that used polls seemed confident that Hillary Clinton would win the election. [Political analysts](https://www.youtube.com/watch?v=zerWCVpXTr8) also seemed to think the polls were favorable to Clinton.
+
+
+![*NY Upshot*](images/clintonupshot.png) 
+
+We all know that afterwards, Clinton did not win.
+
+![*Pew*](images/afterpolls.png){width=70%}
+
+
+This led public opinion scholars and practitioners to do a deep investigation into the quality of pre-election polling. Like 2016, following the 2020 election, a similar team investigated the quality of pre-election polling in 2020. Here, while many polls pointed to a favorable outcome for Biden, the results seemed closer than one might have anticipated.
+
+
+![](images/aaportitle.png)
+
+The results of these findings are in the [AAPOR report](https://www.aapor.org/AAPOR_Main/media/MainSiteFiles/AAPOR-Task-Force-on-2020-Pre-Election-Polling_Report-FNL.pdf).
+
+### Choose an approach: Let's analyze some polls
+
+
+We are going to do our own analysis of pre-election polls as a prediction of the 2020 election results. We will use a large number of state polls conducted from May-November 2020 that were made available to the public on FiveThirtyEight.
+
+```{r, include=F}
+polls2020 <- read.csv("data/pollsandresults2020.csv", stringsAsFactors = T)
+```
+ 
+```{r, eval=F}
+polls2020 <- read.csv("pollsandresults2020.csv", stringsAsFactors = T)
+```
+
+
+Variables
+
+  - `TrumpPoll, BidenPoll`: Poll-based vote share for Biden or Trump
+  - `TrumpResult, BidenResult`: Actual vote share for Biden or Trump
+  - `EV`: Electoral votes associated with state/CD
+  - `days_to_election`: Days until Election Day
+  - `stateid`: state abbreviation
+  - `fte_grade`: FiveThirtyEight Pollster grade
+  - `sample_size`: Poll sample size
+
+
+Can we predict the outcome of an election using polls?
+
+Let's create our outcome variables.
+
+```{r}
+## Biden's margin of victory (or defeat) in  the polls
+polls2020$polldiff <- polls2020$BidenPoll - polls2020$TrumpPoll
+
+## Biden's margin of victory (or defeat) in the actual election result
+polls2020$resultdiff <- polls2020$BidenResult - polls2020$TrumpResult
+```
+
+Positive numbers mean Biden was ahead/won. Negative mean Trump was ahead/won.
+
+
+![](images/result2020.png){width=80%}
+
+Let's predict the amount of electoral votes for Biden based on polls in each state close to Election Day.
+
+Let's start with 1 state.
+
+  - Let's grab all polls within 2 weeks of the election or the most recent day polled (for areas that did not have recent polls)
+
+```{r}
+## Iteration vector
+states <- unique(polls2020$stateid)
+states[1]
+## Subset to just Alabama
+subdata <- subset(polls2020, stateid == states[1])
+
+## Further subset to the "latest polls"
+subdata <- subset(subdata, days_to_election < 15 | 
+                      days_to_election == min(subdata$days_to_election) )
+```
+
+
+Now let's extract the actual margin for Biden, the poll-based predicted margin, and finally, let's assign electoral votes based on our prediction.
+
+```{r}
+## Find the margin for the actual result
+result.marginAL <- mean(subdata$resultdiff)
+result.marginAL
+## Find the margin for our prediction
+polls.marginAL <- mean(subdata$polldiff)
+polls.marginAL
+## Allocate votes for Biden according to the margin
+bidenvotesAL <- ifelse(mean(subdata$polldiff) > 0, 
+                            unique(subdata$EV), 0)
+bidenvotesAL
+```
+
+We predicted Biden would lose Alabama because the `polls.marginAL` is negative. Therefore, we assigned Biden 0 electoral votes in this example.
+
+
+### Loop through all states
+
+```{r}
+## Iteration vector
+states <- unique(polls2020$stateid)
+## Container vector
+polls.margin <- result.margin <- bidenvotes <- 
+  rep(NA, length(states))
+
+names(polls.margin) <- names(result.margin) <- 
+  names(bidenvotes)  <-as.character(unique(states))
+
+## Loop
+for(i in 1:length(states)){
+  subdata <- subset(polls2020, stateid == states[i] )
+  subdata <- subset(subdata, days_to_election < 15 | 
+                      days_to_election == min(subdata$days_to_election) )
+  result.margin[i] <- mean(subdata$resultdiff)
+  polls.margin[i] <- mean(subdata$polldiff)
+  bidenvotes[i] <- ifelse(mean(subdata$polldiff) > 0, 
+                            unique(subdata$EV), 0)
+ }
+sum(bidenvotes) # predicted
+```
+
+
+### Check Accuracy
+
+
+#### Quantitative Measures of Accuracy
+
+Let's calculate two common measures of prediction error: bias (the average prediction error) and root-mean-squared error (a typical magnitude of the prediction error).
+
+```{r}
+## Calculate Bias (Predicted Biden - True Biden)
+predictionerror <- polls.margin -result.margin 
+bias <- mean(predictionerror)
+
+## Root Mean Squared Error
+sqrt(mean((predictionerror)^2))
+```
+
+On average, the poll-based prediction was more than 4 points larger for Biden's margin than the actual result.
+
+
+We can create a plot similar to the left plot from the AAPOR report.
+
+![](images/aaporhist20.png)
+
+
+```{r}
+## Histogram of Prediction Errors to Show Bias
+hist(predictionerror, 
+     xlab = "Prediction Error (Predicted Biden Margin - Actual)",
+     main = "Histogram of Prediction Error in Latest Polls")
+abline(v=mean(predictionerror), col="red")
+abline(v=0)
+```
+
+
+Another way to visualize the prediction error
+
+  - Let's create our own version of this AAPOR Plot
+
+
+![](images/aapor20.png)
+
+
+We will plot the prediction error on the x-axis, and list the corresponding states on the y-axis.
+
+  - We will sort the prediction error to make it easier to see the pattern of results.
+
+```{r}
+plot(x=sort(predictionerror), y=1:length(predictionerror),
+     main="Average Prediction Error by State \n Biden - Trump Margin",
+     ylab="State",
+     xlab="Prediction Error (Predicted Biden Margin - Actual Margin)",
+     yaxt="n",
+     bty="n",
+     xlim = c(-5, 15)) 
+abline(v=0, lty=2)
+axis(2, 1:length(predictionerror), labels=names(sort(predictionerror)), las=1, 
+     cex.axis=.5,tick=F)
+axis(1, seq(-5, 15, 5), seq(-5, 15, 5))
+text(-3, 15, "Poll Margin \n Skewed Toward Trump", cex=.7)
+text(8, 15, "Poll Margin \n Skewed Toward Biden", cex=.7)
+```
+
+
+#### Classification
+
+
+Instead of quantifying how far we were off, let's see where we were right vs. where we were wrong.
+  
+
+Classification
+
+  - true positive: correctly predicting Biden to be the winner
+  - false positive: incorrectly predicting Biden to be the winner
+  - true negative: correctly predicting Biden to be the
+      loser
+  - false negative: incorrectly predicting Biden to be
+      the loser
+
+  
+Confusion Matrix
+
+Let's classify our predictions.
+
+```{r}
+actualwins <- ifelse(result.margin > 0, "Biden Won", "Trump Won")
+predictedwins <- ifelse(polls.margin > 0, "Biden Won", "Trump Won")
+```
+
+```{r}
+table(predictedwins, actualwins)
+```
+
+Where did the polls get it wrong?
+
+```{r}
+actualwins[actualwins != predictedwins]
+```
+
+
+What's your conclusion?
+
+  - Are the polls alright? 
+  - How could you improve the prediction?
+  - Wait a second... why even poll?
+
 
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.9 Causal claims from before vs. after comparisons | Data Science for Political Science</title>
   <meta name="description" content="4.9 Causal claims from before vs. after comparisons | Data Science for Political Science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.9 Causal claims from before vs. after comparisons | Data Science for Political Science" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="line-plots-in-r.html"/>
 <link rel="next" href="visual-tips-and-tricks.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,7 +50,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -176,9 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.5.1" data-path="comparing-vep-and-vap-turnout.html"><a href="comparing-vep-and-vap-turnout.html#creating-new-variables-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Creating new variables in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
+<li class="chapter" data-level="2.6" data-path="comparing-presidential-vs.-midterm-turnout.html"><a href="comparing-presidential-vs.-midterm-turnout.html"><i class="fa fa-check"></i><b>2.6</b> Comparing Presidential vs. Midterm turnout</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs-midterm-turnout.html"><a href="comparing-presidential-vs-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
+<li class="chapter" data-level="2.6.1" data-path="comparing-presidential-vs.-midterm-turnout.html"><a href="comparing-presidential-vs.-midterm-turnout.html#r-shortcut-for-writing-vectors"><i class="fa fa-check"></i><b>2.6.1</b> R shortcut for writing vectors</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="causation1.html"><a href="causation1.html"><i class="fa fa-check"></i><b>3</b> Causation with Experiments</a>
@@ -241,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="application-trends-during-covid.html"><a href="application-trends-during-covid.html"><i class="fa fa-check"></i><b>4.7</b> Application: Trends during COVID</a></li>
 <li class="chapter" data-level="4.8" data-path="line-plots-in-r.html"><a href="line-plots-in-r.html"><i class="fa fa-check"></i><b>4.8</b> Line Plots in R</a></li>
-<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs-after-comparisons.html"><a href="causal-claims-from-before-vs-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
+<li class="chapter" data-level="4.9" data-path="causal-claims-from-before-vs.-after-comparisons.html"><a href="causal-claims-from-before-vs.-after-comparisons.html"><i class="fa fa-check"></i><b>4.9</b> Causal claims from before vs. after comparisons</a></li>
 <li class="chapter" data-level="4.10" data-path="visual-tips-and-tricks.html"><a href="visual-tips-and-tricks.html"><i class="fa fa-check"></i><b>4.10</b> Visual tips and tricks</a></li>
 <li class="chapter" data-level="4.11" data-path="common-r-plotting-functions-and-arguments.html"><a href="common-r-plotting-functions-and-arguments.html"><i class="fa fa-check"></i><b>4.11</b> Common R plotting functions and arguments</a></li>
 <li class="chapter" data-level="4.12" data-path="a-note-on-ggplot.html"><a href="a-note-on-ggplot.html"><i class="fa fa-check"></i><b>4.12</b> A note on <code>ggplot</code></a></li>
@@ -275,12 +278,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.3" data-path="the-anatomy-of-a-loop.html"><a href="the-anatomy-of-a-loop.html#troubleshooting-a-loop"><i class="fa fa-check"></i><b>6.1.3</b> Troubleshooting a loop</a></li>
 <li class="chapter" data-level="6.1.4" data-path="the-anatomy-of-a-loop.html"><a href="the-anatomy-of-a-loop.html#your-turn"><i class="fa fa-check"></i><b>6.1.4</b> Your turn</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html"><i class="fa fa-check"></i><b>6.2</b> Application: U.S. Supreme Court</a>
+<li class="chapter" data-level="6.2" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html"><i class="fa fa-check"></i><b>6.2</b> Application: U.S. Supreme Court</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#troubleshooting-the-loop"><i class="fa fa-check"></i><b>6.2.1</b> Troubleshooting the loop</a></li>
-<li class="chapter" data-level="6.2.2" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#visualizing-the-results"><i class="fa fa-check"></i><b>6.2.2</b> Visualizing the Results</a></li>
-<li class="chapter" data-level="6.2.3" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#enhancing-the-plot"><i class="fa fa-check"></i><b>6.2.3</b> Enhancing the plot</a></li>
-<li class="chapter" data-level="6.2.4" data-path="application-u-s-supreme-court.html"><a href="application-u-s-supreme-court.html#wrapping-up"><i class="fa fa-check"></i><b>6.2.4</b> Wrapping Up</a></li>
+<li class="chapter" data-level="6.2.1" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#troubleshooting-the-loop"><i class="fa fa-check"></i><b>6.2.1</b> Troubleshooting the loop</a></li>
+<li class="chapter" data-level="6.2.2" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#visualizing-the-results"><i class="fa fa-check"></i><b>6.2.2</b> Visualizing the Results</a></li>
+<li class="chapter" data-level="6.2.3" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#enhancing-the-plot"><i class="fa fa-check"></i><b>6.2.3</b> Enhancing the plot</a></li>
+<li class="chapter" data-level="6.2.4" data-path="application-u.s.-supreme-court.html"><a href="application-u.s.-supreme-court.html#wrapping-up"><i class="fa fa-check"></i><b>6.2.4</b> Wrapping Up</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="prediction.html"><a href="prediction.html"><i class="fa fa-check"></i><b>7</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="prediction-overview.html"><a href="prediction-overview.html"><i class="fa fa-check"></i><b>7.1</b> Prediction Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="process-of-prediction.html"><a href="process-of-prediction.html"><i class="fa fa-check"></i><b>7.2</b> Process of Prediction</a></li>
+<li class="chapter" data-level="7.3" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html"><i class="fa fa-check"></i><b>7.3</b> Example: Forecasting 2020 US Election based on 2016 Results</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#choose-approach"><i class="fa fa-check"></i><b>7.3.1</b> Choose Approach</a></li>
+<li class="chapter" data-level="7.3.2" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#assess-accuracy"><i class="fa fa-check"></i><b>7.3.2</b> Assess Accuracy</a></li>
+<li class="chapter" data-level="7.3.3" data-path="example-forecasting-2020-us-election-based-on-2016-results.html"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#iterate-to-improve-predictions"><i class="fa fa-check"></i><b>7.3.3</b> Iterate to improve predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html"><i class="fa fa-check"></i><b>7.4</b> Example: Using polls to predict the 2020 election results</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#choose-an-approach-lets-analyze-some-polls"><i class="fa fa-check"></i><b>7.4.1</b> Choose an approach: Let’s analyze some polls</a></li>
+<li class="chapter" data-level="7.4.2" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#loop-through-all-states"><i class="fa fa-check"></i><b>7.4.2</b> Loop through all states</a></li>
+<li class="chapter" data-level="7.4.3" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#check-accuracy"><i class="fa fa-check"></i><b>7.4.3</b> Check Accuracy</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -355,28 +375,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Note we use <code>text(x= , y=, labels)</code> to indicate where to put text</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>Northeast,</span>
-<span id="cb224-2"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>,</span>
-<span id="cb224-3"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Social Mobility by Date and Region&quot;</span>,</span>
-<span id="cb224-4"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Twitter Social Mobility Index&quot;</span>,</span>
-<span id="cb224-5"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb224-6"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">80</span>), <span class="at">las=</span><span class="dv">1</span>,</span>
-<span id="cb224-7"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd=</span><span class="dv">2</span>,</span>
-<span id="cb224-8"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty=</span><span class="st">&quot;n&quot;</span>,</span>
-<span id="cb224-9"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb224-10"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>South, <span class="at">col=</span><span class="st">&quot;red3&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb224-11"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-11" aria-hidden="true" tabindex="-1"></a>axisdates <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2019-01-01&quot;</span>), <span class="fu">as.Date</span>(<span class="st">&quot;2021-09-01&quot;</span>), <span class="at">by=</span><span class="st">&quot;month&quot;</span>)</span>
-<span id="cb224-12"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-12" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> axisdates, <span class="fu">format</span>(axisdates, <span class="st">&quot;%b-%Y&quot;</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">cex.axis=</span>.<span class="dv">7</span>)</span>
-<span id="cb224-13"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>,  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red3&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
-<span id="cb224-14"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">&quot;South&quot;</span>, <span class="st">&quot;Northeast&quot;</span>), <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">lty=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="dv">2</span>,</span>
-<span id="cb224-15"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb224-16"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb224-17"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-17" aria-hidden="true" tabindex="-1"></a><span class="do">## add dashed blue vertical line</span></span>
-<span id="cb224-18"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">as.Date</span>(<span class="st">&quot;2020-03-16&quot;</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;dodgerblue&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span>
-<span id="cb224-19"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb224-20"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-20" aria-hidden="true" tabindex="-1"></a><span class="do">## add text near the line</span></span>
-<span id="cb224-21"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-21" aria-hidden="true" tabindex="-1"></a><span class="do">## the \n breaks the text into different lines</span></span>
-<span id="cb224-22"><a href="causal-claims-from-before-vs-after-comparisons.html#cb224-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">as.Date</span>(<span class="st">&quot;2020-05-01&quot;</span>), <span class="at">y=</span><span class="dv">65</span>, <span class="at">labels =</span> <span class="st">&quot;Federal </span><span class="sc">\n</span><span class="st"> Announcement&quot;</span>, <span class="at">cex=</span>.<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>Northeast,</span>
+<span id="cb224-2"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>,</span>
+<span id="cb224-3"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Social Mobility by Date and Region&quot;</span>,</span>
+<span id="cb224-4"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Twitter Social Mobility Index&quot;</span>,</span>
+<span id="cb224-5"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb224-6"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">80</span>), <span class="at">las=</span><span class="dv">1</span>,</span>
+<span id="cb224-7"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd=</span><span class="dv">2</span>,</span>
+<span id="cb224-8"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty=</span><span class="st">&quot;n&quot;</span>,</span>
+<span id="cb224-9"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xaxt=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb224-10"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>covid<span class="sc">$</span>Dates,<span class="at">y=</span>covid<span class="sc">$</span>South, <span class="at">col=</span><span class="st">&quot;red3&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb224-11"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-11" aria-hidden="true" tabindex="-1"></a>axisdates <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2019-01-01&quot;</span>), <span class="fu">as.Date</span>(<span class="st">&quot;2021-09-01&quot;</span>), <span class="at">by=</span><span class="st">&quot;month&quot;</span>)</span>
+<span id="cb224-12"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-12" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> axisdates, <span class="fu">format</span>(axisdates, <span class="st">&quot;%b-%Y&quot;</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">cex.axis=</span>.<span class="dv">7</span>)</span>
+<span id="cb224-13"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>,  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red3&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
+<span id="cb224-14"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">&quot;South&quot;</span>, <span class="st">&quot;Northeast&quot;</span>), <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">lty=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="dv">2</span>,</span>
+<span id="cb224-15"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb224-16"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-17"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-17" aria-hidden="true" tabindex="-1"></a><span class="do">## add dashed blue vertical line</span></span>
+<span id="cb224-18"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">as.Date</span>(<span class="st">&quot;2020-03-16&quot;</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;dodgerblue&quot;</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span>
+<span id="cb224-19"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-20"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-20" aria-hidden="true" tabindex="-1"></a><span class="do">## add text near the line</span></span>
+<span id="cb224-21"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-21" aria-hidden="true" tabindex="-1"></a><span class="do">## the \n breaks the text into different lines</span></span>
+<span id="cb224-22"><a href="causal-claims-from-before-vs.-after-comparisons.html#cb224-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">as.Date</span>(<span class="st">&quot;2020-05-01&quot;</span>), <span class="at">y=</span><span class="dv">65</span>, <span class="at">labels =</span> <span class="st">&quot;Federal </span><span class="sc">\n</span><span class="st"> Announcement&quot;</span>, <span class="at">cex=</span>.<span class="dv">6</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-123-1.svg" width="672" /></p>
 <p>We see mobility does appear to be lower after the announcement relative to before the announcement. Is this causal?</p>
 <ul>
@@ -401,7 +421,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -420,6 +439,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -440,6 +460,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
