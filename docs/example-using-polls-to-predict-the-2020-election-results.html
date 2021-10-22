@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="example-forecasting-2020-us-election-based-on-2016-results.html"/>
-
+<link rel="next" href="regression.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -303,6 +303,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.3" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#check-accuracy"><i class="fa fa-check"></i><b>7.4.3</b> Check Accuracy</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>8</b> Prediction with Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="regression-in-the-wild..html"><a href="regression-in-the-wild..html"><i class="fa fa-check"></i><b>8.1</b> Regression in the wild.</a></li>
+<li class="chapter" data-level="8.2" data-path="application-baseball-predictions.html"><a href="application-baseball-predictions.html"><i class="fa fa-check"></i><b>8.2</b> Application: Baseball Predictions</a></li>
+<li class="chapter" data-level="8.3" data-path="step-1-approach--regression-in-r.html"><a href="step-1-approach--regression-in-r.html"><i class="fa fa-check"></i><b>8.3</b> Step 1: Approach- Regression in R</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="step-1-approach--regression-in-r.html"><a href="step-1-approach--regression-in-r.html#visualizing-a-regression"><i class="fa fa-check"></i><b>8.3.1</b> Visualizing a regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="step-1-approach--regression-in-r.html"><a href="step-1-approach--regression-in-r.html#making-predictions-with-regression"><i class="fa fa-check"></i><b>8.3.2</b> Making predictions with regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="step-2-checking-accuracy-of-model.html"><a href="step-2-checking-accuracy-of-model.html"><i class="fa fa-check"></i><b>8.4</b> Step 2: Checking accuracy of model</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="step-2-checking-accuracy-of-model.html"><a href="step-2-checking-accuracy-of-model.html#root-mean-squared-error"><i class="fa fa-check"></i><b>8.4.1</b> Root Mean Squared Error</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="step-3-iterate-and-compare-models.html"><a href="step-3-iterate-and-compare-models.html"><i class="fa fa-check"></i><b>8.5</b> Step 3: Iterate and Compare Models</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="step-3-iterate-and-compare-models.html"><a href="step-3-iterate-and-compare-models.html#regression-with-multiple-predictors"><i class="fa fa-check"></i><b>8.5.1</b> Regression with Multiple Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html"><i class="fa fa-check"></i><b>8.6</b> Application: Predicting Campaign Donations</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#visualizing-the-results-1"><i class="fa fa-check"></i><b>8.6.1</b> Visualizing the results</a></li>
+<li class="chapter" data-level="8.6.2" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#step-1-calculate-predictions"><i class="fa fa-check"></i><b>8.6.2</b> Step 1: Calculate Predictions</a></li>
+<li class="chapter" data-level="8.6.3" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#step-2-check-accuracy"><i class="fa fa-check"></i><b>8.6.3</b> Step 2: Check Accuracy</a></li>
+<li class="chapter" data-level="8.6.4" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#step-3-iterate"><i class="fa fa-check"></i><b>8.6.4</b> Step 3: Iterate</a></li>
+<li class="chapter" data-level="8.6.5" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#adding-model-predictors"><i class="fa fa-check"></i><b>8.6.5</b> Adding Model Predictors</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -322,6 +348,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="example-using-polls-to-predict-the-2020-election-results" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> Example: Using polls to predict the 2020 election results</h2>
+<p><em>For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</em></p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/bDvwgs-F8Ic" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <p>Many forecasters use pre-election polls in their models to predict election outcomes. In 2016 and 2020, polling-based forecasts received a lot of criticism</p>
 <p>Prior to the 2016 elections, forecasts that used polls seemed confident that Hillary Clinton would win the election. <a href="https://www.youtube.com/watch?v=zerWCVpXTr8">Political analysts</a> also seemed to think the polls were favorable to Clinton.</p>
 <div class="figure">
@@ -436,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb335-4"><a href="example-using-polls-to-predict-the-2020-election-results.html#cb335-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Histogram of Prediction Error in Latest Polls&quot;</span>)</span>
 <span id="cb335-5"><a href="example-using-polls-to-predict-the-2020-election-results.html#cb335-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(predictionerror), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
 <span id="cb335-6"><a href="example-using-polls-to-predict-the-2020-election-results.html#cb335-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-194-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-196-1.svg" width="672" /></p>
 <p>Another way to visualize the prediction error</p>
 <ul>
 <li>Let’s create our own version of this AAPOR Plot</li>
@@ -459,7 +491,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb336-11"><a href="example-using-polls-to-predict-the-2020-election-results.html#cb336-11" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>), <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">5</span>))</span>
 <span id="cb336-12"><a href="example-using-polls-to-predict-the-2020-election-results.html#cb336-12" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">15</span>, <span class="st">&quot;Poll Margin </span><span class="sc">\n</span><span class="st"> Skewed Toward Trump&quot;</span>, <span class="at">cex=</span>.<span class="dv">7</span>)</span>
 <span id="cb336-13"><a href="example-using-polls-to-predict-the-2020-election-results.html#cb336-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">8</span>, <span class="dv">15</span>, <span class="st">&quot;Poll Margin </span><span class="sc">\n</span><span class="st"> Skewed Toward Biden&quot;</span>, <span class="at">cex=</span>.<span class="dv">7</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-195-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-197-1.svg" width="672" /></p>
 </div>
 <div id="classification" class="section level4" number="7.4.3.2">
 <h4><span class="header-section-number">7.4.3.2</span> Classification</h4>
@@ -502,8 +534,8 @@ the loser</li>
           </div>
         </div>
       </div>
-<a href="example-forecasting-2020-us-election-based-on-2016-results.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="example-forecasting-2020-us-election-based-on-2016-results.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -84,7 +84,14 @@ Eventually, after you have tested the approach and are satisfied with the accura
 
 Let's try to predict the 2020 election results using just the 2016 results.
 
+*For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=zWDxZogRwOs")
+```
 
 ```{r, include=F}
 results2020 <- read.csv("data/elecresults2020.csv", stringsAsFactors = T)
@@ -174,6 +181,17 @@ How could we improve our predictions of elections? What other information could 
 
 
 ## Example: Using polls to predict the 2020 election results
+
+
+*For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=bDvwgs-F8Ic")
+```
+
 
 Many forecasters use pre-election polls in their models to predict election outcomes. In 2016 and 2020, polling-based forecasts received a lot of criticism
 

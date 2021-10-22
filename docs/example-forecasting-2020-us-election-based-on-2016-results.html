@@ -303,6 +303,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.3" data-path="example-using-polls-to-predict-the-2020-election-results.html"><a href="example-using-polls-to-predict-the-2020-election-results.html#check-accuracy"><i class="fa fa-check"></i><b>7.4.3</b> Check Accuracy</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>8</b> Prediction with Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="regression-in-the-wild..html"><a href="regression-in-the-wild..html"><i class="fa fa-check"></i><b>8.1</b> Regression in the wild.</a></li>
+<li class="chapter" data-level="8.2" data-path="application-baseball-predictions.html"><a href="application-baseball-predictions.html"><i class="fa fa-check"></i><b>8.2</b> Application: Baseball Predictions</a></li>
+<li class="chapter" data-level="8.3" data-path="step-1-approach--regression-in-r.html"><a href="step-1-approach--regression-in-r.html"><i class="fa fa-check"></i><b>8.3</b> Step 1: Approach- Regression in R</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="step-1-approach--regression-in-r.html"><a href="step-1-approach--regression-in-r.html#visualizing-a-regression"><i class="fa fa-check"></i><b>8.3.1</b> Visualizing a regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="step-1-approach--regression-in-r.html"><a href="step-1-approach--regression-in-r.html#making-predictions-with-regression"><i class="fa fa-check"></i><b>8.3.2</b> Making predictions with regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="step-2-checking-accuracy-of-model.html"><a href="step-2-checking-accuracy-of-model.html"><i class="fa fa-check"></i><b>8.4</b> Step 2: Checking accuracy of model</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="step-2-checking-accuracy-of-model.html"><a href="step-2-checking-accuracy-of-model.html#root-mean-squared-error"><i class="fa fa-check"></i><b>8.4.1</b> Root Mean Squared Error</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="step-3-iterate-and-compare-models.html"><a href="step-3-iterate-and-compare-models.html"><i class="fa fa-check"></i><b>8.5</b> Step 3: Iterate and Compare Models</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="step-3-iterate-and-compare-models.html"><a href="step-3-iterate-and-compare-models.html#regression-with-multiple-predictors"><i class="fa fa-check"></i><b>8.5.1</b> Regression with Multiple Predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html"><i class="fa fa-check"></i><b>8.6</b> Application: Predicting Campaign Donations</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#visualizing-the-results-1"><i class="fa fa-check"></i><b>8.6.1</b> Visualizing the results</a></li>
+<li class="chapter" data-level="8.6.2" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#step-1-calculate-predictions"><i class="fa fa-check"></i><b>8.6.2</b> Step 1: Calculate Predictions</a></li>
+<li class="chapter" data-level="8.6.3" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#step-2-check-accuracy"><i class="fa fa-check"></i><b>8.6.3</b> Step 2: Check Accuracy</a></li>
+<li class="chapter" data-level="8.6.4" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#step-3-iterate"><i class="fa fa-check"></i><b>8.6.4</b> Step 3: Iterate</a></li>
+<li class="chapter" data-level="8.6.5" data-path="application-predicting-campaign-donations.html"><a href="application-predicting-campaign-donations.html#adding-model-predictors"><i class="fa fa-check"></i><b>8.6.5</b> Adding Model Predictors</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -323,6 +349,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-forecasting-2020-us-election-based-on-2016-results" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Example: Forecasting 2020 US Election based on 2016 Results</h2>
 <p>Let’s try to predict the 2020 election results using just the 2016 results.</p>
+<p><em>For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</em></p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/zWDxZogRwOs" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="example-forecasting-2020-us-election-based-on-2016-results.html#cb308-1" aria-hidden="true" tabindex="-1"></a>results2020 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;elecresults2020.csv&quot;</span>, <span class="at">stringsAsFactors =</span> T)</span></code></pre></div>
 <p>Variables</p>
 <ul>
