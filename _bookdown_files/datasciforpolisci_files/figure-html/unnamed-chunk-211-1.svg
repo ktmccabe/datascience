@@ -1282,4 +1282,15 @@
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='139.56' y='34.67' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='253.69px' lengthAdjust='spacingAndGlyphs'>Runs Scored by On Base Percentage</text></g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='210.70' y='341.28' style='font-size: 12.00px; font-family: Arial;' textLength='111.40px' lengthAdjust='spacingAndGlyphs'>On Base Percentage</text></g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text transform='translate(12.96,207.48) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='69.37px' lengthAdjust='spacingAndGlyphs'>Runs Scored</text></g>
+<defs>
+  <clipPath id='cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA=='>
+    <rect x='59.04' y='59.04' width='414.72' height='227.52' />
+  </clipPath>
+</defs>
+<line x1='59.04' y1='293.51' x2='473.76' y2='73.87' style='stroke-width: 2.25; stroke: #A020F0;' clip-path='url(#cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA==)' />
+<polygon points='158.30,244.75 174.50,244.75 174.50,228.55 158.30,228.55 ' style='stroke-width: 0.75; stroke: none; fill: #FF0000;' clip-path='url(#cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA==)' />
+<polyline points='166.40,360.00 166.40,236.65 ' style='stroke-width: 2.25; stroke: #FF0000;' clip-path='url(#cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA==)' />
+<polyline points='0.00,236.65 166.40,236.65 ' style='stroke-width: 2.25; stroke: #FF0000;' clip-path='url(#cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA==)' />
+<g clip-path='url(#cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA==)'><text x='62.04' y='223.24' style='font-size: 8.40px; font-family: Arial;' textLength='88.71px' lengthAdjust='spacingAndGlyphs'>Predicted Runs Scored </text></g>
+<g clip-path='url(#cpNTkuMDR8NDczLjc2fDI4Ni41Nnw1OS4wNA==)'><text x='84.81' y='233.32' style='font-size: 8.40px; font-family: Arial;' textLength='43.19px' lengthAdjust='spacingAndGlyphs'> if OBP = .3</text></g>
 </svg>

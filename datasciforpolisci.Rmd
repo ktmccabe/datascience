@@ -3767,10 +3767,18 @@ For our first example, we will stay outside of politics and use regression to pr
 ![](images/moneyball.jpeg)
 
 
-The movie describes the Oakland A's shift to start using data to build their team. They may two observations 1) To win baseball games, you need runs. 2) To score runs, you need to get on base. We can estimate what on base percentage we would need as a team to score enough runs to make the playoffs in a typical season.
+The movie describes the Oakland A's shift to start using data to build their team. They make two observations 1) To win baseball games, you need runs. 2) To score runs, you need to get on base. We can estimate what on base percentage we would need as a team to score enough runs to make the playoffs in a typical season.
 
 We will use regression to make these predictions.
 
+*For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=wtn-W8Uv32E")
+```
 
 We use `baseball.csv` data
 

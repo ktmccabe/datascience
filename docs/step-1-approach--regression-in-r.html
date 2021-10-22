@@ -352,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Our best prediction of the number of runs scored would be the spot on the purple line directly above a given OBP.</li>
 </ul>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-206-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-207-1.svg" width="672" /></p>
 <p>The regression model is <span class="math inline">\(Y = \alpha + \beta X + \epsilon\)</span>. Let’s demystify this.</p>
 <ul>
 <li>A regression model describes the relationship between one or more independent variables <span class="math inline">\(X\)</span> (explanatory variables) and an outcome variable <span class="math inline">\(Y\)</span> (dependent variable)
@@ -407,12 +407,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb348-6"><a href="step-1-approach--regression-in-r.html#cb348-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb348-7"><a href="step-1-approach--regression-in-r.html#cb348-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Add regression line</span></span>
 <span id="cb348-8"><a href="step-1-approach--regression-in-r.html#cb348-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>) <span class="co"># add line</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-209-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-210-1.svg" width="672" /></p>
 </div>
 <div id="making-predictions-with-regression" class="section level3" number="8.3.2">
 <h3><span class="header-section-number">8.3.2</span> Making predictions with regression</h3>
 <p>A regression model allows us to estimate or “predict” values of our dependent variable for a given value of our independent variable.</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-210-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-211-1.svg" width="672" /></p>
 <p>The red dot represents our estimate (best prediction) of the number of runs scored if a team has an on base percentage of .300. In R, we can calculate this value using <code>predict()</code>.</p>
 <ul>
 <li>The syntax is <code>predict(fit, data.frame(x = value))</code> where <code>fit</code> is the name of the model, <code>x</code> is the name of the independent variable, and <code>value</code> represents the value for the independent variable for which you want to predict your outcome (e.g., .300).</li>

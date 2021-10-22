@@ -351,8 +351,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For our first example, we will stay outside of politics and use regression to predict the success of a baseball team.</p>
 <p><a href="https://www.youtube.com/watch?v=-4QPVo0UIzc">Moneyball</a> is a $100 million Hollywood movie that is all about linear regression… and some baseball… and Brad Pitt, but really… it’s MOSTLY about linear regression</p>
 <p><img src="images/moneyball.jpeg" /></p>
-<p>The movie describes the Oakland A’s shift to start using data to build their team. They may two observations 1) To win baseball games, you need runs. 2) To score runs, you need to get on base. We can estimate what on base percentage we would need as a team to score enough runs to make the playoffs in a typical season.</p>
+<p>The movie describes the Oakland A’s shift to start using data to build their team. They make two observations 1) To win baseball games, you need runs. 2) To score runs, you need to get on base. We can estimate what on base percentage we would need as a team to score enough runs to make the playoffs in a typical season.</p>
 <p>We will use regression to make these predictions.</p>
+<p><em>For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</em></p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/wtn-W8Uv32E" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <p>We use <code>baseball.csv</code> data</p>
 <ul>
 <li><code>RS</code>: runs scored;</li>
@@ -380,12 +386,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5           NA 162 0.335 0.424
 ## 6           NA 162 0.319 0.405</code></pre>
 <p>Below we can see the first observation made: Runs scored are highly correlated with team wins
-<img src="datasciforpolisci_files/figure-html/unnamed-chunk-204-1.svg" width="672" /></p>
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-205-1.svg" width="672" /></p>
 <p>What the A’s noticed is that a team’s On Base Percentage is also highly correlated with runs scored. This aligns with conventional wisdom. Players get a lot of hype when they achieve a high OBP.</p>
 <p><img src="images/kih.png" /></p>
 <p>Hernandez is hitting .500 (16-for-32) with five homers, four doubles, nine RBI, nine runs scored and a .514 on-base percentage in seven postseason games.- NBC Boston</p>
 <p>This correlation shows up in our data, too.</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-205-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-206-1.svg" width="672" /></p>
 </div>
             </section>
 
