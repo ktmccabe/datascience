@@ -11,7 +11,7 @@ Recall that we predict (estimate/guess) some unknown using information we have -
       - (Beyond the course) Using a statistical model to select the measures to use for predicting an outcome
   2. Assess accuracy and precision
   3. Iterate to improve the prediction/classification
-      - Often, we repeat steps 1-3 until we are confident in your method for predicting.
+      - Often, we [repeat steps 1-3](https://www.youtube.com/watch?v=rXPfovXw2tw) until we are confident in your method for predicting.
 
 Eventually, after you have tested the approach and are satisfied with the accuracy, you may start applying it to new data for which you do not know the right answer.
 
@@ -601,7 +601,7 @@ fit2 <- lm(Buchanan00 ~ Perot96, data = florida.pb)
 sigma(fit2)
 ```
 
-My, oh my, our RMSE also goes way down if we remove Palm Beach. Something unique seems to be happening in that county.
+My, oh my, our RMSE also goes way down if we remove Palm Beach. Something unique seems to be happening in that county. See this [academic paper](http://sekhon.berkeley.edu/papers/butterfly.pdf) for an elaboration of the evidence that "The Butterfly [ballot] Did it."
 
 
 ### Confidence Intervals 
@@ -630,4 +630,189 @@ confint(fit)
 For every 1 vote increase in the Perot 1996  vote, we  expect a $\hat \beta =.036$  increase in Buchanan votes. However,  the confidence interval is 0.027 to 0.045.
 
   - We think there is a 95\% chance that this interval 0.027 to 0.045 includes the true $\beta$, describing the rate of change in Buchanan votes for a given change in Perot 1996 votes
+
+## Cross-Validation
+
+So far, we've been "cheating." We've been analyzing a prediction in cases where we know the right answer. Now we will focus  more squarely on how to develop an  "out-of-sample" prediction.
+
+Problem: Models that fit our existing ("in-sample") data might not be the best for predicting out-of-sample data.
+
+
+Example: Compare regression line with vs. without Palm Beach included in the sample.
+
+  - Outliers  "in-sample" can  lead to overfitting to weird, idiosyncratic data points
+  
+
+![](images/overfit.png)
+
+Example: Error Rates in Speech Recognition. See study [here](https://news.stanford.edu/2020/03/23/automated-speech-recognition-less-accurate-blacks/)
+
+  - Predictions/Classification that works well for one group might not work well for all groups
+
+![](images/speecherrors.png)
+
+
+Problem: Models that fit our existing ("in-sample") data might not be the best for predicting out-of-sample data. Approaches to diagnose the problem or help address it:
+
+  - Detect potential outliers within existing data by exploring the prediction errors
+  - Make sure the training (in-sample) data is as representative as possible
+  - Incorporate out-of-sample testing in prediction process
+
+
+### Cross-Validation Process
+
+Cross-validation incorporates the idea of out-of-sample testing into the process of how we evaluate the accuracy of prediction and classification approaches.
+
+Cross-validation (train vs. test data)
+
+  1. Subset your data into two portions: Training and Test data. 
+  2. Run a model based on the training data. 
+  3. Make a prediction and test the accuracy on the test data.
+  4. Repeat process training and testing on different portions of the data.
+  5. Summarize the results and choose a preferred model
+      + Eventually: Apply this model to entirely new data
+
+Goal: Test accuracy in a way that can help detect overfitting. See how well our model will generalize to new data (data the model hasn't seen).
+
+
+
+### Application: Forecasting Election Results
+
+
+Macro political and economic fundamentals are sometimes used for early forecasting of an election. We will build a version of this model and test its accuracy using a process of "Leave-one-out" cross-validation.
+
+The data and model are based on the [FAIR model](Based on the FAIR model for forecasting elections \url{https://fairmodel.econ.yale.edu/vote2016/computev.htm}
+) of forecasting.
+
+```{r, include=FALSE}
+fair <- read.csv("data/fair.csv")
+```
+```{r, eval=F}
+fair <- read.csv("fair.csv")
+```
+
+Key Variables:
+
+  - `VP`: Democratic share of the two-party presidential vote
+  - `t`: Year (presidential years only)
+  - `G`: growth rate of real per capita GDP in the first 3 quarters
+  - `P`: growth rate of the GDP deflator in the first 15 quarters of the recent administration
+  - `Z`: number of quarters in the first 15 quarters of recent administration in which the growth rate of real per capita GDP is greater than 3.2 percent at an annual rate 
+  - `I`: 1  if Democrats in WH and -1 if Republicans in WH
+  - `WAR`: 1 if 1920, 1944, 1948 (denoting the ``WAR" elections, which are believed to be particular)
+  - `DUR`: indicating how many consecutive terms Democrats/Republicans have been office (e.g., in 2020 it will be 0 because Republicans will have been in office for only 1 term.)
+
+
+
+Let's propose a model
+```{r}
+fit <- lm(VP ~ DUR, data = fair)
+```
+
+Let's propose an alternative model and see which one we think is better.
+```{r}
+fit2 <- lm(VP ~ G*I +  DUR, data = fair)
+```
+
+Note: The asterisk represents an "interaction." See QSS Chapter 4. We use this when we think  the effect of one variable (growth) may  depend on the values of another variable (the party of who is in office).
+
+#### Steps 1 and 2
+
+We are going to run a model where each time we `leave out' one row of data (in our case, one election). Let's try this once:
+
+```{r}
+years <- fair$t
+
+## Step 1: Subset data into two portions
+traindata <- subset(fair, t != years[1])
+testdata <- subset(fair, t == years[1])
+
+## Step 2: Run model on training data
+fit <- lm(VP ~ DUR, data = traindata)
+fit2 <- lm(VP ~  G*I +  DUR, data = traindata)
+```
+
+#### Step 3: Predict and assess accuracy with test data
+
+Out-of-Sample prediction
+
+```{r}
+## Step 3: Make a Prediction using test data and
+yhat.fit <- predict(fit, testdata)
+yhat.fit2 <- predict(fit2, testdata)
+```
+Prediction error (Truth - Prediction)
+
+```{r}
+## Step 3: Test accuracy of prediction
+error.fit <- testdata$VP - yhat.fit
+error.fit2 <- testdata$VP - yhat.fit2
+```
+
+#### Step 4: Repeat process across all data
+
+Step 4: Let's do this for each row, storing the prediction errors. 
+
+```{r}
+## Iteration vector
+years <- fair$t
+## Empty container vectors
+errors.fit <- rep(NA, length(years))
+errors.fit2 <- rep(NA, length(years))
+
+## Loop (copy paste meat from  above)
+for(i in  1:length(years)){
+  traindata <- subset(fair, t != years[i])
+  testdata <- subset(fair, t == years[i])
+  fit <- lm(VP ~  DUR, data = traindata)
+  fit2 <- lm(VP ~ G*I +  DUR , data = traindata)
+  yhat.fit <- predict(fit, testdata)
+  yhat.fit2 <- predict(fit2, testdata)
+  errors.fit[i] <- testdata$VP - yhat.fit
+  errors.fit2[i] <- testdata$VP - yhat.fit2
+}
+```
+
+#### Step 5: Summarize performance
+
+Step 5: Summarize the model performance
+
+```{r}
+## RMSE
+sqrt(mean((errors.fit)^2))
+sqrt(mean((errors.fit2)^2))
+
+## Mean Absolute Error
+mean(abs(errors.fit))
+mean(abs(errors.fit2))
+```
+
+Which model tends to have less error?
+
+#### Applying Model to New Data
+
+Eventually, you might further test the model on data that has been "held out"-- data that neither your train/test has seen. How good was our model? We can do this for the 2016 election, which was not in the data.
+
+Truth: 2016 VP was 51.1 Democratic "two-party" vote share.
+
+```{r}
+## Let's use the winner of our two models
+fit2 <- lm(VP ~ G*I +  DUR, data = fair)
+51.1-predict(fit2, data.frame(G=0.97, I=1, DUR=1))
+```
+
+2016 values based on the FAIR [site](https://fairmodel.econ.yale.edu/vote2016/index2.htm)
+
+
+#### Challenge
+
+Can you build a better model? What would your prediction for 2020 be?
+
+  - -5.07: growth rate of real per capita GDP in the first 3 quarters of 2020 (annual rate) (G)
+  - 1.80: growth rate of the GDP deflator in the first 15 quarters of the Trump administration, (annual rate) (P)
+  - 3: number of quarters in the first 15 quarters of the Trump administration in which the growth rate of real per capita GDP is greater than 3.2 percent at an annual rate (Z)
+  - DUR=0 
+  - I = -1
+
+Values based on the FAIR [site](https://fairmodel.econ.yale.edu/vote2020/computev.htm)
 

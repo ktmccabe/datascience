@@ -125,3 +125,12 @@ uncertainty-with-prediction
 example-butterfly-ballot-in-florida
 multiple-predictors
 confidence-intervals
+cross-validation
+cross-validation-process
+application-forecasting-election-results
+steps-1-and-2
+step-3-predict-and-assess-accuracy-with-test-data
+step-4-repeat-process-across-all-data
+step-5-summarize-performance
+applying-model-to-new-data
+challenge

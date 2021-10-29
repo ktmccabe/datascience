@@ -334,6 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7.2" data-path="uncertainty-with-prediction.html"><a href="uncertainty-with-prediction.html#multiple-predictors"><i class="fa fa-check"></i><b>8.7.2</b> Multiple Predictors</a></li>
 <li class="chapter" data-level="8.7.3" data-path="uncertainty-with-prediction.html"><a href="uncertainty-with-prediction.html#confidence-intervals"><i class="fa fa-check"></i><b>8.7.3</b> Confidence Intervals</a></li>
 </ul></li>
+<li class="chapter" data-level="8.8" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>8.8</b> Cross-Validation</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="cross-validation.html"><a href="cross-validation.html#cross-validation-process"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation Process</a></li>
+<li class="chapter" data-level="8.8.2" data-path="cross-validation.html"><a href="cross-validation.html#application-forecasting-election-results"><i class="fa fa-check"></i><b>8.8.2</b> Application: Forecasting Election Results</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -375,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>BA</code>: batting average;</li>
 <li><code>SLG</code>: Slugging Percentage</li>
 </ul>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="application-baseball-predictions.html#cb342-1" aria-hidden="true" tabindex="-1"></a>baseball <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;baseball.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="application-baseball-predictions.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(baseball)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="application-baseball-predictions.html#cb1-1" aria-hidden="true" tabindex="-1"></a>baseball <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;baseball.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="application-baseball-predictions.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(baseball)</span></code></pre></div>
 <pre><code>##   Team League Year  RS  RA  W   OBP   SLG    BA Playoffs RankSeason
 ## 1  ARI     NL 2012 734 688 81 0.328 0.418 0.259        0         NA
 ## 2  ATL     NL 2012 700 600 94 0.320 0.389 0.247        1          4
@@ -392,12 +397,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5           NA 162 0.335 0.424
 ## 6           NA 162 0.319 0.405</code></pre>
 <p>Below we can see the first observation made: Runs scored are highly correlated with team wins
-<img src="datasciforpolisci_files/figure-html/unnamed-chunk-205-1.svg" width="672" /></p>
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-5-1.svg" width="672" /></p>
 <p>What the A’s noticed is that a team’s On Base Percentage is also highly correlated with runs scored. This aligns with conventional wisdom. Players get a lot of hype when they achieve a high OBP.</p>
 <p><img src="images/kih.png" /></p>
 <p>Hernandez is hitting .500 (16-for-32) with five homers, four doubles, nine RBI, nine runs scored and a .514 on-base percentage in seven postseason games.- NBC Boston</p>
 <p>This correlation shows up in our data, too.</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-206-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-6-1.svg" width="672" /></p>
 </div>
             </section>
 

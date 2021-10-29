@@ -334,6 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7.2" data-path="uncertainty-with-prediction.html"><a href="uncertainty-with-prediction.html#multiple-predictors"><i class="fa fa-check"></i><b>8.7.2</b> Multiple Predictors</a></li>
 <li class="chapter" data-level="8.7.3" data-path="uncertainty-with-prediction.html"><a href="uncertainty-with-prediction.html#confidence-intervals"><i class="fa fa-check"></i><b>8.7.3</b> Confidence Intervals</a></li>
 </ul></li>
+<li class="chapter" data-level="8.8" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>8.8</b> Cross-Validation</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="cross-validation.html"><a href="cross-validation.html#cross-validation-process"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation Process</a></li>
+<li class="chapter" data-level="8.8.2" data-path="cross-validation.html"><a href="cross-validation.html#application-forecasting-election-results"><i class="fa fa-check"></i><b>8.8.2</b> Application: Forecasting Election Results</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -357,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Can we predict campaign donations?</p>
 <p><img src="images/moneymoney.jpeg" /></p>
 <p>Data from Barber, Michael J., Brandice Canes‐Wrone, and Sharece Thrower. “Ideologically sophisticated donors: Which candidates do individual contributors finance?.” American Journal of Political Science 61.2 (2017): 271-288</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="application-predicting-campaign-donations.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;donationdata.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="application-predicting-campaign-donations.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;donationdata.RData&quot;</span>)</span></code></pre></div>
 <p>Variables</p>
 <ul>
 <li><code>donation</code>: 1=made donation to senator, 0=no donation made</li>
@@ -379,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Iterate: try different regression model specifications</li>
 </ol>
 <p>Let’s try a prediction based on a person’s income.</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="application-predicting-campaign-donations.html#cb366-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_donation <span class="sc">~</span> IncomeLastYear, <span class="at">data =</span> donationdata)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="application-predicting-campaign-donations.html#cb25-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_donation <span class="sc">~</span> IncomeLastYear, <span class="at">data =</span> donationdata)</span></code></pre></div>
 <p>From this, we can</p>
 <ul>
 <li>Plot the relationship</li>
@@ -389,29 +394,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="visualizing-the-results-1" class="section level3" number="8.6.1">
 <h3><span class="header-section-number">8.6.1</span> Visualizing the results</h3>
 <p>Note that the correlation is a bit weaker here.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="application-predicting-campaign-donations.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>donationdata<span class="sc">$</span>IncomeLastYear, </span>
-<span id="cb367-2"><a href="application-predicting-campaign-donations.html#cb367-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>donationdata<span class="sc">$</span>total_donation,</span>
-<span id="cb367-3"><a href="application-predicting-campaign-donations.html#cb367-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span> <span class="st">&quot;Total Donation ($)&quot;</span>,</span>
-<span id="cb367-4"><a href="application-predicting-campaign-donations.html#cb367-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Income Last Year&quot;</span>,</span>
-<span id="cb367-5"><a href="application-predicting-campaign-donations.html#cb367-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Predicting Total Donations Using Income&quot;</span>)</span>
-<span id="cb367-6"><a href="application-predicting-campaign-donations.html#cb367-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">col=</span><span class="st">&quot;green4&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-221-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="application-predicting-campaign-donations.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>donationdata<span class="sc">$</span>IncomeLastYear, </span>
+<span id="cb26-2"><a href="application-predicting-campaign-donations.html#cb26-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>donationdata<span class="sc">$</span>total_donation,</span>
+<span id="cb26-3"><a href="application-predicting-campaign-donations.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span> <span class="st">&quot;Total Donation ($)&quot;</span>,</span>
+<span id="cb26-4"><a href="application-predicting-campaign-donations.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Income Last Year&quot;</span>,</span>
+<span id="cb26-5"><a href="application-predicting-campaign-donations.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Predicting Total Donations Using Income&quot;</span>)</span>
+<span id="cb26-6"><a href="application-predicting-campaign-donations.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">col=</span><span class="st">&quot;green4&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-21-1.svg" width="672" /></p>
 </div>
 <div id="step-1-calculate-predictions" class="section level3" number="8.6.2">
 <h3><span class="header-section-number">8.6.2</span> Step 1: Calculate Predictions</h3>
 <p>We can calculate predictions based on a level of income. Example: Level 5 of income represents an income of $150k-250k. What level of donation would we expect?</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="application-predicting-campaign-donations.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">IncomeLastYear =</span> <span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="application-predicting-campaign-donations.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">IncomeLastYear =</span> <span class="dv">5</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 348.8581</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="application-predicting-campaign-donations.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative using coef()</span></span>
-<span id="cb370-2"><a href="application-predicting-campaign-donations.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit)[<span class="st">&quot;IncomeLastYear&quot;</span>]<span class="sc">*</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="application-predicting-campaign-donations.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative using coef()</span></span>
+<span id="cb29-2"><a href="application-predicting-campaign-donations.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fit)[<span class="st">&quot;IncomeLastYear&quot;</span>]<span class="sc">*</span><span class="dv">5</span></span></code></pre></div>
 <pre><code>## (Intercept) 
 ##    348.8581</code></pre>
 </div>
 <div id="step-2-check-accuracy" class="section level3" number="8.6.3">
 <h3><span class="header-section-number">8.6.3</span> Step 2: Check Accuracy</h3>
 <p>We can calculate the Root Mean Squared Error</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="application-predicting-campaign-donations.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="application-predicting-campaign-donations.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit)</span></code></pre></div>
 <pre><code>## [1] 915.2528</code></pre>
 </div>
 <div id="step-3-iterate" class="section level3" number="8.6.4">
@@ -421,32 +426,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="adding-model-predictors" class="section level3" number="8.6.5">
 <h3><span class="header-section-number">8.6.5</span> Adding Model Predictors</h3>
 <p>New Model Example</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="application-predicting-campaign-donations.html#cb374-1" aria-hidden="true" tabindex="-1"></a>fitnew <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_donation <span class="sc">~</span> IncomeLastYear <span class="sc">+</span> NetWorth <span class="sc">+</span> sameparty, </span>
-<span id="cb374-2"><a href="application-predicting-campaign-donations.html#cb374-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>donationdata)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="application-predicting-campaign-donations.html#cb33-1" aria-hidden="true" tabindex="-1"></a>fitnew <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_donation <span class="sc">~</span> IncomeLastYear <span class="sc">+</span> NetWorth <span class="sc">+</span> sameparty, </span>
+<span id="cb33-2"><a href="application-predicting-campaign-donations.html#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data=</span>donationdata)</span></code></pre></div>
 <p>New Predictions: note how we add more variables</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="application-predicting-campaign-donations.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitnew, <span class="fu">data.frame</span>(<span class="at">IncomeLastYear =</span> <span class="dv">5</span>, <span class="at">NetWorth =</span> <span class="dv">4</span>, <span class="at">sameparty =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="application-predicting-campaign-donations.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitnew, <span class="fu">data.frame</span>(<span class="at">IncomeLastYear =</span> <span class="dv">5</span>, <span class="at">NetWorth =</span> <span class="dv">4</span>, <span class="at">sameparty =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 406.9705</code></pre>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="application-predicting-campaign-donations.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative using coef()</span></span>
-<span id="cb377-2"><a href="application-predicting-campaign-donations.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fitnew)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fitnew)[<span class="st">&quot;IncomeLastYear&quot;</span>]<span class="sc">*</span><span class="dv">5</span> <span class="sc">+</span> </span>
-<span id="cb377-3"><a href="application-predicting-campaign-donations.html#cb377-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(fitnew)[<span class="st">&quot;NetWorth&quot;</span>]<span class="sc">*</span><span class="dv">4</span> <span class="sc">+</span> <span class="fu">coef</span>(fitnew)[<span class="st">&quot;sameparty&quot;</span>]<span class="sc">*</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="application-predicting-campaign-donations.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## alternative using coef()</span></span>
+<span id="cb36-2"><a href="application-predicting-campaign-donations.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fitnew)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fitnew)[<span class="st">&quot;IncomeLastYear&quot;</span>]<span class="sc">*</span><span class="dv">5</span> <span class="sc">+</span> </span>
+<span id="cb36-3"><a href="application-predicting-campaign-donations.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(fitnew)[<span class="st">&quot;NetWorth&quot;</span>]<span class="sc">*</span><span class="dv">4</span> <span class="sc">+</span> <span class="fu">coef</span>(fitnew)[<span class="st">&quot;sameparty&quot;</span>]<span class="sc">*</span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## (Intercept) 
 ##    406.9705</code></pre>
 <p>Root Mean Squared Error</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="application-predicting-campaign-donations.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fitnew)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="application-predicting-campaign-donations.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fitnew)</span></code></pre></div>
 <pre><code>## [1] 910.4256</code></pre>
 <p>When we have multiple predictors, this changes our interpretation of the coefficients slightly.</p>
 <ul>
 <li>We now interpret the slope as the change in the outcome expected with a 1-unit change in the independent variable– holding all other variables constant (or ``controlling” for all other variables)</li>
 <li>For example, for a 1-unit change in Income, we would expect about a $68 increase in estimated donations, holding constant Net Worth and whether the person shared partisanship with the senator.</li>
 </ul>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="application-predicting-campaign-donations.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fitnew)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="application-predicting-campaign-donations.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fitnew)</span></code></pre></div>
 <pre><code>##    (Intercept) IncomeLastYear       NetWorth      sameparty 
 ##     -242.02780       67.96825       29.55847      190.92323</code></pre>
 <p>Think of this like a set of light switches. How does adjusting one light switch affect the light in the room– holding constant all other switches.</p>
 <p><img src="images/lightswitch.jpeg" style="width:60.0%" /></p>
 <p>When we make predictions with multiple variables, we have to tell R where we want to set each variable’s value.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="application-predicting-campaign-donations.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitnew, <span class="fu">data.frame</span>(<span class="at">IncomeLastYear =</span> <span class="dv">5</span>, <span class="at">NetWorth =</span> <span class="dv">4</span>, <span class="at">sameparty =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="application-predicting-campaign-donations.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitnew, <span class="fu">data.frame</span>(<span class="at">IncomeLastYear =</span> <span class="dv">5</span>, <span class="at">NetWorth =</span> <span class="dv">4</span>, <span class="at">sameparty =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 406.9705</code></pre>
 <p>See how the prediction changes if you shift <code>IncomeLastYear</code> but keep Net Worth and partisanship where they are. That’s the idea of “controlling” for the other variables!</p>

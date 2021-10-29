@@ -334,6 +334,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7.2" data-path="uncertainty-with-prediction.html"><a href="uncertainty-with-prediction.html#multiple-predictors"><i class="fa fa-check"></i><b>8.7.2</b> Multiple Predictors</a></li>
 <li class="chapter" data-level="8.7.3" data-path="uncertainty-with-prediction.html"><a href="uncertainty-with-prediction.html#confidence-intervals"><i class="fa fa-check"></i><b>8.7.3</b> Confidence Intervals</a></li>
 </ul></li>
+<li class="chapter" data-level="8.8" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>8.8</b> Cross-Validation</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="cross-validation.html"><a href="cross-validation.html#cross-validation-process"><i class="fa fa-check"></i><b>8.8.1</b> Cross-Validation Process</a></li>
+<li class="chapter" data-level="8.8.2" data-path="cross-validation.html"><a href="cross-validation.html#application-forecasting-election-results"><i class="fa fa-check"></i><b>8.8.2</b> Application: Forecasting Election Results</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -356,21 +361,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.5</span> Step 3: Iterate and Compare Models</h2>
 <p>When building predictive models, often researchers want to minimize this Root-Mean Squared Error – minimizing the magnitude of the typical prediction error (the distance between the actual value of our outcome, and the true value)</p>
 <p>Example: Let’s compare the RMSE from two different models:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="step-3-iterate-and-compare-models.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicting Runs Scored with OBP</span></span>
-<span id="cb359-2"><a href="step-3-iterate-and-compare-models.html#cb359-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> OBP, <span class="at">data =</span> baseball)</span>
-<span id="cb359-3"><a href="step-3-iterate-and-compare-models.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="step-3-iterate-and-compare-models.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicting Runs Scored with OBP</span></span>
+<span id="cb18-2"><a href="step-3-iterate-and-compare-models.html#cb18-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> OBP, <span class="at">data =</span> baseball)</span>
+<span id="cb18-3"><a href="step-3-iterate-and-compare-models.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit)</span></code></pre></div>
 <pre><code>## [1] 39.82189</code></pre>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="step-3-iterate-and-compare-models.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicting Runs Scored with Batting Average</span></span>
-<span id="cb361-2"><a href="step-3-iterate-and-compare-models.html#cb361-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> BA, <span class="at">data =</span> baseball)</span>
-<span id="cb361-3"><a href="step-3-iterate-and-compare-models.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="step-3-iterate-and-compare-models.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicting Runs Scored with Batting Average</span></span>
+<span id="cb20-2"><a href="step-3-iterate-and-compare-models.html#cb20-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> BA, <span class="at">data =</span> baseball)</span>
+<span id="cb20-3"><a href="step-3-iterate-and-compare-models.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit2)</span></code></pre></div>
 <pre><code>## [1] 51.48172</code></pre>
 <p>The Oakland A’s noticed that OBP was a more precise predictor than BA, and RMSE gives us one way to assess this.</p>
 <div id="regression-with-multiple-predictors" class="section level3" number="8.5.1">
 <h3><span class="header-section-number">8.5.1</span> Regression with Multiple Predictors</h3>
 <p>You can also add more than 1 predictor to a regression using the <code>+</code> sign.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="step-3-iterate-and-compare-models.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicting Runs Scored with OBP and Slugging Percentage</span></span>
-<span id="cb363-2"><a href="step-3-iterate-and-compare-models.html#cb363-2" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> OBP <span class="sc">+</span> SLG, <span class="at">data =</span> baseball)</span>
-<span id="cb363-3"><a href="step-3-iterate-and-compare-models.html#cb363-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit3)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="step-3-iterate-and-compare-models.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Predicting Runs Scored with OBP and Slugging Percentage</span></span>
+<span id="cb22-2"><a href="step-3-iterate-and-compare-models.html#cb22-2" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> OBP <span class="sc">+</span> SLG, <span class="at">data =</span> baseball)</span>
+<span id="cb22-3"><a href="step-3-iterate-and-compare-models.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit3)</span></code></pre></div>
 <pre><code>## [1] 25.12196</code></pre>
 <p>Look how the RMSE dropped again, improving our prediction.</p>
 </div>
