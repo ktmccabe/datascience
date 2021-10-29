@@ -121,3 +121,7 @@ step-1-calculate-predictions
 step-2-check-accuracy
 step-3-iterate
 adding-model-predictors
+uncertainty-with-prediction
+example-butterfly-ballot-in-florida
+multiple-predictors
+confidence-intervals

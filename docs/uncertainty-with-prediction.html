@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.4 Placebo Tests | Data Science for Political Science</title>
-  <meta name="description" content="5.4 Placebo Tests | Data Science for Political Science" />
+  <title>8.7 Uncertainty with Prediction | Data Science for Political Science</title>
+  <meta name="description" content="8.7 Uncertainty with Prediction | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.4 Placebo Tests | Data Science for Political Science" />
+  <meta property="og:title" content="8.7 Uncertainty with Prediction | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.4 Placebo Tests | Data Science for Political Science" />
+  <meta name="twitter:title" content="8.7 Uncertainty with Prediction | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="application-economic-effects-of-basque-terrorism.html"/>
-<link rel="next" href="wrapping-up-causality.html"/>
+<link rel="prev" href="application-predicting-campaign-donations.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -352,35 +352,142 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="placebo-tests" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Placebo Tests</h2>
-<p>Which Results Should We Believe? Role of Placebo Tests</p>
-<p>Cross-section comparison</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="placebo-tests.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="do">## were there pre-existing differences between the groups?</span></span>
-<span id="cb246-2"><a href="placebo-tests.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(basqueBefore<span class="sc">$</span>gdpcap) <span class="sc">-</span> <span class="fu">mean</span>(othersBefore<span class="sc">$</span>gdpcap)</span></code></pre></div>
-<pre><code>## [1] 1.616077</code></pre>
-<p>Before-and-After design</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="placebo-tests.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="do">## was there a change in a group we don&#39;t think should have changed?</span></span>
-<span id="cb248-2"><a href="placebo-tests.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(othersAfter<span class="sc">$</span>gdpcap) <span class="sc">-</span> <span class="fu">mean</span>(othersBefore<span class="sc">$</span>gdpcap)</span></code></pre></div>
-<pre><code>## [1] 3.161306</code></pre>
-<p>What about the Difference-in-Differences design?</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="placebo-tests.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="do">## here we go back in time even further to examine &quot;pre-treatment&quot; trends</span></span>
-<span id="cb250-2"><a href="placebo-tests.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="do">## we want them to be similar</span></span>
-<span id="cb250-3"><a href="placebo-tests.html#cb250-3" aria-hidden="true" tabindex="-1"></a>(basqueBefore<span class="sc">$</span>gdpcap[basqueBefore<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">1972</span>] <span class="sc">-</span></span>
-<span id="cb250-4"><a href="placebo-tests.html#cb250-4" aria-hidden="true" tabindex="-1"></a> basqueBefore<span class="sc">$</span>gdpcap[basqueBefore<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">1955</span>]) <span class="sc">-</span></span>
-<span id="cb250-5"><a href="placebo-tests.html#cb250-5" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">mean</span>(othersBefore<span class="sc">$</span>gdpcap[othersBefore<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">1972</span>]) <span class="sc">-</span></span>
-<span id="cb250-6"><a href="placebo-tests.html#cb250-6" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mean</span>(othersBefore<span class="sc">$</span>gdpcap[othersBefore<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">1955</span>]))</span></code></pre></div>
-<pre><code>## [1] 0.07147071</code></pre>
-<p>These “placebo” checks are closest to zero for diff-in-diff, so we may believe that the most.</p>
-<p><em>Thanks to Will Lowe and QSS for providing the foundations for this example</em></p>
+<div id="uncertainty-with-prediction" class="section level2" number="8.7">
+<h2><span class="header-section-number">8.7</span> Uncertainty with Prediction</h2>
+<p>Regression (and other prediction algorithms) give us our best guess</p>
+<ul>
+<li>But any guess has some uncertainty, prediction error, and potential outliers</li>
+<li>Sometimes these errors can be systematic</li>
+<li>Even when we use more advanced statistical models</li>
+<li>A “best guess” is often better than a random guess– but shouldn’t necessarily be treated as “ground truth.”</li>
+</ul>
+<p>Prediction helps us guess unknowns with observed data, but MUST PROCEED WITH CAUTION</p>
+<div id="example-butterfly-ballot-in-florida" class="section level3" number="8.7.1">
+<h3><span class="header-section-number">8.7.1</span> Example: Butterfly Ballot in Florida</h3>
+<p>In the U.S. 2000 presidential election, the race came down to Florida, which was extremely close. As part of the contest, different counties in Florida came under a microscope. One result that seemed unusual was the amount of votes Buchanan received in certain areas, which seemed to be a result of an odd ballot design choice. In this exercise, we examine voting patterns in Florida during the 2000 election.</p>
+<p>For more on the 2000 race, you can watch this <a href="https://www.youtube.com/watch?v=D-nR_hmS6V0&amp;ab_channel=HISTORY">video</a>.</p>
+<p>Load the data and explore the variables</p>
+<ul>
+<li><code>county</code>: county name</li>
+<li><code>Clinton96</code>: Clinton’s votes in 1996</li>
+<li><code>Dole96</code>: Dole’s votes in 1996</li>
+<li><code>Perot96</code>: Perot’s votes in 1996</li>
+<li><code>Bush00</code>: Bush’s votes in 2000</li>
+<li><code>Gore00</code>: Gore’s votes in 2000</li>
+<li><code>Buchanan00</code>: Buchanan’s votes in 2000</li>
+</ul>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="uncertainty-with-prediction.html#cb385-1" aria-hidden="true" tabindex="-1"></a>florida <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;florida.csv&quot;</span>)</span></code></pre></div>
+<p>Chapter 4 in QSS also discusses this example.</p>
+<p>Using what you learned from the last section, try to complete the following steps:</p>
+<ul>
+<li>Regress Buchanan 2000 votes (your Y) on Perot 1996 (your X) votes</li>
+<li>Create a scatterplot of the two variables and add the regression line</li>
+<li>Find and interpret the slope coefficient for the relationship between Perot and Buchanan votes</li>
+<li>Calculate the root-mean-squared error for the regression and interpret this</li>
+</ul>
+<details>
+<summary>
+Try on your own, then expand for the solution.
+</summary>
+<p>For every 1 additional vote Perot received in 1996, we expect Buchanan to receive .036 additional votes in 2000.</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="uncertainty-with-prediction.html#cb386-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96, <span class="at">data =</span> florida)</span>
+<span id="cb386-2"><a href="uncertainty-with-prediction.html#cb386-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span></code></pre></div>
+<pre><code>## (Intercept)     Perot96 
+##  1.34575212  0.03591504</code></pre>
+<p>In 1996, Perot received 8 million votes as a third-party candidate. Buchanan received less than 1/2 a million. Overall Perot received more votes, but where Perot received votes in 1996 was positively correlated with where Buchanan received votes in 2000.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="uncertainty-with-prediction.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>florida<span class="sc">$</span>Perot96,</span>
+<span id="cb388-2"><a href="uncertainty-with-prediction.html#cb388-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>florida<span class="sc">$</span>Buchanan00,</span>
+<span id="cb388-3"><a href="uncertainty-with-prediction.html#cb388-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Buchanan Votes 2000&quot;</span>,</span>
+<span id="cb388-4"><a href="uncertainty-with-prediction.html#cb388-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Perot Votes 1996&quot;</span>,  </span>
+<span id="cb388-5"><a href="uncertainty-with-prediction.html#cb388-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>)</span>
+<span id="cb388-6"><a href="uncertainty-with-prediction.html#cb388-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-232-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="uncertainty-with-prediction.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit)</span></code></pre></div>
+<pre><code>## [1] 316.3765</code></pre>
+<p>A typical prediction error is about 316.4 votes above or below the Buchanan total.</p>
+</details>
 </div>
+<div id="multiple-predictors" class="section level3" number="8.7.2">
+<h3><span class="header-section-number">8.7.2</span> Multiple Predictors</h3>
+<p>Can we reduce the error by adding more variables?</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="uncertainty-with-prediction.html#cb391-1" aria-hidden="true" tabindex="-1"></a>fitnew <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96 <span class="sc">+</span> Dole96 <span class="sc">+</span> Clinton96, <span class="at">data =</span> florida)</span>
+<span id="cb391-2"><a href="uncertainty-with-prediction.html#cb391-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fitnew)</span></code></pre></div>
+<pre><code>##  (Intercept)      Perot96       Dole96    Clinton96 
+## 20.572650070  0.030663207 -0.001559196  0.001865809</code></pre>
+<p>Again, when we have multiple predictors, this changes our interpretation of the coefficients slightly.</p>
+<ul>
+<li>We now interpret the slope as the change in the outcome expected with a 1-unit change in the independent variable– holding all other variables constant (or ``controlling” for all other variables)</li>
+<li>For example, a 1-unit increase (a 1-vote increase) in the number of Perot voters in 1996 is associated with a 0.03 vote increase in the number of Buchanan votes in 2000, holding constant the number of Clinton and Dole votes a county received.</li>
+</ul>
+<p>When we make predictions with multiple variables, we have to tell R where we want to set each variable’s value.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="uncertainty-with-prediction.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitnew, <span class="fu">data.frame</span>(<span class="at">Perot96=</span><span class="dv">20000</span>, <span class="at">Clinton96=</span><span class="dv">300000</span>, <span class="at">Dole96=</span><span class="dv">300000</span>))</span></code></pre></div>
+<pre><code>##        1 
+## 725.8208</code></pre>
+<p>See how the prediction changes if you shift <code>Perot96</code> but keep the other variables where they are. That’s the idea of “controlling” for the other variables!</p>
+<p>The addition of the new variables, in this case, made very little difference in the RMSE.</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="uncertainty-with-prediction.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit)</span></code></pre></div>
+<pre><code>## [1] 316.3765</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="uncertainty-with-prediction.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fitnew)</span></code></pre></div>
+<pre><code>## [1] 318.3798</code></pre>
+<p>Note: the value R generates through <code>sigma</code> is the residual standard error, which penalizes the RMSE for the number of variables included in the model. You could also calculate it without this penalty by manually taking the square root of the mean of the squared residuals.</p>
+<p>With little change from the addition of predictors, let’s stick with the more simple model and explore the prediction errors.</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="uncertainty-with-prediction.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">fitted</span>(fit), <span class="co"># predicted outcome</span></span>
+<span id="cb399-2"><a href="uncertainty-with-prediction.html#cb399-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span><span class="fu">resid</span>(fit),  <span class="co"># prediction error</span></span>
+<span id="cb399-3"><a href="uncertainty-with-prediction.html#cb399-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="co"># makes the plot blank</span></span>
+<span id="cb399-4"><a href="uncertainty-with-prediction.html#cb399-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>), </span>
+<span id="cb399-5"><a href="uncertainty-with-prediction.html#cb399-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">750</span>, <span class="dv">2500</span>), </span>
+<span id="cb399-6"><a href="uncertainty-with-prediction.html#cb399-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Predicted Buchanan Votes&quot;</span>, </span>
+<span id="cb399-7"><a href="uncertainty-with-prediction.html#cb399-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Prediction Error&quot;</span>)</span>
+<span id="cb399-8"><a href="uncertainty-with-prediction.html#cb399-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>) <span class="co"># adds horizontal line</span></span>
+<span id="cb399-9"><a href="uncertainty-with-prediction.html#cb399-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">fitted</span>(fit), <span class="at">y=</span><span class="fu">resid</span>(fit), <span class="at">labels =</span> florida<span class="sc">$</span>county, <span class="at">cex=</span>.<span class="dv">8</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-237-1.svg" width="672" /></p>
+<p>How does the prediction error change if we remove Palm Beach County?</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="uncertainty-with-prediction.html#cb400-1" aria-hidden="true" tabindex="-1"></a>florida.pb <span class="ot">&lt;-</span> <span class="fu">subset</span>(florida, <span class="at">subset =</span> (county <span class="sc">!=</span> <span class="st">&quot;PalmBeach&quot;</span>))</span>
+<span id="cb400-2"><a href="uncertainty-with-prediction.html#cb400-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Buchanan00 <span class="sc">~</span> Perot96, <span class="at">data =</span> florida.pb)</span>
+<span id="cb400-3"><a href="uncertainty-with-prediction.html#cb400-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(fit2)</span></code></pre></div>
+<pre><code>## [1] 87.74994</code></pre>
+<p>My, oh my, our RMSE also goes way down if we remove Palm Beach. Something unique seems to be happening in that county.</p>
+</div>
+<div id="confidence-intervals" class="section level3" number="8.7.3">
+<h3><span class="header-section-number">8.7.3</span> Confidence Intervals</h3>
+<p>Social scientists like to characterize the uncertainty in their predictions using what is called a “confidence interval.”</p>
+<ul>
+<li>Confidence intervals show a range of values that are likely to contain the true value</li>
+</ul>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="uncertainty-with-prediction.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">Perot96 =</span> <span class="dv">13600</span>), <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 489.7903 394.8363 584.7443</code></pre>
+<p>By default, R supplies the 95% confidence interval.</p>
+<ul>
+<li>For example, our estimate is for a county with 13,600 votes for Perot in 1996, the expected Buchanan vote is 489.79 votes.
+<ul>
+<li>The confidence interval is 394.84 to 584.74 votes, which means we believe there is a 95% chance that this interval contains the true value of the Buchanan 2000 vote share.</li>
+</ul></li>
+<li>Instead of thinking about our prediction as just 489.79, we should think about the entire interval as having a good chance of including the true value.</li>
+</ul>
+<p>Similarly, our coefficients also have uncertainty.</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="uncertainty-with-prediction.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span></code></pre></div>
+<pre><code>## (Intercept)     Perot96 
+##  1.34575212  0.03591504</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="uncertainty-with-prediction.html#cb406-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(fit)</span></code></pre></div>
+<pre><code>##                    2.5 %       97.5 %
+## (Intercept) -98.03044506 100.72194929
+## Perot96       0.02724733   0.04458275</code></pre>
+<p>For every 1 vote increase in the Perot 1996 vote, we expect a <span class="math inline">\(\hat \beta =.036\)</span> increase in Buchanan votes. However, the confidence interval is 0.027 to 0.045.</p>
+<ul>
+<li>We think there is a 95% chance that this interval 0.027 to 0.045 includes the true <span class="math inline">\(\beta\)</span>, describing the rate of change in Buchanan votes for a given change in Perot 1996 votes</li>
+</ul>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="application-economic-effects-of-basque-terrorism.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="wrapping-up-causality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="application-predicting-campaign-donations.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

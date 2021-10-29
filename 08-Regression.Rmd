@@ -467,3 +467,167 @@ Eventually, we would want to apply this prediction model in a real-world setting
   - How could campaigns use these types of prediction models?
 
 
+
+## Uncertainty with Prediction
+
+Regression (and other prediction algorithms) give us our best guess
+
+  - But any guess has some uncertainty, prediction error, and potential outliers
+  - Sometimes these errors can be systematic 
+  - Even when we use more advanced statistical models
+  - A "best guess" is often better than a random guess-- but shouldn't necessarily be treated as "ground truth."
+
+Prediction helps us guess unknowns with observed data, but MUST PROCEED WITH CAUTION
+
+
+### Example: Butterfly Ballot in Florida
+
+
+In the U.S. 2000 presidential election, the race came down to Florida, which was extremely close. As part of the contest, different counties in Florida came under a microscope. One result that seemed unusual was the amount of votes Buchanan received in certain areas, which seemed to be a result of an odd ballot design choice. In this exercise, we examine voting patterns in Florida during the 2000 election.
+
+For more on the 2000 race, you can watch this [video](https://www.youtube.com/watch?v=D-nR_hmS6V0&ab_channel=HISTORY).
+
+
+Load the data and explore the variables
+
+  - `county`: county name 
+  - `Clinton96`:  Clinton's votes in 1996
+  - `Dole96`: Dole's votes in 1996
+  - `Perot96`: Perot's votes in 1996 
+  - `Bush00`: Bush's votes in 2000
+  - `Gore00`: Gore's votes in 2000
+  - `Buchanan00`: Buchanan's votes in 2000 
+  
+```{r, include=F}
+florida <- read.csv("data/florida.csv")
+```
+
+```{r, eval=F}
+florida <- read.csv("florida.csv")
+```
+
+Chapter 4 in QSS also discusses this example.
+
+
+Using what you learned from the last section, try to complete the following steps:
+
+  - Regress Buchanan 2000 votes (your Y) on Perot 1996 (your  X) votes
+  - Create a scatterplot of the  two variables and add the regression line
+  - Find and interpret the slope coefficient for the relationship between Perot and Buchanan votes
+  - Calculate the root-mean-squared error for the regression and interpret this
+
+<details> <summary>Try on your own, then expand for the solution.</summary>
+
+For every 1  additional vote Perot received in 1996, we expect Buchanan to receive .036 additional votes in 2000.
+
+```{r}
+fit <- lm(Buchanan00 ~ Perot96, data = florida)
+coef(fit)
+```
+
+In 1996, Perot received 8 million votes as a third-party candidate. Buchanan received less than 1/2 a million. Overall Perot received more votes, but where Perot received votes in 1996 was positively correlated with where Buchanan received votes in 2000.
+
+```{r}
+plot(x=florida$Perot96,
+     y=florida$Buchanan00,
+     ylab="Buchanan Votes 2000",
+     xlab="Perot Votes 1996",  
+     pch=20)
+abline(fit, lwd=3, col="purple")
+```
+
+```{r}
+sigma(fit)
+```
+A typical prediction error is about 316.4 votes above or below the Buchanan total.
+
+
+</details>
+
+### Multiple Predictors
+
+Can we reduce the error by adding more variables?
+
+```{r}
+fitnew <- lm(Buchanan00 ~ Perot96 + Dole96 + Clinton96, data = florida)
+coef(fitnew)
+```
+
+Again, when we have multiple predictors, this changes our interpretation of the coefficients slightly.
+
+  - We now interpret the slope as the change in the outcome expected with a 1-unit change in the independent variable-- holding all other variables constant (or ``controlling" for all other variables)
+  - For example, a 1-unit increase (a 1-vote increase) in the number of Perot voters in 1996 is associated with a 0.03 vote increase in the number of Buchanan votes in 2000, holding constant the number of Clinton and Dole votes a county received.
+  
+  
+When we make predictions with multiple variables, we have to tell R where we want to set each variable's value.
+
+```{r}
+predict(fitnew, data.frame(Perot96=20000, Clinton96=300000, Dole96=300000))
+```
+
+See how the prediction changes if you shift `Perot96` but keep the other variables where they are. That's the idea of "controlling" for the other variables!
+
+The addition of the new variables, in this case, made very little difference in the RMSE.
+
+```{r}
+sigma(fit)
+
+sigma(fitnew)
+```
+
+Note: the value R generates through `sigma` is the residual standard error, which penalizes the RMSE for the number of variables included in the model. You could also calculate it without this penalty by manually taking the square root of the mean of the squared residuals.
+
+
+With little change from the addition of predictors, let's stick with the more simple model and explore the prediction errors.
+
+```{r}
+plot(x=fitted(fit), # predicted outcome
+     y=resid(fit),  # prediction error
+     type="n", # makes the plot blank
+     xlim = c(0, 1500), 
+     ylim = c(-750, 2500), 
+     xlab = "Predicted Buchanan Votes", 
+     ylab = "Prediction Error")
+abline(h = 0) # adds horizontal line
+text(x=fitted(fit), y=resid(fit), labels = florida$county, cex=.8)
+
+```
+
+How does the prediction error change if we remove Palm Beach County?
+
+```{r}
+florida.pb <- subset(florida, subset = (county != "PalmBeach"))
+fit2 <- lm(Buchanan00 ~ Perot96, data = florida.pb)
+sigma(fit2)
+```
+
+My, oh my, our RMSE also goes way down if we remove Palm Beach. Something unique seems to be happening in that county.
+
+
+### Confidence Intervals 
+
+Social scientists like to characterize the uncertainty in their predictions using what is called a "confidence interval."
+
+  - Confidence intervals show a range of values  that are likely to contain the true value
+
+```{r}
+predict(fit, data.frame(Perot96 = 13600), interval = "confidence")
+```
+
+By default, R supplies the 95\%  confidence interval. 
+
+  - For example, our estimate is for a county with 13,600 votes for Perot in  1996, the expected Buchanan vote is 489.79 votes. 
+      + The confidence interval is 394.84 to 584.74 votes, which means we believe there is a 95\% chance that this interval contains the true value of the Buchanan 2000 vote share.
+  - Instead of thinking about our prediction as just 489.79,  we should think about the entire interval as having a good chance of including the true value.
+
+Similarly, our coefficients also have uncertainty. 
+
+```{r}
+coef(fit)
+confint(fit)
+```
+
+For every 1 vote increase in the Perot 1996  vote, we  expect a $\hat \beta =.036$  increase in Buchanan votes. However,  the confidence interval is 0.027 to 0.045.
+
+  - We think there is a 95\% chance that this interval 0.027 to 0.045 includes the true $\beta$, describing the rate of change in Buchanan votes for a given change in Perot 1996 votes
+
