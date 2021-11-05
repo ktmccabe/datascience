@@ -135,12 +135,10 @@ step-5-summarize-performance
 applying-model-to-new-data
 challenge
 fairness
-fairness-in-machine-learning
 application-criminal-justice
 load-data
 predictionclassification-process
-approach-regression-model
-step-1-make-prediction.
+step-1-regression-model
 detour-logistic-regression
 change-prediction-into-a-classification
 step-2-check-accuracy-1
@@ -149,4 +147,3 @@ false-positive-rate
 false-negative-rate
 taking-fairness-seriously
 extended-learning
-step-1-regression-model

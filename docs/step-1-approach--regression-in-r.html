@@ -340,6 +340,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.2" data-path="cross-validation.html"><a href="cross-validation.html#application-forecasting-election-results"><i class="fa fa-check"></i><b>8.8.2</b> Application: Forecasting Election Results</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="fairness.html"><a href="fairness.html"><i class="fa fa-check"></i><b>9</b> Fairness and Ethics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html"><i class="fa fa-check"></i><b>9.1</b> Application: Criminal Justice</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#load-data"><i class="fa fa-check"></i><b>9.1.1</b> Load data</a></li>
+<li class="chapter" data-level="9.1.2" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#predictionclassification-process"><i class="fa fa-check"></i><b>9.1.2</b> Prediction/Classification process</a></li>
+<li class="chapter" data-level="9.1.3" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#step-1-regression-model"><i class="fa fa-check"></i><b>9.1.3</b> Step 1: Regression Model</a></li>
+<li class="chapter" data-level="9.1.4" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#step-2-check-accuracy-1"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Check Accuracy</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="taking-fairness-seriously.html"><a href="taking-fairness-seriously.html"><i class="fa fa-check"></i><b>9.2</b> Taking Fairness Seriously</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="taking-fairness-seriously.html"><a href="taking-fairness-seriously.html#extended-learning"><i class="fa fa-check"></i><b>9.2.1</b> Extended Learning</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -363,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Our best prediction of the number of runs scored would be the spot on the purple line directly above a given OBP.</li>
 </ul>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-7-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-207-1.svg" width="672" /></p>
 <p>The regression model is <span class="math inline">\(Y = \alpha + \beta X + \epsilon\)</span>. Let’s demystify this.</p>
 <ul>
 <li>A regression model describes the relationship between one or more independent variables <span class="math inline">\(X\)</span> (explanatory variables) and an outcome variable <span class="math inline">\(Y\)</span> (dependent variable)
@@ -388,12 +402,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>x</code> is the name of the independent variable, and</li>
 <li><code>mydata</code> is whatever you have called your dataframe. E.g.:</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="step-1-approach--regression-in-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> OBP, <span class="at">data =</span> baseball)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="step-1-approach--regression-in-r.html#cb345-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(RS <span class="sc">~</span> OBP, <span class="at">data =</span> baseball)</span></code></pre></div>
 <p>When we have data, we estimate <span class="math inline">\(Y\)</span>, <span class="math inline">\(\alpha\)</span>, and <span class="math inline">\(\beta\)</span>: <span class="math inline">\(\hat Y = \hat \alpha + \hat \beta X\)</span>.</p>
 <ul>
 <li>Our model gives us the “coefficient” estimates for <span class="math inline">\(\hat \alpha\)</span> and <span class="math inline">\(\hat \beta\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="step-1-approach--regression-in-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="step-1-approach--regression-in-r.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)</span></code></pre></div>
 <pre><code>## (Intercept)         OBP 
 ##   -1076.602    5490.386</code></pre>
 <p>The first coefficient is <span class="math inline">\(\hat \alpha\)</span>, this represents the intercept – the estimated value our dependent variable will take if our independent variable is 0.</p>
@@ -410,36 +424,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="visualizing-a-regression" class="section level3" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> Visualizing a regression</h3>
 <p>We can plot the regression using a scatterplot and <code>abline()</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="step-1-approach--regression-in-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>baseball<span class="sc">$</span>OBP, <span class="at">y=</span>baseball<span class="sc">$</span>RS, </span>
-<span id="cb7-2"><a href="step-1-approach--regression-in-r.html#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Runs Scored&quot;</span>,</span>
-<span id="cb7-3"><a href="step-1-approach--regression-in-r.html#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span>  <span class="st">&quot;On Base Percentage&quot;</span>, </span>
-<span id="cb7-4"><a href="step-1-approach--regression-in-r.html#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Runs Scored by On Base Percentage&quot;</span>,</span>
-<span id="cb7-5"><a href="step-1-approach--regression-in-r.html#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>)</span>
-<span id="cb7-6"><a href="step-1-approach--regression-in-r.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="step-1-approach--regression-in-r.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Add regression line</span></span>
-<span id="cb7-8"><a href="step-1-approach--regression-in-r.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>) <span class="co"># add line</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-10-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="step-1-approach--regression-in-r.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>baseball<span class="sc">$</span>OBP, <span class="at">y=</span>baseball<span class="sc">$</span>RS, </span>
+<span id="cb348-2"><a href="step-1-approach--regression-in-r.html#cb348-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Runs Scored&quot;</span>,</span>
+<span id="cb348-3"><a href="step-1-approach--regression-in-r.html#cb348-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span>  <span class="st">&quot;On Base Percentage&quot;</span>, </span>
+<span id="cb348-4"><a href="step-1-approach--regression-in-r.html#cb348-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Runs Scored by On Base Percentage&quot;</span>,</span>
+<span id="cb348-5"><a href="step-1-approach--regression-in-r.html#cb348-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>)</span>
+<span id="cb348-6"><a href="step-1-approach--regression-in-r.html#cb348-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-7"><a href="step-1-approach--regression-in-r.html#cb348-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Add regression line</span></span>
+<span id="cb348-8"><a href="step-1-approach--regression-in-r.html#cb348-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>) <span class="co"># add line</span></span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-210-1.svg" width="672" /></p>
 </div>
 <div id="making-predictions-with-regression" class="section level3" number="8.3.2">
 <h3><span class="header-section-number">8.3.2</span> Making predictions with regression</h3>
 <p>A regression model allows us to estimate or “predict” values of our dependent variable for a given value of our independent variable.</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-11-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-211-1.svg" width="672" /></p>
 <p>The red dot represents our estimate (best prediction) of the number of runs scored if a team has an on base percentage of .300. In R, we can calculate this value using <code>predict()</code>.</p>
 <ul>
 <li>The syntax is <code>predict(fit, data.frame(x = value))</code> where <code>fit</code> is the name of the model, <code>x</code> is the name of the independent variable, and <code>value</code> represents the value for the independent variable for which you want to predict your outcome (e.g., .300).</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="step-1-approach--regression-in-r.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">OBP=</span>.<span class="dv">300</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="step-1-approach--regression-in-r.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">OBP=</span>.<span class="dv">300</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 570.5137</code></pre>
 <p>Under the hood, this is just using the regression formula described above. For example, to estimate the number of runs scored for a .300 on base percentage, we take <span class="math inline">\(\hat \alpha + \hat \beta * .300\)</span></p>
 <ul>
 <li>Note that below we compare the output of the predict function to our output if we manually calculated the estimated value.</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="step-1-approach--regression-in-r.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">OBP=</span>.<span class="dv">300</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="step-1-approach--regression-in-r.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">OBP=</span>.<span class="dv">300</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 570.5137</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="step-1-approach--regression-in-r.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a + b*.300</span></span>
-<span id="cb12-2"><a href="step-1-approach--regression-in-r.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)[<span class="dv">1</span>] <span class="sc">+</span>  <span class="fu">coef</span>(fit)[<span class="dv">2</span>]<span class="sc">*</span>.<span class="dv">300</span></span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="step-1-approach--regression-in-r.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a + b*.300</span></span>
+<span id="cb353-2"><a href="step-1-approach--regression-in-r.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit)[<span class="dv">1</span>] <span class="sc">+</span>  <span class="fu">coef</span>(fit)[<span class="dv">2</span>]<span class="sc">*</span>.<span class="dv">300</span></span></code></pre></div>
 <pre><code>## (Intercept) 
 ##    570.5137</code></pre>
 <p>Let’s say a team thought they needed about 900 runs scored to get to the playoffs, and they were pretty sure they could get a team on base percentage of .500. How many runs would they be expected to score with that OBP? Do you think they will make the playoffs?</p>
@@ -447,7 +461,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>
 Try on your own, then expand for the solution.
 </summary>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="step-1-approach--regression-in-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">OBP=</span>.<span class="dv">500</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="step-1-approach--regression-in-r.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit, <span class="fu">data.frame</span>(<span class="at">OBP=</span>.<span class="dv">500</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 1668.591</code></pre>
 <p>It’s greater than 900, so we should feel good about our chances.</p>
