@@ -4402,6 +4402,17 @@ Goal: Test accuracy in a way that can help detect overfitting. See how well our 
 
 Macro political and economic fundamentals are sometimes used for early forecasting of an election. We will build a version of this model and test its accuracy using a process of "Leave-one-out" cross-validation.
 
+
+Below is a video explainer of this application, which uses cross-validation.
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=Wqj9Jm8heAA")
+```
+
+
+
 The data and model are based on the [FAIR model](Based on the FAIR model for forecasting elections \url{https://fairmodel.econ.yale.edu/vote2016/computev.htm}
 ) of forecasting.
 
@@ -4572,6 +4583,15 @@ Note: These algorithms have generated a lot of debate, concern and controversy, 
 
 
 ### Load data
+
+Below is a video explainer of this application, which uses classification and cross-validation.
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=vpNnUR0V1hA")
+```
+
 
 Data include information about 7214 arrests in Broward County Florida in 2013-2014
 

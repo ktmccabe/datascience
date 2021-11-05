@@ -380,6 +380,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note: These algorithms have generated a lot of debate, concern and controversy, which we will discuss.</p>
 <div id="load-data" class="section level3" number="9.1.1">
 <h3><span class="header-section-number">9.1.1</span> Load data</h3>
+<p>Below is a video explainer of this application, which uses classification and cross-validation.</p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/vpNnUR0V1hA" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <p>Data include information about 7214 arrests in Broward County Florida in 2013-2014</p>
 <div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="application-criminal-justice.html#cb425-1" aria-hidden="true" tabindex="-1"></a>broward <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;browardsub.csv&quot;</span>)</span></code></pre></div>
 <p>Variables</p>
@@ -455,7 +461,7 @@ For details, expand.
 <p>Logistic regression keeps probabilities between 0 and 1 due to a transformation it applies to our standard regression formula. As a result, our coefficient units (<code>coef(fitl)</code>) are in log-odds units, which are hard to interpret. We can transform our predictions of the model into probabilities using the <code>predict()</code> function with <code>type = "response"</code>.</p>
 </details>
 <p>We can compare the predictions of the probability of recidivism between the linear and logistic regression models. Note how the linear model blows past 0 and 1, while the logistic-based predictions can keep them within those bounds.</p>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-257-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-259-1.svg" width="672" /></p>
 <p>We don’t have time to go into the math of logistic regression in this course, but know that it is a desirable option for classification.</p>
 <p>For now, let’s stick with the linear model.</p>
 </div>

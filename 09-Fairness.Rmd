@@ -30,6 +30,15 @@ Note: These algorithms have generated a lot of debate, concern and controversy, 
 
 ### Load data
 
+Below is a video explainer of this application, which uses classification and cross-validation.
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=vpNnUR0V1hA")
+```
+
+
 Data include information about 7214 arrests in Broward County Florida in 2013-2014
 
 ```{r, include=F}
