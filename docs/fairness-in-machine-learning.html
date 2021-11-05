@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Science for Political Science</title>
-  <meta name="description" content="Page not found | Data Science for Political Science" />
+  <title>9.1 Fairness in Machine Learning | Data Science for Political Science</title>
+  <meta name="description" content="9.1 Fairness in Machine Learning | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Science for Political Science" />
+  <meta property="og:title" content="9.1 Fairness in Machine Learning | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Science for Political Science" />
+  <meta name="twitter:title" content="9.1 Fairness in Machine Learning | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="fairness.html"/>
+<link rel="next" href="application-criminal-justice.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -341,16 +341,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="fairness.html"><a href="fairness.html"><i class="fa fa-check"></i><b>9</b> Fairness and Ethics</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html"><i class="fa fa-check"></i><b>9.1</b> Application: Criminal Justice</a>
+<li class="chapter" data-level="9.1" data-path="fairness-in-machine-learning.html"><a href="fairness-in-machine-learning.html"><i class="fa fa-check"></i><b>9.1</b> Fairness in Machine Learning</a></li>
+<li class="chapter" data-level="9.2" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html"><i class="fa fa-check"></i><b>9.2</b> Application: Criminal Justice</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#load-data"><i class="fa fa-check"></i><b>9.1.1</b> Load data</a></li>
-<li class="chapter" data-level="9.1.2" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#predictionclassification-process"><i class="fa fa-check"></i><b>9.1.2</b> Prediction/Classification process</a></li>
-<li class="chapter" data-level="9.1.3" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#step-1-regression-model"><i class="fa fa-check"></i><b>9.1.3</b> Step 1: Regression Model</a></li>
-<li class="chapter" data-level="9.1.4" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#step-2-check-accuracy-1"><i class="fa fa-check"></i><b>9.1.4</b> Step 2: Check Accuracy</a></li>
+<li class="chapter" data-level="9.2.1" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#load-data"><i class="fa fa-check"></i><b>9.2.1</b> Load data</a></li>
+<li class="chapter" data-level="9.2.2" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#predictionclassification-process"><i class="fa fa-check"></i><b>9.2.2</b> Prediction/Classification process</a></li>
+<li class="chapter" data-level="9.2.3" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#approach-regression-model"><i class="fa fa-check"></i><b>9.2.3</b> Approach: Regression Model</a></li>
+<li class="chapter" data-level="9.2.4" data-path="application-criminal-justice.html"><a href="application-criminal-justice.html#step-2-check-accuracy-1"><i class="fa fa-check"></i><b>9.2.4</b> Step 2: Check Accuracy</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="taking-fairness-seriously.html"><a href="taking-fairness-seriously.html"><i class="fa fa-check"></i><b>9.2</b> Taking Fairness Seriously</a>
+<li class="chapter" data-level="9.3" data-path="taking-fairness-seriously.html"><a href="taking-fairness-seriously.html"><i class="fa fa-check"></i><b>9.3</b> Taking Fairness Seriously</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="taking-fairness-seriously.html"><a href="taking-fairness-seriously.html#extended-learning"><i class="fa fa-check"></i><b>9.2.1</b> Extended Learning</a></li>
+<li class="chapter" data-level="9.3.1" data-path="taking-fairness-seriously.html"><a href="taking-fairness-seriously.html#extended-learning"><i class="fa fa-check"></i><b>9.3.1</b> Extended Learning</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -370,19 +371,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="fairness-in-machine-learning" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Fairness in Machine Learning</h2>
+<p>Machine learning comes with a bundle of potential ethical issues. Hold on– we are doing machine learning? Yes, a type of it.</p>
+<ul>
+<li>We have used a statistical model (in this case, regression) to learn and make inferences about patterns in data.
+<ul>
+<li>A regression can be considered a type of algorithm</li>
+</ul></li>
+<li>We then apply the model to new data to make predictions and classify new data into categories.</li>
+<li>The models we have used are a type of “supervised machine learning” because our outcomes are pre-defined (vote share for Biden, a person donates vs. does not donate)
+<ul>
+<li>Other types of machine learning may be fully ``unsupervised,” such as searching data to come up with outputs, such as topics in books of text</li>
+</ul></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="fairness.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="application-criminal-justice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

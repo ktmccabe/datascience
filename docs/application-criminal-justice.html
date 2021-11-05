@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Science for Political Science</title>
-  <meta name="description" content="Page not found | Data Science for Political Science" />
+  <title>9.1 Application: Criminal Justice | Data Science for Political Science</title>
+  <meta name="description" content="9.1 Application: Criminal Justice | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Science for Political Science" />
+  <meta property="og:title" content="9.1 Application: Criminal Justice | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Science for Political Science" />
+  <meta name="twitter:title" content="9.1 Application: Criminal Justice | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="fairness.html"/>
+<link rel="next" href="taking-fairness-seriously.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -370,19 +370,229 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="application-criminal-justice" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Application: Criminal Justice</h2>
+<p>This application is based on Dressel, Julia, and Hany Farid. “<a href="https://www.science.org/doi/10.1126/sciadv.aao5580">The accuracy, fairness, and limits of predicting recidivism</a>.” Science advances 4.1 (2018): eaao5580.</p>
+<p>Prediction and classification models are used all of the time in public policy, including in the criminal justice system: “where crimes will most likely occur, who is most likely to commit a violent crime, who is likely to fail to appear at their court hearing, and who is likely to reoffend at some point in the future” (Dressel and Farid)</p>
+<p>Dressel and Farid develop and examine models that predict whether someone will recidivate– based on a measure of rearrest. They compare their own models to COMPAS (a well-known proprietary algorithm that generates risk scores) and to human-based predictions</p>
+<p>We will develop a model similar to the one Dressel and Farid use in their paper, which seems to closely approximate COMPAS predictions.</p>
+<p>Note: These algorithms have generated a lot of debate, concern and controversy, which we will discuss.</p>
+<div id="load-data" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Load data</h3>
+<p>Data include information about 7214 arrests in Broward County Florida in 2013-2014</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="application-criminal-justice.html#cb1-1" aria-hidden="true" tabindex="-1"></a>broward <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;browardsub.csv&quot;</span>)</span></code></pre></div>
+<p>Variables</p>
+<ul>
+<li><code>sex</code>: 0 male; 1: female</li>
+<li><code>age</code></li>
+<li><code>juv_fel_count</code>: total number of juvenile felony criminal charges</li>
+<li><code>juv_ misd_count</code>: total number of juvenile misdemeanor criminal charges</li>
+<li><code>priors_count</code>: total number of non-juvenile criminal charges</li>
+<li><code>charge_degree</code>: a numeric indicator of the degree of the charge: 0: misdemeanor; 1: felony</li>
+<li><code>two_year_recid</code>: a numeric indicator of whether the defendant recidivated two years after previous charge: 0: no, did not recidivate; 1: yes, did recidivate</li>
+</ul>
+</div>
+<div id="predictionclassification-process" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Prediction/Classification process</h3>
+<p>Recall the steps for prediction/classification</p>
+<ol style="list-style-type: decimal">
+<li>Choose Approach
+<ul>
+<li>We will use a regression to try to classify subjects as those who will / will not recidivate</li>
+</ul></li>
+<li>Check accuracy
+<ul>
+<li>We will calculate false positive rates and false negative rates</li>
+<li>We will use cross-validation to do so</li>
+</ul></li>
+<li>Iterate</li>
+</ol>
+</div>
+<div id="step-1-regression-model" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Step 1: Regression Model</h3>
+<p>Step 1: Choose Approach</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="application-criminal-justice.html#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(two_year_recid <span class="sc">~</span> age <span class="sc">+</span> sex <span class="sc">+</span> juv_misd_count <span class="sc">+</span> juv_fel_count <span class="sc">+</span> </span>
+<span id="cb2-2"><a href="application-criminal-justice.html#cb2-2" aria-hidden="true" tabindex="-1"></a>            priors_count <span class="sc">+</span> charge_degree, </span>
+<span id="cb2-3"><a href="application-criminal-justice.html#cb2-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> broward)</span></code></pre></div>
+<p>Note: our outcome is binary</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="application-criminal-justice.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(broward<span class="sc">$</span>two_year_recid)</span></code></pre></div>
+<pre><code>## 
+##    0    1 
+## 3963 3251</code></pre>
+<p>When you use linear regression with a binary outcome, it is called a linear probability model. We estimate the probability of recidivism– a number between 0 and 1.</p>
+<ul>
+<li>There are downsides to using linear regression with this type of outcome. Data scientists may often use a different model called logistic regression for this.</li>
+</ul>
+<p>Make Prediction.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="application-criminal-justice.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimates a predicted probability of recidivism for each subject</span></span>
+<span id="cb5-2"><a href="application-criminal-justice.html#cb5-2" aria-hidden="true" tabindex="-1"></a>broward<span class="sc">$</span>predictedrec <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
+<span id="cb5-3"><a href="application-criminal-justice.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="application-criminal-justice.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Range of predicted probabilities</span></span>
+<span id="cb5-5"><a href="application-criminal-justice.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(broward<span class="sc">$</span>predictedrec)</span></code></pre></div>
+<pre><code>## [1] -0.1463835  1.6059606</code></pre>
+<p>Note: One downside of linear models is they can generate probabilities below 0 or above 1. Logistic regression will constrain these due to a transformation it makes when estimating the coefficients.</p>
+<div id="detour-logistic-regression" class="section level4" number="9.1.3.1">
+<h4><span class="header-section-number">9.1.3.1</span> Detour: Logistic Regression</h4>
+<p>As an alternative, you could use logistic regression, which data scientists may often use when trying to do a classification task– predicting which category a subject belongs to (e.g., recidivate vs. not recidivate; turned out to vote vs. did not turn out to vote). We won’t focus on logistic regression in this class, but you can know it is out there for future study.</p>
+<p>Step 1: Choose Approach- Let’s try logistic regression instead</p>
+<details>
+<summary>
+For details, expand.
+</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="application-criminal-justice.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Logistic regression</span></span>
+<span id="cb7-2"><a href="application-criminal-justice.html#cb7-2" aria-hidden="true" tabindex="-1"></a>fitl <span class="ot">&lt;-</span> <span class="fu">glm</span>(two_year_recid <span class="sc">~</span> age <span class="sc">+</span> sex <span class="sc">+</span> juv_misd_count <span class="sc">+</span> juv_fel_count <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="application-criminal-justice.html#cb7-3" aria-hidden="true" tabindex="-1"></a>            priors_count <span class="sc">+</span> charge_degree, </span>
+<span id="cb7-4"><a href="application-criminal-justice.html#cb7-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> broward, </span>
+<span id="cb7-5"><a href="application-criminal-justice.html#cb7-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb7-6"><a href="application-criminal-justice.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="application-criminal-justice.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimates a predicted probability of recidivism for each subject</span></span>
+<span id="cb7-8"><a href="application-criminal-justice.html#cb7-8" aria-hidden="true" tabindex="-1"></a>broward<span class="sc">$</span>predictedrecl <span class="ot">&lt;-</span> <span class="fu">predict</span>(fitl, <span class="at">type=</span><span class="st">&quot;response&quot;</span>) <span class="co"># need type=&quot;response&quot; to make them probabilities</span></span>
+<span id="cb7-9"><a href="application-criminal-justice.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="application-criminal-justice.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Range of predicted probabilities of recidivism</span></span>
+<span id="cb7-11"><a href="application-criminal-justice.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(broward<span class="sc">$</span>predictedrecl)</span></code></pre></div>
+<pre><code>## [1] 0.04176846 0.99891808</code></pre>
+<p>Logistic regression keeps probabilities between 0 and 1 due to a transformation it applies to our standard regression formula. As a result, our coefficient units (<code>coef(fitl)</code>) are in log-odds units, which are hard to interpret. We can transform our predictions of the model into probabilities using the <code>predict()</code> function with <code>type = "response"</code>.</p>
+</details>
+<p>We can compare the predictions of the probability of recidivism between the linear and logistic regression models. Note how the linear model blows past 0 and 1, while the logistic-based predictions can keep them within those bounds.</p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-7-1.svg" width="672" /></p>
+<p>We don’t have time to go into the math of logistic regression in this course, but know that it is a desirable option for classification.</p>
+<p>For now, let’s stick with the linear model.</p>
+</div>
+<div id="change-prediction-into-a-classification" class="section level4" number="9.1.3.2">
+<h4><span class="header-section-number">9.1.3.2</span> Change Prediction into a Classification</h4>
+<p>Recall: we are trying to <strong>classify</strong></p>
+<ul>
+<li>We need to make our estimates of the probability of recidivism categorical, into simply a prediction of recidivate vs. not recidivate</li>
+</ul>
+<p>For now, we will use .5 as a threshold (a probability of more than .5)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="application-criminal-justice.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Need to make prediction binary.</span></span>
+<span id="cb9-2"><a href="application-criminal-justice.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We use .5, but there are other methods for choosing this threshold</span></span>
+<span id="cb9-3"><a href="application-criminal-justice.html#cb9-3" aria-hidden="true" tabindex="-1"></a>broward<span class="sc">$</span>predictedrecclass <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(broward<span class="sc">$</span>predictedrec <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<p>Predicted Recidivism</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="application-criminal-justice.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">predicted=</span>broward<span class="sc">$</span>predictedrecclass)</span></code></pre></div>
+<pre><code>## predicted
+##    0    1 
+## 4683 2531</code></pre>
+</div>
+</div>
+<div id="step-2-check-accuracy-1" class="section level3" number="9.1.4">
+<h3><span class="header-section-number">9.1.4</span> Step 2: Check Accuracy</h3>
+<p>We are going to get extra practice with cross-validation as a way to check accuracy. Recall:</p>
+<p>Cross-validation (train vs. test data)</p>
+<ol style="list-style-type: decimal">
+<li>Subset your data into two portions: Training and Test data.</li>
+<li>Run a model based on the training data.</li>
+<li>Make a prediction and test the accuracy on the test data.</li>
+<li>Repeat process training and testing on different portions of the data.</li>
+<li>Summarize the results and choose a preferred model
+<ul>
+<li>Eventually: Apply this model to entirely new data</li>
+</ul></li>
+</ol>
+<p>Goal: Test accuracy in a way that can help detect overfitting. See how well our model will generalize to new data (data the model hasn’t seen).</p>
+<p>We will use leave-one-out cross-validation again, but there are other methods, such as splitting data into “folds” of multiple observations at once (i.e., leaving out 100 or 1000 observations for testing instead of just 1).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="application-criminal-justice.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 1: Subset Data</span></span>
+<span id="cb12-2"><a href="application-criminal-justice.html#cb12-2" aria-hidden="true" tabindex="-1"></a>traindata <span class="ot">&lt;-</span> broward[<span class="sc">-</span><span class="dv">1</span>,] <span class="co"># all but first row</span></span>
+<span id="cb12-3"><a href="application-criminal-justice.html#cb12-3" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> broward[<span class="dv">1</span>,] <span class="co"># just the first row</span></span>
+<span id="cb12-4"><a href="application-criminal-justice.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="application-criminal-justice.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 2: Run model on training data</span></span>
+<span id="cb12-6"><a href="application-criminal-justice.html#cb12-6" aria-hidden="true" tabindex="-1"></a>fittrain <span class="ot">&lt;-</span> <span class="fu">lm</span>(two_year_recid <span class="sc">~</span> age <span class="sc">+</span> sex <span class="sc">+</span> juv_misd_count </span>
+<span id="cb12-7"><a href="application-criminal-justice.html#cb12-7" aria-hidden="true" tabindex="-1"></a>               <span class="sc">+</span> juv_fel_count <span class="sc">+</span> </span>
+<span id="cb12-8"><a href="application-criminal-justice.html#cb12-8" aria-hidden="true" tabindex="-1"></a>            priors_count <span class="sc">+</span> charge_degree, </span>
+<span id="cb12-9"><a href="application-criminal-justice.html#cb12-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> traindata)</span>
+<span id="cb12-10"><a href="application-criminal-justice.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="application-criminal-justice.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 3: Predict with test data</span></span>
+<span id="cb12-12"><a href="application-criminal-justice.html#cb12-12" aria-hidden="true" tabindex="-1"></a>predictedrec <span class="ot">&lt;-</span> <span class="fu">predict</span>(fittrain, testdata)</span>
+<span id="cb12-13"><a href="application-criminal-justice.html#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="application-criminal-justice.html#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 3: Change predicted probability into a classification</span></span>
+<span id="cb12-15"><a href="application-criminal-justice.html#cb12-15" aria-hidden="true" tabindex="-1"></a>cvpredictions <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(predictedrec <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<p>Step 4: Repeat across all observations and summarize accuracy.</p>
+<p>We want to repeat this process for every row of our data– leaving out a different row each time. To construct our loop, we embed the above process in the loop syntax.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="application-criminal-justice.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Iteration vector</span></span>
+<span id="cb13-2"><a href="application-criminal-justice.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 1:nrow(broward)</span></span>
+<span id="cb13-3"><a href="application-criminal-justice.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="application-criminal-justice.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Container vector</span></span>
+<span id="cb13-5"><a href="application-criminal-justice.html#cb13-5" aria-hidden="true" tabindex="-1"></a>broward<span class="sc">$</span>cvpredictions <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb13-6"><a href="application-criminal-justice.html#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="application-criminal-justice.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(broward)){</span>
+<span id="cb13-8"><a href="application-criminal-justice.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Step 1: Subset Data</span></span>
+<span id="cb13-9"><a href="application-criminal-justice.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  traindata <span class="ot">&lt;-</span> broward[<span class="sc">-</span>i,] <span class="co"># all but ith row</span></span>
+<span id="cb13-10"><a href="application-criminal-justice.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  testdata <span class="ot">&lt;-</span> broward[i,] <span class="co"># just the ith row</span></span>
+<span id="cb13-11"><a href="application-criminal-justice.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-12"><a href="application-criminal-justice.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Step 2: Run model on training data</span></span>
+<span id="cb13-13"><a href="application-criminal-justice.html#cb13-13" aria-hidden="true" tabindex="-1"></a>  fittrain <span class="ot">&lt;-</span> <span class="fu">lm</span>(two_year_recid <span class="sc">~</span> age <span class="sc">+</span> sex <span class="sc">+</span> juv_misd_count </span>
+<span id="cb13-14"><a href="application-criminal-justice.html#cb13-14" aria-hidden="true" tabindex="-1"></a>                 <span class="sc">+</span> juv_fel_count <span class="sc">+</span> </span>
+<span id="cb13-15"><a href="application-criminal-justice.html#cb13-15" aria-hidden="true" tabindex="-1"></a>            priors_count <span class="sc">+</span> charge_degree, </span>
+<span id="cb13-16"><a href="application-criminal-justice.html#cb13-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> traindata)</span>
+<span id="cb13-17"><a href="application-criminal-justice.html#cb13-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-18"><a href="application-criminal-justice.html#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Step 3: Predict with test data</span></span>
+<span id="cb13-19"><a href="application-criminal-justice.html#cb13-19" aria-hidden="true" tabindex="-1"></a>  predictedrec <span class="ot">&lt;-</span> <span class="fu">predict</span>(fittrain, testdata)</span>
+<span id="cb13-20"><a href="application-criminal-justice.html#cb13-20" aria-hidden="true" tabindex="-1"></a>  broward<span class="sc">$</span>cvpredictions[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(predictedrec <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb13-21"><a href="application-criminal-justice.html#cb13-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="confusion-matrix" class="section level4" number="9.1.4.1">
+<h4><span class="header-section-number">9.1.4.1</span> Confusion Matrix</h4>
+<p>Check Accuracy: Confusion Matrix</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="application-criminal-justice.html#cb14-1" aria-hidden="true" tabindex="-1"></a>confmatrix <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">actual =</span> broward<span class="sc">$</span>two_year_recid, </span>
+<span id="cb14-2"><a href="application-criminal-justice.html#cb14-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">predicted =</span> broward<span class="sc">$</span>cvpredictions)</span>
+<span id="cb14-3"><a href="application-criminal-justice.html#cb14-3" aria-hidden="true" tabindex="-1"></a>confmatrix</span></code></pre></div>
+<pre><code>##       predicted
+## actual    0    1
+##      0 3156  807
+##      1 1528 1723</code></pre>
+<p>How should we interpret each cell?</p>
+<ul>
+<li>Let’s Consider 1 = Recidivate = Positive outcome; 0 = Not Recidivate = Negative Outcome</li>
+<li>What is a false positive? false negative? true positive? true negative?</li>
+</ul>
+</div>
+<div id="false-positive-rate" class="section level4" number="9.1.4.2">
+<h4><span class="header-section-number">9.1.4.2</span> False Positive Rate</h4>
+<p>False Positive Rate: <span class="math inline">\(\frac{\text{False Positive}}{\text{(False Positive + True Negative)}}\)</span></p>
+<ul>
+<li>Out of those who do not recidivate, how often did we predict recidivate?</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="application-criminal-justice.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One Approach</span></span>
+<span id="cb16-2"><a href="application-criminal-justice.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(broward<span class="sc">$</span>cvpredictions <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> broward<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">/</span> </span>
+<span id="cb16-3"><a href="application-criminal-justice.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(broward<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2036336</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="application-criminal-justice.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Alternative Approach</span></span>
+<span id="cb18-2"><a href="application-criminal-justice.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## predicted recidivism, actual not</span></span>
+<span id="cb18-3"><a href="application-criminal-justice.html#cb18-3" aria-hidden="true" tabindex="-1"></a>fp <span class="ot">&lt;-</span> confmatrix[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb18-4"><a href="application-criminal-justice.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predicted not, actual not</span></span>
+<span id="cb18-5"><a href="application-criminal-justice.html#cb18-5" aria-hidden="true" tabindex="-1"></a>tn <span class="ot">&lt;-</span> confmatrix[<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb18-6"><a href="application-criminal-justice.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="application-criminal-justice.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="do">## False Positive Rate</span></span>
+<span id="cb18-8"><a href="application-criminal-justice.html#cb18-8" aria-hidden="true" tabindex="-1"></a>fp <span class="sc">/</span> (fp <span class="sc">+</span> tn)</span></code></pre></div>
+<pre><code>## [1] 0.2036336</code></pre>
+</div>
+<div id="false-negative-rate" class="section level4" number="9.1.4.3">
+<h4><span class="header-section-number">9.1.4.3</span> False Negative Rate</h4>
+<p>False Negative Rate: <span class="math inline">\(\frac{\text{False Negative}}{\text{(False Negative + True Positive)}}\)</span></p>
+<ul>
+<li>Out of those who did recidivate, how often did we predict not recidivate?</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="application-criminal-justice.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Out of those who recidivate, how often does it predict not recidivate?</span></span>
+<span id="cb20-2"><a href="application-criminal-justice.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(broward<span class="sc">$</span>cvpredictions<span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> broward<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">/</span> </span>
+<span id="cb20-3"><a href="application-criminal-justice.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(broward<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.4700092</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="application-criminal-justice.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Alternative Approach</span></span>
+<span id="cb22-2"><a href="application-criminal-justice.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  predicted to not recidivate, actual yes</span></span>
+<span id="cb22-3"><a href="application-criminal-justice.html#cb22-3" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> confmatrix[<span class="dv">2</span>, <span class="dv">1</span>]</span>
+<span id="cb22-4"><a href="application-criminal-justice.html#cb22-4" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">&lt;-</span> confmatrix[<span class="dv">2</span>, <span class="dv">2</span>]</span>
+<span id="cb22-5"><a href="application-criminal-justice.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="application-criminal-justice.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">## False Negative Rate</span></span>
+<span id="cb22-7"><a href="application-criminal-justice.html#cb22-7" aria-hidden="true" tabindex="-1"></a>fn <span class="sc">/</span> (fn <span class="sc">+</span> tp)</span></code></pre></div>
+<pre><code>## [1] 0.4700092</code></pre>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="fairness.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="taking-fairness-seriously.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

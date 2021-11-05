@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Science for Political Science</title>
-  <meta name="description" content="Page not found | Data Science for Political Science" />
+  <title>9.2 Taking Fairness Seriously | Data Science for Political Science</title>
+  <meta name="description" content="9.2 Taking Fairness Seriously | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Science for Political Science" />
+  <meta property="og:title" content="9.2 Taking Fairness Seriously | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Science for Political Science" />
+  <meta name="twitter:title" content="9.2 Taking Fairness Seriously | Data Science for Political Science" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="application-criminal-justice.html"/>
 
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -370,18 +370,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="taking-fairness-seriously" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Taking Fairness Seriously</h2>
+<p>Recall the steps for prediction/classification</p>
+<ol style="list-style-type: decimal">
+<li>Choose Approach
+<ul>
+<li>We will use a regression to try to classify subjects as those who will / will not recidivate</li>
+</ul></li>
+<li>Check accuracy
+<ul>
+<li>We will calculate false positive rates and false negative rates</li>
+<li>We will use cross-validation to do so</li>
+<li><strong><em>What about fairness?</em></strong></li>
+</ul></li>
+<li>Iterate</li>
+</ol>
+<p>The performance of a prediction/classification may be different for different groups in the population. Dressel and Farid point to this when it comes to different racial groups.</p>
+<div class="figure">
+<img src="images/fair1.png" alt="" />
+<p class="caption"><em>Dressel and Farid</em></p>
 </div>
+<p>Let’s see how our predictions perform across racial groups</p>
+<p><code>race</code>: 1: White (Caucasian); 2: Black (African American); 3: Hispanic; 4: Asian; 5: Native American; 6: Other</p>
+<p>Wait a second– we didn’t use race in our model. Why could the performance still differ across racial groups?</p>
+<ul>
+<li>Think about how the inputs in our regression model could be correlated with race.</li>
+<li>Think about how existing human biases and inequalities that lead to differential arrest rates by racial groups could be reproduced in our model.</li>
+<li>Even if a model does not have the intent to include race, its impact may nonetheless vary according to race. This could be true for any number of characteristics depending on the application.</li>
+</ul>
+<p>We will subset our data by race.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="taking-fairness-seriously.html#cb24-1" aria-hidden="true" tabindex="-1"></a>black <span class="ot">&lt;-</span> <span class="fu">subset</span>(broward, race <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb24-2"><a href="taking-fairness-seriously.html#cb24-2" aria-hidden="true" tabindex="-1"></a>white <span class="ot">&lt;-</span> <span class="fu">subset</span>(broward, race <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>We can first check overall accuracy</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="taking-fairness-seriously.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(black<span class="sc">$</span>cvpredictions <span class="sc">==</span> black<span class="sc">$</span>two_year_recid)</span></code></pre></div>
+<pre><code>## [1] 0.6696429</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="taking-fairness-seriously.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(white<span class="sc">$</span>cvpredictions <span class="sc">==</span> white<span class="sc">$</span>two_year_recid)</span></code></pre></div>
+<pre><code>## [1] 0.6805216</code></pre>
+<p>But are we making the same types of errors?</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="taking-fairness-seriously.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## False positive rate- Black</span></span>
+<span id="cb29-2"><a href="taking-fairness-seriously.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Out of those who do not recidivate, how often did we predict recidivate?</span></span>
+<span id="cb29-3"><a href="taking-fairness-seriously.html#cb29-3" aria-hidden="true" tabindex="-1"></a>fprate.black <span class="ot">&lt;-</span> <span class="fu">sum</span>(black<span class="sc">$</span>cvpredictions <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> black<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">/</span> </span>
+<span id="cb29-4"><a href="taking-fairness-seriously.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(black<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb29-5"><a href="taking-fairness-seriously.html#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="taking-fairness-seriously.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="do">## False negative rate- Black</span></span>
+<span id="cb29-7"><a href="taking-fairness-seriously.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Out of those who recidivate, how often does it predict not recidivate?</span></span>
+<span id="cb29-8"><a href="taking-fairness-seriously.html#cb29-8" aria-hidden="true" tabindex="-1"></a>fnrate.black <span class="ot">&lt;-</span><span class="fu">sum</span>(black<span class="sc">$</span>cvpredictions<span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> black<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">/</span> </span>
+<span id="cb29-9"><a href="taking-fairness-seriously.html#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(black<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb29-10"><a href="taking-fairness-seriously.html#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="taking-fairness-seriously.html#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="do">## False positive rate- white</span></span>
+<span id="cb29-12"><a href="taking-fairness-seriously.html#cb29-12" aria-hidden="true" tabindex="-1"></a>fprate.white <span class="ot">&lt;-</span> <span class="fu">sum</span>(white<span class="sc">$</span>cvpredictions <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> white<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">/</span> </span>
+<span id="cb29-13"><a href="taking-fairness-seriously.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(white<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb29-14"><a href="taking-fairness-seriously.html#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="taking-fairness-seriously.html#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="do">## False negative rate- white</span></span>
+<span id="cb29-16"><a href="taking-fairness-seriously.html#cb29-16" aria-hidden="true" tabindex="-1"></a>fnrate.white <span class="ot">&lt;-</span><span class="fu">sum</span>(white<span class="sc">$</span>cvpredictions<span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> white<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">/</span> </span>
+<span id="cb29-17"><a href="taking-fairness-seriously.html#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(white<span class="sc">$</span>two_year_recid <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Let’s see how our predictions perform across racial groups</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="taking-fairness-seriously.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## False positive rates</span></span>
+<span id="cb30-2"><a href="taking-fairness-seriously.html#cb30-2" aria-hidden="true" tabindex="-1"></a>fprate.black</span></code></pre></div>
+<pre><code>## [1] 0.2846797</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="taking-fairness-seriously.html#cb32-1" aria-hidden="true" tabindex="-1"></a>fprate.white </span></code></pre></div>
+<pre><code>## [1] 0.1323925</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="taking-fairness-seriously.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## False negative rates</span></span>
+<span id="cb34-2"><a href="taking-fairness-seriously.html#cb34-2" aria-hidden="true" tabindex="-1"></a>fnrate.black</span></code></pre></div>
+<pre><code>## [1] 0.3734876</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="taking-fairness-seriously.html#cb36-1" aria-hidden="true" tabindex="-1"></a>fnrate.white </span></code></pre></div>
+<pre><code>## [1] 0.6076605</code></pre>
+<p>We see asymmetries in the types of errors the model is making across racial groups. Black subjects have higher false positives– more likely as being predicted to recidivate (a predicted “positive”) when they do not (the “false” in false positive). White subjects have higher false negatives– predicted not to recidivate (the negative) when they do (the false in false negative).</p>
+<p>Based on these results, reflect on the following:</p>
+<ul>
+<li>Should we use this type of algorithm in public policy?
+<ul>
+<li>What might be desirable about this process over alternatives?</li>
+<li>What are possible concerns?</li>
+<li>Does your answer depend on accuracy or other considerations?</li>
+</ul></li>
+<li>What should we care more about? False positives or false negatives?</li>
+<li>What measures of fairness should be considered?</li>
+<li>Are there ways to avoid an unfair/biased model?</li>
+</ul>
+<div id="extended-learning" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Extended Learning</h3>
+<p>Note: There are many debates about the use of these algorithms</p>
+<ul>
+<li>Example of Initial Critique from <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">ProPublica</a></li>
+<li>Example of <a href="https://www.uscourts.gov/federal-probation-journal/2016/09/false-positives-false-negatives-and-false-analyses-rejoinder">Rejoinder</a></li>
+<li>Discussion of what fairness means: J. Kleinberg, S. Mullainathan, M. Raghavan, <a href="https://arxiv.org/abs/1609.05807v2">Inherent trade-offs in the fair determination of risk scores.</a> (2016).
+<ul>
+<li>Notes that goals of fairness can be in competition:</li>
+<li>Well-calibrated: if the algorithm identifies a set of people as having a probability z of constituting positive instances, then approximately a z fraction of this set should indeed be positive instances</li>
+<li>Balance for positive and negative instances across groups: the chance of making a mistake on should not depend on which group they belong to.</li>
+</ul></li>
+</ul>
+<p>For more on fairness and machine learning</p>
+<ul>
+<li>FAIRNESS AND MACHINE LEARNING: <a href="https://fairmlbook.org/">Limitations and Opportunities by Solon Barocas, Moritz Hardt, Arvind Narayanan</a>.</li>
+<li>Vivek Singh’s <a href="http://behavioralinformatics.org/">Research Lab</a></li>
+<li>Rutgers <a href="https://sites.rutgers.edu/critical-ai/event-details/">Critical AI group</a></li>
+<li>See the “Gender Shades” project from <a href="https://www.youtube.com/watch?v=TWWsW1w-BVo">Joy Buolamwini</a></li>
+<li>See Brookings Report on <a href="https://www.brookings.edu/research/algorithmic-bias-detection-and-mitigation-best-practices-and-policies-to-reduce-consumer-harms/">Bias in AI</a></li>
+</ul>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="application-criminal-justice.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
