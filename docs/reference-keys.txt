@@ -147,3 +147,15 @@ false-positive-rate
 false-negative-rate
 taking-fairness-seriously
 extended-learning
+uncertainty
+hypothesis-testing-overview-of-process
+sampling-and-uncertainty
+sampling-distribution
+details-standard-errors
+z-scores-and-p-values
+relationship-to-confidence-intervals
+wrapping-up-the-process
+application-health-savings-study
+additional-applications
+example-using-regression
+example-using-prop.test
