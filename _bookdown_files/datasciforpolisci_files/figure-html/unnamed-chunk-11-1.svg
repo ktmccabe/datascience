@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 504.00 360.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, polygon, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<text x='200.72' y='183.88' style='font-size: 15.00px; font-family: Arial;' textLength='102.55px' lengthAdjust='spacingAndGlyphs'>representatives</text>
+<text x='200.19' y='197.86' style='font-size: 18.00px; font-family: Arial;' textLength='79.03px' lengthAdjust='spacingAndGlyphs'>measures</text>
+<text x='240.20' y='173.49' style='font-size: 15.00px; font-family: Arial;' textLength='25.85px' lengthAdjust='spacingAndGlyphs'>free</text>
+<text x='226.93' y='212.86' style='font-size: 18.00px; font-family: Arial;' textLength='49.04px' lengthAdjust='spacingAndGlyphs'>united</text>
+<text x='245.99' y='159.11' style='font-size: 18.00px; font-family: Arial;' textLength='52.03px' lengthAdjust='spacingAndGlyphs'>regard</text>
+<text transform='translate(241.64,154.98) rotate(-90)' style='font-size: 18.00px; font-family: Arial;' textLength='59.03px' lengthAdjust='spacingAndGlyphs'>country</text>
+<text x='232.50' y='224.00' style='font-size: 15.00px; font-family: Arial;' textLength='40.87px' lengthAdjust='spacingAndGlyphs'>house</text>
+<text x='247.20' y='144.52' style='font-size: 18.00px; font-family: Arial;' textLength='48.02px' lengthAdjust='spacingAndGlyphs'>states</text>
+<text transform='translate(226.35,170.48) rotate(-90)' style='font-size: 15.00px; font-family: Arial;' textLength='24.18px' lengthAdjust='spacingAndGlyphs'>can</text>
+<text x='188.21' y='236.04' style='font-size: 15.00px; font-family: Arial;' textLength='68.36px' lengthAdjust='spacingAndGlyphs'>necessary</text>
+<text x='280.15' y='207.96' style='font-size: 18.00px; font-family: Arial;' textLength='30.03px' lengthAdjust='spacingAndGlyphs'>end</text>
+<text x='187.08' y='213.75' style='font-size: 21.00px; font-family: Arial;' textLength='39.67px' lengthAdjust='spacingAndGlyphs'>may</text>
+<text x='252.15' y='127.36' style='font-size: 15.00px; font-family: Arial;' textLength='33.37px' lengthAdjust='spacingAndGlyphs'>good</text>
+<text x='204.00' y='252.31' style='font-size: 18.00px; font-family: Arial;' textLength='95.05px' lengthAdjust='spacingAndGlyphs'>government</text>
+<text x='276.14' y='219.67' style='font-size: 15.00px; font-family: Arial;' textLength='40.85px' lengthAdjust='spacingAndGlyphs'>affairs</text>
+<text x='276.55' y='235.85' style='font-size: 21.00px; font-family: Arial;' textLength='54.87px' lengthAdjust='spacingAndGlyphs'>public</text>
+<text transform='translate(212.75,162.62) rotate(-90)' style='font-size: 48.00px; font-family: Arial;' textLength='66.66px' lengthAdjust='spacingAndGlyphs'>will</text>
+<text x='309.29' y='185.89' style='font-size: 15.00px; font-family: Arial;' textLength='43.36px' lengthAdjust='spacingAndGlyphs'>proper</text>
+<text x='305.10' y='172.71' style='font-size: 18.00px; font-family: Arial;' textLength='41.03px' lengthAdjust='spacingAndGlyphs'>great</text>
+<text x='250.77' y='117.02' style='font-size: 15.00px; font-family: Arial;' textLength='74.20px' lengthAdjust='spacingAndGlyphs'>information</text>
+</svg>

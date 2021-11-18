@@ -423,6 +423,31 @@ round(test$p.value, digits=3)
 What do you conclude about the hypothesis? Is it significant?
 
 
+## In-Class Exercise Questions
+
+Do negative ads increase voter turnout? In an experiment, suppose researchers found that a negative political ad intending to make voters angry toward the opposing candidate increased voter turnout by 5 percentage points relative to a control condition in which a non-political ad was shown. The difference between treatment and control had a p-value of 0.25, and the confidence interval was -1 to 11 percentage points.
+
+  1.	What are the implied null and alternative hypotheses? 
+  2.	What is the difference in voter turnout between the groups?
+  3.	What do you conclude about the results? Is it significant? Do you reject or fail to reject the null hypothesis?
+  4.	How do you interpret the p-value? 
+
+
+If we imagine that we could conduct the negative advertising study over and over again, estimating voter turnout each time. The set of estimates of voter turnout across these hypothetical studies would be called the (circle one):
+
+  A.	Standard error
+  B.	Sampling distribution
+  C.	Confidence Interval
+  D.	Standard deviation
+
+
+Are natural resources like oil negatively related to how democratic a country is? In a study, researchers looked at the correlation between the amount of oil available to a country and how democratic the country is according to expert ratings of democracy. The researchers ran a regression analysis and found that for every one-unit increase in the amount of oil a country has, the country has a b=.3 decrease in its democracy rating. The standard error of the coefficient is se = 0.05. The t-statistic is 6, with a p-value < 0.001. 
+
+  1.	What are the implied null and alternative hypotheses? 
+  2.	What do you conclude about the results? Is it significant? Do you reject or fail to reject the null hypothesis?
+
+
+
 
 
 

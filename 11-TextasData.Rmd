@@ -1,0 +1,395 @@
+# Text as Data {#text}
+
+
+Recall that we said, four primary goals of social science include:
+
+  - **Describe** and measure
+      + Has the U.S. population increased?
+  - **Explain**, evaluate, and recommend (study of causation)
+      + Does expanding Medicaid improve health outcomes?
+  - **Predict**
+      + Who will win the next election?
+  - **Discover**
+      + How do policies diffuse across states?
+
+In this section, we start to explore the goal of discovery, seeing what we can learn from text as data.
+
+
+## Why text?
+
+
+Words (can) matter. Patterns of word usage can be suggestive of deeper divides.
+
+![](images/deadspin.png){width=80%}
+
+Article from [Deadspin](https://deadspin.com/which-words-are-used-to-describe-white-and-black-nfl-pr-1573683214)
+
+
+![](images/wordsmass.png)
+
+Article from [NY Times](https://www.nytimes.com/interactive/2016/06/13/us/politics/politicians-respond-to-orlando-nightclub-attack.html)
+
+
+***Why Use R to analyze text?***
+
+  - Assist in reading large amounts of text
+
+![](images/greg1.png){width=40%} ![](images/greg2.png){width=40%}
+
+  - Efficiently summarize text through quantifying text attributes
+  - (Can) remove some subjectivity in coding text, allow to discover aspects of text unknown a priori
+
+## R Packages for text
+
+Packages are like apps on your phone. They give you additional functionality. To use the tools in a package you first have to install it.
+
+```{r, eval=F}
+install.packages("sotu", dependencies = T)
+install.packages("tm", dependencies = T)
+install.packages("SnowballC", dependencies = T)
+install.packages("wordcloud", dependencies = T)
+install.packages("stringr", dependencies = T)
+```
+
+After you install it, just like on a phone, anytime you want to use the app, you need to open it. In R, we do that with `library()`.
+
+```{r, message=F, warning=F}
+library(sotu)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(stringr)
+```
+
+
+## Application: State of the Union
+
+The `sotu` package includes a dataset with the text of every U.S. State of the Union speech. It also includes second dataset with information about the speech. When datasets are stored in a package, you can add them to your environment through the `data()` function.
+
+```{r}
+data(sotu_meta)
+data(sotu_text)
+```
+
+We are going to "bind" these together into a new dataframe. That way, the `sotu_text` is a variable inside of our `speeches` dataframe. 
+
+```{r}
+speeches <- cbind(sotu_meta, sotu_text)
+names(speeches)
+```
+
+
+### Cleaning Text
+
+Note that when working with raw text data, we usually do want our variables to be character variables and not factor variables. Here, every cell is not a category. Instead, it is a speech!
+
+```{r}
+class(speeches$sotu_text)
+```
+
+
+Text is messy data. We may want to spruce it up a bit by removing some of the non-essential characters and words, and moving everything to lowercase.
+
+```{r}
+## Example of speech
+speeches$sotu_text[1]
+```
+
+
+```{r}
+## clean text
+speeches$sotu_text <- tolower(speeches$sotu_text)
+speeches$sotu_text <- stripWhitespace(speeches$sotu_text)
+speeches$sotu_text <- removeWords(speeches$sotu_text, stopwords(kind="en"))
+speeches$sotu_text <- removePunctuation(speeches$sotu_text)
+speeches$sotu_text <- removeNumbers(speeches$sotu_text)
+#speeches$sotu_text <- stemDocument(speeches$sotu_text) # we will hold off
+```
+Note: What you might consider non-essential could differ depending on your application. Maybe you want to keep numbers in your text, for example.
+
+### Preparing a Corpus
+
+
+```{r}
+## turn text into corpus
+sotu.corpus <- Corpus(VectorSource(speeches$sotu_text))
+## turn into Document-Term-Matrix
+sotu.dtm <- DocumentTermMatrix(sotu.corpus)
+```
+
+```{r}
+## preview
+inspect(sotu.dtm[,10:20])
+```
+
+### Word Frequency
+
+Convert the "Document-Term-Matrix" into a matrix using `as.matrix()`
+
+```{r}
+sotu.dtm.mat <- as.matrix(sotu.dtm)
+
+## Most frequent words
+head(sort(sotu.dtm.mat[1,], decreasing=T), n=10)
+
+head(sort(sotu.dtm.mat[236,], decreasing=T), n=10)
+
+```
+Note: these are somewhat generic words.
+
+
+***Word Cloud***
+
+```{r}
+wordcloud(words=names(sotu.dtm.mat[1,]),
+          freq=sotu.dtm.mat[1,], max.words = 20)
+```
+
+
+## Word Importance
+
+We use tf-idf (term frequency - inverse document frequency) as a way to pull out uniquely important/relevant words for a given character.
+
+  - Relative frequency of a term inversely weighted by the number of documents in which the term appears.
+  - Functionally, if everyone uses the word "know," then it's not very important for distinguishing characters/documents from each other.
+  - We want words that a speech used frequently, that other speeches use less frequently
+
+```{r}
+## words uniquely important to a character
+sotu.tfidf <- weightTfIdf(sotu.dtm)
+
+## convert to matrix
+sotu.tfidf.mat <- as.matrix(sotu.tfidf)
+
+```
+
+We can summarize the uniquely relevant words for each speech
+
+```{r}
+Gw1790.tfidf <-head(sort(sotu.tfidf.mat[1,], decreasing=T), n=8)
+BO2016.tfidf <-head(sort(sotu.tfidf.mat[236,], decreasing=T), n=8)
+```
+
+```{r}
+Gw1790.tfidf
+```
+
+
+```{r}
+barplot(Gw1790.tfidf, cex.axis=.7,
+         cex.names=.7,
+        main= "Most `Important' 1790 SOTU Words (tf-idf)", 
+        horiz = T, las=2)
+barplot(BO2016.tfidf,
+         cex.names=.7, cex.axis=.7,
+        main= "Most `Important' 2016 SOTU Words (tf-idf)", 
+        horiz=T, las=2)
+```
+
+
+## Additional Descriptive Statistics
+
+Are the length of speeches changing? The `nchar()` function tells you the number of characters in a "string."
+
+```{r}
+speeches$speechlength <- nchar(speeches$sotu_text)
+```
+
+Let's plot the length of speeches over time and annotate with informative colors and labels.
+
+
+Is the length of speeches changing? 
+
+```{r}
+plot(x=1:236, y= speeches$speechlength, 
+    pch=15,
+     xaxt="n",
+     xlab="", 
+     ylab = "Number of Characters")
+
+## add x axis
+axis(1, 1:236, labels=speeches$year, las=3, cex.axis=.7)
+```
+
+
+We can add color to distinguish written vs. spoken speeches
+
+```{r}
+speechcolor <- ifelse(speeches$sotu_type == "written", "black", "green3")
+plot(x=1:236, y= speeches$speechlength, 
+     xaxt="n", pch=15,
+     xlab="", 
+     ylab = "Number of Characters",
+     col = speechcolor)
+
+## add x axis
+axis(1, 1:236, labels=speeches$year, las=3, cex.axis=.7)
+
+## add legend
+legend("topleft", c("spoken", "written"), 
+       pch=15, 
+       col=c("green3", "black"), bty="n")
+```
+
+### Dictionary Analysis
+
+We can characterize the content of speeches in different ways. For example, we can see if speeches mention specific words, such as `"terrorism."
+
+  - The function `grepl()` lets you search for a pattern of text in a character string
+  - The function `str_detect()` works similarly with the opposite order of inputs
+
+```{r}
+speeches$terrorism <- ifelse(grepl("terror", speeches$sotu_text), 1,0)
+speeches$terrorism2 <- ifelse(str_detect(speeches$sotu_text,"terror"), 1,0)
+```
+
+
+```{r}
+sort(tapply(speeches$terrorism, speeches$president, sum), 
+     decreasing=T)[1:10]
+```
+
+
+We can characterize the content of speeches in different ways. For example, we can see if speeches mention specific words, such as "terrorism."
+
+  - The function `str_count()` counts the number of times a piece of text appears in a character string
+
+```{r}
+speeches$terrorismcount <- str_count(speeches$sotu_text, "terror")
+```
+
+```{r}
+sort(tapply(speeches$terrorismcount, speeches$president, sum), 
+     decreasing=T)[1:10]
+```
+
+We can add multiple words with the | operator. This is often called a "dictionary analysis."
+
+```{r}
+speeches$warcount <- str_count(speeches$sotu_text, 
+                               "terror|war|military|drone")
+sort(tapply(speeches$warcount, speeches$president, sum), decreasing=T)[1:10]
+```
+
+
+What are possible limitations of this analysis?
+
+
+
+## Application Programming Interfaces
+
+Application programming interfaces (APIs) are tools that allow you to search a large database to extract specific types of information. Social scientists often work with APIs to extract data from social media platforms, government agencies (e.g., U.S. Census), and news sites, among others.
+
+Organizations that develop these APIs can control what types of information researchers can access. Often, they set limits on the types and quantities of information someone can collect. Companies also often monitor who accesses the information by requiring people to sign up for access, apply for access, and/or pay for access.
+
+APIs can make a social scientist's life easier by providing an efficient way to collect data. Without an API, researchers might have to resort to manually extracting information from online or writing an ad hoc set of code to "scrape" the information off of websites. However, because researchers cannot control the API, the downside is at any given time, an organization could change or remove API access.
+
+Many researchers have developed corresponding R packages that make it easier to work with APIs. We will explore two of them.
+
+***Because the APIs require you to sign up for access (giving away your information), this course will not require that you gain access or use the APIs***
+
+### Twitter API v1
+
+Let's try an example working with a Twitter API. To use this version of the Twitter API with R, you need 
+
+  1. To create a Twitter account (you don't need to tweet from the account, just need an account)
+  2. An internet connection
+  3. To install the `rtweet` package
+  
+```{r, eval=F}
+install.packages("rtweet")
+```
+
+Let's open the package
+
+```{r, message=F, warning=F}
+library(rtweet)
+```
+
+The API sets guidelines about what and how much information a person can collect from Twitter over a particular duration of time. With the version of the API we are working with, we can collect a few thousand of the most recent tweets of any public user and search recent tweets (past few days) on Twitter that include keywords.
+
+  - Twitter has other versions of the API that academic researchers can apply to for broader access, including access to older tweets (e.g., if you wanted to study tweets during the 2020 election). Researchers have developed a separate R package for working with this broader API. 
+  
+#### Searching tweets for keywords.  
+
+The first time you use a function from `rtweet`, R will prompt you to authenticate and authorize an "app" through your Twitter account. Essentially, a web browser on your computer should automatically open to a Twitter landing page asking you to hit the "authorize" button. Once you do this, then you should be able to return to R and work with the R functions. (This is why you need a Twitter account and an internet connection to work with this package.)
+
+We can use the `search_tweets` function to search recent tweets that contain keywords. We can specify the number of tweets to extract with the `n` argument. We can also filter tweets with additional arguments, such as by limiting tweets to English tweets or omitting retweets.
+
+```{r, eval=F}
+## simple keyword search
+taylortweets <-search_tweets("taylorsversion", n=1000)
+
+## use ' ' to search for exact phrase
+simmonstweets <-search_tweets('"ben simmons"', n=1000)
+
+## use OR between words to search for tweets with at least one of the key words
+f1tweets <- search_tweets('"daniel ricciardo" OR "lando norris"', n=500)
+
+## just keep a space between words, no extra quotes to search for tweets that include both words somewhere
+bachtweets <- search_tweets("bachelorette michelle", n=400)
+
+## limit tweets to include only english tweets
+coronatweets <- search_tweets("coronavirus OR COVID", n=200, lang = "en")
+
+## omit retweets, may affect total n extracted
+rittenhousetweets <- search_tweets("rittenhouse", n=200, include_rts = FALSE)
+```
+  
+The resulting object we created with the first search, `taylortweets`, is a dataframe and includes the 1000 tweets we requested to extract along with 90 variables of information about those tweets. A few notable variables:
+
+  - `screen_name`: the screen name of the twitter user
+  - `text`: the text of the tweet
+  - `is_retweet`: an indiactor TRUE or FALSE indicating if the tweet was a retweet
+  - `favorite_count`: the number of times the tweet was favorited (liked)
+  - `followers_count`: number of followers the user has
+  - `friends_count`: number of users that the tweeter follows
+  - `statuses_count`: the number of tweets from the user
+  - `verified`: an indicator TRUE or FALSE indicating if the user is verified
+  - `lang`: language of the tweet
+
+
+#### Extracting user timeline  
+
+Here is an example of extracting tweets from a particular user. You cane extract up to 3200 recent tweets of a specified public user. If you try to extract tweets from several users at once, you might hit a "rate limit" indicating that you requested more information than allowed over a particular period of time.
+
+```{r, eval=F}
+## extracting tweets from potus
+bidentweets <- get_timeline("potus", n=3200)
+
+## extracting tweets from potus
+polleaders <- c("potus", "vp")
+poltweets <- get_timeline(polleaders, n=3200)
+```
+
+Similar to the keyword tweets, the object created will provide the text of the tweets and information about the reactions to the tweets.
+
+
+### Saving R Objects
+
+After you extract an tweets from online, you may want to save them as a hard data file on your computer. This way if you close RStudio, you can recover the tweets without needing to extract new tweets from Twitter.
+
+R allows you to save any R object as an .RData file that can be opened with the `load()` command. This is discussed on pg. 24 of QSS [Chapter 1](https://assets.press.princeton.edu/chapters/s11025.pdf).
+
+We can demonstrate this now by saving `taylortweets` as an RData object. It will automatically save to your working directory, but you can also add a subfolder or alternative file path.
+
+```{r, eval=F}
+save(taylortweets, file = "taylortweets.RData")
+```
+
+Prior to saving the file, you could consider limiting the number of variables you want to save if you didn't want to store 90 variables. Example of keeping only 5 variables:
+
+```{r, eval=F}
+taylortweets <- taylortweets[, c("user_id", "screen_name", "text", "created_at", "is_retweet")]
+save(taylortweets, file = "taylortweets.RData")
+```
+
+
+Then, you can load the file (if you happen to close R/RStudio, restart your computer, etc.) with the load command.
+
+```{r, eval=FALSE}
+load("taylortweets.RData")
+```
+
+
+
