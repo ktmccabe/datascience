@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="additional-descriptive-statistics.html"/>
-
+<link rel="next" href="application-sentiment-analysis.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -394,6 +394,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="application-programming-interfaces.html"><a href="application-programming-interfaces.html#twitter-api-v1"><i class="fa fa-check"></i><b>11.6.1</b> Twitter API v1</a></li>
 <li class="chapter" data-level="11.6.2" data-path="application-programming-interfaces.html"><a href="application-programming-interfaces.html#saving-r-objects"><i class="fa fa-check"></i><b>11.6.2</b> Saving R Objects</a></li>
 </ul></li>
+<li class="chapter" data-level="11.7" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html"><i class="fa fa-check"></i><b>11.7</b> Application: Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#searching-tweets-for-keywords"><i class="fa fa-check"></i><b>11.7.1</b> Searching tweets for keywords</a></li>
+<li class="chapter" data-level="11.7.2" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#sentiment-analysis-overview"><i class="fa fa-check"></i><b>11.7.2</b> Sentiment Analysis Overview</a></li>
+<li class="chapter" data-level="11.7.3" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#implementing-sentiment-analysis"><i class="fa fa-check"></i><b>11.7.3</b> Implementing sentiment analysis</a></li>
+<li class="chapter" data-level="11.7.4" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#your-twitter-analysis"><i class="fa fa-check"></i><b>11.7.4</b> Your Twitter Analysis</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -416,8 +423,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">11.6</span> Application Programming Interfaces</h2>
 <p>Application programming interfaces (APIs) are tools that allow you to search a large database to extract specific types of information. Social scientists often work with APIs to extract data from social media platforms, government agencies (e.g., U.S. Census), and news sites, among others.</p>
 <p>Organizations that develop these APIs can control what types of information researchers can access. Often, they set limits on the types and quantities of information someone can collect. Companies also often monitor who accesses the information by requiring people to sign up for access, apply for access, and/or pay for access.</p>
-<p>APIs can make a social scientist’s life easier by providing an efficient way to collect data. Without an API, researchers might have to resort to manually extracting information from online or writing an ad hoc set of code to “scrape” the information off of websites. However, because researchers cannot control the API, the downside is at any given time, an organization could change or remove API access.</p>
-<p>Many researchers have developed corresponding R packages that make it easier to work with APIs. We will explore two of them.</p>
+<p><strong><em>Example: Census API</em></strong>
+As an example of an API, the U.S. Census has an API that allows researchers to extract nicely formatted data summaries of different geographic units (e.g., all zip codes in the U.S.).</p>
+<ul>
+<li>Researchers can sign up <a href="https://api.census.gov/data/key_signup.html">here</a> for an API “key” which allows the organization to monitor who is accessing what information.</li>
+</ul>
+<p>Researchers Kyle Walker and Matt Herman have made an R package that makes working with the API easier.</p>
+<ul>
+<li>Example: <code>tidycensus</code> found <a href="https://walker-data.com/tidycensus/articles/basic-usage.html">here</a> allows you to search Census data by providing the variables you want to extract</li>
+</ul>
+<p><img src="images/tidycensus.png" style="width:45.0%" /></p>
+<p>APIs can make a social scientist’s life easier by providing an efficient way to collect data. Without an API, researchers might have to resort to manually extracting information from online or writing an ad hoc set of code to “scrape” the information off of websites. This can be time consuming, against an organization or company’s policy, or even impossible in some cases. APIs are powerful and efficient.</p>
+<p>However, because researchers cannot control the API, the downside is at any given time, an organization could change or remove API access. Researchers might also not have the full details of what information is included in the API, potentially leading to biased conclusions from the data. APIs are great, but we should use them with caution.</p>
 <p><strong><em>Because the APIs require you to sign up for access (giving away your information), this course will not require that you gain access or use the APIs</em></strong></p>
 <div id="twitter-api-v1" class="section level3" number="11.6.1">
 <h3><span class="header-section-number">11.6.1</span> Twitter API v1</h3>
@@ -491,17 +508,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb528-2"><a href="application-programming-interfaces.html#cb528-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(taylortweets, <span class="at">file =</span> <span class="st">&quot;taylortweets.RData&quot;</span>)</span></code></pre></div>
 <p>Then, you can load the file (if you happen to close R/RStudio, restart your computer, etc.) with the load command.</p>
 <div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="application-programming-interfaces.html#cb529-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;taylortweets.RData&quot;</span>)</span></code></pre></div>
-
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="additional-descriptive-statistics.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="additional-descriptive-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="application-sentiment-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

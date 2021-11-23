@@ -394,6 +394,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="application-programming-interfaces.html"><a href="application-programming-interfaces.html#twitter-api-v1"><i class="fa fa-check"></i><b>11.6.1</b> Twitter API v1</a></li>
 <li class="chapter" data-level="11.6.2" data-path="application-programming-interfaces.html"><a href="application-programming-interfaces.html#saving-r-objects"><i class="fa fa-check"></i><b>11.6.2</b> Saving R Objects</a></li>
 </ul></li>
+<li class="chapter" data-level="11.7" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html"><i class="fa fa-check"></i><b>11.7</b> Application: Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#searching-tweets-for-keywords"><i class="fa fa-check"></i><b>11.7.1</b> Searching tweets for keywords</a></li>
+<li class="chapter" data-level="11.7.2" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#sentiment-analysis-overview"><i class="fa fa-check"></i><b>11.7.2</b> Sentiment Analysis Overview</a></li>
+<li class="chapter" data-level="11.7.3" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#implementing-sentiment-analysis"><i class="fa fa-check"></i><b>11.7.3</b> Implementing sentiment analysis</a></li>
+<li class="chapter" data-level="11.7.4" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#your-twitter-analysis"><i class="fa fa-check"></i><b>11.7.4</b> Your Twitter Analysis</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -426,7 +433,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb513-6"><a href="additional-descriptive-statistics.html#cb513-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb513-7"><a href="additional-descriptive-statistics.html#cb513-7" aria-hidden="true" tabindex="-1"></a><span class="do">## add x axis</span></span>
 <span id="cb513-8"><a href="additional-descriptive-statistics.html#cb513-8" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">236</span>, <span class="at">labels=</span>speeches<span class="sc">$</span>year, <span class="at">las=</span><span class="dv">3</span>, <span class="at">cex.axis=</span>.<span class="dv">7</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-301-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-302-1.svg" width="672" /></p>
 <p>We can add color to distinguish written vs. spoken speeches</p>
 <div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="additional-descriptive-statistics.html#cb514-1" aria-hidden="true" tabindex="-1"></a>speechcolor <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(speeches<span class="sc">$</span>sotu_type <span class="sc">==</span> <span class="st">&quot;written&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;green3&quot;</span>)</span>
 <span id="cb514-2"><a href="additional-descriptive-statistics.html#cb514-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">236</span>, <span class="at">y=</span> speeches<span class="sc">$</span>speechlength, </span>
@@ -442,7 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb514-12"><a href="additional-descriptive-statistics.html#cb514-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;spoken&quot;</span>, <span class="st">&quot;written&quot;</span>), </span>
 <span id="cb514-13"><a href="additional-descriptive-statistics.html#cb514-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch=</span><span class="dv">15</span>, </span>
 <span id="cb514-14"><a href="additional-descriptive-statistics.html#cb514-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;green3&quot;</span>, <span class="st">&quot;black&quot;</span>), <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-302-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-303-1.svg" width="672" /></p>
 <div id="dictionary-analysis" class="section level3" number="11.5.1">
 <h3><span class="header-section-number">11.5.1</span> Dictionary Analysis</h3>
 <p>We can characterize the content of speeches in different ways. For example, we can see if speeches mention specific words, such as `“terrorism.”</p>

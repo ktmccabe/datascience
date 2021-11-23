@@ -394,6 +394,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6.1" data-path="application-programming-interfaces.html"><a href="application-programming-interfaces.html#twitter-api-v1"><i class="fa fa-check"></i><b>11.6.1</b> Twitter API v1</a></li>
 <li class="chapter" data-level="11.6.2" data-path="application-programming-interfaces.html"><a href="application-programming-interfaces.html#saving-r-objects"><i class="fa fa-check"></i><b>11.6.2</b> Saving R Objects</a></li>
 </ul></li>
+<li class="chapter" data-level="11.7" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html"><i class="fa fa-check"></i><b>11.7</b> Application: Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#searching-tweets-for-keywords"><i class="fa fa-check"></i><b>11.7.1</b> Searching tweets for keywords</a></li>
+<li class="chapter" data-level="11.7.2" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#sentiment-analysis-overview"><i class="fa fa-check"></i><b>11.7.2</b> Sentiment Analysis Overview</a></li>
+<li class="chapter" data-level="11.7.3" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#implementing-sentiment-analysis"><i class="fa fa-check"></i><b>11.7.3</b> Implementing sentiment analysis</a></li>
+<li class="chapter" data-level="11.7.4" data-path="application-sentiment-analysis.html"><a href="application-sentiment-analysis.html#your-twitter-analysis"><i class="fa fa-check"></i><b>11.7.4</b> Your Twitter Analysis</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -414,6 +421,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="application-state-of-the-union" class="section level2" number="11.3">
 <h2><span class="header-section-number">11.3</span> Application: State of the Union</h2>
+<p><em>For a video explainer of the code for the State of the Union application on pre-processing text and dictionary analysis, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</em></p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/-9rB6uOih34" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <p>The <code>sotu</code> package includes a dataset with the text of every U.S. State of the Union speech. It also includes second dataset with information about the speech. When datasets are stored in a package, you can add them to your environment through the <code>data()</code> function.</p>
 <div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="application-state-of-the-union.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sotu_meta)</span>
 <span id="cb490-2"><a href="application-state-of-the-union.html#cb490-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sotu_text)</span></code></pre></div>
@@ -499,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong><em>Word Cloud</em></strong></p>
 <div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="application-state-of-the-union.html#cb505-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="at">words=</span><span class="fu">names</span>(sotu.dtm.mat[<span class="dv">1</span>,]),</span>
 <span id="cb505-2"><a href="application-state-of-the-union.html#cb505-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">freq=</span>sotu.dtm.mat[<span class="dv">1</span>,], <span class="at">max.words =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-295-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-296-1.svg" width="672" /></p>
 </div>
 </div>
             </section>

@@ -175,3 +175,8 @@ twitter-api-v1
 searching-tweets-for-keywords.
 extracting-user-timeline
 saving-r-objects
+application-sentiment-analysis
+searching-tweets-for-keywords
+sentiment-analysis-overview
+implementing-sentiment-analysis
+your-twitter-analysis
