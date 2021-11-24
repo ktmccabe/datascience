@@ -103,8 +103,9 @@ A standard error is the standard deviation of the sampling distribution
   - Where a standard deviation is the typical distance between a given observation and the mean.
   - Compare the two photos below showing 0 standard deviation vs. a large standard deviation
 
-![*From the Cartoon Guide to Statistics*](images/spread1.png){width=40%} ![](images/spread2.jpg){width=42%}
+![](images/spread1.png){width=40%} ![](images/spread2.jpg){width=42%}
 
+*From the Cartoon Guide to Statistics*
 
 In real life studies, we don't know the actual sampling distribution because we only have 1 sample (we only had one study of applications/hiring decisions). 
 
@@ -196,6 +197,15 @@ Let's Review the Process
       
 
 ## Application: Health Savings Study
+
+*For a video explainer of the code in this section, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=kJlonC8AI6w")
+```
 
 
 Health Savings Experiment (Dupas and Robinson 2013): Field experiment in rural Kenya in which they randomly varied access to four innovative saving technologies and observed the impact on asset accumulation.
