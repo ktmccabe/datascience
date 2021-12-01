@@ -439,3 +439,52 @@ Here are a few additional resources for working with RMarkdown.
 
 See the course Canvas page for additional templates for working with RMarkdown in problem sets.
 
+
+## Wait a second why R?
+
+R is a free and open-source program.
+
+  - This means anyone can use R. In the future, if you are not at a university that provides licenses for software or at an organization that can afford to buy very expensive softwares (e.g., SPSS, Stata), you can still use R!!
+  - This means anyone can access the underlying code to understand how different functions and capabilities work.
+  
+R has a very large community of users and developers.
+
+  - People are constantly expanding R's capabilities. This means that as the tools and methods change, R will also adapt very quickly to expand with new capabilities.
+  - Google will be your friend. Multiple websites are devoted to helping people troubleshoot R problems and providing tutorials for using R.
+  
+
+R is very versatile
+
+  - R can 
+      + Manage multiple datasets at once, subset, append, and merge data 
+      + Be used for descriptive analyses, as well more complicated statistical methods, 
+      + Employ APIs to communicate with external databases,
+      + Map data, 
+      + Conduct text analyses,
+      + And create interactive visualizations, among other capabilities.
+  - With RStudio, users can also directly integrate their R code and written text to automatically generate data reports, presentations, interactive dashboards, and more.
+  - R also has a reputation of having terrific visualization tools, again with a lot of flexibility
+  
+  
+R facilitates reproducibility
+
+  - (While some other softwares also provide this ability), R encourages the use of scripts, which help researchers keep track of every modification they have made to data and every analysis they have run. This helps future researchers replicate, verify, and build on previous research.
+      + Imagine if you accidentally enter the wrong number in a spreadsheet cell in Excel/google sheets. You may have no record you ever did that. In R, you can track all of the modifications you make so that months later you can review your steps to check them for accuracy.
+  
+
+R is popular
+
+  - While there is no guarantee R will remain popular forever, it is commonly employed in many different industries and organizations. Learning R can be a useful skill when applying for jobs. Moreover, even if jobs don't require R, in learning R, it will be easier to learn how to use other statistical programs and languages, such as SPSS, Stata, or Python, as well as visualization tools like Tableau, or database tools like SQL.
+  
+R has some distinct advantages compared to other programs, but all programs have benefits and weaknesses
+
+  - Here are a couple of articles comparing R to Excel [here](https://www.northeastern.edu/graduate/blog/r-vs-excel/) and [here](https://blog.revolutionanalytics.com/2014/10/why-r-is-better-than-excel.html)
+  - Here is an article making a case for R over multiple other programs from [R Bloggers](https://www.r-bloggers.com/2019/07/whats-the-best-statistical-software-a-comparison-of-r-python-sas-spss-and-stata/)
+
+Rgghhhh
+
+  - With all this, R does come with a learning curve. It is a programming language. In other softwares, such as Stata or SPSS, there are more "point and click" capabilities.
+  - Especially as you first work with R, you may find it is easier to do some tasks outside of R, such as with Excel or another spreadsheet software. That's fine. Ultimately, in political science, R is one tool we can use to pursue research goals. There are many other tools, and you may find each has their own strengths and weaknesses.
+  - For this class, R provides a one-stop-shop for the wide range of types of data wrangling and analyses used across data science.
+  
+  
