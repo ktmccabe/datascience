@@ -422,7 +422,59 @@ How could we improve this visualization?
 
 
 
+## Application: Territorial Control of Syria
 
+In this [article](https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12509), Anita Gohdes uses data from the Syria Conflict Mapping Project (SCMP), which tracks local communities and determines which conflict party is in control. The author maps which group is in control of different communities in 2014 and 2015, including: opposition forces, Islamic State forces, government forces, and Kurdish forces.
+
+Among other findings, the author shows that group presence influences the degree of targeted repressive violence. 
+
+We are going to map the territorial control of Syria at these two time points using the author's data. Note: the mapping data we use does not come directly from the `maps` package. Instead the author used "shape files" from an external source, which then can be converted into a dataframe like we get when using `map_data`.
+
+Let's load the data. The data have already been converted into the dataframe.
+
+```{r, include=F}
+load("data/SYmapd.RData")
+```
+
+```{r, eval=F}
+load("SYmapd.RData")
+```
+
+A second dataset includes information about territorial control. Let's also load that data.
+
+```{r, include=F}
+load("data/mapdata.RData")
+```
+
+```{r, eval=F}
+load("mapdata.RData")
+```
+
+We can create a map.
+
+```{r, eval=F}
+ggplot()+
+  
+  ## use shape data
+   geom_polygon(data=SYmapd, aes(x=long, y=lat, group=group),
+                fill="white", color="gray") +  
+  
+  ## add points with map data
+   geom_point(data=mapdata, aes(x=longitude, y=latitude, color=group), alpha=.3)+
+   scale_color_manual("",values=c("red", "black", "purple", "blue"))+
+  
+  
+   theme_void()+ 
+  
+  ## add animation
+   transition_states(date, transition_length = .25, state_length = 3)+
+   labs(title = "Current map: {closest_state}")
+
+anim_save("syriamap.gif")
+```
+
+
+![](syriamap.gif)
 
 
 
