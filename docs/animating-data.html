@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12.7 Animating Data | Data Science for Political Science</title>
-  <meta name="description" content="12.7 Animating Data | Data Science for Political Science" />
+  <title>12.8 Animating Data | Data Science for Political Science</title>
+  <meta name="description" content="12.8 Animating Data | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12.7 Animating Data | Data Science for Political Science" />
+  <meta property="og:title" content="12.8 Animating Data | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12.7 Animating Data | Data Science for Political Science" />
+  <meta name="twitter:title" content="12.8 Animating Data | Data Science for Political Science" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="your-turn-to-map.html"/>
+<link rel="prev" href="application-terrorist-attacks-in-france.html"/>
 <link rel="next" href="application-spread-of-coronavirus.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -420,9 +420,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.5.1" data-path="application-voter-identification-laws.html"><a href="application-voter-identification-laws.html#using-the-in-function"><i class="fa fa-check"></i><b>12.5.1</b> Using the <code>%in%</code> function</a></li>
 </ul></li>
 <li class="chapter" data-level="12.6" data-path="your-turn-to-map.html"><a href="your-turn-to-map.html"><i class="fa fa-check"></i><b>12.6</b> Your turn to map</a></li>
-<li class="chapter" data-level="12.7" data-path="animating-data.html"><a href="animating-data.html"><i class="fa fa-check"></i><b>12.7</b> Animating Data</a></li>
-<li class="chapter" data-level="12.8" data-path="application-spread-of-coronavirus.html"><a href="application-spread-of-coronavirus.html"><i class="fa fa-check"></i><b>12.8</b> Application: Spread of Coronavirus</a></li>
-<li class="chapter" data-level="12.9" data-path="application-territorial-control-of-syria.html"><a href="application-territorial-control-of-syria.html"><i class="fa fa-check"></i><b>12.9</b> Application: Territorial Control of Syria</a></li>
+<li class="chapter" data-level="12.7" data-path="application-terrorist-attacks-in-france.html"><a href="application-terrorist-attacks-in-france.html"><i class="fa fa-check"></i><b>12.7</b> Application: Terrorist Attacks in France</a>
+<ul>
+<li class="chapter" data-level="12.7.1" data-path="application-terrorist-attacks-in-france.html"><a href="application-terrorist-attacks-in-france.html#adding-points-to-a-map"><i class="fa fa-check"></i><b>12.7.1</b> Adding points to a map</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="animating-data.html"><a href="animating-data.html"><i class="fa fa-check"></i><b>12.8</b> Animating Data</a></li>
+<li class="chapter" data-level="12.9" data-path="application-spread-of-coronavirus.html"><a href="application-spread-of-coronavirus.html"><i class="fa fa-check"></i><b>12.9</b> Application: Spread of Coronavirus</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="application-spread-of-coronavirus.html"><a href="application-spread-of-coronavirus.html#mapping-animation-with-world-map"><i class="fa fa-check"></i><b>12.9.1</b> Mapping Animation with World Map</a></li>
+</ul></li>
+<li class="chapter" data-level="12.10" data-path="application-territorial-control-of-syria.html"><a href="application-territorial-control-of-syria.html"><i class="fa fa-check"></i><b>12.10</b> Application: Territorial Control of Syria</a></li>
 </ul></li>
 </ul>
 
@@ -441,20 +448,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="animating-data" class="section level2" number="12.7">
-<h2><span class="header-section-number">12.7</span> Animating Data</h2>
+<div id="animating-data" class="section level2" number="12.8">
+<h2><span class="header-section-number">12.8</span> Animating Data</h2>
 <p>With R, we can go a step further to make our maps more interactive. RStudio and R allow for the ability to turn graphics into interactive applications, as well as animate visualizations to reveal or change the visual over the course of different frames. We will take a brief look at these applications.</p>
+<p>Why would we want to do this? An engaging way to reveal changes over time or other states. Adding a bit of drama to presentations.</p>
+<p><img src="images/giphy.gif" /></p>
 <p>We will use the package <code>gganimate</code> for this. Install and load the package.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="animating-data.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;gganimate&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="animating-data.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span></code></pre></div>
-<pre><code>## Warning: package &#39;gganimate&#39; was built under R version 4.0.2</code></pre>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="animating-data.html#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;gganimate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="animating-data.html#cb574-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span></code></pre></div>
+<p>To animate a ggplot, we just add an argument to indicate the variable that dictates the transition between different states, in this case, the date variable, <code>iyear</code>. The other parts of the plot stay very similar to before.</p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="animating-data.html#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb575-2"><a href="animating-data.html#cb575-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data=</span>france, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y=</span>lat, <span class="at">group=</span>group), <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">colour=</span><span class="st">&quot;gray&quot;</span>)<span class="sc">+</span></span>
+<span id="cb575-3"><a href="animating-data.html#cb575-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb575-4"><a href="animating-data.html#cb575-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add points with size in proportion to fatalities</span></span>
+<span id="cb575-5"><a href="animating-data.html#cb575-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>gtbfrance, <span class="fu">aes</span>(<span class="at">x=</span>longitude, <span class="at">y=</span>latitude, <span class="at">size=</span>nkill), <span class="at">alpha=</span>.<span class="dv">4</span>, <span class="at">colour=</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb575-6"><a href="animating-data.html#cb575-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">name=</span><span class="st">&quot;Number of Fatalities&quot;</span>, <span class="at">range=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb575-7"><a href="animating-data.html#cb575-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb575-8"><a href="animating-data.html#cb575-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Terrorist Attacks in France 2000-2019&quot;</span>)<span class="sc">+</span></span>
+<span id="cb575-9"><a href="animating-data.html#cb575-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>()<span class="sc">+</span></span>
+<span id="cb575-10"><a href="animating-data.html#cb575-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb575-11"><a href="animating-data.html#cb575-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb575-12"><a href="animating-data.html#cb575-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add the transition and a label for the plot</span></span>
+<span id="cb575-13"><a href="animating-data.html#cb575-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_states</span>(iyear, <span class="at">state_length =</span> <span class="dv">8</span>)<span class="sc">+</span></span>
+<span id="cb575-14"><a href="animating-data.html#cb575-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Current map: {closest_state}&quot;</span>)</span>
+<span id="cb575-15"><a href="animating-data.html#cb575-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb575-16"><a href="animating-data.html#cb575-16" aria-hidden="true" tabindex="-1"></a><span class="fu">anim_save</span>(<span class="st">&quot;gtbplot.gif&quot;</span>)</span></code></pre></div>
+<p><img src="gtbplot.gif" /></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="your-turn-to-map.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="application-terrorist-attacks-in-france.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="application-spread-of-coronavirus.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

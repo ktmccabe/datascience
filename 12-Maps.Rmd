@@ -330,11 +330,122 @@ Make a choropleth plot of the United States or some other geographic unit.
       + Does a particular state/set of states embody a certain characteristic?
   - Share the map on Piazza
   
+
+## Application: Terrorist Attacks in France
+
+
+Political scientists study a wide range of questions related to terrorism, including how [targets end up being selected](https://doi.org/10.1080/19361610902929990), how to predict and defend against attacks, what [types of incidents the public considers to be terrorism](https://doi.org/10.1111/ajps.12329), how [attacks influence public attitudes](https://static1.squarespace.com/static/5da3488403dd2c4493a888d0/t/61600a72d794ed74cf58e0f3/1633684109226/Godefroidt_2021_Manuscript.pdf), and responses to terrorism from government and other actors.
+
+  - Why might mapping visualizations and spatial data be useful to political scientists for these questions?
+
+### Adding points to a map
+
+In this application, we use the [Global Terrorism Database](https://www.start.umd.edu/gtd/) to visualize where terrorist attacks (including failed attacks) have occurred in recent years in France.
+
+  - We will make a map of France using `map_data` to get the polygon information
   
+```{r}
+library(maps)
+library(ggplot2)
+
+## get france data (not available for all countries)
+france <- map_data("france")
+
+## Plot France
+ggplot()+
+  geom_polygon(data=france, aes(x=long, y=lat, group=group), fill="white", colour="gray")+
+  
+  ggtitle("Terrorist Attacks in France 2000-2019")+
+  coord_quickmap()+
+  theme_void()
+
+```
+
+
+  - We load separate data that includes the latitude and longitude of attacks
+
+```{r, include=F}
+#gtb <- read.csv("data/gtb.csv")
+#head(gtb)
+#library(tidyverse)
+#gtb <- gtb %>% dplyr::select(nkill, country_txt, iyear, imonth, weaptype1_txt, city, success, crit1, crit2, crit3,
+#                      targtype1_txt, longitude, latitude)
+#save(gtb, file="data/gtb.RData")
+load("data/gtb.RData")
+
+```
+ 
+```{r, eval=F}
+load("gtb.RData")
+```
+
+```{r}
+## Let's look at only recent attacks 
+gtbfrance <- subset(gtb, iyear > 2000 & country_txt=="France")
+```
+  - We use `geom_point` to add a layer of points from this dataset
+      + We can colour or size the points by additional variables in the data
+      
+```{r}
+ggplot()+
+  geom_polygon(data=france, aes(x=long, y=lat, group=group), fill="white", colour="gray")+
+  
+  
+  ## add points with size in proportion to fatalities
+  geom_point(data=gtbfrance, aes(x=longitude, y=latitude, size=nkill), 
+             alpha=.4, colour="red")+ # alpha makes points transparent
+  
+  ## range specifies how big or small you want points to be
+  scale_size(name="Number of Fatalities", range=c(2, 10))+
+
+
+  ggtitle("Terrorist Attacks in France 2000-2019")+
+  coord_quickmap()+
+  theme_void()
+
+```
+
+  - We can also add labels to the plot with `geom_text_repel` from the `ggrepel` package
+      + Note that we can use labels from yet another object so long as we have the right lat and long
+
+```{r, eval=F}
+install.packages("ggrepel")
+```
+
+```{r, message=F, warning=F}
+library(ggrepel)
+## Let's add labels for the biggest attacks only
+gtbmajorfrance <- subset(gtbfrance, nkill > 75)
+
+
+ggplot()+
+  geom_polygon(data=france, aes(x=long, y=lat, group=group), fill="white", colour="gray")+
+  
+  
+  ## add points with size in proportion to fatalities
+  geom_point(data=gtbfrance, aes(x=longitude, y=latitude, size=nkill), 
+             alpha=.4, colour="red")+
+  scale_size(name="Number of Fatalities", range=c(2, 10))+
+
+  ## add labels from gtbmajorfrance
+  geom_text_repel(data=gtbmajorfrance, aes(x=longitude, y=latitude, 
+                                           label=city), size=4,
+                  max.overlaps = 30)+
+  
+  
+  ggtitle("Terrorist Attacks in France 2000-2019")+
+  coord_quickmap()+
+  theme_void()
+```
 
 ## Animating Data
 
 With R, we can go a step further to make our maps more interactive. RStudio and R allow for the ability to turn graphics into interactive applications, as well as animate visualizations to reveal or change the visual over the course of different frames. We will take a brief look at these applications.
+
+Why would we want to do this? An engaging way to reveal changes over time or other states. Adding a bit of drama to presentations.
+
+![](images/giphy.gif)
+
 
 We will use the package `gganimate` for this. Install and load the package.
 
@@ -342,12 +453,39 @@ We will use the package `gganimate` for this. Install and load the package.
 install.packages("gganimate")
 ```
 
-```{r}
+```{r, message=F, warning=F}
 library(gganimate)
 ```
 
 
+To animate a ggplot, we just add an argument to indicate the variable that dictates the transition between different states, in this case, the date variable, `iyear`. The other parts of the plot stay very similar to before.
+
+```{r, eval=FALSE}
+ggplot()+
+  geom_polygon(data=france, aes(x=long, y=lat, group=group), fill="white", colour="gray")+
+  
+  ## add points with size in proportion to fatalities
+  geom_point(data=gtbfrance, aes(x=longitude, y=latitude, size=nkill), alpha=.4, colour="red")+
+  scale_size(name="Number of Fatalities", range=c(2, 10))+
+
+  ggtitle("Terrorist Attacks in France 2000-2019")+
+  coord_quickmap()+
+  theme_void()+
+  
+  ## add the transition and a label for the plot
+  transition_states(iyear, state_length = 8)+
+  labs(subtitle = "Current map: {closest_state}")
+
+anim_save("gtbplot.gif")
+```
+
+
+![](gtbplot.gif)
+
 ## Application: Spread of Coronavirus
+
+Mapping isn't the only application where we might want to show an animation. Here is a brief example using ggplot in a different way to reveal trends over time.
+
 
 We are going to map the spread of confirmed COVID cases based on data from [John Hopkins University](https://github.com/CSSEGISandData/COVID-19).
 
@@ -359,9 +497,52 @@ load("covidlongfmt.RData")
 load("data/covidlongfmt.RData")
 ```
 
-To animate a ggplot, we just add an argument to indicate the variable that dictates the transition between different states, in this case, the date variable, `date_fmt`. The other parts of the plot stay very similar to before.
 
-To illustrate this, let's create a plot for just one day: 2020-03-01.
+We have variables `case_count` and `Country.Region` along with `date_fmt`. Let's compare trends in confirmed cases between Italy and France.
+
+```{r}
+italyspain <- subset(covidlongfmt, Country.Region %in% c("Italy", "Spain"))
+```
+
+Let's divide cases by 1000 to make it easier to visualize.
+
+```{r}
+italyspain$case_count_thousands <- italyspain$case_count /1000
+```
+
+With ggplot, this time instead of using `geom_polygon`, we will use `geom_line`. Our x-axis will be time, and our y-axis will be the case count.
+
+Again, to animate a ggplot, we just add an argument to indicate the variable that dictates the transition between different states, in this case, the date variable, `date_fmt`. The other parts of the plot stay very similar to before.
+
+```{r, eval=F}
+ggplot()+
+  geom_line(data=italyspain, aes(x=date_fmt, y=case_count_thousands, 
+                                 colour=Country.Region))+
+  
+  ## Add labels with exact case count
+  geom_text_repel(data=italyspain, aes(x=date_fmt,  
+                                       y=case_count_thousands,
+                                       colour=Country.Region,
+                                 label=case_count_thousands))+
+ 
+  ## axis and title labels
+  ylab("Cases (thousands)")+
+  ggtitle("Confirmed Cases in Italy and Spain")+
+  theme_minimal()+
+  
+  ## We use transition_reveal to slowly reveal the trend
+  transition_reveal(date_fmt)+
+  labs(x = "Date: {frame_along}")
+anim_save("italyspain.gif")
+```
+
+![](italyspain.gif)
+
+### Mapping Animation with World Map
+
+Just like with the terrorism data, we can make a map with the data, too.
+
+To illustrate the process, let's create a plot for just one day: 2020-03-01.
 
 ```{r}
 covidmarch <- subset(covidlongfmt, date_fmt == "2020-03-01")

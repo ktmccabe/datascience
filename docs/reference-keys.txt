@@ -191,6 +191,9 @@ application-2021-nj-election-results
 application-voter-identification-laws
 using-the-in-function
 your-turn-to-map
+application-terrorist-attacks-in-france
+adding-points-to-a-map
 animating-data
 application-spread-of-coronavirus
+mapping-animation-with-world-map
 application-territorial-control-of-syria

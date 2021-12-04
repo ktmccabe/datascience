@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12.9 Application: Territorial Control of Syria | Data Science for Political Science</title>
-  <meta name="description" content="12.9 Application: Territorial Control of Syria | Data Science for Political Science" />
+  <title>12.10 Application: Territorial Control of Syria | Data Science for Political Science</title>
+  <meta name="description" content="12.10 Application: Territorial Control of Syria | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12.9 Application: Territorial Control of Syria | Data Science for Political Science" />
+  <meta property="og:title" content="12.10 Application: Territorial Control of Syria | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12.9 Application: Territorial Control of Syria | Data Science for Political Science" />
+  <meta name="twitter:title" content="12.10 Application: Territorial Control of Syria | Data Science for Political Science" />
   
   
   
@@ -420,9 +420,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.5.1" data-path="application-voter-identification-laws.html"><a href="application-voter-identification-laws.html#using-the-in-function"><i class="fa fa-check"></i><b>12.5.1</b> Using the <code>%in%</code> function</a></li>
 </ul></li>
 <li class="chapter" data-level="12.6" data-path="your-turn-to-map.html"><a href="your-turn-to-map.html"><i class="fa fa-check"></i><b>12.6</b> Your turn to map</a></li>
-<li class="chapter" data-level="12.7" data-path="animating-data.html"><a href="animating-data.html"><i class="fa fa-check"></i><b>12.7</b> Animating Data</a></li>
-<li class="chapter" data-level="12.8" data-path="application-spread-of-coronavirus.html"><a href="application-spread-of-coronavirus.html"><i class="fa fa-check"></i><b>12.8</b> Application: Spread of Coronavirus</a></li>
-<li class="chapter" data-level="12.9" data-path="application-territorial-control-of-syria.html"><a href="application-territorial-control-of-syria.html"><i class="fa fa-check"></i><b>12.9</b> Application: Territorial Control of Syria</a></li>
+<li class="chapter" data-level="12.7" data-path="application-terrorist-attacks-in-france.html"><a href="application-terrorist-attacks-in-france.html"><i class="fa fa-check"></i><b>12.7</b> Application: Terrorist Attacks in France</a>
+<ul>
+<li class="chapter" data-level="12.7.1" data-path="application-terrorist-attacks-in-france.html"><a href="application-terrorist-attacks-in-france.html#adding-points-to-a-map"><i class="fa fa-check"></i><b>12.7.1</b> Adding points to a map</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="animating-data.html"><a href="animating-data.html"><i class="fa fa-check"></i><b>12.8</b> Animating Data</a></li>
+<li class="chapter" data-level="12.9" data-path="application-spread-of-coronavirus.html"><a href="application-spread-of-coronavirus.html"><i class="fa fa-check"></i><b>12.9</b> Application: Spread of Coronavirus</a>
+<ul>
+<li class="chapter" data-level="12.9.1" data-path="application-spread-of-coronavirus.html"><a href="application-spread-of-coronavirus.html#mapping-animation-with-world-map"><i class="fa fa-check"></i><b>12.9.1</b> Mapping Animation with World Map</a></li>
+</ul></li>
+<li class="chapter" data-level="12.10" data-path="application-territorial-control-of-syria.html"><a href="application-territorial-control-of-syria.html"><i class="fa fa-check"></i><b>12.10</b> Application: Territorial Control of Syria</a></li>
 </ul></li>
 </ul>
 
@@ -441,34 +448,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="application-territorial-control-of-syria" class="section level2" number="12.9">
-<h2><span class="header-section-number">12.9</span> Application: Territorial Control of Syria</h2>
+<div id="application-territorial-control-of-syria" class="section level2" number="12.10">
+<h2><span class="header-section-number">12.10</span> Application: Territorial Control of Syria</h2>
 <p>In this <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12509">article</a>, Anita Gohdes uses data from the Syria Conflict Mapping Project (SCMP), which tracks local communities and determines which conflict party is in control. The author maps which group is in control of different communities in 2014 and 2015, including: opposition forces, Islamic State forces, government forces, and Kurdish forces.</p>
 <p>Among other findings, the author shows that group presence influences the degree of targeted repressive violence.</p>
 <p>We are going to map the territorial control of Syria at these two time points using the author’s data. Note: the mapping data we use does not come directly from the <code>maps</code> package. Instead the author used “shape files” from an external source, which then can be converted into a dataframe like we get when using <code>map_data</code>.</p>
 <p>Let’s load the data. The data have already been converted into the dataframe.</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="application-territorial-control-of-syria.html#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;SYmapd.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="application-territorial-control-of-syria.html#cb584-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;SYmapd.RData&quot;</span>)</span></code></pre></div>
 <p>A second dataset includes information about territorial control. Let’s also load that data.</p>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="application-territorial-control-of-syria.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;mapdata.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="application-territorial-control-of-syria.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;mapdata.RData&quot;</span>)</span></code></pre></div>
 <p>We can create a map.</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="application-territorial-control-of-syria.html#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb577-2"><a href="application-territorial-control-of-syria.html#cb577-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb577-3"><a href="application-territorial-control-of-syria.html#cb577-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## use shape data</span></span>
-<span id="cb577-4"><a href="application-territorial-control-of-syria.html#cb577-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_polygon</span>(<span class="at">data=</span>SYmapd, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y=</span>lat, <span class="at">group=</span>group),</span>
-<span id="cb577-5"><a href="application-territorial-control-of-syria.html#cb577-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span>  </span>
-<span id="cb577-6"><a href="application-territorial-control-of-syria.html#cb577-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb577-7"><a href="application-territorial-control-of-syria.html#cb577-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add points with map data</span></span>
-<span id="cb577-8"><a href="application-territorial-control-of-syria.html#cb577-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">data=</span>mapdata, <span class="fu">aes</span>(<span class="at">x=</span>longitude, <span class="at">y=</span>latitude, <span class="at">color=</span>group), <span class="at">alpha=</span>.<span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb577-9"><a href="application-territorial-control-of-syria.html#cb577-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(<span class="st">&quot;&quot;</span>,<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;purple&quot;</span>, <span class="st">&quot;blue&quot;</span>))<span class="sc">+</span></span>
-<span id="cb577-10"><a href="application-territorial-control-of-syria.html#cb577-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb577-11"><a href="application-territorial-control-of-syria.html#cb577-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb577-12"><a href="application-territorial-control-of-syria.html#cb577-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
-<span id="cb577-13"><a href="application-territorial-control-of-syria.html#cb577-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb577-14"><a href="application-territorial-control-of-syria.html#cb577-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add animation</span></span>
-<span id="cb577-15"><a href="application-territorial-control-of-syria.html#cb577-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">transition_states</span>(date, <span class="at">transition_length =</span> .<span class="dv">25</span>, <span class="at">state_length =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb577-16"><a href="application-territorial-control-of-syria.html#cb577-16" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Current map: {closest_state}&quot;</span>)</span>
-<span id="cb577-17"><a href="application-territorial-control-of-syria.html#cb577-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb577-18"><a href="application-territorial-control-of-syria.html#cb577-18" aria-hidden="true" tabindex="-1"></a><span class="fu">anim_save</span>(<span class="st">&quot;syriamap.gif&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="application-territorial-control-of-syria.html#cb586-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb586-2"><a href="application-territorial-control-of-syria.html#cb586-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb586-3"><a href="application-territorial-control-of-syria.html#cb586-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## use shape data</span></span>
+<span id="cb586-4"><a href="application-territorial-control-of-syria.html#cb586-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_polygon</span>(<span class="at">data=</span>SYmapd, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y=</span>lat, <span class="at">group=</span>group),</span>
+<span id="cb586-5"><a href="application-territorial-control-of-syria.html#cb586-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;gray&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb586-6"><a href="application-territorial-control-of-syria.html#cb586-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb586-7"><a href="application-territorial-control-of-syria.html#cb586-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add points with map data</span></span>
+<span id="cb586-8"><a href="application-territorial-control-of-syria.html#cb586-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="at">data=</span>mapdata, <span class="fu">aes</span>(<span class="at">x=</span>longitude, <span class="at">y=</span>latitude, <span class="at">color=</span>group), <span class="at">alpha=</span>.<span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb586-9"><a href="application-territorial-control-of-syria.html#cb586-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(<span class="st">&quot;&quot;</span>,<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;purple&quot;</span>, <span class="st">&quot;blue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb586-10"><a href="application-territorial-control-of-syria.html#cb586-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb586-11"><a href="application-territorial-control-of-syria.html#cb586-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb586-12"><a href="application-territorial-control-of-syria.html#cb586-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_void</span>()<span class="sc">+</span> </span>
+<span id="cb586-13"><a href="application-territorial-control-of-syria.html#cb586-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb586-14"><a href="application-territorial-control-of-syria.html#cb586-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add animation</span></span>
+<span id="cb586-15"><a href="application-territorial-control-of-syria.html#cb586-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">transition_states</span>(date, <span class="at">transition_length =</span> .<span class="dv">25</span>, <span class="at">state_length =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb586-16"><a href="application-territorial-control-of-syria.html#cb586-16" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Current map: {closest_state}&quot;</span>)</span>
+<span id="cb586-17"><a href="application-territorial-control-of-syria.html#cb586-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb586-18"><a href="application-territorial-control-of-syria.html#cb586-18" aria-hidden="true" tabindex="-1"></a><span class="fu">anim_save</span>(<span class="st">&quot;syriamap.gif&quot;</span>)</span></code></pre></div>
 <p><img src="syriamap.gif" /></p>
 
 </div>
