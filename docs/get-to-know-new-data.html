@@ -610,10 +610,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">13.1.3</span> Dealing with Variable Codings that Aren’t Quite Right</h3>
 <p>Often times the ways that variables are coded in datasets we get off-the-shelf are not coded exactly as how we were dreaming up operationalizing our concepts. Instead, we are going to have to wrangle the data to get them into shape.</p>
 <p>This may involve creating new variables that recode certain values, creating new variables that collapse some values into a smaller number of categories, combining multiple variables into a single variable (e.g., representing the average), or setting some of the variable values to be missing (<code>NA</code>). All of these scenarios may come up when you are dealing with real data.</p>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="get-to-know-new-data.html#cb596-1" aria-hidden="true" tabindex="-1"></a><span class="do">## create variable indicating over 65 vs. under 65</span></span>
+<span id="cb596-2"><a href="get-to-know-new-data.html#cb596-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb596-3"><a href="get-to-know-new-data.html#cb596-3" aria-hidden="true" tabindex="-1"></a><span class="do">## approach 1</span></span>
+<span id="cb596-4"><a href="get-to-know-new-data.html#cb596-4" aria-hidden="true" tabindex="-1"></a>uglydata<span class="sc">$</span>over65 <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb596-5"><a href="get-to-know-new-data.html#cb596-5" aria-hidden="true" tabindex="-1"></a>uglydata<span class="sc">$</span>over65[uglydata<span class="sc">$</span>VV1400068 <span class="sc">&gt;=</span><span class="dv">65</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb596-6"><a href="get-to-know-new-data.html#cb596-6" aria-hidden="true" tabindex="-1"></a>uglydata<span class="sc">$</span>over65[uglydata<span class="sc">$</span>VV1400068 <span class="sc">&lt;</span> <span class="dv">65</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb596-7"><a href="get-to-know-new-data.html#cb596-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb596-8"><a href="get-to-know-new-data.html#cb596-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb596-9"><a href="get-to-know-new-data.html#cb596-9" aria-hidden="true" tabindex="-1"></a><span class="do">## approach 2</span></span>
+<span id="cb596-10"><a href="get-to-know-new-data.html#cb596-10" aria-hidden="true" tabindex="-1"></a>uglydata<span class="sc">$</span>over65 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(uglydata<span class="sc">$</span>VV1400068 <span class="sc">&gt;=</span><span class="dv">65</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
 </div>
 <div id="dealing-with-parts-of-datasets" class="section level3" number="13.1.4">
 <h3><span class="header-section-number">13.1.4</span> Dealing with Parts of Datasets</h3>
-<p>We may also want to limit our analysis to just small parts of datsets instead of the entire dataset. Recall the function <code>subset</code> to do this.</p>
+<p>We may also want to limit our analysis to just small parts of datasets instead of the entire dataset. Recall the function <code>subset</code> to limit the data to only rows that meet certain criteria.</p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="get-to-know-new-data.html#cb597-1" aria-hidden="true" tabindex="-1"></a><span class="do">## limit data to those over 65</span></span>
+<span id="cb597-2"><a href="get-to-know-new-data.html#cb597-2" aria-hidden="true" tabindex="-1"></a>over65 <span class="ot">&lt;-</span> <span class="fu">subset</span>(uglydata, over65 <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 
 </div>
 </div>

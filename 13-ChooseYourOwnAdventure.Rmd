@@ -116,10 +116,28 @@ Often times the ways that variables are coded in datasets we get off-the-shelf a
 
 This may involve creating new variables that recode certain values, creating new variables that collapse some values into a smaller number of categories, combining multiple variables into a single variable (e.g., representing the average), or setting some of the variable values to be missing (`NA`). All of these scenarios may come up when you are dealing with real data.
 
+```{r}
+## create variable indicating over 65 vs. under 65
+
+## approach 1
+uglydata$over65 <- NA
+uglydata$over65[uglydata$VV1400068 >=65] <- 1
+uglydata$over65[uglydata$VV1400068 < 65] <- 0
+
+
+## approach 2
+uglydata$over65 <- ifelse(uglydata$VV1400068 >=65, 1, 0)
+```
+
 ### Dealing with Parts of Datasets
 
-We may also want to limit our analysis to just small parts of datsets instead of the entire dataset. Recall the function `subset` to do this.
+We may also want to limit our analysis to just small parts of datasets instead of the entire dataset. Recall the function `subset` to limit the data to only rows that meet certain criteria.
 
+
+```{r}
+## limit data to those over 65
+over65 <- subset(uglydata, over65 == 1)
+```
 
 
       
