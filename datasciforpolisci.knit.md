@@ -124,11 +124,13 @@ This content follows and reinforces QSS 1.3. Additional resources are also linke
 then follow the installation instructions, and 
     2. Visiting [RStudio](http://www.rstudio.com/) and follow the download and installation instructions. R is the statistical software and programming language used for analysis. RStudio provides a convenient user interface for running R code. 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=ulIv0NiVTs4")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/ulIv0NiVTs4" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -171,18 +173,53 @@ Now you should have something that looks like this, similar to Figure 1.1. in QS
 
 The *bottom left* window in your RStudio is the Console. You can type in this window to use R as a calculator or to try out commands. It will show the raw output of any commands you type. For example, we can try to use R as a calculator. Type the following in the Console (the bottom left window) and hit "enter" or "return" on your keyboard:
 
-```{r}
+
+```r
 5 + 3
+```
 
+```
+## [1] 8
+```
+
+```r
 5 - 3
+```
 
+```
+## [1] 2
+```
+
+```r
 5^2
+```
 
+```
+## [1] 25
+```
+
+```r
 5 * 3
+```
 
+```
+## [1] 15
+```
+
+```r
 5/3
+```
 
+```
+## [1] 1.666667
+```
+
+```r
 (5 + 3) * 2
+```
+
+```
+## [1] 16
 ```
 
 In the other RStudio windows, the upper right will show a history of commands that you have sent from the text editor to the R console, along with other items. The lower right will show graphs, help documents and other features. These will be useful later in the course.
@@ -202,7 +239,8 @@ There are many ways to do this.
   - If you aren't sure where your directory has been set, you can also type `getwd()` in your Console. Try it now
 
 
-```{r, eval=F}
+
+```r
 ## Example of where my directory was
 getwd()
 ```
@@ -210,7 +248,8 @@ getwd()
 
 If I want to  change the working directory, I can go to the top toolbar of my computer and use Session -> Set Working Directory -> Choose Directory or just type my file pathway using the `setwd()` below:
 
-```{r, eval=FALSE}
+
+```r
 ## Example of setting the working directory using setwd().
 ## Your computer will have your own file path.
 setwd("/Users/ktmccabe/Dropbox/Rutgers Teaching/")
@@ -254,15 +293,21 @@ Try it: Type `5 + 3` in the R script. Then, try to execute `5 + 3`. It should lo
 ![](images/rtemplate2.png)
 
 After you executed the code, you should see it pop out in your Console:
-```{r}
+
+```r
 5 + 3
+```
+
+```
+## [1] 8
 ```
 
 ![](images/runningcode.png){width=90%}
 
 Note: The symbol \# also allows for annotation behind commands or on a separate line. Everything that follows \# will be ignored by R. You can annotate your own code so that you and others can understand what each part of the code is designed to do.
 
-```{r}
+
+```r
 ## Example
 sum53 <- 5 + 3 # example of assigning an addition calculation
 ```
@@ -271,34 +316,55 @@ sum53 <- 5 + 3 # example of assigning an addition calculation
 
 Sometimes we will want to store our calculations as "objects" in R. We use `<-` to assign objects by placing it [to the left](https://www.youtube.com/watch?v=vLZA67L7gIo&ab_channel=BeyonceSasha1) of what we want to store. For example, let's store the calculation `5 + 3` as an object named `sum53`:
 
-```{r}
+
+```r
 sum53 <- 5 + 3
 ```
 
 After we execute this code, `sum53 now stores the calculation. This means, that if we execute a line of code that just has `sum53`, it will output 8. Try  it:
 
-```{r}
+
+```r
 sum53
+```
+
+```
+## [1] 8
 ```
 
 Now we no longer have to type `5 + 3`, we can just type `sum53`. For example, let's say we wanted to subtract 2 from this calculation. We could do:
 
-```{r}
+
+```r
 sum53 - 2
 ```
 
+```
+## [1] 6
+```
+
 Let's say we wanted to divide two stored calculations:
-```{r}
+
+```r
 ten <- 5 + 5
 two <- 1 + 1
 ten / two
 ```
 
+```
+## [1] 5
+```
+
 The information stored does not have to be numeric. For example, it can be a word, or what we would call a character string, in which case you need to use quotation marks.
 
-```{r}
+
+```r
 mccabe <- "professor for this course"
 mccabe
+```
+
+```
+## [1] "professor for this course"
 ```
 
 
@@ -311,9 +377,14 @@ While these are simple examples, we will use objects all the time for more compl
 
 We can also store an array or "vector" of information using `c()`
 
-```{r}
+
+```r
 somenumbers <- c(3, 6, 8, 9)
 somenumbers
+```
+
+```
+## [1] 3 6 8 9
 ```
 
 **Importance of Clean Code**
@@ -321,19 +392,30 @@ somenumbers
 Ideally, when you are done with your R script, you should be able to highlight the entire script and execute it without generating any error messages. This means your code is clean. Code with typos in it may generate a red error message in the Console upon execution. This can happen when there are typos or commands are misused.
 
 For example, R is case sensitive. Let's say we assigned our object like before:
-```{r}
+
+```r
 sum53 <- 5 + 3
 ```
 
 However, when we went to execute `sum53`, we accidentally typed `Sum53`:
-```{r, error=TRUE}
+
+```r
 Sum53
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'Sum53' not found
 ```
 
 Only certain types of objects can be used in mathematical calculations. Let's say we tried to divide `mccabe` by 2:
 
-```{r, error=TRUE}
+
+```r
 mccabe / 2
+```
+
+```
+## Error in mccabe/2: non-numeric argument to binary operator
 ```
 
 A big part of learning to use R will be learning how to troubleshoot and detect typos in your code that generate error messages.
@@ -386,7 +468,8 @@ The **first time** you will be working in RMarkdown, you will want to install tw
 
 Type the following into the Console window and hit enter/return.
 
-```{r, eval=F}
+
+```r
 install.packages("rmarkdown")
 install.packages("knitr")
 ```
@@ -548,11 +631,13 @@ How would you summarize information in explaining it to another person? You woul
 
 For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=80tbdiWuljc")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/80tbdiWuljc" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -567,42 +652,78 @@ Our set of values is Outcome = \{0,0,0,0,1,1,0,1,0,1\}.
 
 We can create vectors in R by using `c()` and assigning `<-` it to an object we will call `Outcome`.
 
-```{r}
+
+```r
 Outcome <- c(0,0,0,0,1,1,0,1,0,1) # Use commas to separate values
 ```
 
 
 We can extract a particular value within our vector using brackets
 
-```{r}
+
+```r
 Outcome[10]
+```
+
+```
+## [1] 1
 ```
 
 We can label our outcomes using `names()`
 
-```{r}
+
+```r
 names(Outcome) <-c("Joe","Sally", "Trevor", "Emily", "Mark",
                    "Sarah Jane", "Stacey", "Steve", "Phoebe", "Jesse")
 Outcome[10]
 ```
 
+```
+## Jesse 
+##     1
+```
+
 
 We can overwrite whole vectors or values within a vector
 
-```{r}
+
+```r
 Outcome <- c(5,0,2, 6,1,1, 7, 8, 0, 1) # oops we put the wrong numbers
 Outcome
+```
+
+```
+##  [1] 5 0 2 6 1 1 7 8 0 1
+```
+
+```r
 Outcome <- c(0,0,0,0,1,1,0,1,0,1) # no problem, just overwrite it
 Outcome
 ```
 
+```
+##  [1] 0 0 0 0 1 1 0 1 0 1
+```
+
 Oops we accidentally type a 0 for Jesse.
 
-```{r}
+
+```r
 Outcome <- c(0,0,0,0,1,1,0,1,0,0) # oops typo for Jesse
 Outcome
+```
+
+```
+##  [1] 0 0 0 0 1 1 0 1 0 0
+```
+
+```r
 Outcome[10] <- 1 # no prob bob. Assign a 1 in position 10
 Outcome
+```
+
+```
+##  [1] 0 0 0 0 1 1 0 1 0 1
 ```
 
 
@@ -610,16 +731,33 @@ Vectors do not have to be numeric. Character vectors contain a collection of wor
 
 Example: let's create a vector of names that we will call `People`.
 
-```{r}
+
+```r
 People <- c("Joe","Sally", "Trevor", "Emily", "Mark", "Sarah Jane", "Stacey", "Steve", "Phoebe", "Jesse")
 People[10]
 ```
 
+```
+## [1] "Jesse"
+```
+
 We can use the R function `class()` to tell us the type of object we have.
 
-```{r}
+
+```r
 class(Outcome)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
 class(People)
+```
+
+```
+## [1] "character"
 ```
 
 ## Functions to summarize univariate data
@@ -636,8 +774,13 @@ $\bar{X} = \frac{\text{sum of values}}{\text{number of values}} = \frac{x_1 + x_
 
 Let's do this in R for our set of 10 values
 
-```{r}
+
+```r
 (0 + 0 + 0 + 0 + 1 + 1 + 0 + 1 + 0 + 1)/10
+```
+
+```
+## [1] 0.4
 ```
 
 The average outcome is .4. Note: when a variable contains only 0's and 1's its mean is the proportion of 1's. 40\% of people think the economy is doing well. 
@@ -650,26 +793,38 @@ A function is an action(s) that you request R to perform on an object or set of 
   - Inside the function you place inputs or "arguments."
 
 
-```{r}
+
+```r
 mean(Outcome)
+```
+
+```
+## [1] 0.4
 ```
 
 R also has functions that take the sum `sum()` of a vector of values.
 
-```{r}
+
+```r
 sumofvalues <- sum(Outcome)
 ```
 
 And that count the total number of values or "length" `length()` of the vector.
 
-```{r}
+
+```r
 numberofvalues <- length(Outcome)
 ```
 
 Note that the below is also equivalent to the mean
 
-```{r}
+
+```r
 sumofvalues / numberofvalues
+```
+
+```
+## [1] 0.4
 ```
 
 Returning to our example, we found that 40\% of people surveyed thought the economy was doing well. Surveying people about their opinions on how the country doing is a common way that social scientists use description. We could extend this exercise in many ways going forward, even with the same question.
@@ -711,11 +866,13 @@ In this dataset, each row is an election year. Each column contains information 
 
 For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=rm_g0rrglEQ")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/rm_g0rrglEQ" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -735,7 +892,8 @@ Option 1: Download dataset to your computer
   - Pick the appropriate R function to match the type (e.g., `read.csv(), read.dta(), load(), read.table()`)
   - Assign the dataset to an object. This object will now be `class()` of `data.frame`
 
-```{r, eval=F}
+
+```r
 turnout <- read.csv("turnout.csv")
 ```
 
@@ -746,16 +904,23 @@ Option 2: Read file from a url provided
   - URL generally must be public
   - Include the url inside the function used to read the data
 
-```{r}
+
+```r
 turnout <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/turnout.csv")
 ```
 
-```{r}
+
+```r
 class(turnout)
 ```
 
+```
+## [1] "data.frame"
+```
+
 You can also open up a window to view the data:
-```{r, eval=FALSE}
+
+```r
 View(turnout)
 ```
 
@@ -791,67 +956,139 @@ Voter Turnout in the U.S.
 ### Getting to know your data
 
 
-```{r}
+
+```r
 ## How many observations (the rows)?
 nrow(turnout)
+```
 
+```
+## [1] 14
+```
+
+```r
 ## How many variables (the columns)?
 ncol(turnout)
+```
 
+```
+## [1] 9
+```
+
+```r
 ## What are the variable names?
 names(turnout)
+```
 
+```
+## [1] "year"     "VEP"      "VAP"      "total"    "ANES"     "felons"   "noncit"  
+## [8] "overseas" "osvoters"
+```
+
+```r
 ## Show the first six rows
 head(turnout)
 ```
 
+```
+##   year    VEP    VAP total ANES felons noncit overseas osvoters
+## 1 1980 159635 164445 86515   71    802   5756     1803       NA
+## 2 1982 160467 166028 67616   60    960   6641     1982       NA
+## 3 1984 167702 173995 92653   74   1165   7482     2361       NA
+## 4 1986 170396 177922 64991   53   1367   8362     2216       NA
+## 5 1988 173579 181955 91595   70   1594   9280     2257       NA
+## 6 1990 176629 186159 67859   47   1901  10239     2659       NA
+```
+
 
 Extract a particular column (vector) from the data using the \$.
-```{r}
+
+```r
 turnout$year
+```
+
+```
+##  [1] 1980 1982 1984 1986 1988 1990 1992 1994 1996 1998 2000 2002 2004 2008
 ```
 
 Extract the 10th year. Just like before! We use 10 to indicate the value of the `year` column in position (row 10) of the data.
 
-```{r}
+
+```r
 turnout$year[10]
+```
+
+```
+## [1] 1998
 ```
 
 
 We can take the `mean()` of a particular column, too. Let's take it of the total number of voters.
 
-```{r}
+
+```r
 mean(turnout$total)
+```
+
+```
+## [1] 89778.29
 ```
 
 And get the `class()` (Note: integer is just a type of numeric variable)
 
-```{r}
+
+```r
 class(turnout$total)
+```
+
+```
+## [1] "integer"
 ```
 
 
 We can also use brackets in the full data frame, but because our data frame has BOTH rows and columns, we cannot just supply one position `i`. Instead, we have to tell R which row AND which column by using a comma between the positions.
 
-```{r}
+
+```r
 turnout[1,2] # value in row 1, column 2
+```
+
+```
+## [1] 159635
 ```
 
 We can use the column name instead
 
-```{r}
+
+```r
 turnout[1, "VEP"]
+```
+
+```
+## [1] 159635
 ```
 
 If we leave the second entry blank, it will return all columns for the specified row
 
-```{r}
+
+```r
 turnout[1,] # All variable values for row 1
 ```
 
+```
+##   year    VEP    VAP total ANES felons noncit overseas osvoters
+## 1 1980 159635 164445 86515   71    802   5756     1803       NA
+```
+
 The opposite is true if we leave the first entry blank.
-```{r}
+
+```r
 turnout[,2] # VEP for all rows
+```
+
+```
+##  [1] 159635 160467 167702 170396 173579 176629 179656 182623 186347 190420
+## [11] 194331 198382 203483 213314
 ```
 
 ## Comparing VEP and VAP turnout
@@ -860,7 +1097,8 @@ turnout[,2] # VEP for all rows
 
 Let's create a new variable that is VAP that adds overseas voters.
 
-```{r}
+
+```r
 # Use $ to add a new variable (i.e., column) to a dataframe
 turnout$VAPplusoverseas <- turnout$VAP + turnout$overseas
 ```
@@ -869,7 +1107,8 @@ Under the hood, what this is doing is taking each value of `turnout$VAP` and add
 
 And, yes, this new variable shows up as a new column in `turnout`. Go ahead, `View()` it
 
-```{r, eval=F}
+
+```r
 View(turnout)
 ```
 
@@ -881,14 +1120,21 @@ This does not change the underlying `turnout.csv` file, only the `turnout data.f
 
 
 This is our new denominator. Now we can calculate turnout based on this denominator.
-```{r}
+
+```r
 turnout$newVAPturnout <- turnout$total / turnout$VAPplusoverseas
 ```
 
 Just like with adding two vectors, when we divide, each value in the first vector is divided by its corresponding value in the second vector.
 
-```{r}
+
+```r
 turnout$newVAPturnout
+```
+
+```
+##  [1] 0.5203972 0.4024522 0.5253748 0.3607845 0.4972260 0.3593884 0.5404097
+##  [8] 0.3803086 0.4753376 0.3483169 0.4934211 0.3582850 0.5454777 0.5567409
 ```
 
 
@@ -896,30 +1142,54 @@ Let's calculate the VEP turnout rate and turn it into a percentage. This time, w
 
   -  (total votes / VEP) $\times$ 100:
 
-```{r}
+
+```r
 turnout$newVEPturnout <- (turnout$total / turnout$VEP) * 100
 turnout$newVEPturnout
 ```
 
+```
+##  [1] 54.19551 42.13701 55.24860 38.14115 52.76848 38.41895 58.11384 41.12625
+##  [9] 51.65793 38.09316 54.22449 39.51064 60.10084 61.55433
+```
+
 Let's change it from a proportion to a percentage. How? Multiply each value of `turnout$newVAP` by 100
 
-```{r}
+
+```r
 turnout$newVAPturnout <- turnout$newVAPturnout * 100
 ```
 
 This multiplies each number within the vector by 100. 
 
-```{r}
+
+```r
 turnout$newVAPturnout
+```
+
+```
+##  [1] 52.03972 40.24522 52.53748 36.07845 49.72260 35.93884 54.04097 38.03086
+##  [9] 47.53376 34.83169 49.34211 35.82850 54.54777 55.67409
 ```
 
 
 What is typical turnout?
 
-```{r}
-mean(turnout$newVAPturnout)
 
+```r
+mean(turnout$newVAPturnout)
+```
+
+```
+## [1] 45.45658
+```
+
+```r
 mean(turnout$newVEPturnout)
+```
+
+```
+## [1] 48.94937
 ```
 
 We find that turnout based on the voting age population is lower than turnout based on the voting eligible population. This is a pattern that political scientists have examined, going back several decades. For example, in a 2001 article McDonald and Popkin show that is it the ineligible population that grew from the 1970s onward and not the population of people who simply prefer not to vote. (See more [here](https://www.jstor.org/stable/3117725).)
@@ -932,36 +1202,61 @@ How does turnout compare in presidential vs. midterm years? Sometimes using a si
 
 Oh dear. We need to extract specific years from the turnout data frame. Which rows contain the years we want?
 
-```{r}
+
+```r
 turnout$year
+```
+
+```
+##  [1] 1980 1982 1984 1986 1988 1990 1992 1994 1996 1998 2000 2002 2004 2008
 ```
 
 Ok: rows 1,3,5,7,9,11,13,14 are the presidential. And rows 2,4,6,8,10,12 are midterms.
 
-```{r}
+
+```r
 ## we can extract all of these at once by using c()
 turnout$year[c(1,3,5,7,9,11,13,14)] # presidential
 ```
 
+```
+## [1] 1980 1984 1988 1992 1996 2000 2004 2008
+```
+
 Let's take the mean VEP turnout for presidential years.
 
-```{r}
+
+```r
 mean(turnout$newVEPturnout[c(1,3,5,7,9,11,13,14)])
+```
+
+```
+## [1] 55.983
 ```
 
 Let's take the mean VEP turnout for midterm years.
 
-```{r}
+
+```r
 mean(turnout$newVEPturnout[c(2,4,6,8,10,12)])
+```
+
+```
+## [1] 39.5712
 ```
 
 
 Let's take the difference by storing each mean and then subtracting
 
-```{r}
+
+```r
 mean.VEP.pres <- mean(turnout$newVEPturnout[c(1,3,5,7,9,11,13,14)])
 mean.VEP.mid <- mean(turnout$newVEPturnout[c(2,4,6,8,10,12)])
 mean.VEP.pres -  mean.VEP.mid
+```
+
+```
+## [1] 16.41181
 ```
 
 Presidential turnout, on average, is higher than midterm turnout.
@@ -970,18 +1265,48 @@ Presidential turnout, on average, is higher than midterm turnout.
 
 Sometimes we write numbers that are in a predictable sequence (e.g., 1,2,3,4,5). In R, we have functions that prevent us from having to type each number when this is the case.
 
-```{r}
+
+```r
 c(1,2,3,4,5) # is equivalent to:
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+```r
 1:5 # is equivalent to:
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+```r
 seq(from = 1, to = 5, by = 1)
+```
+
+```
+## [1] 1 2 3 4 5
 ```
 
 We can use the last one to our advantage to extract the midterm years, which go by 2
 
-```{r}
-mean(turnout$newVEPturnout[c(2,4,6,8,10,12)]) # is the same as
 
+```r
+mean(turnout$newVEPturnout[c(2,4,6,8,10,12)]) # is the same as
+```
+
+```
+## [1] 39.5712
+```
+
+```r
 mean(turnout$newVEPturnout[seq(2, 12, 2)])
+```
+
+```
+## [1] 39.5712
 ```
 
 Not a big deal now, but imagine if you had to write 100 numbers or 1 MILLION NUMBERS!
@@ -1175,20 +1500,24 @@ employable than Lakisha and Jamal? A field experiment on labor market discrimina
 
 *For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=LeJkRydMruM")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/LeJkRydMruM" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 Let's load the data. Note: When we have variables that are text-based categories, we may want to tell R to treat these "strings" of text information as factor variables, a particular type of variable that represents data as a set of nominal (unordered) or ordinal (ordered) categories. We do this with the `stringsAsFactors` argument.
 
-```{r, eval=F}
+
+```r
 resume <- read.csv("resume.csv", stringsAsFactors = T)
 ```
 
-```{r}
+
+```r
 resume <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/resume.csv",
                    stringsAsFactors = T)
 ```
@@ -1202,44 +1531,110 @@ Variables and Description
   
 
 The data contain 4870 resumes and 4 variables.
-```{r}
+
+```r
 nrow(resume) # number of rows
+```
+
+```
+## [1] 4870
+```
+
+```r
 ncol(resume) # number of columns
+```
+
+```
+## [1] 4
+```
+
+```r
 dim(resume) # number of rows and columns
+```
+
+```
+## [1] 4870    4
 ```
 
 
 
 Note: These data look a little different from what we used last week. For example, the `sex` and `race` variables contain words, not numbers.
 
-```{r}
+
+```r
 head(resume)
+```
+
+```
+##   firstname    sex  race call
+## 1   Allison female white    0
+## 2   Kristen female white    0
+## 3   Lakisha female black    0
+## 4   Latonya female black    0
+## 5    Carrie female white    0
+## 6       Jay   male white    0
 ```
 
 ### Variable classes
 
 We can check the class of each variable: Look, we have a new type, a "factor" variable.
 
-```{r}
+
+```r
 class(resume$firstname)
+```
+
+```
+## [1] "factor"
+```
+
+```r
 class(resume$sex)
+```
+
+```
+## [1] "factor"
+```
+
+```r
 class(resume$race)
+```
+
+```
+## [1] "factor"
+```
+
+```r
 class(resume$call)
+```
+
+```
+## [1] "integer"
 ```
 
 
 We have now encountered `numeric, character`, and `factor` vectors and/or variables in R. Note: This is simply how R understands them. Sometimes R can get it wrong. For example, if we write:
 
-```{r}
+
+```r
 somenumbers <- c("1", "3", "4")
 class(somenumbers)
 ```
 
+```
+## [1] "character"
+```
+
 Because we put our numbers in quotation marks, R thinks the values in `somenumbers` are text. The number "3" might as well be the word "blue" for all R knows. Fortunately, we can easily switch between classes.
 
-```{r}
+
+```r
 somenumbers <- as.numeric(somenumbers)
 class(somenumbers)
+```
+
+```
+## [1] "numeric"
 ```
 
 Here,  we used `as.numeric()` to overwrite and change the character vector into a numeric vector. 
@@ -1262,34 +1657,62 @@ Rules of Thumb
 
 A nice thing about numeric and factor variables is we can use the `table` command to see how many observations in our data fall into each category or numerical value.
 
-```{r}
+
+```r
 ## Example: how many black vs. white sounding resumes
 table(resume$race)
 ```
 
+```
+## 
+## black white 
+##  2435  2435
+```
+
 As mentioned, `factor` variables have levels:
 
-```{r}
+
+```r
 levels(resume$race)
+```
+
+```
+## [1] "black" "white"
 ```
 
 ### Crosstabulation
 
 We can also use the `table` command to show a crosstabulation: a table that displays the frequency of observations across two variables.
 
-```{r}
+
+```r
 ## Example: how many black vs. white sounding resumes by call backs
 ## We can label the two dimensions of the table with the =
 table(calledback = resume$call, race = resume$race)
 ```
 
+```
+##           race
+## calledback black white
+##          0  2278  2200
+##          1   157   235
+```
+
 
 Sometimes we will want to show the proportion instead of the frequency using `prop.table`
 
-```{r}
+
+```r
 ## Example: proportion black vs. white sounding resumes by call backs
 ## Convert to proportion
 prop.table(table(calledback = resume$call, race = resume$race), margin = 2) # 1 for row sum, 2 for col
+```
+
+```
+##           race
+## calledback      black      white
+##          0 0.93552361 0.90349076
+##          1 0.06447639 0.09650924
 ```
 
 ***How can we interpret this crosstabulation? It should let us see the causal effect-- the callback rate for each group***
@@ -1298,10 +1721,16 @@ prop.table(table(calledback = resume$call, race = resume$race), margin = 2) # 1 
 
 Another thing we can do with factor variables is to find how the average of one variable (e.g., our outcome- the callback rate) varies across different categories of our factor variable. For this, we use `tapply()`.
 
-```{r}
+
+```r
 ## take the mean of input1 by categories of input2
 ## mean of call by race
 tapply(resume$call, INDEX=resume$race, mean)
+```
+
+```
+##      black      white 
+## 0.06447639 0.09650924
 ```
 
 
@@ -1314,15 +1743,21 @@ Good news: We have several relational operators in R that evaluate logical state
   -  `==, <, >, <=, >=, !=`
   - We have a statement and R evaluates it as `TRUE` or `FALSE`
 
-```{r, eval=F}
+
+```r
 ## for each observation, does the value of race equal "black"?
 resume$race == "black"
 ```
 
 By putting this logical statement within `[ ]`, we are asking R to take the `mean()` of the variable `resume$call` for the subset of observations for which this logical statement is `TRUE`.
 
-```{r}
+
+```r
 mean(resume$call[resume$race == "black"])
+```
+
+```
+## [1] 0.06447639
 ```
 
 
@@ -1330,10 +1765,15 @@ Ultimately, each of these paths has led us to a place where we can estimate the 
 
 We said the ATE = $\bar{Y}(treatment) - \bar{Y}(control)$ 
 
-```{r}
+
+```r
 ate <- mean(resume$call[resume$race == "black"]) - 
   mean(resume$call[resume$race == "white"])
 ate
+```
+
+```
+## [1] -0.03203285
 ```
 
 How can we interpret this? Do white applicants have an advantage?
@@ -1347,7 +1787,8 @@ Maybe we are interested in differences in callbacks for females. One approach fo
   - To do this, we will  assign a new `data.frame` object that keeps only those rows where `sex == "female"` and retains all columns 
   - Below are two approaches for this subsetting, one that uses brackets and one that uses the `subset` function
 
-```{r}
+
+```r
 ## option one
 females <- resume[resume$sex == "female", ]
 ## option two using subset()- preferred
@@ -1358,10 +1799,15 @@ Now that we have subset the data, this simplifies estimating the ATE for female 
 
 We said the ATE = $\bar{Y}(treatment) - \bar{Y}(control)$
 
-```{r}
+
+```r
 ate.females <- mean(females$call[females$race == "black"]) -
   mean(females$call[females$race == "white"])
 ate.females
+```
+
+```
+## [1] -0.03264689
 ```
 
 
@@ -1371,14 +1817,20 @@ We can make this slightly more complex by adding more criteria. Let's say we wan
 
   - R allows use to use `&` (and) and `|` (or)
 
-```{r}
+
+```r
 femaleblack <- subset(resume, sex == "female" & race == "black")
 ```
 
 We could now find the callback rate for Black females using the tools from above:
 
-```{r}
+
+```r
 mean(femaleblack$call)
+```
+
+```
+## [1] 0.06627784
 ```
 
 
@@ -1386,7 +1838,8 @@ mean(femaleblack$call)
 
 We can instead create a new variable in our main dataframe. Let's make a variable that takes the value 1 if a name is female and black sounding and 0, otherwise
 
-```{r}
+
+```r
 # Initialize a new variable called femaleblackname
 resume$femaleblackname <- NA
 # Assign a 1 to our new variable where sex is female and race is black
@@ -1397,18 +1850,70 @@ resume$femaleblackname[resume$sex != "female" | resume$race != "black"] <- 0
 
 
 We can check our work
-```{r}
+
+```r
 table(name = resume$firstname, femaleblack = resume$femaleblackname)
+```
+
+```
+##           femaleblack
+## name         0   1
+##   Aisha      0 180
+##   Allison  232   0
+##   Anne     242   0
+##   Brad      63   0
+##   Brendan   65   0
+##   Brett     59   0
+##   Carrie   168   0
+##   Darnell   42   0
+##   Ebony      0 208
+##   Emily    227   0
+##   Geoffrey  59   0
+##   Greg      51   0
+##   Hakim     55   0
+##   Jamal     61   0
+##   Jay       67   0
+##   Jermaine  52   0
+##   Jill     203   0
+##   Kareem    64   0
+##   Keisha     0 183
+##   Kenya      0 196
+##   Kristen  213   0
+##   Lakisha    0 200
+##   Latonya    0 230
+##   Latoya     0 226
+##   Laurie   195   0
+##   Leroy     64   0
+##   Matthew   67   0
+##   Meredith 187   0
+##   Neil      76   0
+##   Rasheed   67   0
+##   Sarah    193   0
+##   Tamika     0 256
+##   Tanisha    0 207
+##   Todd      68   0
+##   Tremayne  69   0
+##   Tyrone    75   0
 ```
 
 
 Let's say we wanted to  know the callback rates for just female black (sounding) names.
 
-```{r}
+
+```r
 mean(femaleblack$call)
+```
 
+```
+## [1] 0.06627784
+```
+
+```r
 mean(resume$call[resume$femaleblackname == 1])
+```
 
+```
+## [1] 0.06627784
 ```
 BINGO: two ways to do the same thing.
 
@@ -1418,7 +1923,8 @@ Remember how we created the variable `femaleblack`, well there is another way to
 
   - Can be read: If this relational statement is `TRUE`, I assign you A, otherwise I assign you B
 
-```{r}
+
+```r
 resume$femaleblackname <- ifelse(resume$sex == "female" &
                                    resume$race == "black", 1, 0)
 ```
@@ -1433,7 +1939,8 @@ Like most things, we can also get more complicated here. Let's say we wanted to 
   - Otherwise if this third relational statement is `TRUE`, I assign you  C,
   - Otherwise I assign you D
 
-```{r}
+
+```r
 resume$racesex <- ifelse(resume$sex == "female" &
                                    resume$race == "black", "FemaleBlack", 
                          ifelse(resume$sex == "female" &
@@ -1538,11 +2045,13 @@ Snapshot of Concrete and Placebo comparison conditions
 
 For a video explainer of the code for boxplots and barplots, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=QmQr4lfrmUc")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/QmQr4lfrmUc" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -1550,18 +2059,28 @@ embed_url("https://www.youtube.com/watch?v=QmQr4lfrmUc")
 Let's load the data! Here, note that the data file is in a .RData format instead of .csv. This means that instead of using `read.csv`, we should use a function to load the data that is suitable for the .RData format. This will be `load`. That function works the following way:
 
 
-```{r, eval=T, echo=FALSE, include=FALSE}
-load("data/status.RData")
-```
 
-```{r,eval=F}
+
+
+```r
 load("status.RData")
 ```
 
 After running the above code, an object will show up in your R environment.
 
-```{r}
+
+```r
 head(status)
+```
+
+```
+##         condition male   econcon
+## 2        Concrete    1 0.7500000
+## 3     Self-Esteem    1 1.0000000
+## 4         Placebo    1 0.6666667
+## 5     Self-Esteem    0 0.2500000
+## 6     Self-Esteem    0 1.0000000
+## 7 Social Approval    0 0.8333333
 ```
 
 The data include the following variables
@@ -1587,17 +2106,21 @@ Here is an example of the `boxplot` using our `econcon` variable.
 
   - We have added a title and y-axis label to the plot through the `main` and `ylab` arguments. Play around with changing the words in those arguments.
   
-```{r}
+
+```r
 boxplot(status$econcon,
         main="Economic Views in the Survey Sample",
         ylab="Economic Views")
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-88-1.svg" width="672" />
+
 After you  execute the plot code, a preview of the plot should appear in the bottom-right window of RStudio.
 
 Boxplots are also useful for data summary across multiple distribution: `boxplot(y ~ x, data = d)`
 
-```{r, fig.width=11}
+
+```r
 boxplot(econcon ~ condition, data=status,
         main="Economic Views by Experimental Condition",
         ylab="Economic Views",
@@ -1606,6 +2129,8 @@ boxplot(econcon ~ condition, data=status,
         xlab = "Experimental Condition",
         col = c("red3", rep("dodgerblue", 4)))
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-89-1.svg" width="1056" />
 
 The additional arguments are just aesthetics. Play around with different settings. 
 
@@ -1619,23 +2144,7 @@ How should we interpret these results? Does status or social approval motivation
 
 Comparing frequencies (raw N), proportions, and/or means across categories
 
-```{r, eval=T, echo=F}
-valuesbar <- c(20, 40, 50, 10, 60)
-
-namesbar <- c("Car rides \n to Malibu",
-              "Strawberry ice cream,\n One spoon for two",
-              "Trading jackets",
-              "Watching reruns \n of Glee",
-              "Being annoying \n Singing in harmony")
-
-barplot(valuesbar,
-        names=namesbar,
-        cex.names = .6,
-        main="Level of deja vu",
-        ylab="Avg. Feeling of deja vu",
-        cex.lab = .7, 
-        col="purple3")
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-90-1.svg" width="672" />
 
 We will use the `barplot()` function.
 
@@ -1650,16 +2159,25 @@ For example, in experiments, we may use barplots to compare the mean from the tr
 
   - First, we need the means. Let's find the conditional means of economic views.
 
-```{r}
+
+```r
 condmeans <- tapply(status$econcon, status$condition, mean)
 condmeans # save as object to supply to the barplot function
+```
+
+```
+##                 Placebo                Concrete Conspicuous Consumption 
+##               0.6340948               0.6647485               0.6724065 
+##             Self-Esteem         Social Approval 
+##               0.6564103               0.6904444
 ```
 
 
 
 The first input is the vector of means/proportions/frequency you want to plot.
 
-```{r}
+
+```r
 barplot(condmeans,
         ylim =  c(0,1), # y-axis dimensions
         names = c("Placebo", "Concrete", "Conspicuous", 
@@ -1673,6 +2191,8 @@ barplot(condmeans,
         las = 1) # controls angle of axis labels
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-92-1.svg" width="672" />
+
 The remaining arguments alter the look of the plot to make it more informative.
 
   - How could we improve this plot to make the interpretation easier?
@@ -1681,7 +2201,8 @@ The remaining arguments alter the look of the plot to make it more informative.
 
 You can save an image of your plot as a `png()` to your working directory. Place `png()` just before your plot with a name in quotations, and then specify the dimensions. Place `dev.off()` at the bottom.
 
-```{r, eval=F}
+
+```r
 png("mybarplot.png", width = 7, height = 4, res=300, units="in")
 barplot(condmeans,
         ylim =  c(0,1), # y-axis dimensions
@@ -1709,7 +2230,8 @@ The author theorizes that social approval, self-esteem, and conspicuous consumpt
   - Verify new variable by exploring values
 
 
-```{r}
+
+```r
 status$conditionnew <- NA # create new variable
 ## Code new variable
 status$conditionnew[status$condition == "Placebo"] <- "Placebo"
@@ -1728,7 +2250,8 @@ An alternative way to create the new variable is through an `ifelse` statement.
   - Can be read: If this relational statement is  `TRUE`, I assign you A, otherwise I assign you B
   - This often works best when we change factor variables to character
 
-```{r}
+
+```r
 status$conditionnew2 <- as.character(status$condition)
 status$conditionnew2 <- ifelse(status$condition == "Conspicuous Consumption" |
                      status$condition == "Self-Esteem" |  
@@ -1738,10 +2261,17 @@ status$conditionnew2 <- as.factor(status$conditionnew2)
 table(status$conditionnew2)
 ```
 
+```
+## 
+## Concrete  Placebo   Status 
+##      391      394     1157
+```
+
 
 Note: Barplots don't have to display means. We could also display frequencies. For example, let's make a plot of the number of people in each condition using our new variable.
 
-```{r}
+
+```r
 freqobs <- table(status$conditionnew)
 
 
@@ -1755,6 +2285,8 @@ barplot(freqobs,
         cex.lab = .8,# size of yaxis label
         las = 1) # controls angle of axis labels
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-96-1.svg" width="672" />
 
 
 ## Application: Changing Minds on Gay Marriage
@@ -1786,36 +2318,55 @@ Let's load the data. Data available through QSS. See QSS Chapter 2 for additiona
   - `therm1`: Survey thermometer rating of feeling towards gay couples in waves 1 (0--100) (asked before people were canvassed)
   - `therm2`: Survey thermometer rating of feeling towards gay couples in waves 2 (0--100) (asked after people were canvassed)
 
-```{r, echo=F}
-marriage <- read.csv("data/gayreshaped.csv", stringsAsFactors = T)
-```
 
-```{r, eval=F}
+
+
+```r
 marriage <- read.csv("gayreshaped.csv", stringsAsFactors = T)
 ```
 
-```{r}
+
+```r
 ## How many rows and columns
 dim(marriage)
+```
 
+```
+## [1] 11948     6
+```
+
+```r
 ## How many observations in each treatment group, in each study
 table(marriage$treatment, marriage$study)
+```
+
+```
+##                                                 
+##                                                     1    2
+##   No Contact                                     5238 1203
+##   Recycling Script by Gay Canvasser              1046    0
+##   Recycling Script by Straight Canvasser         1039    0
+##   Same-Sex Marriage Script by Gay Canvasser      1151 1238
+##   Same-Sex Marriage Script by Straight Canvasser 1033    0
 ```
 
 
 For a video explainer of the code for the barplot, scatter plot and histogram created with this application, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=ukexpAulAAk")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/ukexpAulAAk" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
 Let's focus on study 1 only.
 
-```{r}
+
+```r
 marriage1 <- subset(marriage, study ==  1)
 ```
 
@@ -1826,7 +2377,8 @@ In experiments, we compare the mean from the treatment group(s) $\bar{Y}(1)$ to 
 
   - Here are outcome is Change in Support for gay couples:  Wave 2 - Wave 1 feeling thermometer scores
 
-```{r}
+
+```r
 marriage1$outcome <- marriage1$therm2 - marriage1$therm1
 ```
 
@@ -1835,7 +2387,8 @@ marriage1$outcome <- marriage1$therm2 - marriage1$therm1
 
 Let's create a new variable `treatmentnew` that collapses the two Recycling and Same-Sex marriage conditions.
 
-```{r}
+
+```r
 marriage1$treatmentnew <- NA
 marriage1$treatmentnew[marriage1$treatment == "No Contact"] <- "No Contact"
 marriage1$treatmentnew[marriage1$treatment == "Recycling Script by Gay Canvasser" |
@@ -1847,6 +2400,12 @@ marriage1$treatmentnew[marriage1$treatment == "Same-Sex Marriage Script by Gay C
 marriage1$treatmentnew <- as.factor(marriage1$treatmentnew)
 
 table(marriage1$treatmentnew)
+```
+
+```
+## 
+##   Marriage No Contact  Recycling 
+##       2184       5238       2085
 ```
 
 
@@ -1862,7 +2421,8 @@ Let's try another way using the `ifelse` command.
   - if this alternative relational statement is `TRUE`, I assign you C (in this case "Marriage"), otherwise
   - If all of those were `FALSE` I assign you D (in this case an `NA`)
 
-```{r}
+
+```r
 marriage1$treatmentnew2 <- ifelse(marriage1$treatment == "No Contact", "No Contact",
                                   ifelse(marriage1$treatment == 
                                            "Recycling Script by Gay Canvasser" |
@@ -1883,7 +2443,8 @@ marriage1$treatmentnew2 <- as.factor(marriage1$treatmentnew2)
 
 We now have our outcome and our treatment conditions. In an experiment, we want to look at the difference in means between conditions. Let's calculate the means.
 
-```{r}
+
+```r
 outs <- tapply(marriage1$outcome, marriage1$treatmentnew, mean, na.rm=T)
 ```
 
@@ -1893,7 +2454,8 @@ Note: Sometimes data include missing cells. In R, these have an `NA`. To ignore 
 
 Let's also add a line at 0 using `abline()`
 
-```{r}
+
+```r
 barplot(outs,
         col="black",
         ylim =  c(-2, 2), # y-axis dimensions
@@ -1904,8 +2466,9 @@ barplot(outs,
         cex.lab = .8,# size of yaxis label
         las = 1) # controls angle of axis labels
 abline(h=0, lty=2, col = "red", lwd=2) # adds horizontal line at 0 with dashes 
-
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-106-1.svg" width="672" />
 
 
 
@@ -1948,7 +2511,8 @@ The `plot()` function in R works using x and y coordinates.
 
 To illustrate a scatterplot, we will examine the relationship between the Wave 1 and Wave 2 feeling thermometer scores in the field experiment, for just the control "No Contact" condition.
 
-```{r}
+
+```r
 ## Subset data to look at control only
 controlonly <- subset(marriage1, treatment == "No Contact")
 ```
@@ -1958,7 +2522,8 @@ In the `plot()`, we supply the x and y vectors.
   - `xlim` and `ylim` specify the range of the x and y axis. 
   - `pch` is the point type. You can play around with that number to view different plot types
   
-```{r}
+
+```r
 plot(x=controlonly$therm1, y=controlonly$therm2, 
      main = "Relationship between W1 and  W2",
      xlab = "Wave 1", xlim = c(0, 100),
@@ -1966,15 +2531,22 @@ plot(x=controlonly$therm1, y=controlonly$therm2,
      pch = 20)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-108-1.svg" width="672" />
+
 The correlation looks extremely high! It is positively sloped and tightly clustered.
 
 In fact, if we use R's function to quantify a correlation between two variables, we will see it is a correlation above .99, very close to the maximum value.
 
   - By default, R calculate the "pearson" correlation coefficient, a number that will be between -1 and 1. It represents the strength of the linear association between two variables.
 
-```{r}
+
+```r
 ## use = "pairwise" means to use all observations where neither variable has missing NA data
 cor(marriage1$therm1, marriage1$therm2, use = "pairwise")
+```
+
+```
+## [1] 0.995313
 ```
 
 This high correlation was unusual for this type of data. 
@@ -2000,12 +2572,20 @@ Because a histogram is a single variable summary, we just supply R with the nume
   - The new argument here `breaks` tells R how many of the individual rectangles we want. You can play around with that number to see how the plot changes.
   
 
-```{r}
+
+```r
 hist(x=controlonly$therm1, breaks=50,
      main = "W1 Histogram", ylim = c(0,1000))
+```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-110-1.svg" width="672" />
+
+```r
 hist(x=controlonly$therm2,breaks=50,
      main = "W2 Histogram", ylim = c(0,1000))  
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-110-2.svg" width="672" />
 
 The researchers noticed that the heaping patterns were different between Wave 1 and Wave 2. 
 
@@ -2030,11 +2610,13 @@ While the original article  was retracted
 
 For a video companion for sections 4.7-4.9 and the code for line/trend plots, see below. The video only discusses the notes and code. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=UNJximu2suM")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/UNJximu2suM" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -2076,22 +2658,50 @@ Each row of the dataset represents a week of the year. Each column represents a 
   - `Northeast`: social mobility data for those in the northeast of the U.S.
   - `South`: social mobility data for those in the south of the U.S.
 
-```{r}
+
+```r
 ## Load the data from the author Mark Dredze's website
 covid <- read.csv("https://raw.githubusercontent.com/mdredze/covid19_social_mobility.github.io/master/data/longitudinal_compiled.csv")
 ```
 
 Just like we have encountered numeric, factor, and character variables, R also has the ability to treat variables specifically as dates. We will want R to treat the date variable we read in as a date, and not as raw text or some other variable type. To do this, we will use the `as.Date` function.
 
-```{r}
+
+```r
 ## Date variable original format and class
 head(covid$Dates)
-class(covid$Dates)
+```
 
+```
+## [1] "2019-01-01" "2019-01-07" "2019-01-14" "2019-01-21" "2019-01-28"
+## [6] "2019-02-04"
+```
+
+```r
+class(covid$Dates)
+```
+
+```
+## [1] "character"
+```
+
+```r
 ## Convert to class Date
 covid$Dates <- as.Date(covid$Date)
 head(covid$Dates)
+```
+
+```
+## [1] "2019-01-01" "2019-01-07" "2019-01-14" "2019-01-21" "2019-01-28"
+## [6] "2019-02-04"
+```
+
+```r
 class(covid$Dates)
+```
+
+```
+## [1] "Date"
 ```
 
 
@@ -2100,7 +2710,8 @@ The researchers continue to add to these data. Let's look at the portion of data
   - Note the use of `as.Date` again to make sure R knows our text should be treated as a date
   - Note the use of the greater than or equal  to `>=` and less than or equal signs `<=` to specify which rows we want to keep in the data. We want rows that are in dates after January 1, 2019 and (`&`) on or before September 1, 2021.
   
-```{r}
+
+```r
 covidsub <- subset(covid, Dates >= as.Date("2019-01-01") &
                      Dates <= as.Date("2021-09-01"))
 ```
@@ -2110,23 +2721,7 @@ covidsub <- subset(covid, Dates >= as.Date("2019-01-01") &
 
 Where we are going ...
 
-```{r, echo=F}
-plot(x=covid$Dates,y=covid$Northeast,
-     type="l", pch=15,
-     main="Social Mobility by Date and Region",
-     ylab="Twitter Social Mobility Index",
-     xlab="",
-     ylim = c(0, 80), las=1,
-     lwd=2,
-     bty="n",
-     xaxt="n")
-lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
-axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
-axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2, cex.axis=.7)
-legend("bottomleft",  col=c("red3", "black"), 
-       c("South", "Northeast"), cex = .7, lty=1,lwd=2,
-       bty="n")
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-115-1.svg" width="672" />
 
 
 Starting from the bottom ...
@@ -2136,22 +2731,29 @@ Starting from the bottom ...
   - We want our outcome on the y-axis, in this case, social mobility
   - Ultimately we will want to compare the Northeast with the South. We will plot one line at a time, starting with the Northeast
   
-```{r}
+
+```r
 plot(x=covidsub$Dates,y=covidsub$Northeast, pch=16) # pch is point type
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-116-1.svg" width="672" />
 
 We now transform it to a line by specifying `type="l"`
 
   - By default, R creates a plot with `type=p` for points. R also has `type=b` which has both a line and points.
 
-```{r}
+
+```r
 plot(x=covidsub$Dates,y=covidsub$Northeast,type="l") # makes it a line
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-117-1.svg" width="672" />
 
 
 Let us change the aesthetics a bit by adding labels and removing the border with `bty="n"`.
 
-```{r}
+
+```r
 plot(x=covid$Dates,y=covid$Northeast,
      type="l", 
      main="Social Mobility by Date and Region",
@@ -2163,13 +2765,16 @@ plot(x=covid$Dates,y=covid$Northeast,
      bty="n") # removes border
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-118-1.svg" width="672" />
+
 
 Let's add a comparison line with the `lines()` function to look at trends for the south. 
 
   - Note that this is outside of the `plot()` function, but the inputs are very similar. We supply a set of x and y coordindates.
   
 
-```{r}
+
+```r
 plot(x=covid$Dates,y=covid$Northeast,
      type="l", pch=15,
      main="Social Mobility by Date and Region",
@@ -2182,10 +2787,13 @@ plot(x=covid$Dates,y=covid$Northeast,
 lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-119-1.svg" width="672" />
+
 
 Let's create our own axis for the plot to add detail. To do this, we add `xaxt` to the `plot` function and then use `axis()` below the function.
 
-```{r}
+
+```r
 plot(x=covid$Dates,y=covid$Northeast,
      type="l", pch=15,
      main="Social Mobility by Date and Region",
@@ -2204,9 +2812,12 @@ axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
 axis(1, at = axisdates, labels=format(axisdates, "%b-%Y"), las=2)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-120-1.svg" width="672" />
+
 Finally, let's add a `legend()`. Now we're here!
 
-```{r}
+
+```r
 plot(x=covid$Dates,y=covid$Northeast,
      type="l", pch=15,
      main="Social Mobility by Date and Region",
@@ -2228,6 +2839,8 @@ legend("bottomleft",  col=c("red3", "black"),
        lwd=2,
        bty="n")
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-121-1.svg" width="672" />
 
 
 
@@ -2236,28 +2849,7 @@ legend("bottomleft",  col=c("red3", "black"),
 
 ***What types of research questions could these trends generate?***
 
-```{r, echo=F}
-plot(x=covid$Dates,y=covid$Northeast,
-     type="l", pch=15,
-     main="Social Mobility by Date and Region",
-     ylab="Twitter Social Mobility Index",
-     xlab="",
-     ylim = c(0, 80), las=1,
-     lwd=2,
-     bty="n",
-     xaxt="n")
-lines(x=covid$Dates,y=covid$South, col="red3", lwd=2)
-axisdates <- seq(as.Date("2019-01-01"), as.Date("2021-09-01"), by="month")
-axis(1, at = axisdates, format(axisdates, "%b-%Y"), las=2)
-
-## Add legend, "bottomleft" indicates where on the plot to locate it
-## Could use "topright" instead, for example
-legend("bottomleft",  col=c("red3", "black"), 
-       c("South", "Northeast"), 
-       cex = .7, # size of legend
-       lwd=2,
-       bty="n")
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-122-1.svg" width="672" />
 
 What would you want to know about how movement has changed since the start of COVID? 
 
@@ -2298,7 +2890,8 @@ Let's examine social mobility just before vs. just after the federal announcemen
   - We will also add text to inform views what that line represents
       + Note we use `text(x= , y=, labels)` to indicate where to put text
   
-```{r}
+
+```r
 plot(x=covid$Dates,y=covid$Northeast,
      type="l", pch=15,
      main="Social Mobility by Date and Region",
@@ -2321,7 +2914,9 @@ abline(v=as.Date("2020-03-16"), lty=2, col="dodgerblue", lwd=1.5)
 ## add text near the line
 ## the \n breaks the text into different lines
 text(x=as.Date("2020-05-01"), y=65, labels = "Federal \n Announcement", cex=.6)
-```  
+```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-123-1.svg" width="672" />
 
 We see mobility does appear to be lower after the announcement relative to before the announcement. Is this causal?
 
@@ -2421,14 +3016,16 @@ Think of packages like apps on a smartphone.
 
   - If RStudio is our smartphone, we install a package like you install an app on the phone. You only have to do this once, though occasionally you may want or need to update the installation to a new version.
   
-```{r, eval=F}
+
+```r
 ## Run this line in your R console
 install.packages("ggplot2")
 ```
 
   - On a smartphone, every time you want to use an app after you have installed it, you have to open the app. Similarly, every time we want to open a package in RStudio, we have to open it by using the `library()` command
   
-```{r}
+
+```r
 ## Add and run this line in your R script, above the code where you will use functions from the package
 library(ggplot2)
 ```
@@ -2438,10 +3035,13 @@ The main plotting function in `ggplot2` is the `ggplot()` function. It will give
 
   - The syntax within this package is a little different from the base R plotting functions. We will investigate below. For now, here is an example of using `ggplot` to create a boxplot using the experiment on social status from earlier in this section.
   
-```{r}
+
+```r
 ggplot(data=status, mapping = aes(x=condition, y=econcon)) +
   geom_boxplot()
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-126-1.svg" width="672" />
 
 The three primary components of a ggplot() are a dataframe (`data =`), a set of mapping aesthetics (`aes()`), and `geoms` (e.g., geom boxplot, geom bar, geom point, geom line, etc.).
 
@@ -2458,7 +3058,8 @@ There are many more possibilities for plotting with `ggplot()`, but these should
 Here is a second version of the boxplot with more aesthetics specified.
 
   - We will color in the boxes based on the collapsed condition variable.
-```{r}
+
+```r
 ggplot(data=status, mapping = aes(x=condition, y=econcon, fill=conditionnew)) +
   ## Specifies plot type. E.g., also have geom_point(), geom_bar()
   geom_boxplot()+
@@ -2470,22 +3071,30 @@ ggplot(data=status, mapping = aes(x=condition, y=econcon, fill=conditionnew)) +
   ## Changes the overall theme (i.e., color scheme, borders, etc.)
   theme_bw()+
   theme(legend.position="bottom")
-ggsave("myboxplot.pdf", width=7, height=5)
+```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-127-1.svg" width="672" />
+
+```r
+ggsave("myboxplot.pdf", width=7, height=5)
 ```
 
 Here is an example of a histogram from the application on views toward gay couples.
 
-```{r}
+
+```r
 ggplot(controlonly, aes(x=therm1)) +
   geom_histogram(binwidth = 1) +
   ggtitle("W1 Histogram") +
   theme_minimal()
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-128-1.svg" width="672" />
+
 Instead of displaying multiple categories through different shapes or colors, we could also create multiple mini plots instead. This is done through `facet`. Let's look at a histogram for each condition for the thermometers in wave 2.
 
-```{r}
+
+```r
 ggplot(marriage1, aes(x=therm2)) +
   geom_histogram(binwidth = 1) +
   ggtitle("W2 Histogram by Condition") +
@@ -2494,17 +3103,32 @@ ggplot(marriage1, aes(x=therm2)) +
   facet_wrap(~treatmentnew)
 ```
 
+```
+## Warning: Removed 1042 rows containing non-finite values (stat_bin).
+```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-129-1.svg" width="672" />
+
 
 We can similarly create a scatter and line plot. Let's use the social mobility data. Here we see `geom_point` and `geom_line`.
 
-```{r}
+
+```r
 ## Scatterplot
 ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
   geom_point() +
   ggtitle("Average Social Mobility in US") +
   xlab("Date")+
   ylab("Avg Social Mobility")
+```
 
+```
+## Warning: Removed 4 rows containing missing values (geom_point).
+```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-130-1.svg" width="672" />
+
+```r
 ## Line plot
 ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
   geom_line() +
@@ -2512,6 +3136,8 @@ ggplot(covidsub, aes(x=Dates, y=avg_USA)) +
   xlab("Date")+
   ylab("Avg Social Mobility")
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-130-2.svg" width="672" />
 
 
 
@@ -2592,11 +3218,13 @@ We want to rule out all possible confounding variables and "alternative explanat
 
 Example: Does drinking Sprite make a person a better basketball player? (Inspired by 1990s commercial where a kid believes drinking Sprite will cause him to play basketball better.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=zbavu2Al-ME")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/zbavu2Al-ME" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
   - **Cross-section comparison**: Compare Grant Hill (who drinks Sprite) to others (who don't) 
@@ -2679,23 +3307,35 @@ Problem: We can't observe the counterfactual. We can't go back in time to manipu
 
 For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=E4PqZgcv5IQ")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/E4PqZgcv5IQ" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
-```{r, include=FALSE}
-basque <- read.csv("data/basque.csv")
-```
 
-```{r, eval=F}
+
+
+```r
 basque <- read.csv("basque.csv")
 ```
 
-```{r}
+
+```r
 head(basque)
+```
+
+```
+##      region year   gdpcap
+## 1 Andalucia 1955 1.688732
+## 2 Andalucia 1956 1.758498
+## 3 Andalucia 1957 1.827621
+## 4 Andalucia 1958 1.852756
+## 5 Andalucia 1959 1.878035
+## 6 Andalucia 1960 2.010140
 ```
 
 Variables
@@ -2706,7 +3346,8 @@ Variables
 
 Subset Basque Data into Four Groups
 
-```{r}
+
+```r
 ## Basque before terrorism
 basqueBefore <- subset(basque, (year < 1973) &
                             (region == "Basque Country"))
@@ -2726,19 +3367,30 @@ What is the economic impact of terrorism?
 
 Cross-section comparison
 
-```{r}
+
+```r
 mean(basqueAfter$gdpcap) - mean(othersAfter$gdpcap)
+```
+
+```
+## [1] 1.132917
 ```
 
 Before-and-after design
 
-```{r}
+
+```r
 mean(basqueAfter$gdpcap) - mean(basqueBefore$gdpcap)
+```
+
+```
+## [1] 2.678146
 ```
 
 Difference-in-Differences design
 
-```{r}
+
+```r
 treatDiff <- mean(basqueAfter$gdpcap) -
     mean(basqueBefore$gdpcap)
 controlDiff <- mean(othersAfter$gdpcap) -
@@ -2746,21 +3398,13 @@ controlDiff <- mean(othersAfter$gdpcap) -
 treatDiff - controlDiff
 ```
 
+```
+## [1] -0.48316
+```
+
 Here is a way to visualize this difference-in-differences. Our estimated causal effect is the difference between the observed growth in the Basque region and what we assume the growth would have been in the absence of terrorism (the treatment).
 
-```{r, echo=F}
-plot(c(1, 2),
-     c(mean(basqueBefore$gdpcap), mean(basqueAfter$gdpcap)), type="b",
-     ylim = c(2, 9),xlab="",
-     ylab="GDP", xaxt="n", main="Pre/Post 1973 Economy in Spain", cex.main=.8)
-points(c(1,2), c(mean(othersBefore$gdpcap), mean(othersAfter$gdpcap)), type="b", col="red3")
-points(c(1,2), c(mean(basqueBefore$gdpcap), (mean(basqueBefore$gdpcap) + controlDiff)), 
-       type="b", lty=2)
-
-axis(1, 1:2, c("Before", "After"))
-legend("topleft", c("Basque", "Other", "Assumed Basque Trend \n in absence of Treatment"), 
-       col=c("Black", "Red", "Black"), bty="n",lwd=1, lty=c(1, 1,2) ,cex=.7)
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-140-1.svg" width="672" />
 
 
 What should we conclude from each approach?
@@ -2774,27 +3418,42 @@ Which Results Should We Believe? Role of Placebo Tests
 
 Cross-section comparison
 
-```{r}
+
+```r
 ## were there pre-existing differences between the groups?
 mean(basqueBefore$gdpcap) - mean(othersBefore$gdpcap)
 ```
 
+```
+## [1] 1.616077
+```
+
 Before-and-After design
 
-```{r}
+
+```r
 ## was there a change in a group we don't think should have changed?
 mean(othersAfter$gdpcap) - mean(othersBefore$gdpcap)
 ```
 
+```
+## [1] 3.161306
+```
+
 What about the Difference-in-Differences design?
 
-```{r}
+
+```r
 ## here we go back in time even further to examine "pre-treatment" trends
 ## we want them to be similar
 (basqueBefore$gdpcap[basqueBefore$year == 1972] -
  basqueBefore$gdpcap[basqueBefore$year == 1955]) -
     (mean(othersBefore$gdpcap[othersBefore$year == 1972]) -
      mean(othersBefore$gdpcap[othersBefore$year == 1955]))
+```
+
+```
+## [1] 0.07147071
 ```
 
 These "placebo" checks are closest to zero for diff-in-diff, so we may believe that the most.
@@ -2826,37 +3485,65 @@ Loops are a tool in R that are useful for situations where we want to do somethi
 A quick example using the Basque data from the previous section:
 
 
-```{r, include=F}
-basque <- read.csv("data/basque.csv", stringsAsFactors = T)
-```
 
-```{r, eval=FALSE}
+
+
+```r
 basque <- read.csv("basque.csv", stringsAsFactors = T)
 ```
 
 Let's say I wanted to know the GDP for each region for the earliest year they are in the data.
 
-```{r}
+
+```r
 regionsubset <- subset(basque, region == "Andalucia")
 regionsubset$gdpcap[regionsubset$year == min(regionsubset$year)]
+```
 
+```
+## [1] 1.688732
+```
+
+```r
 ## Repeat for a new region
 regionsubset <- subset(basque, region == "Aragon")
 regionsubset$gdpcap[regionsubset$year == min(regionsubset$year)]
+```
 
+```
+## [1] 2.288775
+```
+
+```r
 ## Repeat for a new region
 regionsubset <- subset(basque, region == "Baleares")
 regionsubset$gdpcap[regionsubset$year == min(regionsubset$year)]
 ```
 
+```
+## [1] 3.143959
+```
+
 Ughhh can we automate this? we have 17 regions!!!
-```{r}
+
+```r
 unique(basque$region)
+```
+
+```
+##  [1] Andalucia              Aragon                 Principado De Asturias
+##  [4] Baleares               Canarias               Cantabria             
+##  [7] Castilla Y Leon        Castilla-La Mancha     Cataluna              
+## [10] Comunidad Valenciana   Extremadura            Galicia               
+## [13] Madrid                 Murcia                 Navarra               
+## [16] Basque Country         Rioja                 
+## 17 Levels: Andalucia Aragon Baleares Basque Country Canarias ... Rioja
 ```
 
 Where we will be going by the end of this section:
 
-```{r}
+
+```r
 gdpminyear <- rep(NA, 17) # empty "container" vector
 regions <- unique(basque$region) # what we iterate through
 names(gdpminyear) <- unique(basque$region) # labels for our output
@@ -2867,6 +3554,13 @@ for(i in 1:17){
                                          min(regionsubset$year)]
 }
 head(gdpminyear) # output
+```
+
+```
+##              Andalucia                 Aragon Principado De Asturias 
+##               1.688732               2.288775               2.502928 
+##               Baleares               Canarias              Cantabria 
+##               3.143959               1.914382               2.559412
 ```
 
 We got all of the answers with just one chunk of code!
@@ -2900,7 +3594,8 @@ to indicate we want to repeat command1 and command2 and .... as many commands as
 
 The meat: the command or set of commands you want to do over and over.
 
-```{r}
+
+```r
 ## the meat
 result <- 6 + 2
 result <- 8 + 2
@@ -2916,34 +3611,44 @@ Note the pattern: we take some number and + 2 each time.
 For a loop, you want to:
 
   1. The Meat: Write down the code for one version.
-```{r}
+
+```r
 result <- 6 + 2
 ```
   2. The Bread: Embed this code in the loop syntax (`for(i in X){}`)
-```{r, eval=F}
+
+```r
 for(i in X){
     result <- 6 + 2
     }
 ```
   3. Create a vector that contains the values you want to loop through
 
-```{r}
+
+```r
 somenumbers <- c(6, 8, 4, 7, 11)
 ```
   4. Create a storage vector that will contain the results 
-```{r}
+
+```r
 result <- rep(NA, length(somenumbers))
 ```
   5. Modify the meat and bread to iterate by using `[i]`, and replace `X`.
-```{r}
+
+```r
 for(i in 1:length(somenumbers)){
   result[i] <- somenumbers[i] + 2
 }
 ```
       where `1:length(somenumbers)` reflects possible values `i` will take 
 
-```{r}
+
+```r
 1:length(somenumbers)
+```
+
+```
+## [1] 1 2 3 4 5
 ```
 
 
@@ -2952,7 +3657,8 @@ Let's put these parts together:
 
 Suppose we want to add 2 to a set of numbers `c(6, 8, 4, 7, 11)`
 
-```{r}
+
+```r
 somenumbers <- c(6, 8, 4, 7, 11) # iteration vector
 result <- rep(NA, length(somenumbers)) # container vector
 
@@ -2962,22 +3668,43 @@ for(i in 1:length(somenumbers)){
 result
 ```
 
+```
+## [1]  8 10  6  9 13
+```
+
 How does this work? Every iteration, the value of i changes.
 
   - For example, when `i` is 1, we take the first value in our `somenumbers` vector  `somenumbers[1]`, add 2 to it, and store it in the first position of our container vector `result[1]`. When `i` is 2, we switch the number in the brackets to 2, corresponding to the second entry in each vector, and so on.
   
-```{r}
+
+```r
 # Suppose i is 1
 result[1] <- somenumbers[1] + 2
 result[1]
+```
 
+```
+## [1] 8
+```
+
+```r
 # Suppose i is 2
 result[2] <- somenumbers[2] + 2
 result[2]
+```
 
+```
+## [1] 10
+```
+
+```r
 # Suppose i is 3
 result[3] <- somenumbers[3] + 2
 result[3]
+```
+
+```
+## [1] 6
 ```
 
 
@@ -2985,20 +3712,27 @@ result[3]
 
 The inside part of the loop should run if we set `i` to a particular value.
 
-```{r}
+
+```r
 i <- 1
 result[i] <- somenumbers[i] + 2
 ```
 
 If you get an error here, there is something wrong with the meat! (and not necessarily the loop) 
 
-```{r}
+
+```r
 result[i]
+```
+
+```
+## [1] 8
 ```
 
 For example, if we had a typo, we'd get an error. Try running the below!
 
-```{r, eval=F}
+
+```r
 i <- 1
 result[i] <- somenumberz[i] + 2
 ```
@@ -3008,7 +3742,8 @@ result[i] <- somenumberz[i] + 2
 
 Using a loop, for each value in our poll results, add 10 and divide by 100. Store in a vector called `adjustedpollresults`.
 
-```{r}
+
+```r
 pollresults <- c(70, 40, 45, 60, 43, 80, 23)
 ```
 
@@ -3022,7 +3757,8 @@ Remember the steps:
 
 <details> <summary>Try on your own, then expand for the solution.</summary>
 
-```{r}
+
+```r
 pollresults <- c(70, 40, 45, 60, 43, 80, 23)
 adjustedpollresults <- rep(NA, length(pollresults))
 
@@ -3030,6 +3766,10 @@ for(i in 1:length(pollresults)){
   adjustedpollresults[i] <- (pollresults[i] + 10)/100 
 }
 adjustedpollresults
+```
+
+```
+## [1] 0.80 0.50 0.55 0.70 0.53 0.90 0.33
 ```
 
 </details>
@@ -3054,11 +3794,13 @@ We will explore how he changed the Court, with a focus on how the location of th
 
 For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=gA1OZ8-SO9E")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/gA1OZ8-SO9E" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 The link to the video is https://youtu.be/gA1OZ8-SO9E. 
 
@@ -3082,11 +3824,10 @@ Let's load and explore our data.
 
 Martin-Quinn Scores assess ideology based on how judges "cluster" together in their voting patterns. Every Justice gets an ideology score, and this score can change each SC term (year) they are on the Court. Higher scores are more conservative justices, and lower, more liberal. More information is available  at the [MQScores website](http://mqscores.lsa.umich.edu/measures.php)
 
-```{r, include=F}
-justices <- read.csv("data/justices.csv", stringsAsFactors = T)
-```
 
-```{r, eval=F}
+
+
+```r
 justices <- read.csv("justices.csv", stringsAsFactors = T)
 
 ## alternative
@@ -3095,7 +3836,8 @@ justices <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/ma
 
 We are going to make the name variable a character class. This will make R treat the names as raw text rather than valued categories. This will be useful later on in the application.
 
-```{r}
+
+```r
 ## justice Name as character
 justices$justiceName <- as.character(justices$justiceName)
 ```
@@ -3103,7 +3845,8 @@ justices$justiceName <- as.character(justices$justiceName)
 
 We can use `tapply()` to see the median "ideal point" (ideology score) each term in our data.
 
-```{r}
+
+```r
 ## Note: we use tapply like before but replace mean with median
 medians <- tapply(justices$post_mn, justices$term, median)
 
@@ -3117,6 +3860,8 @@ plot(x =names(medians),
      main="Median of US Supreme Court over Time")
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-167-1.svg" width="672" />
+
 
 We see a conservative shift at the end of the plot. However, we cannot tell whether this represents a shift within a particular justice's ideology or a shift in which justice has become the median, due perhaps, to the change in the Court's composition.
 
@@ -3129,9 +3874,15 @@ We will start our process by definding the meat of the operation.
 
   - We want to find the median SC Justice for each term. To get started, let's pretend we only have to find the median Supreme Court Justice for one term.
 
-```{r}
+
+```r
 SCterms <- sort(unique(justices$term))
 SCterms
+```
+
+```
+##  [1] 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2006
+## [16] 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019
 ```
 
 Note that where you have a vector where some entries in the vector are repeated (such as terms on the Supreme Court), you can extract the unique elements of that vector using the `unique()` function. You can also `sort()` them in numeric or alphabetical order. This won't be necessary most times.
@@ -3139,31 +3890,45 @@ Note that where you have a vector where some entries in the vector are repeated 
 
 First, let's think about how we would do this for just one of the Supreme Court terms. Well we would first subset our data frame to contain only that one Supreme Court term.
 
-```{r}
+
+```r
 ## Example for the first term
 SCterms[1]
+```
 
+```
+## [1] 1991
+```
+
+```r
 ## Subset data to include only rows from 1991
 subterm <- subset(justices, term == 1991)
 ```
 
 Then, we would take the median of these ideal points
 
-```{r}
+
+```r
 median.ip <- median(subterm$post_mn)
 ```
 
 Finally, we would figure out which justice has this median.
 
-```{r}
+
+```r
 result <- subterm$justiceName[subterm$post_mn == median.ip]
 result
+```
+
+```
+## [1] "SDOConnor"
 ```
 
 
 Now let's put it into our loop syntax
 
-```{r, eval=F}
+
+```r
 # for(i  in . . . ){
 #  subterm <- subset(justices, term == 1991)
 #  median.ip <- median(subterm$post_mn)
@@ -3173,7 +3938,8 @@ Now let's put it into our loop syntax
 
 Now, we need our container vector and iteration vectors.
 
-```{r}
+
+```r
 SCterms <- sort(unique(justices$term))
 results <- rep(NA, length(SCterms))
 names(results) <- SCterms
@@ -3181,7 +3947,8 @@ names(results) <- SCterms
 
 Finally, we would modify our loop syntax with `i` and `[i]`
 
-```{r}
+
+```r
 for(i  in 1:length(SCterms)){
   subterm <- subset(justices, term == SCterms[i])
   median.ip <- median(subterm$post_mn)
@@ -3191,15 +3958,30 @@ for(i  in 1:length(SCterms)){
 
 Did it work?
 
-```{r}
+
+```r
 results
+```
+
+```
+##        1991        1992        1993        1994        1995        1996 
+## "SDOConnor" "SDOConnor" "AMKennedy" "SDOConnor" "AMKennedy" "AMKennedy" 
+##        1997        1998        1999        2000        2001        2002 
+## "AMKennedy" "AMKennedy" "SDOConnor" "SDOConnor" "SDOConnor" "SDOConnor" 
+##        2003        2004        2006        2007        2008        2009 
+## "SDOConnor" "SDOConnor" "AMKennedy" "AMKennedy" "AMKennedy" "AMKennedy" 
+##        2010        2011        2012        2013        2014        2015 
+## "AMKennedy" "AMKennedy" "AMKennedy" "AMKennedy" "AMKennedy" "AMKennedy" 
+##        2016        2017        2018        2019 
+## "AMKennedy" "JGRoberts" "JGRoberts" "JGRoberts"
 ```
 
 ### Troubleshooting the loop
 
 Recall, the inside part of the loop should run if we set `i` to a particular value.
 
-```{r}
+
+```r
   i <- 1
   subterm <- subset(justices, term == SCterms[i])
   median.ip <- median(subterm$post_mn)
@@ -3208,13 +3990,19 @@ Recall, the inside part of the loop should run if we set `i` to a particular val
   results[i]
 ```
 
+```
+##        1991 
+## "SDOConnor"
+```
+
 We are in good shape! If we had a typo, we'd get an error message there, and that would be a sign that we need to work on the inside part of the code before putting it back into the loop structure.
 
 ### Visualizing the Results
 
 To get a bit more practice with plots, let's visualize the results and make our interpretations.
 
-```{r}
+
+```r
 medians <- tapply(justices$post_mn, justices$term, median)
 plot(x =names(medians),
      y= medians, 
@@ -3229,6 +4017,8 @@ plot(x =names(medians),
 ## Note: we want to make sure medians and results are in the same order for this to work
 text(x=names(results), y=(medians - .14), labels=results, cex=.35)
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-177-1.svg" width="672" />
 
 We have now used the `text()` function. Similar to plot, the `text()` takes a set of x and y coordinates that tells R the location of where you want to add a piece(s) of text to the plot. The third input is the actual text.
 
@@ -3250,7 +4040,8 @@ Recall, the Martin-Quinn scores measure justice ideology based on voting pattern
 
 Let's make the plot more beautiful by color coding.
 
-```{r}
+
+```r
 medians <- tapply(justices$post_mn, justices$term, median)
 plot(x =names(medians),
      y= medians, 
@@ -3280,12 +4071,15 @@ points(x =names(medians),
 axis(1, names(medians), cex.axis=.6)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-178-1.svg" width="672" />
+
 We have used the `points()` function. This adds an additional layer of points to a plot. It works much like the `plot` function in that in takes a set of x and y coordinates.
 
 
 We could change the look of the plot even more by adding a legend and altering the borders and look of the plot.
 
-```{r, warning=F}
+
+```r
 medians <- tapply(justices$post_mn, justices$term, median)
 plot(x =names(medians),
      y= medians, 
@@ -3316,6 +4110,8 @@ points(x =names(medians), y= medians,
 ## Adds our custom x-axis
 axis(1, names(medians), cex.axis=.6, tick=F)
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-179-1.svg" width="672" />
 
 
 ### Wrapping Up
@@ -3426,18 +4222,19 @@ Let's try to predict the 2020 election results using just the 2016 results.
 
 *For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=zWDxZogRwOs")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/zWDxZogRwOs" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
-```{r, include=F}
-results2020 <- read.csv("data/elecresults2020.csv", stringsAsFactors = T)
-```
 
-```{r, eval=F}
+
+
+```r
 results2020 <- read.csv("elecresults2020.csv", stringsAsFactors = T)
 ```
 
@@ -3452,9 +4249,21 @@ Variables
 ![](images/result2020.png){width=80%}
 
 
-```{r}
+
+```r
 sum(results2020$EV[results2020$called == "R"])
+```
+
+```
+## [1] 232
+```
+
+```r
 sum(results2020$EV[results2020$called == "D"])
+```
+
+```
+## [1] 306
 ```
 
 
@@ -3464,7 +4273,8 @@ sum(results2020$EV[results2020$called == "D"])
 
   - Let's use the 2016 result as a direct proxy to predict 2020.
 
-```{r}
+
+```r
 results2020$predicted2020 <- ifelse(results2020$margin2016 < 0, "R", "D")
 results2020$predicted2020 <- as.factor(results2020$predicted2020)
 ```
@@ -3477,8 +4287,13 @@ results2020$predicted2020 <- as.factor(results2020$predicted2020)
 
 What proportion of states did we get correct?
 
-```{r}
+
+```r
 mean(results2020$predicted2020 == results2020$called)
+```
+
+```
+## [1] 0.8928571
 ```
 
 
@@ -3501,15 +4316,30 @@ We define one outcome as the "positive" and one as the "negative." Here we will 
   
 Confusion Matrix: Tells us how we went right, how we went wrong.
 
-```{r}
+
+```r
 table(predicted=results2020$predicted2020, actual = results2020$called)
+```
+
+```
+##          actual
+## predicted  D  R
+##         D 22  0
+##         R  6 28
 ```
 
 
 Which states did we get wrong?
 
-```{r}
+
+```r
 results2020$state[results2020$predicted2020 != results2020$called]
+```
+
+```
+## [1] Arizona               Georgia               Michigan             
+## [4] Nebraska 2nd District Pennsylvania          Wisconsin            
+## 56 Levels: Alabama Alaska Arizona Arkansas California Colorado ... Wyoming
 ```
 
 ### Iterate to improve predictions
@@ -3525,11 +4355,13 @@ How could we improve our predictions of elections? What other information could 
 
 *For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=bDvwgs-F8Ic")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/bDvwgs-F8Ic" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -3558,11 +4390,10 @@ The results of these findings are in the [AAPOR report](https://www.aapor.org/AA
 
 We are going to do our own analysis of pre-election polls as a prediction of the 2020 election results. We will use a large number of state polls conducted from May-November 2020 that were made available to the public on FiveThirtyEight.
 
-```{r, include=F}
-polls2020 <- read.csv("data/pollsandresults2020.csv", stringsAsFactors = T)
-```
+
  
-```{r, eval=F}
+
+```r
 polls2020 <- read.csv("pollsandresults2020.csv", stringsAsFactors = T)
 ```
 
@@ -3582,7 +4413,8 @@ Can we predict the outcome of an election using polls?
 
 Let's create our outcome variables.
 
-```{r}
+
+```r
 ## Biden's margin of victory (or defeat) in  the polls
 polls2020$polldiff <- polls2020$BidenPoll - polls2020$TrumpPoll
 
@@ -3601,10 +4433,19 @@ Let's start with 1 state.
 
   - Let's grab all polls within 2 weeks of the election or the most recent day polled (for areas that did not have recent polls)
 
-```{r}
+
+```r
 ## Iteration vector
 states <- unique(polls2020$stateid)
 states[1]
+```
+
+```
+## [1] AL
+## 55 Levels: AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA ... WY
+```
+
+```r
 ## Subset to just Alabama
 subdata <- subset(polls2020, stateid == states[1])
 
@@ -3616,17 +4457,36 @@ subdata <- subset(subdata, days_to_election < 15 |
 
 Now let's extract the actual margin for Biden, the poll-based predicted margin, and finally, let's assign electoral votes based on our prediction.
 
-```{r}
+
+```r
 ## Find the margin for the actual result
 result.marginAL <- mean(subdata$resultdiff)
 result.marginAL
+```
+
+```
+## [1] -25.4
+```
+
+```r
 ## Find the margin for our prediction
 polls.marginAL <- mean(subdata$polldiff)
 polls.marginAL
+```
+
+```
+## [1] -21.16667
+```
+
+```r
 ## Allocate votes for Biden according to the margin
 bidenvotesAL <- ifelse(mean(subdata$polldiff) > 0, 
                             unique(subdata$EV), 0)
 bidenvotesAL
+```
+
+```
+## [1] 0
 ```
 
 We predicted Biden would lose Alabama because the `polls.marginAL` is negative. Therefore, we assigned Biden 0 electoral votes in this example.
@@ -3634,7 +4494,8 @@ We predicted Biden would lose Alabama because the `polls.marginAL` is negative. 
 
 ### Loop through all states
 
-```{r}
+
+```r
 ## Iteration vector
 states <- unique(polls2020$stateid)
 ## Container vector
@@ -3657,6 +4518,10 @@ for(i in 1:length(states)){
 sum(bidenvotes) # predicted
 ```
 
+```
+## [1] 351
+```
+
 
 ### Check Accuracy
 
@@ -3665,13 +4530,18 @@ sum(bidenvotes) # predicted
 
 Let's calculate two common measures of prediction error: bias (the average prediction error) and root-mean-squared error (a typical magnitude of the prediction error).
 
-```{r}
+
+```r
 ## Calculate Bias (Predicted Biden - True Biden)
 predictionerror <- polls.margin -result.margin 
 bias <- mean(predictionerror)
 
 ## Root Mean Squared Error
 sqrt(mean((predictionerror)^2))
+```
+
+```
+## [1] 6.052873
 ```
 
 On average, the poll-based prediction was more than 4 points larger for Biden's margin than the actual result.
@@ -3682,7 +4552,8 @@ We can create a plot similar to the left plot from the AAPOR report.
 ![](images/aaporhist20.png)
 
 
-```{r}
+
+```r
 ## Histogram of Prediction Errors to Show Bias
 hist(predictionerror, 
      xlab = "Prediction Error (Predicted Biden Margin - Actual)",
@@ -3690,6 +4561,8 @@ hist(predictionerror,
 abline(v=mean(predictionerror), col="red")
 abline(v=0)
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-196-1.svg" width="672" />
 
 
 Another way to visualize the prediction error
@@ -3704,7 +4577,8 @@ We will plot the prediction error on the x-axis, and list the corresponding stat
 
   - We will sort the prediction error to make it easier to see the pattern of results.
 
-```{r}
+
+```r
 plot(x=sort(predictionerror), y=1:length(predictionerror),
      main="Average Prediction Error by State \n Biden - Trump Margin",
      ylab="State",
@@ -3719,6 +4593,8 @@ axis(1, seq(-5, 15, 5), seq(-5, 15, 5))
 text(-3, 15, "Poll Margin \n Skewed Toward Trump", cex=.7)
 text(8, 15, "Poll Margin \n Skewed Toward Biden", cex=.7)
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-197-1.svg" width="672" />
 
 
 #### Classification
@@ -3741,19 +4617,34 @@ Confusion Matrix
 
 Let's classify our predictions.
 
-```{r}
+
+```r
 actualwins <- ifelse(result.margin > 0, "Biden Won", "Trump Won")
 predictedwins <- ifelse(polls.margin > 0, "Biden Won", "Trump Won")
 ```
 
-```{r}
+
+```r
 table(predictedwins, actualwins)
+```
+
+```
+##              actualwins
+## predictedwins Biden Won Trump Won
+##     Biden Won        28         3
+##     Trump Won         0        24
 ```
 
 Where did the polls get it wrong?
 
-```{r}
+
+```r
 actualwins[actualwins != predictedwins]
+```
+
+```
+##          FL         ME2          NC 
+## "Trump Won" "Trump Won" "Trump Won"
 ```
 
 
@@ -3822,11 +4713,13 @@ We will use regression to make these predictions.
 
 *For a video explainer of the code for this application, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=wtn-W8Uv32E")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/wtn-W8Uv32E" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 We use `baseball.csv` data
@@ -3839,27 +4732,37 @@ We use `baseball.csv` data
   - `BA`: batting average; 
   - `SLG`: Slugging Percentage
 
-```{r, include=FALSE}
-baseball <- read.csv("data/baseball.csv")
-```
 
-```{r, eval=FALSE}
+
+
+```r
 baseball <- read.csv("baseball.csv")
 ```
 
-```{r}
+
+```r
 head(baseball)
 ```
 
-Below we can see the first observation made: Runs scored are highly correlated with team wins
-```{r, echo=F}
-plot(x=baseball$RS, 
-     y=baseball$W,
-     xlab = "Runs Scored",
-     ylab =  "Wins",
-     main="Wins by Runs Scored",
-     pch=20)
 ```
+##   Team League Year  RS  RA  W   OBP   SLG    BA Playoffs RankSeason
+## 1  ARI     NL 2012 734 688 81 0.328 0.418 0.259        0         NA
+## 2  ATL     NL 2012 700 600 94 0.320 0.389 0.247        1          4
+## 3  BAL     AL 2012 712 705 93 0.311 0.417 0.247        1          5
+## 4  BOS     AL 2012 734 806 69 0.315 0.415 0.260        0         NA
+## 5  CHC     NL 2012 613 759 61 0.302 0.378 0.240        0         NA
+## 6  CHW     AL 2012 748 676 85 0.318 0.422 0.255        0         NA
+##   RankPlayoffs   G  OOBP  OSLG
+## 1           NA 162 0.317 0.415
+## 2            5 162 0.306 0.378
+## 3            4 162 0.315 0.403
+## 4           NA 162 0.331 0.428
+## 5           NA 162 0.335 0.424
+## 6           NA 162 0.319 0.405
+```
+
+Below we can see the first observation made: Runs scored are highly correlated with team wins
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-205-1.svg" width="672" />
 
 
 What the A's noticed is that a team's On Base Percentage is also highly correlated with runs scored. This aligns with conventional wisdom. Players get a lot of hype when they achieve a high OBP.
@@ -3871,15 +4774,7 @@ Hernandez is hitting .500 (16-for-32) with five homers, four doubles, nine RBI, 
 
 This correlation shows up in our data, too.
 
-```{r, echo=F}
-fit <- lm(RS ~ OBP, data = baseball)
-plot(x=baseball$OBP, 
-     y=baseball$RS,
-     ylab = "Runs Scored",
-     xlab =  "On Base Percentage",
-     main="Runs Scored by On Base Percentage",
-     pch=20)
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-206-1.svg" width="672" />
 
 
 ## Step 1: Approach- Regression in R
@@ -3889,16 +4784,7 @@ A regression draws a "best fit line" between the points. This allows us -- for a
 
   - Our best prediction of the number of runs scored would be the spot on the purple line directly above a given OBP.
 
-```{r, echo=F}
-fit <- lm(RS ~ OBP, data = baseball)
-plot(x=baseball$OBP, 
-     y=baseball$RS,
-     ylab = "Runs Scored",
-     xlab =  "On Base Percentage",
-     main="Runs Scored by On Base Percentage",
-     pch=20)
-abline(fit, col="purple", lwd=3)
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-207-1.svg" width="672" />
 
 
 The regression model is $Y = \alpha + \beta X + \epsilon$. Let's demystify this.
@@ -3922,7 +4808,8 @@ In  R, the regression syntax is `fit <- lm(y ~ x, data = mydata)`
   - `mydata` is whatever you have called your dataframe. E.g.:
 
 
-```{r}
+
+```r
 fit <- lm(RS ~ OBP, data = baseball)
 ```
 
@@ -3931,8 +4818,14 @@ When we have data, we estimate $Y$, $\alpha$, and $\beta$: $\hat Y = \hat \alpha
 
   - Our model gives us the "coefficient" estimates for  $\hat \alpha$ and $\hat \beta$.
 
-```{r}
+
+```r
 coef(fit)
+```
+
+```
+## (Intercept)         OBP 
+##   -1076.602    5490.386
 ```
 
 The first coefficient is $\hat \alpha$, this represents the intercept -- the estimated value our dependent variable will take if our independent variable is 0. 
@@ -3950,7 +4843,8 @@ The second coefficient is $\hat \beta$ is the slope This represents the expected
 
 We can plot the regression using a scatterplot and `abline()`.
 
-```{r}
+
+```r
 plot(x=baseball$OBP, y=baseball$RS, 
      ylab = "Runs Scored",
      xlab =  "On Base Percentage", 
@@ -3961,33 +4855,27 @@ plot(x=baseball$OBP, y=baseball$RS,
 abline(fit, lwd=3, col = "purple") # add line
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-210-1.svg" width="672" />
+
 
 ### Making predictions with regression
 
 A regression model allows us to estimate or "predict" values of our dependent variable for a given value of our independent variable.
 
-```{r, echo=F}
-fit <- lm(RS ~ OBP, data = baseball)
-plot(x=baseball$OBP, 
-     y=baseball$RS,
-     ylab = "Runs Scored",
-     xlab =  "On Base Percentage",
-          main="Runs Scored by On Base Percentage",
-     pch=20)
-abline(fit, lwd=3, col = "purple")
-points(.300, predict(fit, data.frame(OBP=.300)), col=  "red", cex=3, pch=15)
-lines(x = c(.3, .3), y = c(0,predict(fit, data.frame(OBP=.300)) ), lwd=3, col="red")
-lines( c(0, .3), y = c(predict(fit, data.frame(OBP=.300)) ,
-                         predict(fit, data.frame(OBP=.300)) ), lwd=3, col="red")
-text(.285, 600, "Predicted Runs Scored \n if OBP = .3", cex=.7) 
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-211-1.svg" width="672" />
 
 The red dot represents our estimate (best prediction) of the number of runs scored if a team has an on base percentage of .300. In R, we can calculate this value using `predict()`.
 
   -  The syntax is `predict(fit, data.frame(x = value))` where `fit` is the name of the model, `x` is the name of the independent variable, and `value` represents the value for the independent variable for which you want to predict your outcome (e.g., .300).
 
-```{r}
+
+```r
 predict(fit, data.frame(OBP=.300))
+```
+
+```
+##        1 
+## 570.5137
 ```
 
 
@@ -3995,11 +4883,24 @@ Under the hood, this is just using the regression formula described above. For e
 
   - Note that below we compare the output of the predict function to our output if we manually calculated the estimated value.
  
-```{r}
-predict(fit, data.frame(OBP=.300))
 
+```r
+predict(fit, data.frame(OBP=.300))
+```
+
+```
+##        1 
+## 570.5137
+```
+
+```r
 # a + b*.300
 coef(fit)[1] +  coef(fit)[2]*.300
+```
+
+```
+## (Intercept) 
+##    570.5137
 ```
 
 Let's say a team thought they needed about 900 runs scored to get to the playoffs, and they were pretty sure they could get a team on base percentage of .500. How many runs would they be expected to score with that OBP? Do you think they will make the playoffs?
@@ -4007,8 +4908,14 @@ Let's say a team thought they needed about 900 runs scored to get to the playoff
 
 <details> <summary>Try on your own, then expand for the solution.</summary>
 
-```{r}
+
+```r
 predict(fit, data.frame(OBP=.500))
+```
+
+```
+##        1 
+## 1668.591
 ```
 
 It's greater than 900, so we should feel good about our chances.
@@ -4043,8 +4950,13 @@ Just like we had root mean squared error in our poll predictions, we can calcula
   - Just like with the polls, this is the square root of the mean of our squared prediction errors, or "residuals" in the case of regression
       + R will give us this output automatically for a regression using `sigma()`
       
-```{r}
+
+```r
 sigma(fit)
+```
+
+```
+## [1] 39.82189
 ```
 
   - In our case, using on based percentage to predict runs scored, our estimates are off typically, by about 40 runs scored. 
@@ -4057,14 +4969,25 @@ When building  predictive models, often researchers want to minimize this Root-M
 Example: Let's compare the RMSE from two different models:
 
 
-```{r}
+
+```r
 ## Predicting Runs Scored with OBP
 fit <- lm(RS ~ OBP, data = baseball)
 sigma(fit)
+```
 
+```
+## [1] 39.82189
+```
+
+```r
 ## Predicting Runs Scored with Batting Average
 fit2 <- lm(RS ~ BA, data = baseball)
 sigma(fit2)
+```
+
+```
+## [1] 51.48172
 ```
 
 The Oakland A's noticed that OBP was a more precise predictor than BA, and RMSE gives us one way to assess this.
@@ -4075,10 +4998,15 @@ The Oakland A's noticed that OBP was a more precise predictor than BA, and RMSE 
 You can also add more than 1 predictor to a regression using the `+` sign.
 
 
-```{r}
+
+```r
 ## Predicting Runs Scored with OBP and Slugging Percentage
 fit3 <- lm(RS ~ OBP + SLG, data = baseball)
 sigma(fit3)
+```
+
+```
+## [1] 25.12196
 ```
 
 Look how the RMSE dropped again, improving our prediction.
@@ -4095,11 +5023,10 @@ Can we predict campaign donations?
 Data from Barber, Michael J., Brandice Canes‐Wrone, and Sharece Thrower. "Ideologically sophisticated donors: Which candidates do individual contributors finance?." American Journal of Political Science 61.2 (2017): 271-288
 
 
-```{r, include=F}  
-load("data/donationdata.RData")
-```
 
-```{r, eval=FALSE}
+
+
+```r
 load("donationdata.RData")
 ```
 
@@ -4128,7 +5055,8 @@ Can we predict how much someone donates to a U.S. Senate campaign?
 
 Let's try a prediction based on a person's income.
 
-```{r}
+
+```r
 fit <- lm(total_donation ~ IncomeLastYear, data = donationdata)
 ```
 
@@ -4142,7 +5070,8 @@ From this, we can
 
 Note that the correlation is a bit weaker here.
 
-```{r}
+
+```r
 plot(x=donationdata$IncomeLastYear, 
      y=donationdata$total_donation,
      ylab= "Total Donation ($)",
@@ -4151,16 +5080,31 @@ plot(x=donationdata$IncomeLastYear,
 abline(fit, col="green4", lwd=2)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-221-1.svg" width="672" />
+
 
 ### Step 1: Calculate Predictions
 
 We can calculate predictions based on a level of income. Example: Level 5 of income represents an income of \$150k-250k. What level of donation would we expect?
 
-```{r}
-predict(fit, data.frame(IncomeLastYear = 5))
 
+```r
+predict(fit, data.frame(IncomeLastYear = 5))
+```
+
+```
+##        1 
+## 348.8581
+```
+
+```r
 ## alternative using coef()
 coef(fit)[1] + coef(fit)["IncomeLastYear"]*5
+```
+
+```
+## (Intercept) 
+##    348.8581
 ```
 
 
@@ -4168,8 +5112,13 @@ coef(fit)[1] + coef(fit)["IncomeLastYear"]*5
 
 We can calculate the Root Mean Squared Error
 
-```{r}
+
+```r
 sigma(fit)
+```
+
+```
+## [1] 915.2528
 ```
 
 ### Step 3: Iterate
@@ -4181,26 +5130,45 @@ YOUR TURN: Change the model and see if it improves the prediction using RMSE usi
 
 New Model Example
 
-```{r}
+
+```r
 fitnew <- lm(total_donation ~ IncomeLastYear + NetWorth + sameparty, 
              data=donationdata)
 ```
 
 New Predictions: note how we add more variables
 
-```{r}
-predict(fitnew, data.frame(IncomeLastYear = 5, NetWorth = 4, sameparty = 1))
 
+```r
+predict(fitnew, data.frame(IncomeLastYear = 5, NetWorth = 4, sameparty = 1))
+```
+
+```
+##        1 
+## 406.9705
+```
+
+```r
 ## alternative using coef()
 coef(fitnew)[1] + coef(fitnew)["IncomeLastYear"]*5 + 
   coef(fitnew)["NetWorth"]*4 + coef(fitnew)["sameparty"]*1
 ```
 
+```
+## (Intercept) 
+##    406.9705
+```
+
 
 Root Mean Squared Error
 
-```{r}
+
+```r
 sigma(fitnew)
+```
+
+```
+## [1] 910.4256
 ```
 
 
@@ -4210,8 +5178,14 @@ When we have multiple predictors, this changes our interpretation of the coeffic
   - We now interpret the slope as the change in the outcome expected with a 1-unit change in the independent variable-- holding all other variables constant (or ``controlling" for all other variables)
   - For example, for a 1-unit change in Income, we would expect about a \$68 increase in estimated donations, holding constant Net Worth and whether the person shared partisanship with the senator.
 
-```{r}
+
+```r
 coef(fitnew)
+```
+
+```
+##    (Intercept) IncomeLastYear       NetWorth      sameparty 
+##     -242.02780       67.96825       29.55847      190.92323
 ```
 
 Think of this like a set of light switches. How does adjusting one light switch affect the light in the room-- holding constant all other switches.
@@ -4222,8 +5196,14 @@ Think of this like a set of light switches. How does adjusting one light switch 
 
 When we make predictions with multiple variables, we have to tell R where we want to set each variable's value.
 
-```{r}
+
+```r
 predict(fitnew, data.frame(IncomeLastYear = 5, NetWorth = 4, sameparty = 1))
+```
+
+```
+##        1 
+## 406.9705
 ```
 
 See how the prediction changes if you shift `IncomeLastYear` but keep Net Worth and partisanship where they are. That's the idea of "controlling" for the other variables!
@@ -4268,11 +5248,10 @@ Load the data and explore the variables
   - `Gore00`: Gore's votes in 2000
   - `Buchanan00`: Buchanan's votes in 2000 
   
-```{r, include=F}
-florida <- read.csv("data/florida.csv")
-```
 
-```{r, eval=F}
+
+
+```r
 florida <- read.csv("florida.csv")
 ```
 
@@ -4290,14 +5269,21 @@ Using what you learned from the last section, try to complete the following step
 
 For every 1  additional vote Perot received in 1996, we expect Buchanan to receive .036 additional votes in 2000.
 
-```{r}
+
+```r
 fit <- lm(Buchanan00 ~ Perot96, data = florida)
 coef(fit)
 ```
 
+```
+## (Intercept)     Perot96 
+##  1.34575212  0.03591504
+```
+
 In 1996, Perot received 8 million votes as a third-party candidate. Buchanan received less than 1/2 a million. Overall Perot received more votes, but where Perot received votes in 1996 was positively correlated with where Buchanan received votes in 2000.
 
-```{r}
+
+```r
 plot(x=florida$Perot96,
      y=florida$Buchanan00,
      ylab="Buchanan Votes 2000",
@@ -4306,8 +5292,15 @@ plot(x=florida$Perot96,
 abline(fit, lwd=3, col="purple")
 ```
 
-```{r}
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-232-1.svg" width="672" />
+
+
+```r
 sigma(fit)
+```
+
+```
+## [1] 316.3765
 ```
 A typical prediction error is about 316.4 votes above or below the Buchanan total.
 
@@ -4318,9 +5311,15 @@ A typical prediction error is about 316.4 votes above or below the Buchanan tota
 
 Can we reduce the error by adding more variables?
 
-```{r}
+
+```r
 fitnew <- lm(Buchanan00 ~ Perot96 + Dole96 + Clinton96, data = florida)
 coef(fitnew)
+```
+
+```
+##  (Intercept)      Perot96       Dole96    Clinton96 
+## 20.572650070  0.030663207 -0.001559196  0.001865809
 ```
 
 Again, when we have multiple predictors, this changes our interpretation of the coefficients slightly.
@@ -4331,18 +5330,35 @@ Again, when we have multiple predictors, this changes our interpretation of the 
   
 When we make predictions with multiple variables, we have to tell R where we want to set each variable's value.
 
-```{r}
+
+```r
 predict(fitnew, data.frame(Perot96=20000, Clinton96=300000, Dole96=300000))
+```
+
+```
+##        1 
+## 725.8208
 ```
 
 See how the prediction changes if you shift `Perot96` but keep the other variables where they are. That's the idea of "controlling" for the other variables!
 
 The addition of the new variables, in this case, made very little difference in the RMSE.
 
-```{r}
-sigma(fit)
 
+```r
+sigma(fit)
+```
+
+```
+## [1] 316.3765
+```
+
+```r
 sigma(fitnew)
+```
+
+```
+## [1] 318.3798
 ```
 
 Note: the value R generates through `sigma` is the residual standard error, which penalizes the RMSE for the number of variables included in the model. You could also calculate it without this penalty by manually taking the square root of the mean of the squared residuals.
@@ -4350,7 +5366,8 @@ Note: the value R generates through `sigma` is the residual standard error, whic
 
 With little change from the addition of predictors, let's stick with the more simple model and explore the prediction errors.
 
-```{r}
+
+```r
 plot(x=fitted(fit), # predicted outcome
      y=resid(fit),  # prediction error
      type="n", # makes the plot blank
@@ -4360,15 +5377,21 @@ plot(x=fitted(fit), # predicted outcome
      ylab = "Prediction Error")
 abline(h = 0) # adds horizontal line
 text(x=fitted(fit), y=resid(fit), labels = florida$county, cex=.8)
-
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-237-1.svg" width="672" />
 
 How does the prediction error change if we remove Palm Beach County?
 
-```{r}
+
+```r
 florida.pb <- subset(florida, subset = (county != "PalmBeach"))
 fit2 <- lm(Buchanan00 ~ Perot96, data = florida.pb)
 sigma(fit2)
+```
+
+```
+## [1] 87.74994
 ```
 
 My, oh my, our RMSE also goes way down if we remove Palm Beach. Something unique seems to be happening in that county. See this [academic paper](http://sekhon.berkeley.edu/papers/butterfly.pdf) for an elaboration of the evidence that "The Butterfly [ballot] Did it."
@@ -4380,8 +5403,14 @@ Social scientists like to characterize the uncertainty in their predictions usin
 
   - Confidence intervals show a range of values  that are likely to contain the true value
 
-```{r}
+
+```r
 predict(fit, data.frame(Perot96 = 13600), interval = "confidence")
+```
+
+```
+##        fit      lwr      upr
+## 1 489.7903 394.8363 584.7443
 ```
 
 By default, R supplies the 95\%  confidence interval. 
@@ -4392,9 +5421,24 @@ By default, R supplies the 95\%  confidence interval.
 
 Similarly, our coefficients also have uncertainty. 
 
-```{r}
+
+```r
 coef(fit)
+```
+
+```
+## (Intercept)     Perot96 
+##  1.34575212  0.03591504
+```
+
+```r
 confint(fit)
+```
+
+```
+##                    2.5 %       97.5 %
+## (Intercept) -98.03044506 100.72194929
+## Perot96       0.02724733   0.04458275
 ```
 
 For every 1 vote increase in the Perot 1996  vote, we  expect a $\hat \beta =.036$  increase in Buchanan votes. However,  the confidence interval is 0.027 to 0.045.
@@ -4453,11 +5497,13 @@ Macro political and economic fundamentals are sometimes used for early forecasti
 
 
 Below is a video explainer of this application, which uses cross-validation.
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=Wqj9Jm8heAA")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/Wqj9Jm8heAA" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -4465,10 +5511,9 @@ embed_url("https://www.youtube.com/watch?v=Wqj9Jm8heAA")
 The data and model are based on the [FAIR model](Based on the FAIR model for forecasting elections \url{https://fairmodel.econ.yale.edu/vote2016/computev.htm}
 ) of forecasting.
 
-```{r, include=FALSE}
-fair <- read.csv("data/fair.csv")
-```
-```{r, eval=F}
+
+
+```r
 fair <- read.csv("fair.csv")
 ```
 
@@ -4486,12 +5531,14 @@ Key Variables:
 
 
 Let's propose a model
-```{r}
+
+```r
 fit <- lm(VP ~ DUR, data = fair)
 ```
 
 Let's propose an alternative model and see which one we think is better.
-```{r}
+
+```r
 fit2 <- lm(VP ~ G*I +  DUR, data = fair)
 ```
 
@@ -4501,7 +5548,8 @@ Note: The asterisk represents an "interaction." See QSS Chapter 4. We use this w
 
 We are going to run a model where each time we `leave out' one row of data (in our case, one election). Let's try this once:
 
-```{r}
+
+```r
 years <- fair$t
 
 ## Step 1: Subset data into two portions
@@ -4517,14 +5565,16 @@ fit2 <- lm(VP ~  G*I +  DUR, data = traindata)
 
 Out-of-Sample prediction
 
-```{r}
+
+```r
 ## Step 3: Make a Prediction using test data and
 yhat.fit <- predict(fit, testdata)
 yhat.fit2 <- predict(fit2, testdata)
 ```
 Prediction error (Truth - Prediction)
 
-```{r}
+
+```r
 ## Step 3: Test accuracy of prediction
 error.fit <- testdata$VP - yhat.fit
 error.fit2 <- testdata$VP - yhat.fit2
@@ -4534,7 +5584,8 @@ error.fit2 <- testdata$VP - yhat.fit2
 
 Step 4: Let's do this for each row, storing the prediction errors. 
 
-```{r}
+
+```r
 ## Iteration vector
 years <- fair$t
 ## Empty container vectors
@@ -4558,14 +5609,39 @@ for(i in  1:length(years)){
 
 Step 5: Summarize the model performance
 
-```{r}
+
+```r
 ## RMSE
 sqrt(mean((errors.fit)^2))
-sqrt(mean((errors.fit2)^2))
+```
 
+```
+## [1] 7.170149
+```
+
+```r
+sqrt(mean((errors.fit2)^2))
+```
+
+```
+## [1] 3.793135
+```
+
+```r
 ## Mean Absolute Error
 mean(abs(errors.fit))
+```
+
+```
+## [1] 5.937542
+```
+
+```r
 mean(abs(errors.fit2))
+```
+
+```
+## [1] 3.363163
 ```
 
 Which model tends to have less error?
@@ -4576,10 +5652,16 @@ Eventually, you might further test the model on data that has been "held out"-- 
 
 Truth: 2016 VP was 51.1 Democratic "two-party" vote share.
 
-```{r}
+
+```r
 ## Let's use the winner of our two models
 fit2 <- lm(VP ~ G*I +  DUR, data = fair)
 51.1-predict(fit2, data.frame(G=0.97, I=1, DUR=1))
+```
+
+```
+##        1 
+## 2.472147
 ```
 
 2016 values based on the FAIR [site](https://fairmodel.econ.yale.edu/vote2016/index2.htm)
@@ -4634,21 +5716,22 @@ Note: These algorithms have generated a lot of debate, concern and controversy, 
 ### Load data
 
 Below is a video explainer of this application, which uses classification and cross-validation.
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=vpNnUR0V1hA")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/vpNnUR0V1hA" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
 Data include information about 7214 arrests in Broward County Florida in 2013-2014
 
-```{r, include=F}
-broward <- read.csv("data/browardsub.csv")
-```
 
-```{r, eval=F}
+
+
+```r
 broward <- read.csv("browardsub.csv")
 ```
 
@@ -4677,7 +5760,8 @@ Recall the steps for prediction/classification
 
 Step 1: Choose Approach
 
-```{r}
+
+```r
 fit <- lm(two_year_recid ~ age + sex + juv_misd_count + juv_fel_count + 
             priors_count + charge_degree, 
           data = broward)
@@ -4685,8 +5769,15 @@ fit <- lm(two_year_recid ~ age + sex + juv_misd_count + juv_fel_count +
 
 Note: our outcome is binary
 
-```{r}
+
+```r
 table(broward$two_year_recid)
+```
+
+```
+## 
+##    0    1 
+## 3963 3251
 ```
 
 When you use linear regression with a binary outcome, it is called a linear probability model. We estimate the probability of recidivism-- a number between 0 and 1.
@@ -4696,12 +5787,17 @@ When you use linear regression with a binary outcome, it is called a linear prob
 
 Make Prediction.
 
-```{r}
+
+```r
 ## estimates a predicted probability of recidivism for each subject
 broward$predictedrec <- predict(fit)
 
 ## Range of predicted probabilities
 range(broward$predictedrec)
+```
+
+```
+## [1] -0.1463835  1.6059606
 ```
 
 Note: One downside of linear models is they can generate probabilities below 0 or above 1. Logistic regression will constrain these due to a transformation it makes when estimating the coefficients.
@@ -4714,7 +5810,8 @@ Step 1: Choose Approach- Let's try logistic regression instead
 
 <details> <summary>For details, expand.</summary>
 
-```{r}
+
+```r
 ## Logistic regression
 fitl <- glm(two_year_recid ~ age + sex + juv_misd_count + juv_fel_count + 
             priors_count + charge_degree, 
@@ -4728,31 +5825,17 @@ broward$predictedrecl <- predict(fitl, type="response") # need type="response" t
 range(broward$predictedrecl)
 ```
 
+```
+## [1] 0.04176846 0.99891808
+```
+
 Logistic regression keeps probabilities between 0 and 1 due to a transformation it applies to our standard regression formula. As a result, our coefficient units (`coef(fitl)`) are in log-odds units, which are hard to interpret. We can transform our predictions of the model into probabilities using the `predict()` function with `type = "response"`. 
 
 </details>
 
 We can compare the predictions of the probability of recidivism between the linear and logistic regression models. Note how the linear model blows past 0 and 1, while the logistic-based predictions can keep them within those bounds.
 
-```{r, echo=F}
-fitd1 <- glm(two_year_recid ~ 
-            priors_count , 
-          data = broward, 
-          family=binomial(link = "logit"))
-fitd2 <- lm(two_year_recid ~ 
-            priors_count , 
-          data = broward)
-
-plot(x=broward$priors_count, 
-     y=broward$two_year_recid,
-     type="n", xlab="", ylab="Predicted Probability",
-     xlim = c(-20,30), ylim =c(-.5, 1.5), main = "Contrast: Linear vs. Logistic Regression Predictions",
-     cex.main=.9, xaxt="n")
-abline(h=c(0,1), lty=2)
-abline(fitd2, col="purple", lwd=3)
-lines(x=-20:30, y=predict(fitd1, data.frame(priors_count = -20:30), type="response"), col="red", lwd=3)
-legend("topleft", col=c("red", "purple"), c("Logit", "Linear"), lwd=3, lty=1, bty="n", cex=.8)
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-259-1.svg" width="672" />
 
 We don't have time to go into the math of logistic regression in this course, but know that it is a desirable option for classification. 
 
@@ -4766,15 +5849,23 @@ Recall: we are trying to **classify**
   - We need to make our estimates of the probability of recidivism categorical, into simply a prediction of recidivate vs. not recidivate
 
 For now, we will use .5 as a threshold (a probability of more than .5)
-```{r}
+
+```r
 # Need to make prediction binary.
 # We use .5, but there are other methods for choosing this threshold
 broward$predictedrecclass <- ifelse(broward$predictedrec > .5, 1, 0)
 ```
 
 Predicted Recidivism
-```{r}
+
+```r
 table(predicted=broward$predictedrecclass)
+```
+
+```
+## predicted
+##    0    1 
+## 4683 2531
 ```
 
 
@@ -4795,7 +5886,8 @@ Goal: Test accuracy in a way that can help detect overfitting. See how well our 
 
 We will use leave-one-out cross-validation again, but there are other methods, such as splitting data into "folds" of multiple observations at once (i.e., leaving out 100 or 1000 observations for testing instead of just 1).
 
-```{r}
+
+```r
 ## Step 1: Subset Data
 traindata <- broward[-1,] # all but first row
 testdata <- broward[1,] # just the first row
@@ -4817,7 +5909,8 @@ Step 4: Repeat across all observations and summarize accuracy.
 
 We want to repeat this process for every row of our data-- leaving out a different row each time. To construct our loop, we embed the above process in the loop syntax.
 
-```{r}
+
+```r
 ## Iteration vector
 ## 1:nrow(broward)
 
@@ -4845,10 +5938,18 @@ for(i in 1:nrow(broward)){
 
 Check Accuracy: Confusion Matrix
 
-```{r}
+
+```r
 confmatrix <- table(actual = broward$two_year_recid, 
                     predicted = broward$cvpredictions)
 confmatrix
+```
+
+```
+##       predicted
+## actual    0    1
+##      0 3156  807
+##      1 1528 1723
 ```
 
 How should we interpret each cell? 
@@ -4863,11 +5964,18 @@ False Positive Rate: $\frac{\text{False Positive}}{\text{(False Positive + True 
 
   - Out of those who do not recidivate, how often did we predict recidivate?
 
-```{r}
+
+```r
 ## One Approach
 sum(broward$cvpredictions == 1 & broward$two_year_recid == 0) / 
   sum(broward$two_year_recid == 0)
+```
 
+```
+## [1] 0.2036336
+```
+
+```r
 ## Alternative Approach
 ## predicted recidivism, actual not
 fp <- confmatrix[1, 2]
@@ -4878,17 +5986,28 @@ tn <- confmatrix[1, 1]
 fp / (fp + tn)
 ```
 
+```
+## [1] 0.2036336
+```
+
 #### False Negative Rate
 
 False Negative Rate: $\frac{\text{False Negative}}{\text{(False Negative + True Positive)}}$
 
   - Out of those who did recidivate, how often did we predict not recidivate?
 
-```{r}
+
+```r
 # Out of those who recidivate, how often does it predict not recidivate?
 sum(broward$cvpredictions== 0 & broward$two_year_recid == 1) / 
   sum(broward$two_year_recid == 1)
+```
 
+```
+## [1] 0.4700092
+```
+
+```r
 ## Alternative Approach
 ##  predicted to not recidivate, actual yes
 fn <- confmatrix[2, 1]
@@ -4896,6 +6015,10 @@ tp <- confmatrix[2, 2]
 
 ## False Negative Rate
 fn / (fn + tp)
+```
+
+```
+## [1] 0.4700092
 ```
 
 
@@ -4930,7 +6053,8 @@ Wait a second-- we didn't use race in our model. Why could the performance still
 
 We will subset our data by race.
 
-```{r}
+
+```r
 black <- subset(broward, race == 2)
 white <- subset(broward, race == 1)
 ```
@@ -4938,16 +6062,28 @@ white <- subset(broward, race == 1)
 
 We can first check overall accuracy
 
-```{r}
-mean(black$cvpredictions == black$two_year_recid)
 
+```r
+mean(black$cvpredictions == black$two_year_recid)
+```
+
+```
+## [1] 0.6696429
+```
+
+```r
 mean(white$cvpredictions == white$two_year_recid)
+```
+
+```
+## [1] 0.6805216
 ```
 
 
 But are we making the same types of errors?
 
-```{r}
+
+```r
 ## False positive rate- Black
 ## Out of those who do not recidivate, how often did we predict recidivate?
 fprate.black <- sum(black$cvpredictions == 1 & black$two_year_recid == 0) / 
@@ -4969,14 +6105,39 @@ fnrate.white <-sum(white$cvpredictions== 0 & white$two_year_recid == 1) /
 
 Let's see how our predictions perform across racial groups
 
-```{r}
+
+```r
 ## False positive rates
 fprate.black
-fprate.white 
+```
 
+```
+## [1] 0.2846797
+```
+
+```r
+fprate.white 
+```
+
+```
+## [1] 0.1323925
+```
+
+```r
 ## False negative rates
 fnrate.black
+```
+
+```
+## [1] 0.3734876
+```
+
+```r
 fnrate.white 
+```
+
+```
+## [1] 0.6076605
 ```
 
 We see asymmetries in the types of errors the model is making across racial groups. Black subjects have higher false positives-- more likely as being predicted to recidivate (a predicted "positive") when they do not (the "false" in false positive). White subjects have higher false negatives-- predicted not to recidivate (the negative) when they do (the false in false negative).
@@ -5094,10 +6255,7 @@ We are going to use this example help us break down a few concepts.
 
 The number of heads you generate over repeated samples is the "sampling distribution." 
 
-```{r, echo=F}
-plot(x=seq(0,100, 1), dbinom(x=seq(0,100, 1), size=100, p=.5), type="l",
-     xlab="Number of Heads in 100 Coin Flips", ylab = "Density")
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-271-1.svg" width="672" />
 
 The higher the curve, the more likely we would observe that number of heads. For example, if you flip a coin 100 times, it is likely you will get close to 50 heads (50\%), and very unlikely you will flip more than 80 heads (80\% heads).
 
@@ -5218,11 +6376,13 @@ Let's Review the Process
 
 *For a video explainer of the code in this section, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=kJlonC8AI6w")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/kJlonC8AI6w" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
@@ -5248,18 +6408,24 @@ What are our null/alternative hypotheses?
 
 We will compare average savings between treatment conditions (a difference in means).
 
-```{r}
+
+```r
 rosca <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/rosca.csv",
                   stringsAsFactors = T)
 ```
 
-```{r}
+
+```r
 ## Compare means
 mean.safebox <- mean(rosca$fol2_amtinvest[rosca$safe_box == 1], na.rm=T)
 mean.encouragement <- mean(rosca$fol2_amtinvest[rosca$encouragement== 1], 
                            na.rm=T)
 diff.means <- mean.safebox - mean.encouragement
 diff.means
+```
+
+```
+## [1] 150.3816
 ```
 
 ***5. Calculate the uncertainty around this estimate.*** 
@@ -5272,7 +6438,8 @@ To get uncertainty when calculating a difference in means, we can use the `t.tes
 
 To get the t-statistic, underneath the hood of the function, R is estimating the standard error by calculating the standard deviation in the sample and the sample size (the number of people in each condition).
 
-```{r}
+
+```r
 ## Compare amount saved for those in Safe Box vs. 
 ## Encouragement Only conditions
 test <- t.test(rosca$fol2_amtinvest[rosca$safe_box == 1],
@@ -5281,16 +6448,50 @@ test <- t.test(rosca$fol2_amtinvest[rosca$safe_box == 1],
 test
 ```
 
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  rosca$fol2_amtinvest[rosca$safe_box == 1] and rosca$fol2_amtinvest[rosca$encouragement == 1]
+## t = 2.1083, df = 150.38, p-value = 0.03666
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##    9.445604 291.317636
+## sample estimates:
+## mean of x mean of y 
+##  408.2150  257.8333
+```
+
 ***6. Decide whether you can reject or fail to reject the hypothesis of no difference***
 
 We can extract the group means, the p-value of the difference and confidence interval of the difference.
 
-```{r}
+
+```r
 test$estimate
+```
 
+```
+## mean of x mean of y 
+##  408.2150  257.8333
+```
+
+```r
 test$conf.int
+```
 
+```
+## [1]   9.445604 291.317636
+## attr(,"conf.level")
+## [1] 0.95
+```
+
+```r
 test$p.value
+```
+
+```
+## [1] 0.03666403
 ```
 
 
@@ -5330,16 +6531,23 @@ In a regression, our key hypothesis test is about whether there is a significant
 Going back to our Florida example: The  null hypothesis would be the 1996 Perot vote does not help us explain the Buchanan 2000 vote (that $\beta = 0$). Our alternative is $\beta \neq 0$, that there is some relationship between 1996 Perot votes and the 2000 Buchanan vote in Florida counties.
 
 
-```{r}
+
+```r
 florida <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/florida.csv")
 ```
 
 
 We estimate $\hat \beta$: for every 1  additional vote Perot received in 1996, we expect Buchanan to receive .036 additional votes in 2000.
 
-```{r}
+
+```r
 fit <- lm(Buchanan00 ~ Perot96, data = florida)
 coef(fit)
+```
+
+```
+## (Intercept)     Perot96 
+##  1.34575212  0.03591504
 ```
 
 
@@ -5348,11 +6556,7 @@ Is that relationship significant? In other words, is it helpful to know the Pero
 
 Recall that the $\hat \beta$ represents the estimated slope of the relationship.
 
-```{r, echo=F}
-plot(x=florida$Perot96, y=florida$Buchanan00,
-     xlab="Perot votes", ylab= "Buchanan Votes", main= "Buchanan vs. Perot Votes")
-abline(fit, col="purple", lwd=3)
-```
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-279-1.svg" width="672" />
 
 We ask: Is that relationship (the slope) significant (i.e., statistically different from 0 slope)? 
 
@@ -5360,8 +6564,15 @@ We ask: Is that relationship (the slope) significant (i.e., statistically differ
 
 Our regression `lm` function will also generate estimates of uncertainty related to hypothesis testing
 
-```{r}
+
+```r
 round(summary(fit)$coefficients, digits=4)
+```
+
+```
+##             Estimate Std. Error t value Pr(>|t|)
+## (Intercept)   1.3458    49.7593  0.0270   0.9785
+## Perot96       0.0359     0.0043  8.2752   0.0000
 ```
 
 ***6. Decide whether you can reject or fail to reject the hypothesis of no difference***
@@ -5374,9 +6585,22 @@ We see the p-value for Perot96 is essentially 0-- well less than 0.05. Therefore
 In social science papers, regressions are often presented in tables:
 
 
-```{r, echo=FALSE, warning=F, message=F}
-library(texreg)
-screenreg(fit)
+
+```
+## 
+## =======================
+##              Model 1   
+## -----------------------
+## (Intercept)    1.35    
+##              (49.76)   
+## Perot96        0.04 ***
+##               (0.00)   
+## -----------------------
+## R^2            0.51    
+## Adj. R^2       0.51    
+## Num. obs.     67       
+## =======================
+## *** p < 0.001; ** p < 0.01; * p < 0.05
 ```
 
 
@@ -5408,10 +6632,21 @@ We can conduct a two-sided hypothesis test
 
 The two-sided means we aren't specifying a direction of our alternative hypothesis. Instead, we are conducting test just trying to reject the idea of no difference between racial groups. Sometimes researchers may specify the alternative hypothesis in a directional way, such as Black applicants will have a lower call back rate than white applicants. However, it is more common to use a two-sided test, even if researchers have a theoretical hypothesis in a particular direction. 
 
-```{r}
+
+```r
 resume <- read.csv("https://raw.githubusercontent.com/ktmccabe/teachingdata/main/resume.csv")
 
 head(resume)
+```
+
+```
+##   firstname    sex  race call
+## 1   Allison female white    0
+## 2   Kristen female white    0
+## 3   Lakisha female black    0
+## 4   Latonya female black    0
+## 5    Carrie female white    0
+## 6       Jay   male white    0
 ```
 
 
@@ -5419,9 +6654,19 @@ head(resume)
 
 Does being black (vs. white) decrease call backs? 
 
-```{r}
-table(resume$race, resume$call)
 
+```r
+table(resume$race, resume$call)
+```
+
+```
+##        
+##            0    1
+##   black 2278  157
+##   white 2200  235
+```
+
+```r
 test <- prop.test(x=c(157, 235), n=c(157+2278, 235+2200))
 ```
 
@@ -5433,8 +6678,23 @@ test <- prop.test(x=c(157, 235), n=c(157+2278, 235+2200))
 ***5. Calculate the uncertainty around this estimate.*** 
 
 
-```{r}
+
+```r
 test
+```
+
+```
+## 
+## 	2-sample test for equality of proportions with continuity correction
+## 
+## data:  c(157, 235) out of c(157 + 2278, 235 + 2200)
+## X-squared = 16.449, df = 1, p-value = 4.998e-05
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.04769866 -0.01636705
+## sample estimates:
+##     prop 1     prop 2 
+## 0.06447639 0.09650924
 ```
 
 You can extract the p.value for the difference in proportions and confidence interval
@@ -5444,8 +6704,13 @@ You can extract the p.value for the difference in proportions and confidence int
 
 In the `prop.test` function, you see a X-squared statistic. You can treat this like the z-score. When you are doing a test of two groups, the X-squared is essentially the z-score squared. The X-squared refers to a Chi-squared test. In our case, the equivalent z-score would be about 4-- well more than 2 standard errors.
 
-```{r}
+
+```r
 round(test$p.value, digits=3)
+```
+
+```
+## [1] 0
 ```
 
 What do you conclude about the hypothesis? Is it significant?
@@ -5530,7 +6795,8 @@ Article from [NY Times](https://www.nytimes.com/interactive/2016/06/13/us/politi
 
 Packages are like apps on your phone. They give you additional functionality. To use the tools in a package you first have to install it.
 
-```{r, eval=F}
+
+```r
 install.packages("sotu", dependencies = T)
 install.packages("tm", dependencies = T)
 install.packages("SnowballC", dependencies = T)
@@ -5540,7 +6806,8 @@ install.packages("stringr", dependencies = T)
 
 After you install it, just like on a phone, anytime you want to use the app, you need to open it. In R, we do that with `library()`.
 
-```{r, message=F, warning=F}
+
+```r
 library(sotu)
 library(tm)
 library(SnowballC)
@@ -5554,26 +6821,35 @@ library(stringr)
 
 *For a video explainer of the code for the State of the Union application on pre-processing text and dictionary analysis, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=-9rB6uOih34")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/-9rB6uOih34" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
 The `sotu` package includes a dataset with the text of every U.S. State of the Union speech. It also includes second dataset with information about the speech. When datasets are stored in a package, you can add them to your environment through the `data()` function.
 
-```{r}
+
+```r
 data(sotu_meta)
 data(sotu_text)
 ```
 
 We are going to "bind" these together into a new dataframe. That way, the `sotu_text` is a variable inside of our `speeches` dataframe. 
 
-```{r}
+
+```r
 speeches <- cbind(sotu_meta, sotu_text)
 names(speeches)
+```
+
+```
+## [1] "president"    "year"         "years_active" "party"        "sotu_type"   
+## [6] "sotu_text"
 ```
 
 
@@ -5581,20 +6857,31 @@ names(speeches)
 
 Note that when working with raw text data, we usually do want our variables to be character variables and not factor variables. Here, every cell is not a category. Instead, it is a speech!
 
-```{r}
+
+```r
 class(speeches$sotu_text)
+```
+
+```
+## [1] "character"
 ```
 
 
 Text is messy data. We may want to spruce it up a bit by removing some of the non-essential characters and words, and moving everything to lowercase.
 
-```{r}
+
+```r
 ## Example of speech
 speeches$sotu_text[1]
 ```
 
+```
+## [1] "Fellow-Citizens of the Senate and House of Representatives: \n\nI embrace with great satisfaction the opportunity which now presents itself of congratulating you on the present favorable prospects of our public affairs. The recent accession of the important state of North Carolina to the Constitution of the United States (of which official information has been received), the rising credit and respectability of our country, the general and increasing good will toward the government of the Union, and the concord, peace, and plenty with which we are blessed are circumstances auspicious in an eminent degree to our national prosperity.\n\nIn resuming your consultations for the general good you can not but derive encouragement from the reflection that the measures of the last session have been as satisfactory to your constituents as the novelty and difficulty of the work allowed you to hope. Still further to realize their expectations and to secure the blessings which a gracious Providence has placed within our reach will in the course of the present important session call for the cool and deliberate exertion of your patriotism, firmness, and wisdom.\n\nAmong the many interesting objects which will engage your attention that of providing for the common defense will merit particular regard. To be prepared for war is one of the most effectual means of preserving peace.\n\nA free people ought not only to be armed, but disciplined; to which end a uniform and well-digested plan is requisite; and their safety and interest require that they should promote such manufactories as tend to render them independent of others for essential, particularly military, supplies.\n\nThe proper establishment of the troops which may be deemed indispensable will be entitled to mature consideration. In the arrangements which may be made respecting it it will be of importance to conciliate the comfortable support of the officers and soldiers with a due regard to economy.\n\nThere was reason to hope that the pacific measures adopted with regard to certain hostile tribes of Indians would have relieved the inhabitants of our southern and western frontiers from their depredations, but you will perceive from the information contained in the papers which I shall direct to be laid before you (comprehending a communication from the Commonwealth of Virginia) that we ought to be prepared to afford protection to those parts of the Union, and, if necessary, to punish aggressors.\n\nThe interests of the United States require that our intercourse with other nations should be facilitated by such provisions as will enable me to fulfill my duty in that respect in the manner which circumstances may render most conducive to the public good, and to this end that the compensation to be made to the persons who may be employed should, according to the nature of their appointments, be defined by law, and a competent fund designated for defraying the expenses incident to the conduct of foreign affairs.\n\nVarious considerations also render it expedient that the terms on which foreigners may be admitted to the rights of citizens should be speedily ascertained by a uniform rule of naturalization.\n\nUniformity in the currency, weights, and measures of the United States is an object of great importance, and will, I am persuaded, be duly attended to.\n\nThe advancement of agriculture, commerce, and manufactures by all proper means will not, I trust, need recommendation; but I can not forbear intimating to you the expediency of giving effectual encouragement as well to the introduction of new and useful inventions from abroad as to the exertions of skill and genius in producing them at home, and of facilitating the intercourse between the distant parts of our country by a due attention to the post-office and post-roads.\n\nNor am I less persuaded that you will agree with me in opinion that there is nothing which can better deserve your patronage than the promotion of science and literature. Knowledge is in every country the surest basis of public happiness. In one in which the measures of government receive their impressions so immediately from the sense of the community as in ours it is proportionably essential.\n\nTo the security of a free constitution it contributes in various ways - by convincing those who are intrusted with the public administration that every valuable end of government is best answered by the enlightened confidence of the people, and by teaching the people themselves to know and to value their own rights; to discern and provide against invasions of them; to distinguish between oppression and the necessary exercise of lawful authority; between burthens proceeding from a disregard to their convenience and those resulting from the inevitable exigencies of society; to discriminate the spirit of liberty from that of licentiousness - cherishing the first, avoiding the last - and uniting a speedy but temperate vigilance against encroachments, with an inviolable respect to the laws.\n\nWhether this desirable object will be best promoted by affording aids to seminaries of learning already established, by the institution of a national university, or by any other expedients will be well worthy of a place in the deliberations of the legislature.\n\nGentlemen of the House of Representatives: \n\nI saw with peculiar pleasure at the close of the last session the resolution entered into by you expressive of your opinion that an adequate provision for the support of the public credit is a matter of high importance to the national honor and prosperity. In this sentiment I entirely concur; and to a perfect confidence in your best endeavors to devise such a provision as will be truly with the end I add an equal reliance on the cheerful cooperation of the other branch of the legislature.\n\nIt would be superfluous to specify inducements to a measure in which the character and interests of the United States are so obviously so deeply concerned, and which has received so explicit a sanction from your declaration. \n\nGentlemen of the Senate and House of Representatives: \n\nI have directed the proper officers to lay before you, respectively, such papers and estimates as regard the affairs particularly recommended to your consideration, and necessary to convey to you that information of the state of the Union which it is my duty to afford.\n\nThe welfare of our country is the great object to which our cares and efforts ought to be directed, and I shall derive great satisfaction from a cooperation with you in the pleasing though arduous task of insuring to our fellow citizens the blessings which they have a right to expect from a free, efficient, and equal government. GEORGE WASHINGTON\n"
+```
 
-```{r}
+
+
+```r
 ## clean text
 speeches$sotu_text <- tolower(speeches$sotu_text)
 speeches$sotu_text <- stripWhitespace(speeches$sotu_text)
@@ -5608,40 +6895,94 @@ Note: What you might consider non-essential could differ depending on your appli
 ### Preparing a Corpus
 
 
-```{r}
+
+```r
 ## turn text into corpus
 sotu.corpus <- Corpus(VectorSource(speeches$sotu_text))
 ## turn into Document-Term-Matrix
 sotu.dtm <- DocumentTermMatrix(sotu.corpus)
 ```
 
-```{r}
+
+```r
 ## preview
 inspect(sotu.dtm[,10:20])
+```
+
+```
+## <<DocumentTermMatrix (documents: 236, terms: 11)>>
+## Non-/sparse entries: 1386/1210
+## Sparsity           : 47%
+## Maximal term length: 11
+## Weighting          : term frequency (tf)
+## Sample             :
+##      Terms
+## Docs  affairs afford affording agree agriculture aids allowed already also
+##   113       2      5         0     0           7    0       1      16   23
+##   117       3      9         1     0           2    1       8      17   23
+##   119       2      2         0     2           8    2       3      21   16
+##   124       8      1         0     3           6    3       2      13   25
+##   158       8      5         0     1          22    5       2      25   44
+##   188       6      1         0     3           2    0       0      13   94
+##   190       6      7         0     0           6    0       1      23   89
+##   197       2      2         0     0           8    0       2      11   44
+##   199       4      8         0     0           9    0       1      23   82
+##   201       8      3         0     0           9    0       4      11   72
+##      Terms
+## Docs  among
+##   113    12
+##   117    23
+##   119    11
+##   124    10
+##   158    12
+##   188     6
+##   190     8
+##   197     9
+##   199    14
+##   201    17
 ```
 
 ### Word Frequency
 
 Convert the "Document-Term-Matrix" into a matrix using `as.matrix()`
 
-```{r}
+
+```r
 sotu.dtm.mat <- as.matrix(sotu.dtm)
 
 ## Most frequent words
 head(sort(sotu.dtm.mat[1,], decreasing=T), n=10)
+```
 
+```
+##       will        may     public    country        end government      great 
+##         14          5          5          4          4          4          4 
+##   measures     regard     states 
+##          4          4          4
+```
+
+```r
 head(sort(sotu.dtm.mat[236,], decreasing=T), n=10)
+```
 
+```
+##  america      now   people     will     just     work american    world 
+##       28       27       27       26       25       22       22       22 
+##     make      can 
+##       20       19
 ```
 Note: these are somewhat generic words.
 
 
 ***Word Cloud***
 
-```{r}
+
+```r
 wordcloud(words=names(sotu.dtm.mat[1,]),
           freq=sotu.dtm.mat[1,], max.words = 20)
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-297-1.svg" width="672" />
 
 
 ## Word Importance
@@ -5652,44 +6993,62 @@ We use tf-idf (term frequency - inverse document frequency) as a way to pull out
   - Functionally, if everyone uses the word "know," then it's not very important for distinguishing characters/documents from each other.
   - We want words that a speech used frequently, that other speeches use less frequently
 
-```{r}
+
+```r
 ## words uniquely important to a character
 sotu.tfidf <- weightTfIdf(sotu.dtm)
 
 ## convert to matrix
 sotu.tfidf.mat <- as.matrix(sotu.tfidf)
-
 ```
 
 We can summarize the uniquely relevant words for each speech
 
-```{r}
+
+```r
 Gw1790.tfidf <-head(sort(sotu.tfidf.mat[1,], decreasing=T), n=8)
 BO2016.tfidf <-head(sort(sotu.tfidf.mat[236,], decreasing=T), n=8)
 ```
 
-```{r}
+
+```r
 Gw1790.tfidf
 ```
 
+```
+##     intimating licentiousness        discern     inviolable         derive 
+##     0.01527644     0.01527644     0.01333846     0.01220481     0.01172350 
+##      persuaded     cherishing  comprehending 
+##     0.01172350     0.01077658     0.01077658
+```
 
-```{r}
+
+
+```r
 barplot(Gw1790.tfidf, cex.axis=.7,
          cex.names=.7,
         main= "Most `Important' 1790 SOTU Words (tf-idf)", 
         horiz = T, las=2)
+```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-301-1.svg" width="672" />
+
+```r
 barplot(BO2016.tfidf,
          cex.names=.7, cex.axis=.7,
         main= "Most `Important' 2016 SOTU Words (tf-idf)", 
         horiz=T, las=2)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-301-2.svg" width="672" />
+
 
 ## Additional Descriptive Statistics
 
 Are the length of speeches changing? The `nchar()` function tells you the number of characters in a "string."
 
-```{r}
+
+```r
 speeches$speechlength <- nchar(speeches$sotu_text)
 ```
 
@@ -5698,7 +7057,8 @@ Let's plot the length of speeches over time and annotate with informative colors
 
 Is the length of speeches changing? 
 
-```{r}
+
+```r
 plot(x=1:236, y= speeches$speechlength, 
     pch=15,
      xaxt="n",
@@ -5709,10 +7069,13 @@ plot(x=1:236, y= speeches$speechlength,
 axis(1, 1:236, labels=speeches$year, las=3, cex.axis=.7)
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-303-1.svg" width="672" />
+
 
 We can add color to distinguish written vs. spoken speeches
 
-```{r}
+
+```r
 speechcolor <- ifelse(speeches$sotu_type == "written", "black", "green3")
 plot(x=1:236, y= speeches$speechlength, 
      xaxt="n", pch=15,
@@ -5729,6 +7092,8 @@ legend("topleft", c("spoken", "written"),
        col=c("green3", "black"), bty="n")
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-304-1.svg" width="672" />
+
 ### Dictionary Analysis
 
 We can characterize the content of speeches in different ways. For example, we can see if speeches mention specific words, such as `"terrorism."
@@ -5736,15 +7101,28 @@ We can characterize the content of speeches in different ways. For example, we c
   - The function `grepl()` lets you search for a pattern of text in a character string
   - The function `str_detect()` works similarly with the opposite order of inputs
 
-```{r}
+
+```r
 speeches$terrorism <- ifelse(grepl("terror", speeches$sotu_text), 1,0)
 speeches$terrorism2 <- ifelse(str_detect(speeches$sotu_text,"terror"), 1,0)
 ```
 
 
-```{r}
+
+```r
 sort(tapply(speeches$terrorism, speeches$president, sum), 
      decreasing=T)[1:10]
+```
+
+```
+##        George W. Bush    William J. Clinton          Barack Obama 
+##                     8                     8                     7 
+##         Ronald Reagan Franklin D. Roosevelt        Andrew Jackson 
+##                     6                     4                     2 
+##     Chester A. Arthur      Grover Cleveland        Harry S Truman 
+##                     2                     2                     2 
+##          Jimmy Carter 
+##                     2
 ```
 
 
@@ -5752,21 +7130,46 @@ We can characterize the content of speeches in different ways. For example, we c
 
   - The function `str_count()` counts the number of times a piece of text appears in a character string
 
-```{r}
+
+```r
 speeches$terrorismcount <- str_count(speeches$sotu_text, "terror")
 ```
 
-```{r}
+
+```r
 sort(tapply(speeches$terrorismcount, speeches$president, sum), 
      decreasing=T)[1:10]
 ```
 
+```
+##        George W. Bush          Barack Obama    William J. Clinton 
+##                   171                    37                    29 
+##         Ronald Reagan Franklin D. Roosevelt     Lyndon B. Johnson 
+##                    10                     6                     5 
+##        Harry S Truman          Jimmy Carter        Andrew Jackson 
+##                     3                     3                     2 
+##     Chester A. Arthur 
+##                     2
+```
+
 We can add multiple words with the | operator. This is often called a "dictionary analysis."
 
-```{r}
+
+```r
 speeches$warcount <- str_count(speeches$sotu_text, 
                                "terror|war|military|drone")
 sort(tapply(speeches$warcount, speeches$president, sum), decreasing=T)[1:10]
+```
+
+```
+##        Harry S Truman    Theodore Roosevelt Franklin D. Roosevelt 
+##                   554                   481                   441 
+##         James K. Polk          Jimmy Carter  Dwight D. Eisenhower 
+##                   390                   348                   332 
+##      William McKinley        George W. Bush      Grover Cleveland 
+##                   324                   323                   257 
+##      Ulysses S. Grant 
+##                   233
 ```
 
 
@@ -5808,13 +7211,15 @@ Let's try an example working with a Twitter API. To use this version of the Twit
   2. An internet connection
   3. To install the `rtweet` package
   
-```{r, eval=F}
+
+```r
 install.packages("rtweet")
 ```
 
 Let's open the package
 
-```{r, message=F, warning=F}
+
+```r
 library(rtweet)
 ```
 
@@ -5828,7 +7233,8 @@ The first time you use a function from `rtweet`, R will prompt you to authentica
 
 We can use the `search_tweets` function to search recent tweets that contain keywords. We can specify the number of tweets to extract with the `n` argument. We can also filter tweets with additional arguments, such as by limiting tweets to English tweets or omitting retweets.
 
-```{r, eval=F}
+
+```r
 ## simple keyword search
 taylortweets <-search_tweets("taylorsversion", n=1000)
 
@@ -5865,7 +7271,8 @@ The resulting object we created with the first search, `taylortweets`, is a data
 
 Here is an example of extracting tweets from a particular user. You cane extract up to 3200 recent tweets of a specified public user. If you try to extract tweets from several users at once, you might hit a "rate limit" indicating that you requested more information than allowed over a particular period of time.
 
-```{r, eval=F}
+
+```r
 ## extracting tweets from potus
 bidentweets <- get_timeline("potus", n=3200)
 
@@ -5885,13 +7292,15 @@ R allows you to save any R object as an .RData file that can be opened with the 
 
 We can demonstrate this now by saving `taylortweets` as an RData object. It will automatically save to your working directory, but you can also add a subfolder or alternative file path.
 
-```{r, eval=F}
+
+```r
 save(taylortweets, file = "taylortweets.RData")
 ```
 
 Prior to saving the file, you could consider limiting the number of variables you want to save if you didn't want to store 90 variables. Example of keeping only 5 variables:
 
-```{r, eval=F}
+
+```r
 taylortweets <- taylortweets[, c("user_id", "screen_name", "text", "created_at", "is_retweet")]
 save(taylortweets, file = "taylortweets.RData")
 ```
@@ -5899,7 +7308,8 @@ save(taylortweets, file = "taylortweets.RData")
 
 Then, you can load the file (if you happen to close R/RStudio, restart your computer, etc.) with the load command.
 
-```{r, eval=FALSE}
+
+```r
 load("taylortweets.RData")
 ```
 
@@ -5933,25 +7343,29 @@ When doing political science research on Twitter, we should be careful about how
 
 *For a video explainer of the code in this section, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("vembedr")
-library(knitr)
 
-embed_url("https://www.youtube.com/watch?v=XYc82CFjDWU")
+```{=html}
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/XYc82CFjDWU" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 ```
 
 
 
 For this example, we need the `rtweet` and `syuzhet` packages.
 
-```{r eval=F}
+
+```r
 install.packages("rtweet") # for extracting tweets
 install.packages("syuzhet") # for late sentiment analysis
 ```
 
 In R, we open the packages with `library()`.
 
-```{r, message=F, warning=F}
+
+```r
 library(rtweet)
 library(syuzhet)
 ```
@@ -5962,7 +7376,8 @@ We will first `search` recent tweets for keywords. The first time you use the pa
 
   - See the details above in the course notes for the syntax of this function.
   
-```{r, eval=F}
+
+```r
 politicstweets <- search_tweets("political OR partisan", n=2000)
 thanksgivingtweets <- search_tweets("thanksgiving", n=2000)
 ```
@@ -5970,19 +7385,22 @@ thanksgivingtweets <- search_tweets("thanksgiving", n=2000)
 
 After you create the tweets, you can save them as an RData file on your computer so that you don't lose them when you close R.
 
-```{r eval=F}
+
+```r
 save(politicstweets, file="politicstweets.RData")
 save(thanksgivingtweets, file="thanksgivingtweets.RData")
 ```
 
 These can then be loaded back into R at anytime.
 
-```{r, includel=F}
+
+```r
 load("data/politicstweets.RData")
 load("data/thanksgivingtweets.RData")
 ```
 
-```{r, eval=F}
+
+```r
 load("politicstweets.RData")
 load("thanksgivingtweets.RData")
 ```
@@ -6002,7 +7420,8 @@ Like any dictionary analysis, there are limitations to this "bag of words" appro
 
 The `get_sentiment()` function will calculate the net positive - negative score of a piece of text according to a specified dictionary. We can store this as a new variable.
 
-```{r}
+
+```r
 politicstweets$sentiment <- get_sentiment(politicstweets$text, 
                                           method="bing")
 thanksgivingtweets$sentiment <- get_sentiment(thanksgivingtweets$text, 
@@ -6012,12 +7431,17 @@ thanksgivingtweets$sentiment <- get_sentiment(thanksgivingtweets$text,
 politicstweets$sentiment[1:10]
 ```
 
+```
+##  [1] -2 -3  4  1 -7 -2 -3 -3 -4  0
+```
+
 Let's compare the sentiment of these sets of tweets to help answer the question: Should we talk about politics at Thanksgiving dinner?
 
 
 We add a plotting concept: Plotting multiple plots.
 
-```{r}
+
+```r
 ## Set par
 par(mfrow = c(1, 2)) # 1 row with 2 plots
 ## Plot just the first object
@@ -6040,8 +7464,9 @@ hist(thanksgivingtweets$sentiment,
      xlim = c(-8, 8),
      border= F)
 abline(v=mean(thanksgivingtweets$sentiment), lwd=2)
-
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-325-1.svg" width="672" />
 
 
 ### Your Twitter Analysis
@@ -6049,7 +7474,8 @@ abline(v=mean(thanksgivingtweets$sentiment), lwd=2)
 As mentioned above We can also search the most recent 3200 tweets of a given user.
 
 Here we extract tweets from AOC's Twitter account
-```{r, eval=F}
+
+```r
 aoctweets <- get_timeline("aoc", n=3200)
 ```
 
@@ -6132,49 +7558,72 @@ Can maps be misleading? See this discussion from Kieran Healy in [Chap. 7](https
 
 Install maps package. You only need to do this one time.
 
-```{r, eval=F}
+
+```r
 install.packages("maps")
 ```
 
 All subsequent times, you just need to use `library()`
 
-```{r, warning=F, message=F}
+
+```r
 library(maps)
 ```
 
 
 The map command is like a plot. It maps a particular entry from a database. Below are a few examples of types of maps that come readymade in the package.
 
-```{r}
+
+```r
 map(database = "world")
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-329-1.svg" width="672" />
 
-```{r}
+
+
+```r
 map(database = "usa")
 ```
 
-```{r}
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-330-1.svg" width="672" />
+
+
+```r
 map(database = "state")
 ```
 
-```{r}
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-331-1.svg" width="672" />
+
+
+```r
 map(database="county")
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-332-1.svg" width="672" />
+
 You can also map particular regions within a database.
 
-```{r}
+
+```r
 map(database = "state", regions= c("New Jersey", "New York" ))
 ```
 
-```{r}
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-333-1.svg" width="672" />
+
+
+```r
 map(database="county", regions = "Nebraska")
 ```
 
-```{r}
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-334-1.svg" width="672" />
+
+
+```r
 map(database = "world", regions= "Italy")
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-335-1.svg" width="672" />
 
 
 ### Using ggplot2 with maps
@@ -6183,13 +7632,15 @@ We may want to embed `map` in another plotting device that more easily adds info
 
   - While the plotting tools we have worked with before can do this, the function `ggplot` has a better interface that will more easily help us avoid mistakes, such as putting a label in the wrong place.
 
-```{r, eval=F}
+
+```r
 install.packages("ggplot2")
 ```
 
 Open the packages each time you want to use them.
 
-```{r, warning=F, message=F}
+
+```r
 library(ggplot2)
 ```
 
@@ -6203,13 +7654,15 @@ The "gg" stands for "grammar of graphics." The `ggplot2` package has a very gene
 
 We will create a map of New Jersey. Similar to before, we will first use a function to pull up map data about U.S. states. The `map_data` function pulls up just the data instead of making the map itself.
 
-```{r}
+
+```r
 nj_map <- map_data("state",regions= c("New Jersey"))
 ```
 
 We also directly integrate the data into the plotting function
 
-```{r}
+
+```r
 ## Begin plot
 ggplot() + #Note the use of the + sign between each line
 
@@ -6226,6 +7679,8 @@ ggplot() + #Note the use of the + sign between each line
   theme_void() # note: last line does not end with a +
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-339-1.svg" width="672" />
+
 ## Choropleth Maps
 
 
@@ -6235,7 +7690,8 @@ Sometimes maps use shading of polygons to display quantitative information about
   - We `fill` the plot using `geom_polygon` and can (optionally) indicate specific colors
 
 
-```{r}
+
+```r
 usmap <- map_data("state")
 usmap$nj <- ifelse(usmap$region == "new jersey", "Cannot turn left", 
                    "Can turn left")
@@ -6251,12 +7707,15 @@ ggplot()+
   coord_quickmap()
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-340-1.svg" width="672" />
+
 
 ## Application: 2021 NJ Election Results
 
 We sometimes get data from an outside source. We then need to figure out how to connect it to the mapping data.
 
-```{r}
+
+```r
 njcounties <- map_data("county", region="New Jersey")
 
 ## 2021 county election results
@@ -6271,7 +7730,8 @@ We can use `merge()` to do so by indicating a shared unique identifier that the 
 
   - For more information on merging, see QSS chapter 4.2.5 or this [explainer](https://sejdemyr.github.io/r-tutorials/statistics/tutorial5.html).
 
-```{r}
+
+```r
 njcounties <- merge(njcounties, murphyvote, 
                     by.x="subregion", by.y = "county", 
                     all.x=TRUE, all.y=F)
@@ -6280,7 +7740,8 @@ njcounties <- merge(njcounties, murphyvote,
 
 Now that the data are merged, we can add Murphy's vote share as a color.
 
-```{r}
+
+```r
 ggplot()+
   
   ## create an nj county-level plot
@@ -6299,6 +7760,8 @@ ggplot()+
   coord_quickmap()
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-343-1.svg" width="672" />
+
 
 
 ## Application: Voter Identification Laws
@@ -6316,22 +7779,51 @@ According to the NCSL, 35 states have laws requesting or requiring voters to sho
 
 Detecting if something is contained within a vector: The function `%in%` asks: is this contained in the vector? Yes/No
 
-```{r}
+
+```r
 "new jersey" %in% c("new jersey", "california", "nebraska")
+```
 
+```
+## [1] TRUE
+```
+
+```r
 "florida" %in% c("new jersey", "california", "nebraska")
+```
 
+```
+## [1] FALSE
+```
+
+```r
 (! "florida" %in% c("new jersey", "california", "nebraska")) # not in
+```
 
+```
+## [1] TRUE
 ```
 
 We will augment our map data with a new variable that classifies states according to their voter ID laws.
 
-```{r}
+
+```r
 usmap <- map_data("state")
 
 head(usmap)
+```
 
+```
+##        long      lat group order  region subregion
+## 1 -87.46201 30.38968     1     1 alabama      <NA>
+## 2 -87.48493 30.37249     1     2 alabama      <NA>
+## 3 -87.52503 30.37249     1     3 alabama      <NA>
+## 4 -87.53076 30.33239     1     4 alabama      <NA>
+## 5 -87.57087 30.32665     1     5 alabama      <NA>
+## 6 -87.58806 30.32665     1     6 alabama      <NA>
+```
+
+```r
 ## create variable as NA
 usmap$photoidlaws <- NA
 
@@ -6366,7 +7858,8 @@ usmap$photoidlaws <- as.factor(usmap$photoidlaws)
 Let's create a map of the U.S. We will then annotate the map with information about voter identification laws.
 
 
-```{r}
+
+```r
 ggplot()+
   geom_polygon(data=usmap, aes(x=long, y=lat, group=group, 
                                fill=photoidlaws),
@@ -6378,6 +7871,8 @@ ggplot()+
   ggtitle("Map of U.S. Voter ID Laws")+
   coord_quickmap()
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-346-1.svg" width="672" />
 
 
 
@@ -6405,7 +7900,8 @@ In this application, we use the [Global Terrorism Database](https://www.start.um
 
   - We will make a map of France using `map_data` to get the polygon information
   
-```{r}
+
+```r
 library(maps)
 library(ggplot2)
 
@@ -6419,35 +7915,30 @@ ggplot()+
   ggtitle("Terrorist Attacks in France 2000-2019")+
   coord_quickmap()+
   theme_void()
-
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-347-1.svg" width="672" />
 
 
   - We load separate data that includes the latitude and longitude of attacks
 
-```{r, include=F}
-#gtb <- read.csv("data/gtb.csv")
-#head(gtb)
-#library(tidyverse)
-#gtb <- gtb %>% dplyr::select(nkill, country_txt, iyear, imonth, weaptype1_txt, city, success, crit1, crit2, crit3,
-#                      targtype1_txt, longitude, latitude)
-#save(gtb, file="data/gtb.RData")
-load("data/gtb.RData")
 
-```
  
-```{r, eval=F}
+
+```r
 load("gtb.RData")
 ```
 
-```{r}
+
+```r
 ## Let's look at only recent attacks 
 gtbfrance <- subset(gtb, iyear > 2000 & country_txt=="France")
 ```
   - We use `geom_point` to add a layer of points from this dataset
       + We can colour or size the points by additional variables in the data
       
-```{r}
+
+```r
 ggplot()+
   geom_polygon(data=france, aes(x=long, y=lat, group=group), fill="white", colour="gray")+
   
@@ -6463,17 +7954,20 @@ ggplot()+
   ggtitle("Terrorist Attacks in France 2000-2019")+
   coord_quickmap()+
   theme_void()
-
 ```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-351-1.svg" width="672" />
 
   - We can also add labels to the plot with `geom_text_repel` from the `ggrepel` package
       + Note that we can use labels from yet another object so long as we have the right lat and long
 
-```{r, eval=F}
+
+```r
 install.packages("ggrepel")
 ```
 
-```{r, message=F, warning=F}
+
+```r
 library(ggrepel)
 ## Let's add labels for the biggest attacks only
 gtbmajorfrance <- subset(gtbfrance, nkill > 75)
@@ -6499,6 +7993,8 @@ ggplot()+
   theme_void()
 ```
 
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-353-1.svg" width="672" />
+
 ## Animating Data
 
 With R, we can go a step further to make our maps more interactive. RStudio and R allow for the ability to turn graphics into interactive applications, as well as animate visualizations to reveal or change the visual over the course of different frames. We will take a brief look at these applications.
@@ -6510,18 +8006,21 @@ Why would we want to do this? An engaging way to reveal changes over time or oth
 
 We will use the package `gganimate` for this. Install and load the package.
 
-```{r, eval=F}
+
+```r
 install.packages("gganimate")
 ```
 
-```{r, message=F, warning=F}
+
+```r
 library(gganimate)
 ```
 
 
 To animate a ggplot, we just add an argument to indicate the variable that dictates the transition between different states, in this case, the date variable, `iyear`. The other parts of the plot stay very similar to before.
 
-```{r, eval=FALSE}
+
+```r
 ggplot()+
   geom_polygon(data=france, aes(x=long, y=lat, group=group), fill="white", colour="gray")+
   
@@ -6550,24 +8049,25 @@ Mapping isn't the only application where we might want to show an animation. Her
 
 We are going to map the spread of confirmed COVID cases based on data from [John Hopkins University](https://github.com/CSSEGISandData/COVID-19).
 
-```{r, eval=F}
+
+```r
 load("covidlongfmt.RData")
 ```
 
-```{r, include=FALSE}
-load("data/covidlongfmt.RData")
-```
+
 
 
 We have variables `case_count` and `Country.Region` along with `date_fmt`. Let's compare trends in confirmed cases between Italy and France.
 
-```{r}
+
+```r
 italyspain <- subset(covidlongfmt, Country.Region %in% c("Italy", "Spain"))
 ```
 
 Let's divide cases by 1000 to make it easier to visualize.
 
-```{r}
+
+```r
 italyspain$case_count_thousands <- italyspain$case_count /1000
 ```
 
@@ -6575,7 +8075,8 @@ With ggplot, this time instead of using `geom_polygon`, we will use `geom_line`.
 
 Again, to animate a ggplot, we just add an argument to indicate the variable that dictates the transition between different states, in this case, the date variable, `date_fmt`. The other parts of the plot stay very similar to before.
 
-```{r, eval=F}
+
+```r
 ggplot()+
   geom_line(data=italyspain, aes(x=date_fmt, y=case_count_thousands, 
                                  colour=Country.Region))+
@@ -6605,12 +8106,14 @@ Just like with the terrorism data, we can make a map with the data, too.
 
 To illustrate the process, let's create a plot for just one day: 2020-03-01.
 
-```{r}
+
+```r
 covidmarch <- subset(covidlongfmt, date_fmt == "2020-03-01")
 ```
 
 We create a world map and add points to indicate the case count, with the size proportionate to the count. We include `alpha` to make the points transparent.
-```{r}
+
+```r
 world <- map_data("world")
 
 ggplot()+
@@ -6628,11 +8131,18 @@ ggplot()+
   theme_void()
 ```
 
+```
+## Warning: Removed 2 rows containing missing values (geom_point).
+```
+
+<img src="datasciforpolisci_files/figure-html/unnamed-chunk-363-1.svg" width="672" />
+
 
 Now, we use the full data and transition through the date variable. We then "render" and save the animation.
 
 
-```{r, eval=F}
+
+```r
 world <- map_data("world")
 
 ggplot()+
@@ -6674,27 +8184,26 @@ We are going to map the territorial control of Syria at these two time points us
 
 Let's load the data. The data have already been converted into the dataframe.
 
-```{r, include=F}
-load("data/SYmapd.RData")
-```
 
-```{r, eval=F}
+
+
+```r
 load("SYmapd.RData")
 ```
 
 A second dataset includes information about territorial control. Let's also load that data.
 
-```{r, include=F}
-load("data/mapdata.RData")
-```
 
-```{r, eval=F}
+
+
+```r
 load("mapdata.RData")
 ```
 
 We can create a map.
 
-```{r, eval=F}
+
+```r
 ggplot()+
   
   ## use shape data
@@ -6754,27 +8263,36 @@ How to investigate new variables
   So you have some data.... AND it's a mess!!!
 
 A lot of the data we may encounter in courses has been simplified to allow students to focus on other concepts. We may have data that look like the following:
-```{r, results="asis"}
+
+```r
 nicedata <- data.frame(gender = c("Male", "Female", "Female", "Male"),
            age = c(16, 20, 66, 44),
            voterturnout = c(1, 0, 1, 0))
 ```
 
-```{r, echo=FALSE}
-library(knitr)
-kable(nicedata)
-```
+
+|gender | age| voterturnout|
+|:------|---:|------------:|
+|Male   |  16|            1|
+|Female |  20|            0|
+|Female |  66|            1|
+|Male   |  44|            0|
 
 In the real world, our data may hit us like a ton of bricks, like the below:
-```{r, results="asis"}
+
+```r
 uglydata <- data.frame(VV160002 = c(2, NA, 1, 2),
            VV1400068 = c(16, 20, 66, 44),
            VV20000 = c(1, NA, 1, NA))
 ```
 
-```{r, echo=FALSE}
-kable(uglydata)
-```
+
+| VV160002| VV1400068| VV20000|
+|--------:|---------:|-------:|
+|        2|        16|       1|
+|       NA|        20|      NA|
+|        1|        66|       1|
+|        2|        44|      NA|
 
 
 A lot of common datasets we use in the social sciences are messy, uninformative, sprawling, misshaped, and/or incomplete. What do I mean by this?
@@ -6798,7 +8316,8 @@ For examples of large codebooks, you can view the [2016 American National Electi
 
 I recommend that once you locate the definition of a variable of interest, rename the variable in your dataset to be informative. You can do this by creating a new variable or overwriting the name of the existing variable. You might also comment a note for yourself of what the values mean.
 
-```{r}
+
+```r
 ## Option 1: create new variable
 ## gender 2=Male, 1=Female
 uglydata$gender <- uglydata$VV160002
@@ -6819,18 +8338,35 @@ When we have a column with missing data, it is best to do a few things:
 
 If we want to figure out how much missing data we have in a variable, we have a couple of approaches:
 
-```{r}
+
+```r
 ## Summarize this variable
 summary(uglydata$gender)
+```
 
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   1.000   1.500   2.000   1.667   2.000   2.000       1
+```
+
+```r
 ## What is the length of the subset of the variable where the data are missing
 length(uglydata$gender[is.na(uglydata$gender) == T])
 ```
 
+```
+## [1] 1
+```
+
 If we choose to ignore missing data, this can often be easily accomplished in common operations. For example, when taking the `mean` we just add an argument `na.rm = T`:
 
-```{r}
+
+```r
 mean(uglydata$VV1400068, na.rm=T)
+```
+
+```
+## [1] 36.5
 ```
 
 

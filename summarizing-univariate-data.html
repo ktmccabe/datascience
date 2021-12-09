@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Science for Political Science</title>
-  <meta name="description" content="Page not found | Data Science for Political Science" />
+  <title>2.2 Summarizing univariate data | Data Science for Political Science</title>
+  <meta name="description" content="2.2 Summarizing univariate data | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Science for Political Science" />
+  <meta property="og:title" content="2.2 Summarizing univariate data | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Science for Political Science" />
+  <meta name="twitter:title" content="2.2 Summarizing univariate data | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="process-of-describing.html"/>
+<link rel="next" href="functions-to-summarize-univariate-data.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,6 +52,7 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -457,19 +458,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="summarizing-univariate-data" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Summarizing univariate data</h2>
+<p>For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/80tbdiWuljc" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
+<p>Univariate data refers to data coming from one “variable,” where a variable captures the values of a changing characteristic.</p>
+<p>Our set of values is Outcome = {0,0,0,0,1,1,0,1,0,1}.</p>
+<ul>
+<li>We will call this a vector of values, where a vector is just a collection of things.</li>
+<li>Because our vector contains only numbers, we will call it a <em>numeric</em> vector.</li>
+<li>Each value can be indexed by <code>i</code>, denoting the position of the value in the</li>
+<li>For example, Jesse is in position <code>i=10</code> of the vector, and his value is 1</li>
+</ul>
+<p>We can create vectors in R by using <code>c()</code> and assigning <code>&lt;-</code> it to an object we will call <code>Outcome</code>.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="summarizing-univariate-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a>Outcome <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># Use commas to separate values</span></span></code></pre></div>
+<p>We can extract a particular value within our vector using brackets</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="summarizing-univariate-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a>Outcome[<span class="dv">10</span>]</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>We can label our outcomes using <code>names()</code></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="summarizing-univariate-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Outcome) <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Joe&quot;</span>,<span class="st">&quot;Sally&quot;</span>, <span class="st">&quot;Trevor&quot;</span>, <span class="st">&quot;Emily&quot;</span>, <span class="st">&quot;Mark&quot;</span>,</span>
+<span id="cb38-2"><a href="summarizing-univariate-data.html#cb38-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Sarah Jane&quot;</span>, <span class="st">&quot;Stacey&quot;</span>, <span class="st">&quot;Steve&quot;</span>, <span class="st">&quot;Phoebe&quot;</span>, <span class="st">&quot;Jesse&quot;</span>)</span>
+<span id="cb38-3"><a href="summarizing-univariate-data.html#cb38-3" aria-hidden="true" tabindex="-1"></a>Outcome[<span class="dv">10</span>]</span></code></pre></div>
+<pre><code>## Jesse 
+##     1</code></pre>
+<p>We can overwrite whole vectors or values within a vector</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="summarizing-univariate-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a>Outcome <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">2</span>, <span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># oops we put the wrong numbers</span></span>
+<span id="cb40-2"><a href="summarizing-univariate-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>Outcome</span></code></pre></div>
+<pre><code>##  [1] 5 0 2 6 1 1 7 8 0 1</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="summarizing-univariate-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a>Outcome <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># no problem, just overwrite it</span></span>
+<span id="cb42-2"><a href="summarizing-univariate-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a>Outcome</span></code></pre></div>
+<pre><code>##  [1] 0 0 0 0 1 1 0 1 0 1</code></pre>
+<p>Oops we accidentally type a 0 for Jesse.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="summarizing-univariate-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a>Outcome <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="co"># oops typo for Jesse</span></span>
+<span id="cb44-2"><a href="summarizing-univariate-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>Outcome</span></code></pre></div>
+<pre><code>##  [1] 0 0 0 0 1 1 0 1 0 0</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="summarizing-univariate-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>Outcome[<span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># no prob bob. Assign a 1 in position 10</span></span>
+<span id="cb46-2"><a href="summarizing-univariate-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a>Outcome</span></code></pre></div>
+<pre><code>##  [1] 0 0 0 0 1 1 0 1 0 1</code></pre>
+<p>Vectors do not have to be numeric. Character vectors contain a collection of words and phrases. In R, we use quotations around character values</p>
+<p>Example: let’s create a vector of names that we will call <code>People</code>.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="summarizing-univariate-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a>People <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Joe&quot;</span>,<span class="st">&quot;Sally&quot;</span>, <span class="st">&quot;Trevor&quot;</span>, <span class="st">&quot;Emily&quot;</span>, <span class="st">&quot;Mark&quot;</span>, <span class="st">&quot;Sarah Jane&quot;</span>, <span class="st">&quot;Stacey&quot;</span>, <span class="st">&quot;Steve&quot;</span>, <span class="st">&quot;Phoebe&quot;</span>, <span class="st">&quot;Jesse&quot;</span>)</span>
+<span id="cb48-2"><a href="summarizing-univariate-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>People[<span class="dv">10</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Jesse&quot;</code></pre>
+<p>We can use the R function <code>class()</code> to tell us the type of object we have.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="summarizing-univariate-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Outcome)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="summarizing-univariate-data.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(People)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="process-of-describing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions-to-summarize-univariate-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -523,6 +570,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

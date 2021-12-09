@@ -1,0 +1,125 @@
+# Choose Your Own Adventure {#choose}
+
+
+For the final project, you are creating a research project independently.
+
+Below are some tips for working with new data.
+
+## Get to know new data
+
+How to explore new data
+
+  1. When you encounter a new dataset, try to also identify the codebook that goes along with it.
+      + This should have information describing what the variables are in the data and what the values mean.
+      + It should also help clarify what unit is in each row of a dataset (e.g., is each row a survey respondent, an election, a Member of Congress, a country in a particular year)
+  2. When you download data, identify the file type (e.g., .csv, .dta, .RData)
+      + Recall that chapter 1 of [QSS section 1.3.5 (pg. 20)](https://assets.press.princeton.edu/chapters/s11025.pdf) goes over how to read in different file types in R with functions like `read.csv`, `read.dta` with the `library(foreign)` package, etc.
+  3. When you load in the data in RStudio, explore it.
+      + How many rows? `nrow`, How many columns? `ncol`
+      + You can `View()` the data or look at the first few rows with `head()`
+          - Are most variables numeric? Or, does it seem like you have factor and character variables?
+      + See if the data seem to match up with what the codebook suggests should be there.
+      
+How to investigate new variables
+
+  1. Real-world data may often require some cleaning or "wrangling"
+  
+  So you have some data.... AND it's a mess!!!
+
+A lot of the data we may encounter in courses has been simplified to allow students to focus on other concepts. We may have data that look like the following:
+```{r, results="asis"}
+nicedata <- data.frame(gender = c("Male", "Female", "Female", "Male"),
+           age = c(16, 20, 66, 44),
+           voterturnout = c(1, 0, 1, 0))
+```
+
+```{r, echo=FALSE}
+library(knitr)
+kable(nicedata)
+```
+
+In the real world, our data may hit us like a ton of bricks, like the below:
+```{r, results="asis"}
+uglydata <- data.frame(VV160002 = c(2, NA, 1, 2),
+           VV1400068 = c(16, 20, 66, 44),
+           VV20000 = c(1, NA, 1, NA))
+```
+
+```{r, echo=FALSE}
+kable(uglydata)
+```
+
+
+A lot of common datasets we use in the social sciences are messy, uninformative, sprawling, misshaped, and/or incomplete. What do I mean by this?
+
+  - The data might have a lot of missing values. For example, we may have `NA` values in R, or perhaps a research firm has used some other notation for missing data, such as a `99`.
+  - The variable names may be uninformative. 
+      + For example, there may be no way to know by looking at the data, which variable represents gender. We have to look at a codebook.
+  - Even if we can tell what a variable is, its categories may not be coded in a way that aligns with how we want to use the data for our research question. 
+      + For example, perhaps you are interested in the effect of a policy on people below vs. 65 and over in age. Well, your age variables might just be a numeric variable. You will have to create a new variable that aligns with your theoretical interest.
+  - Datasets are often sprawling. Some datasets may have more than 1000 variables. It is hard to sort through all of them. Likewise, datasets may have millions of observations. We cannot practically look through all the values of a column to know what is there.
+
+
+
+### Dealing with Uninformative Variable Names
+
+Hopefully, there is an easy fix for dealing with uninformative variable names. I say "hopefully" because hopefully when you encounter a dataset with uninformative variable names, the place where you downloaded the data will also include a codebook telling you what each variable name means, and how the corresponding values are coded. 
+
+Unfortunately, this may not always be the case. One thing you can do as a researcher is when you create a dataset for your own work, keep a record (in written form, on a word document or in a pdf or code file) of what each variable means (e.g., the survey question it corresponds to or the exact economic measure), as well as how the values of the variables are coded. This good practice will help you in the short-term, as you pause and come back to working on a project over the course of a year, as well as benefit other researchers in the long run after you publish your research.
+
+For examples of large codebooks, you can view the [2016 American National Election Study Survey](https://electionstudies.org/data-center/2016-time-series-study/) and click on a codebook.
+
+I recommend that once you locate the definition of a variable of interest, rename the variable in your dataset to be informative. You can do this by creating a new variable or overwriting the name of the existing variable. You might also comment a note for yourself of what the values mean.
+
+```{r}
+## Option 1: create new variable
+## gender 2=Male, 1=Female
+uglydata$gender <- uglydata$VV160002
+
+## Option 2: Overwrite
+names(uglydata)[1] <- "gender2"
+```
+
+### Dealing with Missing Data
+
+When we have a column with missing data, it is best to do a few things:
+
+  - Try to quantify how much missing data there is and poke at the reason why data are missing.
+      + Is it minor non-response data?
+      + Or is it indicative of a more systematic issue? For example, maybe data from a whole group of people or countries is missing for certain variables.
+  - If the data are missing at a very minor rate and/or there is a logical explanation for the missing data that should not affect your research question, you may choose to "ignore" the missing data when performing common analyses, such as taking the mean or running a regression.
+
+
+If we want to figure out how much missing data we have in a variable, we have a couple of approaches:
+
+```{r}
+## Summarize this variable
+summary(uglydata$gender)
+
+## What is the length of the subset of the variable where the data are missing
+length(uglydata$gender[is.na(uglydata$gender) == T])
+```
+
+If we choose to ignore missing data, this can often be easily accomplished in common operations. For example, when taking the `mean` we just add an argument `na.rm = T`:
+
+```{r}
+mean(uglydata$VV1400068, na.rm=T)
+```
+
+
+We should always be careful with missing data to understand how R is treating it in a particular scenario. 
+
+
+### Dealing with Variable Codings that Aren't Quite Right
+
+Often times the ways that variables are coded in datasets we get off-the-shelf are not coded exactly as how we were dreaming up operationalizing our concepts. Instead, we are going to have to wrangle the data to get them into shape.
+
+This may involve creating new variables that recode certain values, creating new variables that collapse some values into a smaller number of categories, combining multiple variables into a single variable (e.g., representing the average), or setting some of the variable values to be missing (`NA`). All of these scenarios may come up when you are dealing with real data.
+
+### Dealing with Parts of Datasets
+
+We may also want to limit our analysis to just small parts of datsets instead of the entire dataset. Recall the function `subset` to do this.
+
+
+
+      

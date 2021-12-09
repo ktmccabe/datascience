@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Science for Political Science</title>
-  <meta name="description" content="Page not found | Data Science for Political Science" />
+  <title>2.4 Loading data into R | Data Science for Political Science</title>
+  <meta name="description" content="2.4 Loading data into R | Data Science for Political Science" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Science for Political Science" />
+  <meta property="og:title" content="2.4 Loading data into R | Data Science for Political Science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Science for Political Science" />
+  <meta name="twitter:title" content="2.4 Loading data into R | Data Science for Political Science" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="functions-to-summarize-univariate-data.html"/>
+<link rel="next" href="comparing-vep-and-vap-turnout.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,6 +52,7 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -457,19 +458,141 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="loading-data-into-r" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Loading data into R</h2>
+<p>For this section, our motivating example will be methods to measure voter turnout in the United States.</p>
+<p>Describing voter turnout</p>
+<ul>
+<li>What is a typical level of voter turnout?</li>
+<li>How has turnout changed over time?</li>
+<li>Is turnout higher in presidential years or in midterm years?</li>
+</ul>
+<p>How can we measure turnout? Think about the validity, reliability, and cost of different approaches.</p>
+<p>Example: Dataset on Voter Turnout in the U.S. across multiple years</p>
+<p><img src="images/turnoutframe.png" style="width:80.0%" /></p>
+<p>In this dataset, each row is an election year. Each column contains information about the population, potential voters, or voter turnout. These will help us compute the turnout rate in a given year. To work with this dataset, we need to load it into R.</p>
+<div id="working-with-datasets-in-r" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Working with datasets in R</h3>
+<p>For a video explainer of the code in this section, see below. The video only discusses the code. Use the notes and lecture discussion for additional context. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/rm_g0rrglEQ" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
+<p>Often the variables we care about are stored inside of rectangular datasets</p>
+<ul>
+<li>These have a number of rows <code>nrow()</code> and columns <code>ncol()</code></li>
+<li>Each row is an “observation,” representing the information collected from an individual or entity</li>
+<li>Each column is a variable, representing a changing characteristic across multiple observations</li>
+</ul>
+<p>When we import a dataset into R, we have a few options.</p>
+<p>Option 1: Download dataset to your computer</p>
+<ul>
+<li>Move the dataset to your working directory</li>
+<li>Identify the file type (e.g., csv, dta, RData, txt)</li>
+<li>Pick the appropriate R function to match the type (e.g., <code>read.csv(), read.dta(), load(), read.table()</code>)</li>
+<li>Assign the dataset to an object. This object will now be <code>class()</code> of <code>data.frame</code></li>
+</ul>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="loading-data-into-r.html#cb62-1" aria-hidden="true" tabindex="-1"></a>turnout <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;turnout.csv&quot;</span>)</span></code></pre></div>
+<p>Option 2: Read file from a url provided</p>
+<ul>
+<li>Need an active internet connection for this to work</li>
+<li>URL generally must be public</li>
+<li>Include the url inside the function used to read the data</li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="loading-data-into-r.html#cb63-1" aria-hidden="true" tabindex="-1"></a>turnout <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/ktmccabe/teachingdata/main/turnout.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="loading-data-into-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(turnout)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>You can also open up a window to view the data:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="loading-data-into-r.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(turnout)</span></code></pre></div>
+</div>
+<div id="measuring-the-turnout-in-the-us-elections" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Measuring the Turnout in the US Elections</h3>
+<p>Relevant questions with voter turnout</p>
+<ul>
+<li>What is a typical level of voter turnout?</li>
+<li>Is turnout higher in presidential years or in midterm years?</li>
+<li>Is turnout higher or lower based on voting-eligible (VEP) or voting-age (VAP) populations?
+We have a lot of people who are citizens 18 and older who are ineligible to vote. This makes the VEP denominator smaller than the VAP.</li>
+</ul>
+<p>Voter Turnout in the U.S.</p>
+<ul>
+<li>Numerator: <code>total</code>: Total votes cast (in thousands)</li>
+<li>Denominator:
+<ul>
+<li>VAP: (voting-age population) from Census</li>
+<li>VEP (voting-eligible population) VEP = VAP + overseas voters - ineligible voters</li>
+</ul></li>
+<li>Additional Variables and Descriptions
+<ul>
+<li><code>year</code>: election year</li>
+<li><code>ANES</code>: ANES self-reported estimated turnout rate</li>
+<li><code>VEP</code>: Voting Eligible Population (in thousands)</li>
+<li><code>VAP</code>: Voting Age Population (in thousands)</li>
+<li><code>total</code>: total ballots cast for highest office (in thousands)</li>
+<li><code>felons</code>: total ineligible felons (in thousands)</li>
+<li><code>noncitizens</code>: total non-citizens (in thousands)</li>
+<li><code>overseas</code>: total eligible overseas voters (in thousands)</li>
+<li><code>osvoters</code>: total ballots counted by overseas voters (in thousands)</li>
+</ul></li>
+</ul>
+</div>
+<div id="getting-to-know-your-data" class="section level3" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Getting to know your data</h3>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="loading-data-into-r.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="do">## How many observations (the rows)?</span></span>
+<span id="cb67-2"><a href="loading-data-into-r.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(turnout)</span></code></pre></div>
+<pre><code>## [1] 14</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="loading-data-into-r.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="do">## How many variables (the columns)?</span></span>
+<span id="cb69-2"><a href="loading-data-into-r.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(turnout)</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="loading-data-into-r.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="do">## What are the variable names?</span></span>
+<span id="cb71-2"><a href="loading-data-into-r.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(turnout)</span></code></pre></div>
+<pre><code>## [1] &quot;year&quot;     &quot;VEP&quot;      &quot;VAP&quot;      &quot;total&quot;    &quot;ANES&quot;     &quot;felons&quot;   &quot;noncit&quot;  
+## [8] &quot;overseas&quot; &quot;osvoters&quot;</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="loading-data-into-r.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Show the first six rows</span></span>
+<span id="cb73-2"><a href="loading-data-into-r.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(turnout)</span></code></pre></div>
+<pre><code>##   year    VEP    VAP total ANES felons noncit overseas osvoters
+## 1 1980 159635 164445 86515   71    802   5756     1803       NA
+## 2 1982 160467 166028 67616   60    960   6641     1982       NA
+## 3 1984 167702 173995 92653   74   1165   7482     2361       NA
+## 4 1986 170396 177922 64991   53   1367   8362     2216       NA
+## 5 1988 173579 181955 91595   70   1594   9280     2257       NA
+## 6 1990 176629 186159 67859   47   1901  10239     2659       NA</code></pre>
+<p>Extract a particular column (vector) from the data using the $.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="loading-data-into-r.html#cb75-1" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year</span></code></pre></div>
+<pre><code>##  [1] 1980 1982 1984 1986 1988 1990 1992 1994 1996 1998 2000 2002 2004 2008</code></pre>
+<p>Extract the 10th year. Just like before! We use 10 to indicate the value of the <code>year</code> column in position (row 10) of the data.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="loading-data-into-r.html#cb77-1" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>year[<span class="dv">10</span>]</span></code></pre></div>
+<pre><code>## [1] 1998</code></pre>
+<p>We can take the <code>mean()</code> of a particular column, too. Let’s take it of the total number of voters.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="loading-data-into-r.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(turnout<span class="sc">$</span>total)</span></code></pre></div>
+<pre><code>## [1] 89778.29</code></pre>
+<p>And get the <code>class()</code> (Note: integer is just a type of numeric variable)</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="loading-data-into-r.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(turnout<span class="sc">$</span>total)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>We can also use brackets in the full data frame, but because our data frame has BOTH rows and columns, we cannot just supply one position <code>i</code>. Instead, we have to tell R which row AND which column by using a comma between the positions.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="loading-data-into-r.html#cb83-1" aria-hidden="true" tabindex="-1"></a>turnout[<span class="dv">1</span>,<span class="dv">2</span>] <span class="co"># value in row 1, column 2</span></span></code></pre></div>
+<pre><code>## [1] 159635</code></pre>
+<p>We can use the column name instead</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="loading-data-into-r.html#cb85-1" aria-hidden="true" tabindex="-1"></a>turnout[<span class="dv">1</span>, <span class="st">&quot;VEP&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 159635</code></pre>
+<p>If we leave the second entry blank, it will return all columns for the specified row</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="loading-data-into-r.html#cb87-1" aria-hidden="true" tabindex="-1"></a>turnout[<span class="dv">1</span>,] <span class="co"># All variable values for row 1</span></span></code></pre></div>
+<pre><code>##   year    VEP    VAP total ANES felons noncit overseas osvoters
+## 1 1980 159635 164445 86515   71    802   5756     1803       NA</code></pre>
+<p>The opposite is true if we leave the first entry blank.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="loading-data-into-r.html#cb89-1" aria-hidden="true" tabindex="-1"></a>turnout[,<span class="dv">2</span>] <span class="co"># VEP for all rows</span></span></code></pre></div>
+<pre><code>##  [1] 159635 160467 167702 170396 173579 176629 179656 182623 186347 190420
+## [11] 194331 198382 203483 213314</code></pre>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="functions-to-summarize-univariate-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparing-vep-and-vap-turnout.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -523,6 +646,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
