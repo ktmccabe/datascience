@@ -69,6 +69,17 @@ Can maps be misleading? See this discussion from Kieran Healy in [Chap. 7](https
 ## Mapping in R 
 
 
+
+*For a video explainer of the code for the applications with maps and color, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=-uvnL42Stew")
+```
+
+
 Install maps package. You only need to do this one time.
 
 ```{r, eval=F}
@@ -233,7 +244,6 @@ ggplot()+
   ## remove background
   theme_void()+
   
-  #borders("county", region="New Jersey", colour="white", size=1)+
   ggtitle("2021 NJ Governor Results by County")+
   coord_quickmap()
 ```
@@ -339,6 +349,16 @@ Political scientists study a wide range of questions related to terrorism, inclu
   - Why might mapping visualizations and spatial data be useful to political scientists for these questions?
 
 ### Adding points to a map
+
+*For a video explainer of the code for the applications with maps and points, as well as animating these points in the subsequent section, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)*
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("vembedr")
+library(knitr)
+
+embed_url("https://www.youtube.com/watch?v=QTTEgJpOJeY")
+```
+
 
 In this application, we use the [Global Terrorism Database](https://www.start.umd.edu/gtd/) to visualize where terrorist attacks (including failed attacks) have occurred in recent years in France.
 

@@ -198,8 +198,12 @@ application-spread-of-coronavirus
 mapping-animation-with-world-map
 application-territorial-control-of-syria
 choose
-get-to-know-new-data
+how-to-investigate-new-data
 dealing-with-uninformative-variable-names
 dealing-with-missing-data
 dealing-with-variable-codings-that-arent-quite-right
 dealing-with-parts-of-datasets
+where-to-go-next
+network-analysis
+additional-topics-to-explore
+thats-all

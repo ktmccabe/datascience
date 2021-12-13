@@ -433,12 +433,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="13" data-path="choose.html"><a href="choose.html"><i class="fa fa-check"></i><b>13</b> Choose Your Own Adventure</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html"><i class="fa fa-check"></i><b>13.1</b> Get to know new data</a>
+<li class="chapter" data-level="13.1" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html"><i class="fa fa-check"></i><b>13.1</b> How to investigate new data</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-uninformative-variable-names"><i class="fa fa-check"></i><b>13.1.1</b> Dealing with Uninformative Variable Names</a></li>
-<li class="chapter" data-level="13.1.2" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-missing-data"><i class="fa fa-check"></i><b>13.1.2</b> Dealing with Missing Data</a></li>
-<li class="chapter" data-level="13.1.3" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-variable-codings-that-arent-quite-right"><i class="fa fa-check"></i><b>13.1.3</b> Dealing with Variable Codings that Aren’t Quite Right</a></li>
-<li class="chapter" data-level="13.1.4" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-parts-of-datasets"><i class="fa fa-check"></i><b>13.1.4</b> Dealing with Parts of Datasets</a></li>
+<li class="chapter" data-level="13.1.1" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-uninformative-variable-names"><i class="fa fa-check"></i><b>13.1.1</b> Dealing with Uninformative Variable Names</a></li>
+<li class="chapter" data-level="13.1.2" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-missing-data"><i class="fa fa-check"></i><b>13.1.2</b> Dealing with Missing Data</a></li>
+<li class="chapter" data-level="13.1.3" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-variable-codings-that-arent-quite-right"><i class="fa fa-check"></i><b>13.1.3</b> Dealing with Variable Codings that Aren’t Quite Right</a></li>
+<li class="chapter" data-level="13.1.4" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-parts-of-datasets"><i class="fa fa-check"></i><b>13.1.4</b> Dealing with Parts of Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="where-to-go-next.html"><a href="where-to-go-next.html"><i class="fa fa-check"></i><b>13.2</b> Where to Go Next</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="where-to-go-next.html"><a href="where-to-go-next.html#network-analysis"><i class="fa fa-check"></i><b>13.2.1</b> Network Analysis</a></li>
+<li class="chapter" data-level="13.2.2" data-path="where-to-go-next.html"><a href="where-to-go-next.html#additional-topics-to-explore"><i class="fa fa-check"></i><b>13.2.2</b> Additional Topics to Explore</a></li>
+<li class="chapter" data-level="13.2.3" data-path="where-to-go-next.html"><a href="where-to-go-next.html#thats-all"><i class="fa fa-check"></i><b>13.2.3</b> That’s all</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -472,7 +478,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>This is an advantage of using an R script.</li>
 <li>You don’t have to worry about overwriting/messing up the raw data.</li>
-<li>You start from the original raw data when you load {}, and then everything else is done within R.</li>
+<li>You start from the original raw data when you load <code>turnout.csv</code>, and then everything else is done within R.</li>
 </ul>
 <p>This is our new denominator. Now we can calculate turnout based on this denominator.</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="comparing-vep-and-vap-turnout.html#cb93-1" aria-hidden="true" tabindex="-1"></a>turnout<span class="sc">$</span>newVAPturnout <span class="ot">&lt;-</span> turnout<span class="sc">$</span>total <span class="sc">/</span> turnout<span class="sc">$</span>VAPplusoverseas</span></code></pre></div>

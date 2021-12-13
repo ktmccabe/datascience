@@ -433,12 +433,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="13" data-path="choose.html"><a href="choose.html"><i class="fa fa-check"></i><b>13</b> Choose Your Own Adventure</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html"><i class="fa fa-check"></i><b>13.1</b> Get to know new data</a>
+<li class="chapter" data-level="13.1" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html"><i class="fa fa-check"></i><b>13.1</b> How to investigate new data</a>
 <ul>
-<li class="chapter" data-level="13.1.1" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-uninformative-variable-names"><i class="fa fa-check"></i><b>13.1.1</b> Dealing with Uninformative Variable Names</a></li>
-<li class="chapter" data-level="13.1.2" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-missing-data"><i class="fa fa-check"></i><b>13.1.2</b> Dealing with Missing Data</a></li>
-<li class="chapter" data-level="13.1.3" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-variable-codings-that-arent-quite-right"><i class="fa fa-check"></i><b>13.1.3</b> Dealing with Variable Codings that Aren’t Quite Right</a></li>
-<li class="chapter" data-level="13.1.4" data-path="get-to-know-new-data.html"><a href="get-to-know-new-data.html#dealing-with-parts-of-datasets"><i class="fa fa-check"></i><b>13.1.4</b> Dealing with Parts of Datasets</a></li>
+<li class="chapter" data-level="13.1.1" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-uninformative-variable-names"><i class="fa fa-check"></i><b>13.1.1</b> Dealing with Uninformative Variable Names</a></li>
+<li class="chapter" data-level="13.1.2" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-missing-data"><i class="fa fa-check"></i><b>13.1.2</b> Dealing with Missing Data</a></li>
+<li class="chapter" data-level="13.1.3" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-variable-codings-that-arent-quite-right"><i class="fa fa-check"></i><b>13.1.3</b> Dealing with Variable Codings that Aren’t Quite Right</a></li>
+<li class="chapter" data-level="13.1.4" data-path="how-to-investigate-new-data.html"><a href="how-to-investigate-new-data.html#dealing-with-parts-of-datasets"><i class="fa fa-check"></i><b>13.1.4</b> Dealing with Parts of Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="where-to-go-next.html"><a href="where-to-go-next.html"><i class="fa fa-check"></i><b>13.2</b> Where to Go Next</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="where-to-go-next.html"><a href="where-to-go-next.html#network-analysis"><i class="fa fa-check"></i><b>13.2.1</b> Network Analysis</a></li>
+<li class="chapter" data-level="13.2.2" data-path="where-to-go-next.html"><a href="where-to-go-next.html#additional-topics-to-explore"><i class="fa fa-check"></i><b>13.2.2</b> Additional Topics to Explore</a></li>
+<li class="chapter" data-level="13.2.3" data-path="where-to-go-next.html"><a href="where-to-go-next.html#thats-all"><i class="fa fa-check"></i><b>13.2.3</b> That’s all</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -460,26 +466,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mapping-in-r" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> Mapping in R</h2>
+<p><em>For a video explainer of the code for the applications with maps and color, see below. (Via youtube, you can speed up the playback to 1.5 or 2x speed.)</em></p>
+<div class="vembedr">
+<div>
+<iframe src="https://www.youtube.com/embed/-uvnL42Stew" width="533" height="300" frameborder="0" allowfullscreen=""></iframe>
+</div>
+</div>
 <p>Install maps package. You only need to do this one time.</p>
 <div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="mapping-in-r.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;maps&quot;</span>)</span></code></pre></div>
 <p>All subsequent times, you just need to use <code>library()</code></p>
 <div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="mapping-in-r.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span></code></pre></div>
 <p>The map command is like a plot. It maps a particular entry from a database. Below are a few examples of types of maps that come readymade in the package.</p>
 <div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="mapping-in-r.html#cb542-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;world&quot;</span>)</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-329-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="mapping-in-r.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;usa&quot;</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-330-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="mapping-in-r.html#cb544-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;state&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="mapping-in-r.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;usa&quot;</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-331-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="mapping-in-r.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database=</span><span class="st">&quot;county&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="mapping-in-r.html#cb544-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;state&quot;</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-332-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="mapping-in-r.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database=</span><span class="st">&quot;county&quot;</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-333-1.svg" width="672" /></p>
 <p>You can also map particular regions within a database.</p>
 <div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="mapping-in-r.html#cb546-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;state&quot;</span>, <span class="at">regions=</span> <span class="fu">c</span>(<span class="st">&quot;New Jersey&quot;</span>, <span class="st">&quot;New York&quot;</span> ))</span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-333-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="mapping-in-r.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database=</span><span class="st">&quot;county&quot;</span>, <span class="at">regions =</span> <span class="st">&quot;Nebraska&quot;</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-334-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="mapping-in-r.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;world&quot;</span>, <span class="at">regions=</span> <span class="st">&quot;Italy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="mapping-in-r.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database=</span><span class="st">&quot;county&quot;</span>, <span class="at">regions =</span> <span class="st">&quot;Nebraska&quot;</span>)</span></code></pre></div>
 <p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-335-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="mapping-in-r.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">database =</span> <span class="st">&quot;world&quot;</span>, <span class="at">regions=</span> <span class="st">&quot;Italy&quot;</span>)</span></code></pre></div>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-336-1.svg" width="672" /></p>
 <div id="using-ggplot2-with-maps" class="section level3" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Using ggplot2 with maps</h3>
 <p>We may want to embed <code>map</code> in another plotting device that more easily adds informative labels, colors, and other information.</p>
@@ -513,7 +525,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb552-12"><a href="mapping-in-r.html#cb552-12" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb552-13"><a href="mapping-in-r.html#cb552-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## remove background</span></span>
 <span id="cb552-14"><a href="mapping-in-r.html#cb552-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="co"># note: last line does not end with a +</span></span></code></pre></div>
-<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-339-1.svg" width="672" /></p>
+<p><img src="datasciforpolisci_files/figure-html/unnamed-chunk-340-1.svg" width="672" /></p>
 </div>
 </div>
             </section>

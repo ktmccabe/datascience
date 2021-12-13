@@ -384,7 +384,7 @@ This does not change the underlying `turnout.csv` file, only the `turnout data.f
 
   - This is an advantage of using an R script. 
   - You don't have to worry about overwriting/messing up the raw data. 
-  - You start from the original raw data when you load {\tt turnout.csv}, and then everything else is done within R.
+  - You start from the original raw data when you load `turnout.csv`, and then everything else is done within R.
 
 
 This is our new denominator. Now we can calculate turnout based on this denominator.
