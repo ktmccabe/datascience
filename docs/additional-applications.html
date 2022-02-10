@@ -581,7 +581,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 0.06447639 0.09650924</code></pre>
 <p>You can extract the p.value for the difference in proportions and confidence interval</p>
 <p><strong><em>6. Decide whether you can reject or fail to reject the hypothesis of no difference</em></strong></p>
-<p>In the <code>prop.test</code> function, you see a X-squared statistic. You can treat this like the z-score. When you are doing a test of two groups, the X-squared is essentially the z-score squared. The X-squared refers to a Chi-squared test. In our case, the equivalent z-score would be about 4– well more than 2 standard errors.</p>
+<p>In the <code>prop.test</code> function, you see a X-squared statistic. You can treat this like the z-score. When you are doing a test of two groups, the X-squared is essentially the z-score squared. The X-squared refers to a Chi-squared test. In our case, the equivalent z-score would be about 4– well more than our threshold of about 2.</p>
 <div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="additional-applications.html#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(test<span class="sc">$</span>p.value, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>What do you conclude about the hypothesis? Is it significant?</p>

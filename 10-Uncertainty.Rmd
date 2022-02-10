@@ -141,16 +141,16 @@ The z-score represents a ratio of the estimate over the standard errors. We can 
 
 ![](images/zscore.png)
 
-The bell curve is centered on  0 and represents our null distribution. The z-score represents how many standard errors away our estimate is from a z=0, which occurs when the estimate is exactly equal to the null.
+The bell curve is centered on 0 and represents our null distribution. 
 
-  - Instead of the axis being the number of heads out of 100 coin flips, centered on the null hypothesis of 50 heads for a fair coin, the standardized scale is centered on 0. We can then visualize how far 80 coin flips is away from 50 by measuring how many standard errors 80 is away from the null of 50.
+  - Instead of the axis being the number of heads out of 100 coin flips, centered on the null hypothesis of 50 heads for a fair coin, the standardized scale is centered on 0. We can then visualize how far 80 coin flips is away from 50 in terms of standard errors.
   
   
 Recall, we asked: When we conduct an experiment and find that applicants with a criminal record were called back 12.5 percentage points less often than those without a criminal record, we want to know...
 
   - Is that a real difference, or is the real difference 0, and we just happened to get our 12.5-point difference in our sample due to random chance?
 
-It so happens that our 12.5 percentage difference represents more than z=7 standard errors away from the null of z=0 difference.
+It so happens that our 12.5 percentage difference represents more than z=7.
 
 We can visualize where z=7 is in our distribution below with the dashed purple line:
 
@@ -278,7 +278,7 @@ test$p.value
 
 Was the treatment significant? We say something is significant if the p-value is small, such as less than 0.05. We also use this criteria to assess if we should reject the null hypothesis.
 
-  - In a "t test", the t-statistic serves as the z-score. It counts the number of standard errors away from the null. The t-statistic and z-scores differ slightly in how we calculate the corresponding p-value, but with a large enough sample size, these are also very similar. The `t.test` function in R calculates the p-value for you.
+  - In a "t test", the t-statistic serves as the z-score. It is also a ratio of standard errors. The t-statistic and z-scores differ slightly in how we calculate the corresponding p-value, but with a large enough sample size, these are also very similar. The `t.test` function in R calculates the p-value for you.
 
 
 ## Additional Applications
@@ -424,7 +424,7 @@ You can extract the p.value for the difference in proportions and confidence int
 
 ***6. Decide whether you can reject or fail to reject the hypothesis of no difference***
 
-In the `prop.test` function, you see a X-squared statistic. You can treat this like the z-score. When you are doing a test of two groups, the X-squared is essentially the z-score squared. The X-squared refers to a Chi-squared test. In our case, the equivalent z-score would be about 4-- well more than 2 standard errors.
+In the `prop.test` function, you see a X-squared statistic. You can treat this like the z-score. When you are doing a test of two groups, the X-squared is essentially the z-score squared. The X-squared refers to a Chi-squared test. In our case, the equivalent z-score would be about 4-- well more than our threshold of about 2.
 
 ```{r}
 round(test$p.value, digits=3)
