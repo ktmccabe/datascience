@@ -137,11 +137,11 @@ A z-score helps us standardize the size of estimates across any units of study b
 
 z-score = $\frac{\text{Estimate - Null}}{\hat{SE}} = \frac{\text{Estimate - 0}}{\hat{SE}}$
 
-The z-score represents the number of standard errors away that the estimate is from the null. We can visualize the distribution of z-scores in the image below.
+The z-score represents a ratio of the estimate over the standard errors. We can visualize the distribution of z-scores in the image below.
 
 ![](images/zscore.png)
 
-The bell curve is centered on  0 and represents our null distribution. The z-score represents how many standard errors away our estimate is from the null.
+The bell curve is centered on  0 and represents our null distribution. The z-score represents how many standard errors away our estimate is from a z=0, which occurs when the estimate is exactly equal to the null.
 
   - Instead of the axis being the number of heads out of 100 coin flips, centered on the null hypothesis of 50 heads for a fair coin, the standardized scale is centered on 0. We can then visualize how far 80 coin flips is away from 50 by measuring how many standard errors 80 is away from the null of 50.
   
